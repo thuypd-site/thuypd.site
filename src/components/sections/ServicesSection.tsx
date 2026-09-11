@@ -1,0 +1,291 @@
+'use client';
+
+import React from 'react';
+import { motion } from 'motion/react';
+
+import { 
+  ArrowRight, 
+  Palette, 
+  Building2, 
+  MousePointerClick, 
+  TrendingUp, 
+  Server, 
+  Wrench, 
+  Sparkles,
+  Zap,
+  ShieldCheck,
+  Code2,
+  CheckCircle
+} from 'lucide-react';
+import { useServices } from '../../hooks/useServices';
+import { ServicesSectionContent } from '../../types/landingConfig.types';
+
+const iconMap: Record<string, React.ReactNode> = {
+  design_services: <Palette className="w-6 h-6 sm:w-7 sm:h-7" />,
+  domain: <Building2 className="w-6 h-6 sm:w-7 sm:h-7" />,
+  ads_click: <MousePointerClick className="w-6 h-6 sm:w-7 sm:h-7" />,
+  query_stats: <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7" />,
+  dns: <Server className="w-6 h-6 sm:w-7 sm:h-7" />,
+  build_circle: <Wrench className="w-6 h-6 sm:w-7 sm:h-7" />,
+};
+
+interface ServicesSectionProps {
+  content?: ServicesSectionContent;
+  displayStyle?: string;
+}
+
+export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displayStyle = 'services-b' }) => {
+  const { data: defaultServices = [] } = useServices();
+
+  const activeStyle = (() => {
+    if (displayStyle === 'services-a' || displayStyle === 'grid-3' || displayStyle === 'grid-2' || displayStyle === 'compact') {
+      return 'services-a';
+    }
+    return 'services-b'; // Default to modern Bento Grid (Stripe)
+  })();
+
+  const services = content?.items && content.items.length > 0 ? content.items : defaultServices;
+  const badge = content?.badge || 'Hệ Sinh Thái Toàn Diện';
+  const title = content?.title || 'Giải Pháp Thiết Kế Website & Công Nghệ Bứt Phá';
+  const subtitle = content?.subtitle || 'Lựa chọn kiến trúc website may đo độc bản, tối ưu chuyển đổi kinh doanh và đồng hành kỹ thuật dài hạn.';
+
+  return (
+    <section className="py-16 lg:py-24 bg-white" id="dich-vu">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
+        {/* Section Header */}
+        <div className="mb-10 lg:mb-14">
+          <div className="space-y-3 max-w-2xl">
+            <span className="px-3.5 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-bold border border-[#006398]/15 inline-block">
+              {badge}
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight">
+              {title}
+            </h2>
+            <p className="text-sm sm:text-base text-[#45464d] leading-relaxed">
+              {subtitle}
+            </p>
+          </div>
+        </div>
+
+        {/* STYLE A: Grid 6 Symmetric Cards */}
+        {activeStyle === 'services-a' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id || service.serviceId || index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: index * 0.06 }}
+                className="p-6 rounded-2xl bg-white shadow-sm border border-[#dce9ff]/80 hover:border-[#006398]/50 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div className="space-y-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                    {iconMap[service.icon] || <Sparkles className="w-6 h-6" />}
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors leading-snug">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-[#eff4ff] flex items-center justify-between">
+                  <span className="text-xs text-[#006398] font-semibold">{service.tag}</span>
+                  <a
+                    href="#nhan-bao-gia"
+                    className="flex items-center gap-1 text-xs font-bold text-[#006398] group-hover:translate-x-1 transition-transform"
+                  >
+                    <span>Xem chi tiết</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* STYLE B: Bento Grid (Stripe Modern) */}
+        {activeStyle === 'services-b' && (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
+            {/* 1. Large Flagship Card (col-span-12 lg:col-span-8) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="md:col-span-12 lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0b1c30] to-[#0d2a4a] text-white shadow-xl relative overflow-hidden flex flex-col justify-between border border-[#006398]/30 group"
+            >
+              {/* Background ambient lighting */}
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[#006398]/20 blur-3xl rounded-full pointer-events-none" />
+
+              <div className="relative z-10 space-y-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-3 py-1 rounded-full bg-[#006398] text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                    FLAGSHIP SERVICE
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-white/10 text-cyan-300 font-mono text-[10px] sm:text-xs font-bold">
+                    May đo 100% · UI/UX Cao Cấp
+                  </span>
+                </div>
+
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
+                  Thiết Kế Web May Đo Độc Bản &amp; Hệ Thống Doanh Nghiệp
+                </h3>
+
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+                  Phát triển giao diện không giới hạn theo nhận diện thương hiệu độc quyền, tương thích tuyệt đối mọi giải pháp kinh doanh, CRM và cổng thanh toán tự động.
+                </p>
+
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+                    Bảo hành trọn đời
+                  </span>
+                  <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+                    Tối ưu 100% On-page
+                  </span>
+                  <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+                    Mã nguồn độc quyền
+                  </span>
+                </div>
+              </div>
+
+              <div className="relative z-10 pt-6 mt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs sm:text-sm text-cyan-300 font-semibold">
+                  Chuẩn hóa UI/UX cao cấp &amp; tối ưu điểm SEO Google
+                </span>
+                <a
+                  href="#nhan-bao-gia"
+                  className="px-5 py-2.5 rounded-xl bg-white text-[#0b1c30] hover:bg-[#cce5ff] font-bold text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md group-hover:scale-105 active:scale-95"
+                >
+                  <span>Tư vấn may đo</span>
+                  <ArrowRight className="w-4 h-4 text-[#006398]" />
+                </a>
+              </div>
+            </motion.div>
+
+            {/* 2. Top-right Card: Landing Page Tối Ưu Chuyển Đổi */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="md:col-span-6 lg:col-span-4 p-6 sm:p-7 rounded-3xl bg-[#eff4ff] border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#006398] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                  <MousePointerClick className="w-6 h-6" />
+                </div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                  Tối Ưu Chuyển Đổi
+                </div>
+                <h3 className="text-lg font-extrabold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                  Landing Page Quảng Cáo Tối Ưu Chốt Đơn
+                </h3>
+                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                  Thiết kế phễu gom khách, tốc độ mở trang &lt; 0.8s, đẩy mạnh tỷ lệ đăng ký form và gọi hotline cho chiến dịch Ads.
+                </p>
+              </div>
+
+              <div className="pt-4 mt-3 border-t border-[#dce9ff] flex items-center justify-between text-xs">
+                <span className="font-semibold text-[#006398]">Tối ưu Facebook / TikTok Ads</span>
+                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+              </div>
+            </motion.div>
+
+            {/* 3. Lower Row: Card 1 (Website Giới Thiệu Doanh Nghiệp) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="md:col-span-6 lg:col-span-4 p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
+                  <Building2 className="w-6 h-6" />
+                </div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                  Nâng Tầm Uy Tín
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                  Website Giới Thiệu Doanh Nghiệp &amp; Dịch Vụ
+                </h3>
+                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                  Khẳng định vị thế thương hiệu với bố cục chuyên nghiệp, thanh lịch, chuẩn hồ sơ năng lực số tiếp cận đối tác lớn.
+                </p>
+              </div>
+
+              <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
+                <span className="font-semibold text-[#006398]">Khẳng định thương hiệu</span>
+                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+              </div>
+            </motion.div>
+
+            {/* 4. Lower Row: Card 2 (Chuẩn SEO & Core Web Vitals) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="md:col-span-6 lg:col-span-4 p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                  Chuẩn SEO Google
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                  Dịch Vụ Tối Ưu Chuẩn SEO &amp; Lên Top Google
+                </h3>
+                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                  Cấu trúc thẻ Schema, tối ưu thẻ Title/Meta, Sitemap tự động và điểm Google PageSpeed 95+ giúp từ khóa trụ vững bền lâu.
+                </p>
+              </div>
+
+              <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
+                <span className="font-semibold text-[#006398]">Tăng traffic tự nhiên</span>
+                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+              </div>
+            </motion.div>
+
+            {/* 5. Lower Row: Card 3 (Tên Miền & Nâng Cấp Bảo Trì) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="md:col-span-6 lg:col-span-4 p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
+                  <Server className="w-6 h-6" />
+                </div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                  Hạ Tầng &amp; Nâng Cấp
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                  Tên Miền, Cloud NVMe &amp; Nâng Cấp Web Cũ
+                </h3>
+                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                  Cung cấp máy chủ NVMe bảo mật cao, sao lưu dữ liệu mỗi tuần và dịch vụ hồi sinh giao diện web cũ chạy mượt mà ngay.
+                </p>
+              </div>
+
+              <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
+                <span className="font-semibold text-[#006398]">Vận hành ổn định 99.9%</span>
+                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};

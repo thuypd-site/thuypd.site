@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng Điều Khiển Quản Trị CMS | THUYPD.SITE & MongoDB Atlas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #0b1320; color: #f1f5f9; }
+    .glass-card { background: rgba(19, 36, 58, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- AUTH / LOGIN OVERLAY -->
+  <div id="loginModal" class="fixed inset-0 z-50 bg-[#070d18]/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-2xl p-8 shadow-2xl border border-white/15">
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 bg-gradient-to-tr from-[#006398] to-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-[#006398]/30">
+          <i class="fa-solid fa-shield-halved text-2xl text-white"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Quản Trị CMS THUYPD.SITE</h2>
+        <p class="text-sm text-slate-400 mt-1">Đăng nhập tài khoản quản trị viên độc lập</p>
+      </div>
+
+      <div id="loginError" class="hidden mb-4 p-3 rounded-xl bg-red-500/20 border border-red-500/40 text-red-300 text-xs font-medium"></div>
+
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Tài khoản / Email</label>
+          <input type="text" id="loginUsername" value="admin" required class="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-sm" placeholder="Nhập tên đăng nhập hoặc email" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Mật khẩu</label>
+          <input type="password" id="loginPassword" value="admin123" required class="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-sm" placeholder="••••••••" />
+        </div>
+        <button type="submit" id="loginBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#006398] to-[#0088d1] hover:from-[#0074b3] hover:to-[#009beb] text-white font-bold text-sm shadow-lg shadow-[#006398]/30 transition-all cursor-pointer">
+          Đăng Nhập Quản Trị
+        </button>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-white/10 text-center text-xs text-slate-500">
+        Mặc định: <code class="text-cyan-400">admin</code> / <code class="text-cyan-400">admin123</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP HEADER -->
+  <header class="bg-[#0e1929] border-b border-white/10 sticky top-0 z-30 px-4 lg:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-[#006398] flex items-center justify-center text-white font-bold">
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-extrabold text-white tracking-wide text-sm sm:text-base">THUYPD.SITE CMS</span>
+          <span class="px-2 py-0.5 text-[10px] rounded-md font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Standalone Admin</span>
+        </div>
+        <div class="text-[11px] text-slate-400 flex items-center gap-2">
+          <span>Hệ thống Backend & Database riêng biệt</span>
+          <span class="text-slate-600">•</span>
+          <span id="headerDbStatus" class="text-amber-400 flex items-center gap-1 font-medium">
+            <span class="w-2 h-2 rounded-full bg-amber-400 inline-block animate-pulse"></span>
+            Đang kiểm tra MongoDB...
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button onclick="refreshData()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span class="hidden sm:inline">Làm Mới</span>
+      </button>
+      <div id="currentUserBadge" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-white/10 text-xs text-slate-300">
+        <i class="fa-solid fa-user-tie text-cyan-400"></i>
+        <span id="adminDisplayName">Administrator</span>
+      </div>
+      <button onclick="logout()" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span class="hidden sm:inline">Thoát</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <div class="bg-[#0b1320] border-b border-white/10 px-4 lg:px-8">
+    <nav class="flex space-x-1 sm:space-x-3 overflow-x-auto py-2.5 custom-scroll text-xs sm:text-sm font-semibold">
+      <button onclick="switchTab('leads')" id="tab-leads" class="tab-btn px-4 py-2 rounded-xl transition-all flex items-center gap-2 bg-[#006398] text-white">
+        <i class="fa-solid fa-user-group"></i>
+        <span>Khách Hàng & Báo Giá</span>
+        <span id="leadsCountBadge" class="px-1.5 py-0.5 rounded-full text-[10px] bg-white/20 text-white font-bold">0</span>
+      </button>
+
+      <button onclick="switchTab('themes')" id="tab-themes" class="tab-btn px-4 py-2 rounded-xl transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60">
+        <i class="fa-solid fa-palette"></i>
+        <span>Kho Giao Diện</span>
+      </button>
+
+      <button onclick="switchTab('services')" id="tab-services" class="tab-btn px-4 py-2 rounded-xl transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60">
+        <i class="fa-solid fa-laptop-code"></i>
+        <span>Dịch Vụ</span>
+      </button>
+
+      <button onclick="switchTab('pricing')" id="tab-pricing" class="tab-btn px-4 py-2 rounded-xl transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60">
+        <i class="fa-solid fa-tags"></i>
+        <span>Bảng Giá</span>
+      </button>
+
+      <button onclick="switchTab('settings')" id="tab-settings" class="tab-btn px-4 py-2 rounded-xl transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60">
+        <i class="fa-solid fa-sliders"></i>
+        <span>Cấu Hình Website</span>
+      </button>
+
+      <button onclick="switchTab('atlas')" id="tab-atlas" class="tab-btn px-4 py-2 rounded-xl transition-all flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60">
+        <i class="fa-solid fa-database text-emerald-400"></i>
+        <span>MongoDB Atlas & Hệ Thống</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- MAIN VIEW CONTAINER -->
+  <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
+
+    <!-- 1. LEADS TAB -->
+    <div id="view-leads" class="tab-view space-y-6">
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass-card rounded-2xl p-4">
+          <span class="text-xs text-slate-400 block mb-1">Tổng Số Lead Tiếp Nhận</span>
+          <span id="statTotalLeads" class="text-2xl font-black text-white">0</span>
+        </div>
+        <div class="glass-card rounded-2xl p-4 border-l-4 border-amber-400">
+          <span class="text-xs text-amber-300 block mb-1">Cần Xử Lý (Mới)</span>
+          <span id="statNewLeads" class="text-2xl font-black text-amber-300">0</span>
+        </div>
+        <div class="glass-card rounded-2xl p-4 border-l-4 border-emerald-400">
+          <span class="text-xs text-emerald-300 block mb-1">Đã Ký Hợp Đồng</span>
+          <span id="statWonLeads" class="text-2xl font-black text-emerald-300">0</span>
+        </div>
+        <div class="glass-card rounded-2xl p-4">
+          <span class="text-xs text-slate-400 block mb-1">Tỷ Lệ Chốt Thành Công</span>
+          <span id="statConversionRate" class="text-2xl font-black text-cyan-300">0%</span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <div class="relative flex-1 sm:w-72">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+            <input type="text" id="searchLeadsInput" oninput="filterLeads()" placeholder="Tìm theo tên, SĐT, email..." class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:outline-none focus:border-cyan-400" />
+          </div>
+          <select id="filterLeadStatus" onchange="filterLeads()" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:outline-none focus:border-cyan-400">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="new">Mới (Chưa xử lý)</option>
+            <option value="contacted">Đang liên hệ tư vấn</option>
+            <option value="qualified">Đã gửi báo giá</option>
+            <option value="converted">Đã chốt hợp đồng</option>
+            <option value="cancelled">Hủy / Không phù hợp</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+        <div class="overflow-x-auto custom-scroll">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[11px] border-b border-white/10">
+              <tr>
+                <th class="p-3.5">Khách Hàng</th>
+                <th class="p-3.5">Liên Hệ</th>
+                <th class="p-3.5">Nhu Cầu & Gói</th>
+                <th class="p-3.5">Trạng Thái</th>
+                <th class="p-3.5">Ghi Chú Khách</th>
+                <th class="p-3.5">Thời Gian</th>
+                <th class="p-3.5 text-right">Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody" class="divide-y divide-white/5 text-slate-200">
+              <tr>
+                <td colspan="7" class="p-8 text-center text-slate-500">Đang tải danh sách yêu cầu tư vấn...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. THEMES TAB -->
+    <div id="view-themes" class="tab-view hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-white">Kho Giao Diện Website</h2>
+          <p class="text-xs text-slate-400">Quản lý các mẫu website hiển thị trên trang chủ</p>
+        </div>
+        <button onclick="openAddThemeModal()" class="px-4 py-2 rounded-xl bg-[#006398] hover:bg-[#007cb8] text-white text-xs font-bold flex items-center gap-2">
+          <i class="fa-solid fa-plus"></i>
+          <span>Thêm Mẫu Mới</span>
+        </button>
+      </div>
+
+      <div id="themesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Generated Themes -->
+      </div>
+    </div>
+
+    <!-- 3. SERVICES TAB -->
+    <div id="view-services" class="tab-view hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-white">Danh Mục Dịch Vụ Thiết Kế</h2>
+          <p class="text-xs text-slate-400">Quản lý các giải pháp lập trình và thiết kế website</p>
+        </div>
+        <button onclick="openAddServiceModal()" class="px-4 py-2 rounded-xl bg-[#006398] hover:bg-[#007cb8] text-white text-xs font-bold flex items-center gap-2">
+          <i class="fa-solid fa-plus"></i>
+          <span>Thêm Dịch Vụ</span>
+        </button>
+      </div>
+
+      <div id="servicesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Generated Services -->
+      </div>
+    </div>
+
+    <!-- 4. PRICING TAB -->
+    <div id="view-pricing" class="tab-view hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-white">Bảng Giá Các Gói Website</h2>
+          <p class="text-xs text-slate-400">Quản lý thông số các gói Starter, Professional, Enterprise</p>
+        </div>
+      </div>
+
+      <div id="pricingContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Generated Pricing Plans -->
+      </div>
+    </div>
+
+    <!-- 5. SETTINGS TAB -->
+    <div id="view-settings" class="tab-view hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 max-w-2xl mx-auto">
+        <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-[#5bb8fe]"></i>
+          <span>Thông Tin Liên Hệ & Hotline Toàn Site</span>
+        </h2>
+        <form id="settingsForm" onsubmit="saveSettings(event)" class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Tên Thương Hiệu</label>
+            <input type="text" id="settingSiteName" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-cyan-400" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">Hotline 24/7</label>
+              <input type="text" id="settingHotline" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-cyan-400" />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1">Số Zalo OA</label>
+              <input type="text" id="settingZalo" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-cyan-400" />
+            </div>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Email Tiếp Nhận Hồ Sơ</label>
+            <input type="email" id="settingEmail" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-cyan-400" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1">Địa Chỉ Văn Phòng</label>
+            <input type="text" id="settingAddress" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white focus:outline-none focus:border-cyan-400" />
+          </div>
+          <button type="submit" class="w-full py-3 rounded-xl bg-[#006398] hover:bg-[#007cb8] text-white font-bold transition-colors">
+            Lưu Cấu Hình Toàn Website
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 6. ATLAS TAB -->
+    <div id="view-atlas" class="tab-view hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Status Card -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="text-base font-bold text-white mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-server text-cyan-400"></i>
+            <span>Trạng Thái Kết Nối Cơ Sở Dữ Liệu</span>
+          </h3>
+          <div class="space-y-3 text-xs">
+            <div class="flex justify-between py-2 border-b border-white/10">
+              <span class="text-slate-400">Tình trạng:</span>
+              <span id="atlasStatusText" class="font-bold text-amber-400">Đang kiểm tra...</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-white/10">
+              <span class="text-slate-400">Loại cơ sở dữ liệu:</span>
+              <span id="atlasTypeText" class="font-medium text-slate-200">MongoDB Atlas Cluster</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-white/10">
+              <span class="text-slate-400">Database Name:</span>
+              <span id="atlasDbName" class="font-mono text-cyan-300">thuypd_site</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-white/10">
+              <span class="text-slate-400">Cluster Host:</span>
+              <span id="atlasHostName" class="font-mono text-slate-300">-</span>
+            </div>
+            <div class="pt-2">
+              <button onclick="seedDatabase()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-seedling"></i>
+                <span>Nạp Dữ Liệu Khởi Tạo (Seed Initial Data)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection Test Form -->
+        <div class="glass-card rounded-2xl p-6">
+          <h3 class="text-base font-bold text-white mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-plug-circle-check text-emerald-400"></i>
+            <span>Kiểm Tra Kết Nối MongoDB Atlas Trực Tiếp</span>
+          </h3>
+          <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+            Dán chuỗi kết nối từ MongoDB Atlas để kiểm tra trực tiếp khả năng kết nối mạng từ backend.
+          </p>
+          <div class="space-y-3 text-xs">
+            <textarea id="testMongoUri" rows="3" placeholder="mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/thuypd_site" class="w-full p-3 rounded-xl bg-slate-900 border border-white/10 font-mono text-xs text-cyan-300 focus:outline-none focus:border-cyan-400"></textarea>
+            <button onclick="runTestMongo()" id="btnTestMongo" class="w-full py-2.5 rounded-xl bg-[#006398] hover:bg-[#007cb8] text-white font-bold transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Kiểm Tra Kết Nối Ngay</span>
+            </button>
+            <div id="testMongoResult" class="hidden p-3 rounded-xl text-xs font-mono"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const API_BASE = window.location.origin;
+    let token = localStorage.getItem('thuypd_token') || '';
+    let allLeads = [];
+
+    // Header token
+    function getHeaders() {
+      return {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+      };
+    }
+
+    // Switch Tabs
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-[#006398]', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+
+      const activeView = document.getElementById('view-' + tabId);
+      const activeBtn = document.getElementById('tab-' + tabId);
+      if (activeView) activeView.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.classList.add('bg-[#006398]', 'text-white');
+        activeBtn.classList.remove('text-slate-400');
+      }
+
+      if (tabId === 'leads') loadLeads();
+      if (tabId === 'themes') loadThemes();
+      if (tabId === 'services') loadServices();
+      if (tabId === 'pricing') loadPricing();
+      if (tabId === 'settings') loadSettings();
+      if (tabId === 'atlas') loadAtlasStatus();
+    }
+
+    // Auth Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const usernameOrEmail = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginBtn');
+      const errorDiv = document.getElementById('loginError');
+
+      btn.disabled = true;
+      btn.innerText = 'Đang xác thực...';
+      errorDiv.classList.add('hidden');
+
+      try {
+        const res = await fetch(API_BASE + '/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usernameOrEmail, password })
+        });
+        const data = await res.json();
+        if (data.success && data.token) {
+          token = data.token;
+          localStorage.setItem('thuypd_token', token);
+          document.getElementById('loginModal').classList.add('hidden');
+          initAdminApp();
+        } else {
+          errorDiv.innerText = data.message || 'Sai thông tin đăng nhập.';
+          errorDiv.classList.remove('hidden');
+        }
+      } catch (err) {
+        errorDiv.innerText = 'Lỗi kết nối tới máy chủ API: ' + err.message;
+        errorDiv.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Đăng Nhập Quản Trị';
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('thuypd_token');
+      token = '';
+      document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    async function checkAuth() {
+      if (!token) {
+        document.getElementById('loginModal').classList.remove('hidden');
+        return;
+      }
+      try {
+        const res = await fetch(API_BASE + '/api/auth/me', { headers: getHeaders() });
+        const data = await res.json();
+        if (data.success && data.user) {
+          document.getElementById('loginModal').classList.add('hidden');
+          document.getElementById('adminDisplayName').innerText = data.user.fullName || data.user.username;
+          initAdminApp();
+        } else {
+          logout();
+        }
+      } catch (err) {
+        document.getElementById('loginModal').classList.remove('hidden');
+      }
+    }
+
+    function initAdminApp() {
+      loadLeads();
+      loadAtlasStatus();
+    }
+
+    // Refresh Data
+    function refreshData() {
+      loadLeads();
+      loadAtlasStatus();
+    }
+
+    // 1. LEADS
+    async function loadLeads() {
+      try {
+        const res = await fetch(API_BASE + '/api/leads', { headers: getHeaders() });
+        const data = await res.json();
+        if (data.success && Array.isArray(data.leads)) {
+          allLeads = data.leads;
+          renderLeads(allLeads);
+          updateLeadStats(allLeads);
+        }
+      } catch (err) {
+        console.error('Error loading leads:', err);
+      }
+    }
+
+    function updateLeadStats(leads) {
+      document.getElementById('statTotalLeads').innerText = leads.length;
+      document.getElementById('leadsCountBadge').innerText = leads.length;
+      const newCount = leads.filter(l => l.status === 'new').length;
+      const wonCount = leads.filter(l => l.status === 'converted').length;
+      document.getElementById('statNewLeads').innerText = newCount;
+      document.getElementById('statWonLeads').innerText = wonCount;
+      const rate = leads.length > 0 ? Math.round((wonCount / leads.length) * 100) : 0;
+      document.getElementById('statConversionRate').innerText = rate + '%';
+    }
+
+    function renderLeads(leads) {
+      const tbody = document.getElementById('leadsTableBody');
+      if (!leads.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-slate-500">Chưa có yêu cầu tư vấn nào được ghi nhận.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = leads.map(lead => {
+        const statusMap = {
+          new: { text: 'Mới nhận', cls: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
+          contacted: { text: 'Đang liên hệ', cls: 'bg-sky-500/20 text-sky-300 border-sky-500/30' },
+          qualified: { text: 'Đã báo giá', cls: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' },
+          converted: { text: 'Đã chốt hợp đồng', cls: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
+          cancelled: { text: 'Đã hủy', cls: 'bg-red-500/20 text-red-300 border-red-500/30' },
+        };
+        const st = statusMap[lead.status] || { text: lead.status, cls: 'bg-slate-700 text-slate-300' };
+        const id = lead.id || lead._id;
+        const dateStr = new Date(lead.createdAt).toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+
+        return `
+          <tr class="hover:bg-slate-800/40 transition-colors">
+            <td class="p-3.5 font-bold text-white">${escapeHtml(lead.fullName)}</td>
+            <td class="p-3.5">
+              <a href="tel:${escapeHtml(lead.phone)}" class="text-cyan-400 font-bold hover:underline flex items-center gap-1.5">
+                <i class="fa-solid fa-phone text-[10px]"></i>
+                <span>${escapeHtml(lead.phone)}</span>
+              </a>
+              <span class="text-slate-400 text-[11px] block mt-0.5">${escapeHtml(lead.email || '-')}</span>
+            </td>
+            <td class="p-3.5">
+              <span class="font-medium text-slate-200 block">${escapeHtml(lead.websiteType || '-')}</span>
+              <span class="text-slate-400 text-[11px]">${escapeHtml(lead.budgetTier || '-')}</span>
+            </td>
+            <td class="p-3.5">
+              <select onchange="updateLeadStatus('${id}', this.value)" class="px-2 py-1 rounded-lg border text-[11px] font-semibold bg-slate-900 ${st.cls} cursor-pointer focus:outline-none">
+                <option value="new" ${lead.status === 'new' ? 'selected' : ''}>Mới nhận</option>
+                <option value="contacted" ${lead.status === 'contacted' ? 'selected' : ''}>Đang liên hệ</option>
+                <option value="qualified" ${lead.status === 'qualified' ? 'selected' : ''}>Đã báo giá</option>
+                <option value="converted" ${lead.status === 'converted' ? 'selected' : ''}>Đã chốt HĐ</option>
+                <option value="cancelled" ${lead.status === 'cancelled' ? 'selected' : ''}>Đã hủy</option>
+              </select>
+            </td>
+            <td class="p-3.5 max-w-xs truncate text-slate-300" title="${escapeHtml(lead.notes || '')}">
+              ${escapeHtml(lead.notes || '-')}
+            </td>
+            <td class="p-3.5 text-slate-400 whitespace-nowrap text-[11px]">${dateStr}</td>
+            <td class="p-3.5 text-right whitespace-nowrap">
+              <button onclick="deleteLead('${id}')" class="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-colors" title="Xóa yêu cầu">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterLeads() {
+      const q = document.getElementById('searchLeadsInput').value.toLowerCase().trim();
+      const status = document.getElementById('filterLeadStatus').value;
+
+      let filtered = allLeads.filter(l => {
+        const matchQ = !q ||
+          (l.fullName && l.fullName.toLowerCase().includes(q)) ||
+          (l.phone && l.phone.includes(q)) ||
+          (l.email && l.email.toLowerCase().includes(q));
+        const matchStatus = status === 'all' || l.status === status;
+        return matchQ && matchStatus;
+      });
+      renderLeads(filtered);
+    }
+
+    async function updateLeadStatus(id, newStatus) {
+      try {
+        await fetch(API_BASE + '/api/leads/' + id, {
+          method: 'PUT',
+          headers: getHeaders(),
+          body: JSON.stringify({ status: newStatus })
+        });
+        const item = allLeads.find(l => (l.id || l._id) === id);
+        if (item) item.status = newStatus;
+        updateLeadStats(allLeads);
+      } catch (err) {
+        alert('Lỗi cập nhật trạng thái: ' + err.message);
+      }
+    }
+
+    async function deleteLead(id) {
+      if (!confirm('Bạn có chắc chắn muốn xóa yêu cầu tư vấn này?')) return;
+      try {
+        await fetch(API_BASE + '/api/leads/' + id, {
+          method: 'DELETE',
+          headers: getHeaders()
+        });
+        allLeads = allLeads.filter(l => (l.id || l._id) !== id);
+        filterLeads();
+        updateLeadStats(allLeads);
+      } catch (err) {
+        alert('Lỗi xóa yêu cầu: ' + err.message);
+      }
+    }
+
+    // 2. THEMES
+    async function loadThemes() {
+      try {
+        const res = await fetch(API_BASE + '/api/themes');
+        const data = await res.json();
+        const container = document.getElementById('themesGrid');
+        if (data.success && Array.isArray(data.themes)) {
+          container.innerHTML = data.themes.map(t => `
+            <div class="glass-card rounded-2xl overflow-hidden border border-white/10 flex flex-col">
+              <div class="h-44 bg-slate-800 relative overflow-hidden">
+                <img src="${escapeHtml(t.imageUrl || '')}" alt="${escapeHtml(t.title)}" class="w-full h-full object-cover" />
+                <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-[#0b1320]/80 text-cyan-300 border border-white/10">
+                  ${escapeHtml(t.categoryName || t.category)}
+                </span>
+              </div>
+              <div class="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 class="font-bold text-white text-sm mb-1">${escapeHtml(t.title)}</h4>
+                  <span class="text-xs text-amber-400 font-extrabold block mb-2">${escapeHtml(t.formattedPrice || (t.price?.toLocaleString('vi-VN') + ' ₫'))}</span>
+                  <p class="text-[11px] text-slate-400 line-clamp-2 mb-3">${escapeHtml(t.description || '')}</p>
+                </div>
+                <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <a href="${escapeHtml(t.demoUrl || '#')}" target="_blank" class="text-xs text-cyan-400 hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    <span>Xem Demo</span>
+                  </a>
+                  <button onclick="deleteTheme('${t.id || t._id}')" class="text-xs text-red-400 hover:text-red-300">
+                    <i class="fa-regular fa-trash-can"></i> Xóa
+                  </button>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (err) {
+        console.error('Error loading themes:', err);
+      }
+    }
+
+    async function deleteTheme(id) {
+      if (!confirm('Xác nhận xóa giao diện này?')) return;
+      try {
+        await fetch(API_BASE + '/api/themes/' + id, { method: 'DELETE', headers: getHeaders() });
+        loadThemes();
+      } catch (err) {
+        alert('Lỗi xóa giao diện: ' + err.message);
+      }
+    }
+
+    // 3. ATLAS STATUS & TEST
+    async function loadAtlasStatus() {
+      try {
+        const res = await fetch(API_BASE + '/api/db/status');
+        const data = await res.json();
+        const headerStatus = document.getElementById('headerDbStatus');
+        const statusText = document.getElementById('atlasStatusText');
+        const typeText = document.getElementById('atlasTypeText');
+        const dbName = document.getElementById('atlasDbName');
+        const hostName = document.getElementById('atlasHostName');
+
+        if (data.status?.isConnected) {
+          headerStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> MongoDB Atlas Connected';
+          headerStatus.className = 'text-emerald-400 flex items-center gap-1 font-medium';
+          statusText.innerHTML = '<span class="text-emerald-400 font-bold">Đã Kết Nối MongoDB Atlas (Ready)</span>';
+          typeText.innerText = 'MongoDB Atlas Cloud Cluster';
+          dbName.innerText = data.status.databaseName || 'thuypd_site';
+          hostName.innerText = data.status.host || 'Atlas M0 Cluster';
+        } else {
+          headerStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span> Bộ Nhớ Tạm (Memory Fallback)';
+          headerStatus.className = 'text-amber-400 flex items-center gap-1 font-medium';
+          statusText.innerHTML = '<span class="text-amber-400 font-bold">Đang dùng Bộ Nhớ Tạm (Chưa có MONGODB_URI)</span>';
+          typeText.innerText = 'In-Memory Fallback Store (Local)';
+          dbName.innerText = 'thuypd_site (RAM)';
+          hostName.innerText = 'Local Server Memory';
+        }
+      } catch (err) {
+        console.error('DB status load error:', err);
+      }
+    }
+
+    async function runTestMongo() {
+      const uri = document.getElementById('testMongoUri').value.trim();
+      const resultDiv = document.getElementById('testMongoResult');
+      const btn = document.getElementById('btnTestMongo');
+
+      if (!uri) {
+        alert('Vui lòng nhập chuỗi MONGODB_URI từ MongoDB Atlas.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang kiểm tra kết nối...';
+      resultDiv.classList.add('hidden');
+
+      try {
+        const res = await fetch(API_BASE + '/api/db/test-connection', {
+          method: 'POST',
+          headers: getHeaders(),
+          body: JSON.stringify({ uri })
+        });
+        const data = await res.json();
+        resultDiv.classList.remove('hidden');
+
+        if (data.success) {
+          resultDiv.className = 'p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono';
+          resultDiv.innerHTML = `<strong>✅ Kết Nối Thành Công!</strong><br/>Database: ${escapeHtml(data.databaseName || 'N/A')}<br/>Latency: ${data.latencyMs}ms<br/>${escapeHtml(data.message)}`;
+        } else {
+          resultDiv.className = 'p-3 rounded-xl bg-red-500/20 border border-red-500/40 text-red-300 text-xs font-mono';
+          resultDiv.innerHTML = `<strong>❌ Thất Bại:</strong> ${escapeHtml(data.message || data.error)}`;
+        }
+      } catch (err) {
+        resultDiv.classList.remove('hidden');
+        resultDiv.className = 'p-3 rounded-xl bg-red-500/20 border border-red-500/40 text-red-300 text-xs font-mono';
+        resultDiv.innerText = 'Lỗi gửi yêu cầu kiểm tra: ' + err.message;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-bolt"></i> Kiểm Tra Kết Nối Ngay';
+      }
+    }
+
+    async function seedDatabase() {
+      if (!confirm('Khởi tạo lại dữ liệu mẫu vào cơ sở dữ liệu? Dữ liệu hiện tại sẽ được cập nhật.')) return;
+      try {
+        const res = await fetch(API_BASE + '/api/db/seed', { method: 'POST', headers: getHeaders() });
+        const data = await res.json();
+        alert(data.message || 'Đã nạp dữ liệu khởi tạo thành công!');
+        refreshData();
+      } catch (err) {
+        alert('Lỗi nạp dữ liệu khởi tạo: ' + err.message);
+      }
+    }
+
+    // Escape HTML Helper
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Startup Check
+    checkAuth();
+  </script>
+</body>
+</html>
