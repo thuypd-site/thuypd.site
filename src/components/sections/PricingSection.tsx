@@ -42,7 +42,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const title = content?.title || 'Bảng Giá Thiết Kế Website Trọn Gói';
   const subtitle =
     content?.subtitle ||
-    'Minh bạch từng hạng mục, bàn giao 100% quyền sở hữu mã nguồn, cam kết không phát sinh chi phí ngầm trong suốt quá trình thực hiện.';
+    'Chi phí rõ ràng từng hạng mục, toàn quyền sở hữu website vĩnh viễn, cam kết không phát sinh chi phí ngầm trong suốt quá trình thực hiện.';
   const highlightPlanId = content?.highlightPlanId || 'plan-professional';
 
   const handleTableScroll = () => {
@@ -109,7 +109,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
       name: 'Nút Gọi, Chat Zalo & Form nhận tin',
       basic: 'Tích hợp đầy đủ',
       professional: 'Đầy đủ + Tự động gửi thông báo về Zalo',
-      advanced: 'Kết nối tự động Zalo, Telegram & phần mềm CRM',
+      advanced: 'Kết nối tự động Zalo, Telegram & phần mềm bán hàng',
     },
     {
       category: 'Thương Mại Điện Tử',

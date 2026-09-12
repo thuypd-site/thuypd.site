@@ -156,19 +156,19 @@
       "availableStyles": [
         {
           "value": "commits-b",
-          "label": "Wavy Roadmap 🌊",
-          "description": "Lộ trình thực thi lượn sóng 4 bước với đường dẫn SVG tương tác và mốc nghiệm thu rõ ràng"
+          "label": "Quy Trình 4 Bước",
+          "description": "Quy trình triển khai 4 bước minh bạch với mốc nghiệm thu rõ ràng từng giai đoạn"
         },
         {
           "value": "commits-a",
-          "label": "4 Cột Đứng",
+          "label": "4 Cột Song Song",
           "description": "4 Thẻ cam kết chất lượng song song, trực quan và dễ theo dõi"
         }
       ],
       "content": {
-        "badge": "Cam Kết Rõ Ràng & Lộ Trình",
-        "title": "4 Cam Kết Vàng Giúp Bạn An Tâm Tuyệt Đối",
-        "subtitle": "Xóa tan nỗi lo web chạy chậm, chi phí phát sinh bất ngờ hay bị bỏ rơi sau khi hoàn tất thanh toán.",
+        "badge": "Quy Trình Làm Việc",
+        "title": "Quy Trình Triển Khai 4 Bước — Bàn Giao Đúng Hẹn",
+        "subtitle": "Mỗi giai đoạn đều có kết quả cụ thể để bạn nghiệm thu trực tiếp trước khi chuyển sang bước tiếp theo.",
         "items": [
           {
             "id": "adv-01",

@@ -49,8 +49,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       fullName: '',
       phone: '',
       email: '',
-      websiteType: initialWebsiteType || 'Website Bán Hàng / Shop TMĐT',
-      budgetTier: initialBudgetTier || 'Gói Professional (7.990.000đ)',
+      websiteType: initialWebsiteType || 'Website Bán Hàng / Cửa Hàng Trực Tuyến',
+      budgetTier: initialBudgetTier || 'Gói Chuyên Nghiệp (7.990.000đ)',
       notes: initialNotes || '',
       agreedToTerms: true,
     },
@@ -252,7 +252,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       {...register('websiteType')}
                       className="w-full px-4 py-3 rounded-xl bg-slate-50 text-[#0b1c30] text-sm border border-slate-200/90 focus:border-[#006398] focus:bg-white focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none cursor-pointer"
                     >
-                      <option value="Website Bán Hàng / Shop TMĐT">Website Bán Hàng / Shop TMĐT</option>
+                      <option value="Website Bán Hàng / Cửa Hàng Trực Tuyến">Website Bán Hàng / Cửa Hàng Trực Tuyến</option>
                       <option value="Website Giới Thiệu Doanh Nghiệp">Website Giới Thiệu Doanh Nghiệp</option>
                       <option value="Website Bất Động Sản">Website Bất Động Sản</option>
                       <option value="Website Dịch Vụ / Spa / Thẩm Mỹ">Website Dịch Vụ / Spa / Thẩm Mỹ</option>

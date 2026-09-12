@@ -6,8 +6,8 @@ import { LandingPageRenderer } from '@/src/components/landing/LandingPageRendere
 import { ThemeItem } from '@/src/types';
 
 export function ClientApp() {
-  const [selectedBudgetTier, setSelectedBudgetTier] = useState<string>('Gói Professional (7.990.000đ)');
-  const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Website Bán Hàng / Shop TMĐT');
+  const [selectedBudgetTier, setSelectedBudgetTier] = useState<string>('Gói Chuyên Nghiệp (7.990.000đ)');
+  const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Website Bán Hàng / Cửa Hàng Trực Tuyến');
   const [selectedNotes, setSelectedNotes] = useState<string>('');
 
   const handleSelectPlan = (planName: string, budgetTier: string) => {
@@ -18,7 +18,7 @@ export function ClientApp() {
   const handleSelectTheme = (theme: ThemeItem) => {
     setSelectedWebsiteType(
       theme.category === 'ecommerce'
-        ? 'Website Bán Hàng / Shop TMĐT'
+        ? 'Website Bán Hàng / Cửa Hàng Trực Tuyến'
         : theme.category === 'corporate'
         ? 'Website Giới Thiệu Doanh Nghiệp'
         : theme.category === 'realestate'

@@ -132,7 +132,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
               <div className="relative z-10 space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="px-3 py-1 rounded-full bg-[#006398] text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider">
-                    FLAGSHIP SERVICE
+                    DỊCH VỤ TRỌNG TÂM
                   </span>
                   <span className="px-3 py-1 rounded-full bg-white/10 text-cyan-300 font-mono text-[10px] sm:text-xs font-bold">
                     Phát triển riêng 100% · Giao diện độc quyền

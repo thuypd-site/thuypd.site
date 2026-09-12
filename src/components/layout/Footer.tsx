@@ -336,7 +336,7 @@ export const Footer: React.FC<FooterProps> = () => {
               </a>
               <span className="text-slate-600">•</span>
               <a href="#loi-ich" className="hover:text-white transition-colors">
-                Cam Kết SLA
+                Cam Kết Chất Lượng
               </a>
             </div>
 

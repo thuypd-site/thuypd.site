@@ -19,16 +19,16 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({ cont
   const [selectedCategory, setSelectedCategory] = useState<ThemeCategory>('all');
   const [activePreviewTheme, setActivePreviewTheme] = useState<ThemeItem | null>(null);
 
-  const badge = content?.badge || 'Mẫu Giao Diện Chọn Lọc';
-  const title = content?.title || 'Kho Giao Diện Website Xu Hướng & Tối Ưu Chuyển Đổi';
-  const subtitle = content?.subtitle || 'Hơn 100+ mẫu demo thực tế sẵn sàng triển khai nhanh chóng, chuẩn SEO Google và hiển thị đẹp mắt trên mọi thiết bị.';
+  const badge = content?.badge || 'Kho Giao Diện';
+  const title = content?.title || 'Mẫu Giao Diện Website Đẹp Mắt & Thu Hút Khách Hàng';
+  const subtitle = content?.subtitle || 'Bộ sưu tập mẫu giao diện thực tế đa ngành nghề, dễ dàng tùy biến theo nhận diện thương hiệu của bạn.';
 
   // TanStack Query for caching and server state
   const { data: themes = [], isLoading } = useThemes(selectedCategory);
 
   const categories: { id: ThemeCategory; label: string }[] = [
     { id: 'all', label: 'Tất cả mẫu' },
-    { id: 'ecommerce', label: 'Bán Hàng - TMĐT' },
+    { id: 'ecommerce', label: 'Bán Hàng' },
     { id: 'corporate', label: 'Doanh Nghiệp' },
     { id: 'realestate', label: 'Bất Động Sản' },
     { id: 'spa', label: 'Thẩm Mỹ & Spa' },
@@ -67,7 +67,7 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({ cont
               href="#nhan-bao-gia"
               className="group inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#006398] font-bold hover:underline"
             >
-              <span>Xem tất cả 1.200+ mẫu demo</span>
+              <span>Khám phá các mẫu giao diện</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>

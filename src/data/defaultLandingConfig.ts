@@ -14,9 +14,9 @@ export const defaultLandingConfig: LandingPageConfig = {
       enabled: true,
       displayStyle: 'hero-c',
       availableStyles: [
-        { value: 'hero-c', label: 'SaaS Glow (Modern Dark) ⚡', description: 'Giao diện Dark Mode tương phản cao, bảng đối chiếu rủi ro vs cam kết & công cụ chẩn đoán nhu cầu tương tác' },
-        { value: 'hero-b', label: 'Center Focus (Linear)', description: 'Căn giữa hiện đại với 3 thẻ bảo chứng chuyển đổi (Core Web Vitals, Độc Bản, Full Code)' },
-        { value: 'hero-a', label: 'Split Cột (Classic)', description: '2 Cột: Nội dung bên trái + Bảng chỉ số trải nghiệm thời gian thực bên phải' },
+        { value: 'hero-a', label: 'Bố Cục Hai Cột', description: 'Giao diện kinh điển với tiêu đề bên trái và hình ảnh/demo tương tác bên phải' },
+        { value: 'hero-b', label: 'Căn Giữa Hiện Đại', description: 'Căn giữa tinh tế với 3 thẻ cam kết chất lượng cốt lõi' },
+        { value: 'hero-c', label: 'Tương Tác Nhanh', description: 'Tích hợp bộ câu hỏi chẩn đoán và cam kết giải quyết nỗi đau khách hàng' },
       ],
       content: {
         badgeText: 'Thiết Kế Website Theo Yêu Cầu • Chuẩn SEO Google • Bàn Giao Trọn Gói',
@@ -52,8 +52,8 @@ export const defaultLandingConfig: LandingPageConfig = {
       enabled: true,
       displayStyle: 'services-b',
       availableStyles: [
-        { value: 'services-b', label: 'Bento Grid (Stripe)', description: 'Bố cục Bento hiện đại với khối Flagship Service nổi bật và các vệ tinh dịch vụ' },
-        { value: 'services-a', label: 'Grid 6 Ô Đối Xứng', description: 'Hiển thị 6 dịch vụ cân xứng chuẩn nhận diện, biểu tượng tương tác' },
+        { value: 'services-b', label: 'Lưới Đa Khối', description: 'Bố cục hiện đại với khối Dịch vụ trọng tâm và các giải pháp chuyên biệt' },
+        { value: 'services-a', label: '6 Ô Cân Xứng', description: 'Hiển thị 6 dịch vụ cân xứng, trực quan và dễ theo dõi' },
       ],
       content: {
         badge: 'Dịch Vụ Trọng Tâm',
@@ -64,17 +64,17 @@ export const defaultLandingConfig: LandingPageConfig = {
     },
     {
       id: 'advantages',
-      name: 'Ưu điểm & Cam kết vàng',
+      name: 'Quy trình & Cam kết',
       enabled: true,
       displayStyle: 'commits-b',
       availableStyles: [
-        { value: 'commits-b', label: 'Wavy Roadmap 🌊', description: 'Lộ trình thực thi lượn sóng 4 bước với đường dẫn SVG tương tác và mốc nghiệm thu rõ ràng' },
-        { value: 'commits-a', label: '4 Cột Đứng', description: '4 Thẻ cam kết chất lượng song song, trực quan và dễ theo dõi' },
+        { value: 'commits-b', label: 'Quy Trình 4 Bước', description: 'Quy trình triển khai 4 bước minh bạch với mốc nghiệm thu rõ ràng từng giai đoạn' },
+        { value: 'commits-a', label: '4 Cột Song Song', description: '4 Thẻ cam kết chất lượng song song, trực quan và dễ theo dõi' },
       ],
       content: {
-        badge: 'Cam Kết Rõ Ràng & Lộ Trình',
-        title: '4 Cam Kết Vàng Giúp Bạn An Tâm Tuyệt Đối',
-        subtitle: 'Xóa tan nỗi lo web chạy chậm, chi phí phát sinh bất ngờ hay bị bỏ rơi sau khi hoàn tất thanh toán.',
+        badge: 'Quy Trình Làm Việc',
+        title: 'Quy Trình Triển Khai 4 Bước — Bàn Giao Đúng Hẹn',
+        subtitle: 'Mỗi giai đoạn đều có kết quả cụ thể để bạn nghiệm thu trực tiếp trước khi chuyển sang bước tiếp theo.',
         items: [...mockAdvantages],
       },
     },

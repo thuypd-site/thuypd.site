@@ -333,9 +333,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                   <CheckCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-base font-bold text-[#0b1c30]">Toàn Quyền Mã Nguồn</div>
+                  <div className="text-base font-bold text-[#0b1c30]">Toàn Quyền Sở Hữu 100%</div>
                   <p className="text-xs sm:text-sm text-[#45464d] mt-1 leading-relaxed">
-                    Bàn giao full code và hosting, bảo hành đồng hành trọn đời.
+                    Bàn giao trọn gói website và quyền quản trị, bảo hành đồng hành trọn đời.
                   </p>
                 </div>
               </SpotlightCard>

@@ -17,9 +17,9 @@ export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({ content }) =
   const hotline = settings?.hotline || siteConfig.hotline;
   const hotlineRaw = settings?.hotlineRaw || siteConfig.hotlineRaw;
 
-  const title = content?.title || 'Sẵn Sàng Xây Dựng Website Đẹp Mắt & Hiệu Quả?';
-  const subtitle = content?.subtitle || 'Để lại thông tin ngay hôm nay để nhận tư vấn giải pháp sát với thực tế ngành nghề và nhận báo giá trọn gói không phát sinh.';
-  const buttonText = content?.buttonText || 'Nhận Tư Vấn & Báo Giá Nhanh';
+  const title = content?.title || 'Sẵn Sàng Xây Dựng Website Đẹp Mắt & Bứt Phá Doanh Thu?';
+  const subtitle = content?.subtitle || 'Liên hệ ngay hôm nay để nhận tư vấn giải pháp tối ưu cho ngành nghề của bạn và nhận báo giá trọn gói minh bạch.';
+  const buttonText = content?.buttonText || 'Nhận Báo Giá & Tư Vấn Miễn Phí';
   const buttonLink = content?.buttonLink || '#nhan-bao-gia';
   const hotlineText = content?.hotlineText || `Hoặc gọi Hotline trực tiếp: ${hotline}`;
 
@@ -34,7 +34,7 @@ export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({ content }) =
           <div className="relative z-10 max-w-3xl space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-cyan-300 text-xs font-bold backdrop-blur-sm border border-white/15">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>CƠ HỘI NÂNG TẦM THƯƠNG HIỆU</span>
+              <span>BẮT ĐẦU DỰ ÁN NGAY HÔM NAY</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">

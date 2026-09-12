@@ -45,9 +45,9 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
   })();
 
   const items = content?.items && content.items.length > 0 ? content.items : mockAdvantages;
-  const badge = content?.badge || 'Lộ Trình Minh Bạch';
-  const title = content?.title || '4 Bước Triển Khai Rõ Ràng — Bàn Giao Đúng Hẹn';
-  const subtitle = content?.subtitle || 'Mỗi giai đoạn đều có kết quả cụ thể để bạn kiểm tra và duyệt trực tiếp trước khi chuyển sang bước tiếp theo.';
+  const badge = content?.badge || 'Quy Trình Làm Việc';
+  const title = content?.title || 'Quy Trình Triển Khai 4 Bước Rõ Ràng & Bàn Giao Đúng Hẹn';
+  const subtitle = content?.subtitle || 'Mỗi giai đoạn đều có kết quả cụ thể để bạn nghiệm thu trực tiếp trước khi chuyển sang bước tiếp theo.';
 
   // Default fallback steps
   const defaultRoadmapSteps = [
@@ -71,7 +71,7 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
       step: '03',
       days: 'Ngày 6 - 8',
       title: 'Xây Dựng & Tối Ưu Hệ Thống',
-      desc: 'Hiện thực hóa các tính năng thực tế, tối ưu chuẩn SEO Google, cài đặt tốc độ mở trang dưới 1 giây và chạy thử nghiệm.',
+      desc: 'Hiện thực hóa giao diện, tối ưu chuẩn tìm kiếm Google, đảm bảo tốc độ mở trang tức thì dưới 1 giây và chạy thử nghiệm kỹ lưỡng.',
       output: 'Đầu ra: Website chạy thử thực tế hoàn chỉnh',
       icon: <Code className="w-6 h-6 text-blue-600" />,
     },
@@ -79,7 +79,7 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
       step: '04',
       days: 'Ngày 9 - 10',
       title: 'Bàn Giao & Hướng Dẫn Tận Tình',
-      desc: 'Bàn giao toàn bộ quyền quản trị và mã nguồn, gửi video hướng dẫn sử dụng 1-1 và kích hoạt chế độ hỗ trợ trọn đời.',
+      desc: 'Bàn giao toàn bộ quyền quản trị website và dữ liệu, gửi video hướng dẫn sử dụng 1-1 và kích hoạt chế độ hỗ trợ trọn đời.',
       output: 'Đầu ra: Toàn quyền sở hữu & Bắt đầu kinh doanh',
       icon: <CheckCircle className="w-6 h-6 text-emerald-600" />,
     },
@@ -118,12 +118,10 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
               {badge}
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight">
-              {activeStyle === 'commits-b' ? 'Lộ Trình Thực Thi Lượn Sóng 4 Bước (Wavy Roadmap)' : title}
+              {title}
             </h2>
             <p className="text-sm sm:text-base text-[#45464d] leading-relaxed">
-              {activeStyle === 'commits-b'
-                ? 'Mọi giai đoạn đều có mốc nghiệm thu rõ ràng, đảm bảo đúng tiến độ và cam kết bàn giao 100%.'
-                : subtitle}
+              {subtitle}
             </p>
           </div>
         </div>
@@ -261,7 +259,7 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
                 href="#nhan-bao-gia"
                 className="px-5 py-2.5 rounded-xl bg-[#006398] text-white text-xs sm:text-sm font-bold hover:bg-[#004f7a] transition-all shadow-md shrink-0 whitespace-nowrap"
               >
-                Nhận Lộ Trình Chi Tiết
+                Tư Vấn Quy Trình Chi Tiết
               </a>
             </div>
           </div>
