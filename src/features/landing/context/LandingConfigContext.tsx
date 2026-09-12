@@ -24,13 +24,32 @@ export interface LandingConfigProviderProps {
 }
 
 export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ children, initialConfig }) => {
+  const isPreviewModeRef = React.useRef<boolean>(false);
+
   const [config, setConfig] = useState<LandingPageConfig>(() => {
+    // 1. If server provides initialConfig from SSR, prioritize it and sync to localStorage
     if (initialConfig && Array.isArray(initialConfig.sections) && initialConfig.sections.length > 0) {
-      return normalizeLandingPageConfig(initialConfig);
+      const normalized = normalizeLandingPageConfig(initialConfig);
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+        } catch {}
+      }
+      return normalized;
     }
 
     if (typeof window !== 'undefined') {
-      // 1. Pre-fetched server-side configuration from SSR
+      // Check if in preview mode (iframe or ?preview=true or /preview)
+      const isPreview =
+        window.location.search.includes('preview=true') ||
+        window.location.pathname.startsWith('/preview') ||
+        (window.parent && window.parent !== window);
+
+      if (isPreview) {
+        isPreviewModeRef.current = true;
+      }
+
+      // 2. Pre-fetched server-side configuration from SSR
       if (
         (window as any).__INITIAL_LANDING_CONFIG__ &&
         Array.isArray((window as any).__INITIAL_LANDING_CONFIG__.sections) &&
@@ -39,8 +58,7 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
         return normalizeLandingPageConfig((window as any).__INITIAL_LANDING_CONFIG__);
       }
 
-
-      // 2. Client cached configuration from previous session
+      // 3. Client cached configuration from previous session
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
@@ -57,7 +75,6 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(() => {
-    // If SSR provided the initial config, initial loading is already complete!
     if (typeof window !== 'undefined' && (window as any).__INITIAL_LANDING_CONFIG__?.sections?.length) {
       return false;
     }
@@ -70,23 +87,25 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
 
   // Synchronize configuration from Backend API on mount
   const refreshConfig = useCallback(async () => {
+    // If preview mode is actively controlled by Admin, do not overwrite with stale API data
+    if (isPreviewModeRef.current) {
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     setApiError(null);
     try {
       const response = await fetchLandingConfigApi();
       if (response && response.success && response.config && Array.isArray(response.config.sections) && response.config.sections.length > 0) {
-        // Pure API mode: use the normalized server configuration directly without hardcoded defaults
         const serverConfig = response.config;
-
         setConfig(serverConfig);
         setIsUsingLiveApi(true);
 
         if (typeof window !== 'undefined') {
           try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(serverConfig));
-          } catch {
-            // ignore localStorage quota errors
-          }
+          } catch {}
         }
       } else {
         if (response && response.message) {
@@ -111,16 +130,32 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
     if (typeof window === 'undefined') return;
 
     const handleMessage = (event: MessageEvent) => {
+      // 1. Realtime configuration update from Admin
       if (event.data && (event.data.type === 'THUYPD_PREVIEW_UPDATE' || event.data.type === 'LANDING_CONFIG_PREVIEW')) {
         const rawConfig = event.data.config;
         if (rawConfig) {
           try {
+            isPreviewModeRef.current = true;
             const normalized = normalizeLandingPageConfig(rawConfig);
             setConfig(normalized);
             setIsLoading(false);
+
+            // Dynamically apply theme color css variables if provided
+            if (normalized.theme?.primaryColor) {
+              document.documentElement.style.setProperty('--primary', normalized.theme.primaryColor);
+            }
           } catch (err) {
             console.warn('[LandingConfig Preview] Error applying preview config:', err);
           }
+        }
+      }
+
+      // 2. Scroll to section request from Admin
+      if (event.data && event.data.type === 'THUYPD_SCROLL_TO_SECTION' && event.data.sectionKey) {
+        const targetId = `section-${event.data.sectionKey}`;
+        const targetEl = document.getElementById(targetId) || document.querySelector(`[data-section-id="${event.data.sectionKey}"]`);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     };
@@ -129,7 +164,16 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
 
     // If embedded in an iframe, signal parent that preview client is ready
     if (window.parent && window.parent !== window) {
+      isPreviewModeRef.current = true;
       window.parent.postMessage({ type: 'THUYPD_PREVIEW_READY' }, '*');
+      // Re-signal after short delay to ensure parent listener is attached
+      const t1 = setTimeout(() => window.parent.postMessage({ type: 'THUYPD_PREVIEW_READY' }, '*'), 100);
+      const t2 = setTimeout(() => window.parent.postMessage({ type: 'THUYPD_PREVIEW_READY' }, '*'), 300);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        window.removeEventListener('message', handleMessage);
+      };
     }
 
     return () => {
@@ -137,7 +181,7 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
     };
   }, []);
 
-  // Support cross-tab real-time sync via BroadcastChannel
+  // Support cross-tab real-time sync via BroadcastChannel (Instant Publish)
   useEffect(() => {
     if (typeof window === 'undefined' || !('BroadcastChannel' in window)) return;
 
@@ -146,7 +190,11 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
       channel.onmessage = (event) => {
         if (event.data && (event.data.type === 'CONFIG_UPDATED' || event.data.type === 'THUYPD_PREVIEW_UPDATE')) {
           if (event.data.config) {
-            setConfig(normalizeLandingPageConfig(event.data.config));
+            const normalized = normalizeLandingPageConfig(event.data.config);
+            setConfig(normalized);
+            try {
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+            } catch {}
           } else {
             refreshConfig();
           }
