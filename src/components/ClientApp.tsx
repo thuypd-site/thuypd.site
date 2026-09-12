@@ -20,12 +20,12 @@ export function ClientApp() {
       theme.category === 'ecommerce'
         ? 'Website Bán Hàng / Cửa Hàng Trực Tuyến'
         : theme.category === 'corporate'
-        ? 'Website Giới Thiệu Doanh Nghiệp'
-        : theme.category === 'realestate'
-        ? 'Website Bất Động Sản'
-        : theme.category === 'spa'
-        ? 'Website Dịch Vụ / Spa / Thẩm Mỹ'
-        : 'Website Thiết Kế Theo Yêu Cầu Riêng'
+          ? 'Website Giới Thiệu Doanh Nghiệp'
+          : theme.category === 'realestate'
+            ? 'Website Bất Động Sản'
+            : theme.category === 'spa'
+              ? 'Website Dịch Vụ / Spa / Thẩm Mỹ'
+              : 'Website Thiết Kế Theo Yêu Cầu Riêng'
     );
     setSelectedNotes(`Khách hàng quan tâm mẫu thiết kế: ${theme.title} (${theme.formattedPrice}).`);
   };

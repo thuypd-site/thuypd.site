@@ -27,8 +27,8 @@ export const defaultLandingConfig: LandingPageConfig = {
         ctaSecondaryText: 'Tư Vấn Miễn Phí',
         pillars: [
           { id: 'p1', value: '100%', title: 'Đúng Ý & Chuẩn Gu', desc: 'Thiết kế riêng biệt theo nhận diện thương hiệu bạn' },
-          { id: 'p2', value: '< 1s', title: 'Tải Trang Siêu Tốc', desc: 'Đạt 98-100 điểm Google, giữ chân khách hàng tối đa' },
-          { id: 'p3', value: 'Trọn Đời', title: 'Toàn Quyền Sở Hữu', desc: 'Bàn giao trọn bộ mã nguồn, bảo hành chu đáo lâu dài' },
+          { id: 'p2', value: '< 1s', title: 'Tải Trang Siêu Tốc', desc: 'Tốc độ mở trang cực nhanh, giữ chân khách hàng tối đa' },
+          { id: 'p3', value: 'Trọn Đời', title: 'Toàn Quyền Sở Hữu', desc: 'Bàn giao trọn gói website, bảo hành chu đáo lâu dài' },
         ],
       },
     },
@@ -105,7 +105,7 @@ export const defaultLandingConfig: LandingPageConfig = {
       content: {
         badge: 'Chi Phí Rõ Ràng',
         title: 'Bảng Giá Thiết Kế Website Trọn Gói',
-        subtitle: 'Minh bạch từng hạng mục, bàn giao 100% quyền sở hữu mã nguồn, cam kết không phát sinh chi phí ngầm trong suốt quá trình thực hiện.',
+        subtitle: 'Minh bạch từng hạng mục, bàn giao trọn gói quyền sở hữu website, cam kết không phát sinh chi phí ngầm trong suốt quá trình thực hiện.',
         plans: [...mockPricingPlans],
       },
     },

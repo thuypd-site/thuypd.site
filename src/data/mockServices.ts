@@ -39,14 +39,14 @@ export const mockServices: ServiceItem[] = [
     icon: 'trending_up',
     title: 'Tối Ưu Chuẩn SEO Lên Top Google',
     description: 'Cấu trúc website thân thiện với Google, tối ưu tốc độ và thẻ tìm kiếm giúp thương hiệu của bạn tiếp cận khách hàng tiềm năng lâu dài.',
-    tag: 'Chuẩn SEO Google · Tải trang 98+ điểm',
+    tag: 'Chuẩn SEO Google · Tải trang tức thì',
   },
   {
     id: 'service-support',
     serviceId: 'service-support',
     icon: 'support_agent',
     title: 'Bảo Hành Trọn Đời & Hướng Dẫn Tận Tình',
-    description: 'Bàn giao trọn bộ mã nguồn sạch, hướng dẫn bạn sử dụng quản trị 1-1 và đội ngũ kỹ thuật luôn túc trực hỗ trợ trong suốt quá trình kinh doanh.',
+    description: 'Bàn giao toàn quyền quản trị website, hướng dẫn bạn sử dụng 1-1 và đội ngũ kỹ thuật luôn túc trực hỗ trợ trong suốt quá trình kinh doanh.',
     tag: 'Sở hữu trọn vẹn · Đồng hành dài lâu',
   },
 ];
