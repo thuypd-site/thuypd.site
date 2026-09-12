@@ -33,9 +33,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const zaloUrl = settings?.zaloUrl || siteConfig.zaloUrl;
   const email = settings?.contactEmail || siteConfig.email;
   const address = settings?.officeAddress || siteConfig.address;
-  const badge = content?.badge || 'Bắt Đầu Dự Án';
-  const title = content?.title || 'Khởi Tạo Website Cho Doanh Nghiệp Bạn';
-  const subtitle = content?.subtitle || 'Hãy gửi yêu cầu của bạn, đội ngũ chuyên gia của chúng tôi sẽ liên hệ trong tích tắc để tư vấn chi tiết hoàn toàn miễn phí.';
+  const badge = content?.badge || 'Tư Vấn Miễn Phí';
+  const title = content?.title || 'Đăng Ký Nhận Tư Vấn & Phác Thảo Giao Diện';
+  const subtitle = content?.subtitle || 'Điền thông tin bên dưới hoặc liên hệ trực tiếp qua Zalo/Hotline, chúng tôi sẽ phản hồi và tư vấn chu đáo trong 15 phút.';
 
   const {
     register,
@@ -128,7 +128,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div>
-                  <span className="text-[11px] sm:text-xs text-[#45464d] block">Email chuyên môn THUYPD.SITE</span>
+                  <span className="text-[11px] sm:text-xs text-[#45464d] block">Email liên hệ chính thức</span>
                   <div className="text-sm sm:text-base font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
                     {email}
                   </div>
@@ -185,10 +185,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             <div className="p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-white shadow-xl sm:shadow-2xl border border-[#dce9ff]/80 space-y-5 sm:space-y-6">
               <div className="space-y-1">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#0b1c30]">
-                  Nhận Báo Giá Nhanh Trong 30 Phút
+                  Đăng Ký Tư Vấn & Báo Giá Nhanh
                 </h3>
                 <p className="text-xs sm:text-sm text-[#45464d]">
-                  Điền thông tin cơ bản, chúng tôi sẽ phân tích và lập kế hoạch chi tiết gửi bạn.
+                  Điền thông tin bên dưới, chúng tôi sẽ liên hệ tư vấn giải pháp và báo giá cụ thể cho bạn.
                 </p>
               </div>
 

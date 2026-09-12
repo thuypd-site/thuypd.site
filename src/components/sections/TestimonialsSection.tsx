@@ -14,9 +14,9 @@ interface TestimonialsSectionProps {
 
 export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ content, displayStyle = 'cards' }) => {
   const items = content?.items && content.items.length > 0 ? content.items : mockTestimonials;
-  const badge = content?.badge || 'Khách Hàng Chia Sẻ';
-  const title = content?.title || 'Đánh Giá Thực Tế Từ Đối Tác';
-  const subtitle = content?.subtitle || 'Hơn 150+ doanh nghiệp đã gia tăng doanh số và tối ưu thời gian bán hàng với nền tảng website của chúng tôi.';
+  const badge = content?.badge || 'Cảm Nhận Thực Tế';
+  const title = content?.title || 'Đồng Hành Cùng Sự Tăng Trưởng Của Khách Hàng';
+  const subtitle = content?.subtitle || 'Những chia sẻ chân thật từ các chủ cửa hàng và doanh nghiệp sau khi đưa website vào hoạt động thực tế.';
 
   const isCompact = displayStyle === 'compact';
 

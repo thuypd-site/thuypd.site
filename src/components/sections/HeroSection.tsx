@@ -45,41 +45,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
     {
       id: 0,
       title: 'Web chạy chậm',
-      desc: 'Trang tải lâu, khách vào là thoát ngay',
+      desc: 'Tải lâu, khách sốt ruột thoát trang ngay',
       icon: <Gauge className="w-4 h-4 text-amber-400" />,
-      solution: 'Tối ưu bộ nhớ đệm Cache, nén ảnh thế hệ mới WebP, chuyển hạ tầng NVMe siêu tốc giúp web mở dưới 0.8s ngay.',
+      solution: 'Tối ưu hình ảnh thế hệ mới, bộ nhớ đệm thông minh và hạ tầng máy chủ NVMe cao cấp giúp website mở tức thì dưới 1 giây.',
       solIcon: <Zap className="w-4 h-4 text-emerald-400" />,
     },
     {
       id: 1,
-      title: 'Bán hàng & Tự quản trị',
-      desc: 'Cần quản lý dễ, thao tác bằng điện thoại',
+      title: 'Dễ tự sửa & bán hàng',
+      desc: 'Thao tác đơn giản, cập nhật bằng điện thoại',
       icon: <ShoppingBag className="w-4 h-4 text-cyan-300" />,
-      solution: 'Hệ thống quản trị tiếng Việt 100%, thao tác sửa đổi như Facebook, tích hợp đồng bộ kho hàng và Zalo chốt đơn tự động.',
+      solution: 'Trang quản trị tiếng Việt trực quan, tự đăng bài và sửa giá dễ như dùng mạng xã hội, tích hợp Zalo và nút gọi chốt đơn nhanh.',
       solIcon: <ShoppingBag className="w-4 h-4 text-emerald-400" />,
     },
     {
       id: 2,
-      title: 'Thiết kế độc quyền',
-      desc: 'Không muốn đụng hàng hay mẫu rập khuôn',
+      title: 'Thiết kế sang trọng, độc bản',
+      desc: 'Không trùng lặp, chuẩn phong cách riêng',
       icon: <Brush className="w-4 h-4 text-emerald-400" />,
-      solution: 'Thiết kế may đo UI/UX độc quyền chuẩn nhận diện doanh nghiệp, hiệu ứng mượt mà nâng tầm thương hiệu tối đa.',
+      solution: 'May đo giao diện riêng biệt theo phong cách thương hiệu của bạn, bố cục hiện đại, nâng tầm uy tín doanh nghiệp với đối tác.',
       solIcon: <Brush className="w-4 h-4 text-emerald-400" />,
     },
   ];
 
-  const badgeText = content?.badgeText || 'GIẢI PHÁP THIẾT KẾ WEBSITE THEO YÊU CẦU • CHUẨN SEO GOOGLE • CHUYÊN NGHIỆP';
-  const headlineMain = content?.headlineMain || 'Thiết Kế Website';
-  const headlineHighlight = content?.headlineHighlight || 'Chuyên Nghiệp & Chuẩn SEO';
-  const description = content?.description || 'May đo giao diện độc quyền theo từng ý tưởng và ngành nghề kinh doanh, cấu trúc tối ưu chuẩn SEO On-page lên Top Google bền vững, tốc độ mở trang tức thì dưới 1 giây và bàn giao trọn gói 100% không phát sinh.';
-  const ctaPrimary = content?.ctaPrimaryText || 'Khám Phá Bảng Giá';
+  const badgeText = content?.badgeText || 'Thiết Kế Website Theo Yêu Cầu • Chuẩn SEO Google • Bàn Giao Trọn Gói';
+  const headlineMain = content?.headlineMain || 'Thiết Kế Website Chuyên Nghiệp,';
+  const headlineHighlight = content?.headlineHighlight || 'Đúng Ý & Tối Ưu Chuyển Đổi';
+  const description = content?.description || 'Chúng tôi may đo website độc bản theo phong cách thương hiệu của bạn, tối ưu tốc độ mở trang dưới 1 giây, chuẩn SEO Google và bàn giao 100% quyền quản trị. Dễ dàng tự cập nhật nội dung, không lo phát sinh chi phí ngầm.';
+  const ctaPrimary = content?.ctaPrimaryText || 'Xem Báo Giá Trọn Gói';
   const ctaSecondary = content?.ctaSecondaryText || 'Tư Vấn Miễn Phí';
   const ctaPrimaryLink = content?.ctaPrimaryLink || '#pricing';
   const ctaSecondaryLink = content?.ctaSecondaryLink || '#contact-lead';
   const pillars = content?.pillars && content.pillars.length > 0 ? content.pillars : [
-    { id: 'p1', value: '100%', title: 'Theo Yêu Cầu', desc: 'May đo chuẩn nhận diện & tính năng riêng biệt' },
-    { id: 'p2', value: 'Top 1', title: 'Chuẩn SEO Google', desc: 'Cấu trúc tối ưu thẻ, điểm PageSpeed 95+' },
-    { id: 'p3', value: 'Bàn Giao', title: 'Chuyên Nghiệp', desc: 'Full mã nguồn, bảo hành & đồng hành trọn đời' },
+    { id: 'p1', value: '100%', title: 'Đúng Ý & Chuẩn Gu', desc: 'Thiết kế riêng biệt theo nhận diện thương hiệu bạn' },
+    { id: 'p2', value: '< 1s', title: 'Tải Trang Siêu Tốc', desc: 'Đạt 98-100 điểm Google, giữ chân khách hàng tối đa' },
+    { id: 'p3', value: 'Trọn Đời', title: 'Toàn Quyền Sở Hữu', desc: 'Bàn giao trọn bộ mã nguồn, bảo hành chu đáo lâu dài' },
   ];
 
   return (
@@ -390,10 +390,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                   </div>
                   <div>
                     <span className="font-mono text-[10px] sm:text-xs uppercase text-red-400 font-bold tracking-wider">
-                      THỰC TRẠNG THỊ TRƯỜNG
+                      THỰC TẾ ĐÁNG NGẠI
                     </span>
                     <h3 className="text-base sm:text-lg text-red-200 font-bold">
-                      Nỗi đau khi làm web ở nơi khác
+                      Nỗi lo thường gặp khi làm web
                     </h3>
                   </div>
                 </div>
@@ -402,25 +402,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                   <li className="flex items-start gap-2.5">
                     <XCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Website chậm chạp &amp; lỗi giật lag:</strong> Khách đợi hơn 3s lập tức thoát trang, mất doanh số quảng cáo.
+                      <strong className="text-white">Web tải chậm, khách thoát nhanh:</strong> Mở trang quá 3 giây khiến khách sốt ruột bỏ đi, lãng phí tiền quảng cáo.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <XCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Chi phí phát sinh bất ngờ:</strong> Báo giá ban đầu rất rẻ nhưng liên tục thu thêm phí sửa đổi và hosting.
+                      <strong className="text-white">Chi phí phát sinh bất ngờ:</strong> Báo giá ban đầu rẻ nhưng sau đó liên tục thu thêm phí sửa đổi và máy chủ.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <XCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Bị phụ thuộc &amp; giam giữ mã nguồn:</strong> Muốn chuyển đơn vị khác thì bị từ chối hoặc bắt chuộc source code.
+                      <strong className="text-white">Bị giữ mã nguồn, khó chuyển đổi:</strong> Khi cần nâng cấp hoặc đổi đơn vị hỗ trợ thì bị gây khó dễ, phụ thuộc.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <XCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Giao diện rập khuôn đại trà:</strong> Dùng chung mẫu copy nhạt nhòa, chạy ads không ra đơn, khó chỉnh sửa.
+                      <strong className="text-white">Giao diện rập khuôn, khó dùng:</strong> Mẫu cài sẵn đại trà, bố cục rối mắt và rất khó tự thay đổi nội dung.
                     </span>
                   </li>
                 </ul>
@@ -434,10 +434,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                   </div>
                   <div>
                     <span className="font-mono text-[10px] sm:text-xs uppercase text-emerald-400 font-bold tracking-wider">
-                      CAM KẾT THỰC THI
+                      CAM KẾT RÕ RÀNG
                     </span>
                     <h3 className="text-base sm:text-lg text-emerald-200 font-bold">
-                      Cam kết dứt điểm tại THUYPD.SITE
+                      Giải pháp an tâm tại THUYPD.SITE
                     </h3>
                   </div>
                 </div>
@@ -446,25 +446,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                   <li className="flex items-start gap-2.5">
                     <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Tốc độ mở trang &lt; 0.8s:</strong> Đạt 100 điểm Google PageSpeed, giữ chân 98% lượt truy cập.
+                      <strong className="text-white">Tốc độ mở trang tức thì &lt; 0.8s:</strong> Đạt 98-100 điểm Google PageSpeed, giữ chân khách hàng tối đa.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Báo giá trọn gói 0 đồng phát sinh:</strong> Ký kết điều khoản minh bạch, cam kết hoàn tiền nếu phát sinh thêm chi phí.
+                      <strong className="text-white">Báo giá trọn gói 0 đồng phát sinh:</strong> Hợp đồng minh bạch từng mục, cam kết hoàn tiền nếu thu thêm phí.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Bàn giao 100% full source code:</strong> Trao trọn tài khoản quản trị và database, quý khách toàn quyền sở hữu vĩnh viễn.
+                      <strong className="text-white">Bàn giao 100% quyền sở hữu:</strong> Cấp đầy đủ tài khoản quản trị và mã nguồn để bạn toàn quyền làm chủ.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">May đo giao diện tăng chuyển đổi:</strong> Thiết kế chuẩn tâm lý mua hàng, kích thích khách để lại thông tin và gọi hotline ngay.
+                      <strong className="text-white">Giao diện đẹp mắt, dễ quản trị:</strong> Thiết kế chuẩn nhận diện thương hiệu, tự sửa bài viết và giá bán dễ dàng.
                     </span>
                   </li>
                 </ul>

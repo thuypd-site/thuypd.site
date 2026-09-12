@@ -46,9 +46,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
   })();
 
   const services = content?.items && content.items.length > 0 ? content.items : defaultServices;
-  const badge = content?.badge || 'Hệ Sinh Thái Toàn Diện';
-  const title = content?.title || 'Giải Pháp Thiết Kế Website & Công Nghệ Bứt Phá';
-  const subtitle = content?.subtitle || 'Lựa chọn kiến trúc website may đo độc bản, tối ưu chuyển đổi kinh doanh và đồng hành kỹ thuật dài hạn.';
+  const badge = content?.badge || 'Dịch Vụ Trọng Tâm';
+  const title = content?.title || 'Giải Pháp Website May Đo & Công Nghệ Bứt Phá';
+  const subtitle = content?.subtitle || 'Lựa chọn kiến trúc website phù hợp nhất với mô hình kinh doanh của bạn, tối ưu chuyển đổi và đồng hành kỹ thuật bền lâu.';
 
   return (
     <section className="py-16 lg:py-24 bg-white" id="dich-vu">
@@ -140,11 +140,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                 </div>
 
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
-                  Thiết Kế Web May Đo Độc Bản &amp; Hệ Thống Doanh Nghiệp
+                  Thiết Kế Website May Đo Theo Yêu Cầu &amp; Hệ Thống Doanh Nghiệp
                 </h3>
 
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-                  Phát triển giao diện không giới hạn theo nhận diện thương hiệu độc quyền, tương thích tuyệt đối mọi giải pháp kinh doanh, CRM và cổng thanh toán tự động.
+                  Phát triển giao diện độc bản theo nhận diện thương hiệu, đáp ứng chính xác mô hình kinh doanh, dễ dàng kết nối phần mềm quản trị và cổng thanh toán tự động.
                 </p>
 
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -165,7 +165,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
 
               <div className="relative z-10 pt-6 mt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
                 <span className="text-xs sm:text-sm text-cyan-300 font-semibold">
-                  Chuẩn hóa UI/UX cao cấp &amp; tối ưu điểm SEO Google
+                  Chuẩn hóa UI/UX sắc nét &amp; tối ưu điểm Google PageSpeed 98+
                 </span>
                 <a
                   href="#nhan-bao-gia"
@@ -200,12 +200,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     Landing Page Quảng Cáo Tối Ưu Chốt Đơn
                   </h3>
                   <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    Thiết kế phễu gom khách, tốc độ mở trang &lt; 0.8s, đẩy mạnh tỷ lệ đăng ký form và gọi hotline cho chiến dịch Ads.
+                    Bố cục dẫn dắt tâm lý người mua, nút gọi và chat Zalo nổi bật, tốc độ mở trang tức thì giúp tối ưu tối đa chi phí quảng cáo Ads.
                   </p>
                 </div>
 
                 <div className="pt-4 mt-3 border-t border-[#dce9ff] flex items-center justify-between text-xs">
-                  <span className="font-semibold text-[#006398]">Tối ưu Facebook / TikTok Ads</span>
+                  <span className="font-semibold text-[#006398]">Tối ưu Facebook / TikTok / Google Ads</span>
                   <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
                 </div>
               </SpotlightCard>
@@ -231,15 +231,15 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     Nâng Tầm Uy Tín
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-                    Website Giới Thiệu Doanh Nghiệp &amp; Dịch Vụ
+                    Website Giới Thiệu Công Ty &amp; Dịch Vụ
                   </h3>
                   <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    Khẳng định vị thế thương hiệu với bố cục chuyên nghiệp, thanh lịch, chuẩn hồ sơ năng lực số tiếp cận đối tác lớn.
+                    Khẳng định uy tín thương hiệu với phong cách hiện đại, thanh lịch, như một hồ sơ năng lực số chuyên nghiệp tiếp cận đối tác lớn.
                   </p>
                 </div>
 
                 <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-                  <span className="font-semibold text-[#006398]">Khẳng định thương hiệu</span>
+                  <span className="font-semibold text-[#006398]">Khẳng định uy tín thương hiệu</span>
                   <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
                 </div>
               </SpotlightCard>
@@ -265,15 +265,15 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     Chuẩn SEO Google
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-                    Dịch Vụ Tối Ưu Chuẩn SEO &amp; Lên Top Google
+                    Tối Ưu Chuẩn SEO &amp; Lên Top Bền Vững
                   </h3>
                   <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    Cấu trúc thẻ Schema, tối ưu thẻ Title/Meta, Sitemap tự động và điểm Google PageSpeed 95+ giúp từ khóa trụ vững bền lâu.
+                    Cấu trúc website thân thiện với Google, tối ưu tốc độ và thẻ tìm kiếm giúp thương hiệu của bạn tiếp cận khách hàng tiềm năng lâu dài.
                   </p>
                 </div>
 
                 <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-                  <span className="font-semibold text-[#006398]">Tăng traffic tự nhiên</span>
+                  <span className="font-semibold text-[#006398]">Tăng lượng khách tự nhiên</span>
                   <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
                 </div>
               </SpotlightCard>
@@ -299,10 +299,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     Hạ Tầng &amp; Nâng Cấp
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-                    Tên Miền, Cloud NVMe &amp; Nâng Cấp Web Cũ
+                    Máy Chủ Tốc Độ Cao &amp; Nâng Cấp Web Cũ
                   </h3>
                   <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    Cung cấp máy chủ NVMe bảo mật cao, sao lưu dữ liệu mỗi tuần và dịch vụ hồi sinh giao diện web cũ chạy mượt mà ngay.
+                    Cung cấp máy chủ NVMe an toàn, sao lưu tự động hàng tuần và làm mới các website cũ chạy chậm trở nên nhanh mượt.
                   </p>
                 </div>
 

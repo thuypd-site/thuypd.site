@@ -18,9 +18,9 @@ export const DomainCheckerSection: React.FC<DomainCheckerSectionProps> = ({ cont
 
   const { mutate: checkDomain, data: result, isPending } = useDomainCheck();
 
-  const badge = content?.badge || 'Khởi Tạo Tương Lai';
-  const title = content?.title || 'Kiểm Tra & Đăng Ký Tên Miền Ngay Hôm Nay';
-  const subtitle = content?.subtitle || 'Tên miền là tài sản nhận diện thương hiệu trên Internet. Hãy giữ lấy tên miền thương hiệu ngay trước khi đối thủ đăng ký mất. Miễn phí ẩn thông tin chủ thể & tặng kèm chứng chỉ bảo mật!';
+  const badge = content?.badge || 'Tra Cứu Nhanh';
+  const title = content?.title || 'Kiểm Tra Tên Miền Cho Thương Hiệu Của Bạn';
+  const subtitle = content?.subtitle || 'Tên miền là địa chỉ nhận diện thương hiệu của bạn trên internet. Hãy kiểm tra và giữ ngay tên miền đẹp trước khi người khác đăng ký mất!';
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

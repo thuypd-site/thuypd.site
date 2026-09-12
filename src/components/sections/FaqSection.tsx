@@ -14,25 +14,25 @@ interface FaqSectionProps {
 export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const badge = content?.badge || 'GIẢI ĐÁP THẮC MẮC';
-  const title = content?.title || 'Câu Hỏi Thường Gặp Khi Thiết Kế Website';
-  const subtitle = content?.subtitle || 'Những câu hỏi được khách hàng quan tâm nhiều nhất khi bắt đầu làm website tại THUYPD.SITE.';
+  const badge = content?.badge || 'Giải Đáp Thắc Mắc';
+  const title = content?.title || 'Những Câu Hỏi Thường Gặp Khi Làm Website';
+  const subtitle = content?.subtitle || 'Các giải đáp rõ ràng cho những băn khoăn phổ biến nhất trước khi bạn quyết định làm web.';
   const items = content?.items || [
     {
-      question: 'Thời gian hoàn thành một website là bao lâu?',
-      answer: 'Thông thường với gói Business từ 3-5 ngày, gói Professional từ 5-10 ngày, và gói May đo độc bản từ 2-4 tuần tùy quy mô tính năng.',
+      question: 'Thời gian hoàn thiện một website là bao lâu?',
+      answer: 'Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói may đo theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết.',
     },
     {
-      question: 'Chi phí trên đã bao gồm tên miền và hosting chưa?',
-      answer: 'Tất cả các gói tại THUYPD.SITE đều đã tặng kèm tên miền quốc tế (.com/.net) năm đầu và hosting Cloud SSD/NVMe siêu tốc.',
+      question: 'Chi phí trên đã bao gồm tên miền và máy chủ (hosting) chưa?',
+      answer: 'Tất cả các gói tại THUYPD.SITE đều đã bao gồm trọn gói năm đầu tiên cho tên miền quốc tế (.com / .net) và hosting Cloud NVMe tốc độ cao. Bạn không cần chi thêm khoản nào khác để chạy web.',
     },
     {
-      question: 'Tôi có thể tự quản trị và chỉnh sửa nội dung không?',
-      answer: 'Hoàn toàn được! Chúng tôi cung cấp trang quản trị Admin trực quan, kèm video hướng dẫn chi tiết giúp bạn tự thay đổi hình ảnh, giá cả, bài viết.',
+      question: 'Tôi không rành về máy tính thì có tự quản lý website được không?',
+      answer: 'Hoàn toàn được! Giao diện quản trị được làm bằng tiếng Việt rất trực quan, kèm video hướng dẫn từng bước. Bạn có thể tự thay đổi hình ảnh, giá bán, bài viết ngay trên điện thoại dễ như dùng mạng xã hội.',
     },
     {
-      question: 'Chính sách bảo hành và bảo trì như thế nào?',
-      answer: 'Chúng tôi bảo hành kỹ thuật và hỗ trợ trọn đời cho mọi website được thiết kế, cam kết hỗ trợ xử lý sự cố trong vòng 1-2 giờ làm việc.',
+      question: 'Sau khi bàn giao, website gặp sự cố thì ai hỗ trợ?',
+      answer: 'Chúng tôi bảo hành kỹ thuật và đồng hành trọn đời cùng bạn. Bất cứ khi nào cần trợ giúp, bạn chỉ cần nhắn Zalo hoặc gọi hotline là kỹ thuật sẽ kiểm tra xử lý ngay.',
     },
   ];
 

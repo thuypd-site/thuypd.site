@@ -45,42 +45,42 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
   })();
 
   const items = content?.items && content.items.length > 0 ? content.items : mockAdvantages;
-  const badge = content?.badge || 'Cam Kết Thực Tế & Lộ Trình';
-  const title = content?.title || '4 Cam Kết Vàng Giúp Bạn An Tâm Tuyệt Đối';
-  const subtitle = content?.subtitle || 'Chúng tôi hiểu bạn sợ web phức tạp, sợ bị đội chi phí và sợ đơn vị làm web bỏ rơi sau khi thu tiền.';
+  const badge = content?.badge || 'Lộ Trình Minh Bạch';
+  const title = content?.title || '4 Bước Triển Khai Rõ Ràng — Bàn Giao Đúng Hẹn';
+  const subtitle = content?.subtitle || 'Mỗi giai đoạn đều có kết quả cụ thể để bạn kiểm tra và duyệt trực tiếp trước khi chuyển sang bước tiếp theo.';
 
   // Default fallback steps
   const defaultRoadmapSteps = [
     {
       step: '01',
       days: 'Ngày 1 - 2',
-      title: 'Khảo Sát & Lên Khung',
-      desc: 'Lắng nghe yêu cầu, định hình cấu trúc sitemap, chọn phong cách màu sắc và lên demo Wireframe 1-1.',
-      output: 'Đầu ra: Bản vẽ sơ bộ',
+      title: 'Lắng Nghe & Lên Khung Web',
+      desc: 'Trao đổi kỹ nhu cầu thực tế, tư vấn cấu trúc trang hợp lý, thống nhất màu sắc và lên bản phác thảo khung mẫu.',
+      output: 'Đầu ra: Bản phác thảo khung trang rõ ràng',
       icon: <FileSearch className="w-6 h-6 text-[#006398]" />,
     },
     {
       step: '02',
       days: 'Ngày 3 - 5',
-      title: 'May Đo Giao Diện UI',
-      desc: 'Thiết kế đồ họa độc bản theo nhận diện thương hiệu, khách hàng duyệt trực tiếp từng trang trước khi code.',
-      output: 'Đầu ra: Thiết kế chuẩn duyệt',
+      title: 'Thiết Kế Giao Diện Chi Tiết',
+      desc: 'Lên thiết kế đẹp mắt theo nhận diện thương hiệu của bạn. Bạn được xem và góp ý chỉnh sửa cho đến khi ưng ý.',
+      output: 'Đầu ra: Bản thiết kế được bạn duyệt 100%',
       icon: <Palette className="w-6 h-6 text-purple-600" />,
     },
     {
       step: '03',
       days: 'Ngày 6 - 8',
-      title: 'Lập Trình & SEO 100',
-      desc: 'Hiện thực hóa tính năng, cấu hình chuẩn SEO Google, tối ưu tốc độ Core Web Vitals < 0.8s và gắn cổng thanh toán.',
-      output: 'Đầu ra: Bản chạy thực tế',
+      title: 'Lập Trình & Tối Ưu Tốc Độ',
+      desc: 'Hiện thực hóa các tính năng thực tế, tối ưu chuẩn SEO Google, cài đặt tốc độ mở trang dưới 1 giây và chạy thử nghiệm.',
+      output: 'Đầu ra: Website chạy thử thực tế hoàn chỉnh',
       icon: <Code className="w-6 h-6 text-blue-600" />,
     },
     {
       step: '04',
       days: 'Ngày 9 - 10',
-      title: 'Bàn Giao Full & Bảo Hành',
-      desc: 'Bàn giao trọn gói mã nguồn, cấp toàn quyền tên miền & hosting, hướng dẫn video 1-1 và kích hoạt hỗ trợ trọn đời.',
-      output: 'Đầu ra: Full code & Quyền sở hữu',
+      title: 'Bàn Giao & Hướng Dẫn Tận Tình',
+      desc: 'Bàn giao toàn bộ quyền quản trị và mã nguồn, gửi video hướng dẫn sử dụng 1-1 và kích hoạt chế độ hỗ trợ trọn đời.',
+      output: 'Đầu ra: Toàn quyền sở hữu & Bắt đầu kinh doanh',
       icon: <CheckCircle className="w-6 h-6 text-emerald-600" />,
     },
   ];

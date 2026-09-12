@@ -43,9 +43,9 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const tableContainerRef = useRef<HTMLDivElement | null>(null);
 
   const pricingPlans = content?.plans && content.plans.length > 0 ? content.plans : defaultPlans;
-  const badge = content?.badge || 'Bảng Giá Minh Bạch';
-  const title = content?.title || 'Đầu Tư Đúng Mực, Thu Về Hiệu Quả Lâu Dài';
-  const subtitle = content?.subtitle || 'Minh bạch chi phí, bàn giao mã nguồn 100%, cam kết không phát sinh bất kỳ khoản phụ phí nào trong suốt quá trình triển khai.';
+  const badge = content?.badge || 'Chi Phí Rõ Ràng';
+  const title = content?.title || 'Bảng Giá Thiết Kế Website Trọn Gói';
+  const subtitle = content?.subtitle || 'Minh bạch từng hạng mục, bàn giao 100% quyền sở hữu mã nguồn, cam kết không phát sinh chi phí ngầm trong suốt quá trình thực hiện.';
   const highlightPlanId = content?.highlightPlanId || 'plan-professional';
 
   // Hide scroll hint once user scrolls the matrix table horizontally
@@ -66,9 +66,9 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   };
 
   const getTierSelectValue = (planId?: string) => {
-    if (planId === 'plan-business' || planId === 'plan-basic') return 'Gói Business (5.500.000đ)';
-    if (planId === 'plan-professional') return 'Gói Professional (7.990.000đ)';
-    return 'Gói Thiết kế theo yêu cầu (> 15.000.000đ)';
+    if (planId === 'plan-business' || planId === 'plan-basic') return 'Gói Khởi Nghiệp (4.990.000đ)';
+    if (planId === 'plan-professional') return 'Gói Chuyên Nghiệp (7.990.000đ)';
+    return 'Gói May Đo / Bán Hàng (12.990.000đ)';
   };
 
   // Matrix Rows Comparison Data

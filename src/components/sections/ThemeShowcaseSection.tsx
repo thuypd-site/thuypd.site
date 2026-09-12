@@ -19,9 +19,9 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({ cont
   const [selectedCategory, setSelectedCategory] = useState<ThemeCategory>('all');
   const [activePreviewTheme, setActivePreviewTheme] = useState<ThemeItem | null>(null);
 
-  const badge = content?.badge || 'Bộ Sưu Tập Mẫu';
-  const title = content?.title || 'Kho Giao Diện Đẳng Cấp Theo Từng Ngành';
-  const subtitle = content?.subtitle || 'Hàng trăm mẫu giao diện web phân loại chi tiết theo từng lĩnh vực có sẵn, thiết kế tỉ mỉ chuẩn di động và sẵn sàng hoạt động ngay.';
+  const badge = content?.badge || 'Mẫu Giao Diện Chọn Lọc';
+  const title = content?.title || 'Kho Giao Diện Website Xu Hướng & Tối Ưu Chuyển Đổi';
+  const subtitle = content?.subtitle || 'Hơn 100+ mẫu demo thực tế sẵn sàng triển khai nhanh chóng, chuẩn SEO Google và hiển thị đẹp mắt trên mọi thiết bị.';
 
   // TanStack Query for caching and server state
   const { data: themes = [], isLoading } = useThemes(selectedCategory);

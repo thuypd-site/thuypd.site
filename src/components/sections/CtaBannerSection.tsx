@@ -17,9 +17,9 @@ export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({ content }) =
   const hotline = settings?.hotline || siteConfig.hotline;
   const hotlineRaw = settings?.hotlineRaw || siteConfig.hotlineRaw;
 
-  const title = content?.title || 'Sẵn Sàng Bứt Phá Doanh Số Cùng Website Đẳng Cấp?';
-  const subtitle = content?.subtitle || 'Để lại thông tin ngay hôm nay để nhận tư vấn miễn phí từ chuyên gia UI/UX và nhận ưu đãi giảm 10% chi phí.';
-  const buttonText = content?.buttonText || 'Đăng Ký Tư Vấn & Nhận Báo Giá';
+  const title = content?.title || 'Sẵn Sàng Xây Dựng Website Đẹp Mắt & Hiệu Quả?';
+  const subtitle = content?.subtitle || 'Để lại thông tin ngay hôm nay để nhận tư vấn giải pháp sát với thực tế ngành nghề và nhận báo giá trọn gói không phát sinh.';
+  const buttonText = content?.buttonText || 'Nhận Tư Vấn & Báo Giá Nhanh';
   const buttonLink = content?.buttonLink || '#nhan-bao-gia';
   const hotlineText = content?.hotlineText || `Hoặc gọi Hotline trực tiếp: ${hotline}`;
 

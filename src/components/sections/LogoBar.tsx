@@ -10,7 +10,7 @@ interface LogoBarProps {
 }
 
 export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'standard' }) => {
-  const title = content?.title || 'Khách Hàng Tiêu Biểu Tin Tưởng Đồng Hành Cùng Hệ Thống';
+  const title = content?.title || 'Thương Hiệu & Khách Hàng Tin Tưởng Đồng Hành';
   const items = content?.items || [];
 
   const brands = [
