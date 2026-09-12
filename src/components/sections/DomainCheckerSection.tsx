@@ -36,7 +36,7 @@ export const DomainCheckerSection: React.FC<DomainCheckerSectionProps> = ({ cont
   };
 
   return (
-    <section className="py-12 sm:py-16">
+    <section className="py-12 sm:py-16" id="tra-cuu-ten-mien">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         <div className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-[#0f172a] text-white shadow-2xl relative overflow-hidden">
           {/* Ambient Glows */}

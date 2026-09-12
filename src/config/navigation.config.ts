@@ -17,17 +17,18 @@ export const primaryNavItems: NavItem[] = [
 ];
 
 export const footerServiceLinks: NavItem[] = [
-  { id: 'srv-custom', label: 'Thiết Kế Web Theo Yêu Cầu Riêng', href: '#dich-vu' },
+  { id: 'srv-custom', label: 'Thiết Kế & Phát Triển Theo Yêu Cầu', href: '#dich-vu' },
   { id: 'srv-corp', label: 'Website Giới Thiệu Doanh Nghiệp', href: '#dich-vu' },
-  { id: 'srv-ecom', label: 'Website Bán Hàng & E-Commerce', href: '#dich-vu' },
-  { id: 'srv-landing', label: 'Landing Page Chạy Ads Tối Ưu Tỉ Lệ Chuyển Đổi', href: '#dich-vu' },
-  { id: 'srv-seo', label: 'Tối Ưu SEO Google On-page 98+', href: '#dich-vu' },
+  { id: 'srv-ecom', label: 'Website Bán Hàng & Thương Mại Điện Tử', href: '#dich-vu' },
+  { id: 'srv-landing', label: 'Landing Page Tối Ưu Tỉ Lệ Chuyển Đổi', href: '#dich-vu' },
+  { id: 'srv-seo', label: 'Tối Ưu Chuẩn SEO Google & Tốc Độ < 1s', href: '#dich-vu' },
 ];
 
 export const footerQuickLinks: NavItem[] = [
-  { id: 'ql-home', label: 'Về THUYPD.SITE', href: '#' },
-  { id: 'ql-themes', label: 'Xem Thư Viện Mẫu Website', href: '#kho-giao-dien' },
-  { id: 'ql-pricing', label: 'Bảng Giá Chi Tiết & Khuyến Mãi', href: '#bang-gia' },
-  { id: 'ql-domain', label: 'Tra Cứu Tên Miền Độc Quyền', href: '#tra-cuu-ten-mien' },
-  { id: 'ql-quote', label: 'Đăng Ký Nhận Báo Giá Dự Án', href: '#nhan-bao-gia' },
+  { id: 'ql-home', label: 'Về THUYPD.SITE Studio', href: '#' },
+  { id: 'ql-pricing', label: 'Bảng Giá Dịch Vụ Trọn Gói', href: '#bang-gia' },
+  { id: 'ql-themes', label: 'Kho Giao Diện Mẫu (Demo)', href: '#kho-giao-dien' },
+  { id: 'ql-commit', label: '4 Cam Kết Chất Lượng Vàng', href: '#loi-ich' },
+  { id: 'ql-domain', label: 'Công Cụ Tra Cứu Tên Miền', href: '#tra-cuu-ten-mien' },
+  { id: 'ql-faq', label: 'Câu Hỏi Thường Gặp (FAQ)', href: '#faq' },
 ];
