@@ -33,8 +33,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
-        display: ['Plus Jakarta Sans', 'Manrope', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-be-vietnam-pro)', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
+        display: ['var(--font-be-vietnam-pro)', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         float: {

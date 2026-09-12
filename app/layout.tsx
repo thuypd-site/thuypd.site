@@ -1,8 +1,16 @@
 import React, { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { Be_Vietnam_Pro } from 'next/font/google';
 import './globals.css';
 import { BACKEND_URL } from '@/src/lib/backend-proxy';
 import { siteConfig } from '@/src/config/site.config';
+
+const beVietnamPro = Be_Vietnam_Pro({
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin', 'vietnamese'],
+  display: 'swap',
+  variable: '--font-be-vietnam-pro',
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   let title = 'THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & May Đo Độc Bản';
@@ -102,20 +110,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   ];
 
   return (
-    <html lang="vi" className="scroll-smooth">
+    <html lang="vi" className={`scroll-smooth ${beVietnamPro.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
       </head>
-      <body className="min-h-screen bg-[#f8f9ff] text-[#0b1c30] antialiased selection:bg-[#006398]/20 selection:text-[#006398]">
+      <body className={`${beVietnamPro.className} min-h-screen bg-[#f8f9ff] text-[#0b1c30] antialiased selection:bg-[#006398]/20 selection:text-[#006398]`}>
         {children}
       </body>
     </html>

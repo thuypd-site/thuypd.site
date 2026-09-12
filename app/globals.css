@@ -15,14 +15,14 @@
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Be Vietnam Pro', var(--font-be-vietnam-pro), system-ui, -apple-system, sans-serif;
     color: #0b1c30;
     background-color: #f8f9ff;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', 'Manrope', system-ui, -apple-system, sans-serif;
+    font-family: 'Be Vietnam Pro', var(--font-be-vietnam-pro), system-ui, -apple-system, sans-serif;
     text-wrap: balance;
   }
 
