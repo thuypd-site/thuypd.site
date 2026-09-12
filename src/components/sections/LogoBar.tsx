@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { LogoBarContent } from '../../types/landingConfig.types';
-
+import { CountUp, SpotlightCard } from '../common';
 
 interface LogoBarProps {
   content?: LogoBarContent;
@@ -29,17 +29,18 @@ export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'stand
         {items.length > 0 && (
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-8 sm:mb-10 w-full">
             {items.map((it, idx) => (
-              <div
+              <SpotlightCard
                 key={idx}
-                className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-[#dce9ff] text-center shadow-sm hover:shadow-md hover:border-[#006398]/30 transition-all duration-300"
+                spotlightColor="rgba(91, 184, 254, 0.18)"
+                className="bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-[#dce9ff] text-center shadow-xs hover:shadow-md hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 group"
               >
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#006398] tracking-tight">
-                  {it.number}
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#006398] tracking-tight group-hover:scale-105 transition-transform duration-300">
+                  <CountUp value={it.number} />
                 </div>
                 <div className="text-xs sm:text-sm font-semibold text-[#0b1c30] mt-1.5">
                   {it.label}
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         )}

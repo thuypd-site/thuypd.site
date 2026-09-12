@@ -41,6 +41,10 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-9px)' },
         },
+        'float-gentle': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-4px)' },
+        },
         pulseGlow: {
           '0%, 100%': { opacity: '0.55', transform: 'scale(1)' },
           '50%': { opacity: '0.85', transform: 'scale(1.06)' },
@@ -49,11 +53,18 @@ const config: Config = {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(200%)' },
         },
+        'border-beam': {
+          '100%': {
+            offsetDistance: '100%',
+          },
+        },
       },
       animation: {
         float: 'float 4s ease-in-out infinite',
+        'float-gentle': 'float-gentle 5s ease-in-out infinite',
         'pulse-glow': 'pulseGlow 6s ease-in-out infinite',
         shimmer: 'shimmer 3s infinite ease-in-out',
+        'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
       },
     },
   },

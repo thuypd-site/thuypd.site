@@ -23,6 +23,7 @@ import {
   Check
 } from 'lucide-react';
 import { HeroSectionContent } from '../../types/landingConfig.types';
+import { BorderBeam, CountUp, SpotlightCard } from '../common';
 
 interface HeroSectionProps {
   content?: HeroSectionContent;
@@ -187,7 +188,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                       <Zap className="w-4 h-4 text-[#006398] transition-transform duration-300 group-hover:scale-125 group-hover:rotate-45" />
                     </div>
                     <div className="mt-2.5 flex items-baseline gap-1">
-                      <span className="text-2xl sm:text-3xl font-extrabold text-[#006398]">100</span>
+                      <span className="text-2xl sm:text-3xl font-extrabold text-[#006398]">
+                        <CountUp value="100" />
+                      </span>
                       <span className="text-[10px] sm:text-xs text-[#45464d]">/100</span>
                     </div>
                     <p className="text-[10px] sm:text-[11px] text-[#45464d] mt-1 leading-tight">Khách lướt mượt mà, không giật lag</p>
@@ -292,7 +295,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
 
             {/* 3 Large Feature Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl pt-4 text-left">
-              <div className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 transition-all duration-300 flex items-start gap-4">
+              <SpotlightCard
+                spotlightColor="rgba(91, 184, 254, 0.15)"
+                className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4"
+              >
                 <div className="w-12 h-12 rounded-xl bg-[#006398]/10 text-[#006398] flex items-center justify-center shrink-0">
                   <Gauge className="w-6 h-6" />
                 </div>
@@ -302,9 +308,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                     Trang tải tức thì dưới 1 giây, giữ chân khách hàng tuyệt đối.
                   </p>
                 </div>
-              </div>
+              </SpotlightCard>
 
-              <div className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 transition-all duration-300 flex items-start gap-4">
+              <SpotlightCard
+                spotlightColor="rgba(91, 184, 254, 0.15)"
+                className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4"
+              >
                 <div className="w-12 h-12 rounded-xl bg-[#006398]/10 text-[#006398] flex items-center justify-center shrink-0">
                   <Award className="w-6 h-6" />
                 </div>
@@ -314,9 +323,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                     Không dùng mẫu nhân bản đại trà, may đo chuẩn bản sắc thương hiệu.
                   </p>
                 </div>
-              </div>
+              </SpotlightCard>
 
-              <div className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 transition-all duration-300 flex items-start gap-4">
+              <SpotlightCard
+                spotlightColor="rgba(91, 184, 254, 0.15)"
+                className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4"
+              >
                 <div className="w-12 h-12 rounded-xl bg-[#006398]/10 text-[#006398] flex items-center justify-center shrink-0">
                   <CheckCircle className="w-6 h-6" />
                 </div>
@@ -326,7 +338,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                     Bàn giao full code và hosting, bảo hành đồng hành trọn đời.
                   </p>
                 </div>
-              </div>
+              </SpotlightCard>
             </div>
           </motion.div>
         )}
@@ -460,7 +472,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
             </div>
 
             {/* Interactive Need Diagnostic Widget */}
-            <div className="relative z-10 w-full max-w-4xl mx-auto mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+            <div className="relative z-10 w-full max-w-4xl mx-auto mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden">
+              <BorderBeam size={280} duration={9} colorFrom="#5bb8fe" colorTo="#006398" />
               <div className="text-center mb-3 sm:mb-4">
                 <span className="text-[11px] sm:text-xs font-mono uppercase text-[#cce5ff] tracking-wider font-bold">
                   CHẨN ĐOÁN NHANH NHU CẦU

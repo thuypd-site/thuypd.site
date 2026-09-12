@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { usePricing } from '../../hooks/usePricing';
 import { PricingSectionContent } from '../../types/landingConfig.types';
+import { BorderBeam } from '../common';
 
 interface PricingSectionProps {
   content?: PricingSectionContent;
@@ -231,7 +232,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.35, delay: index * 0.08 }}
-                    className={`relative p-5 sm:p-7 lg:p-8 rounded-3xl bg-white flex flex-col justify-between transition-all duration-300 ${
+                    className={`relative p-5 sm:p-7 lg:p-8 rounded-3xl bg-white flex flex-col justify-between transition-all duration-300 overflow-hidden ${
                       // On mobile (< 640px), show only active tab OR show with subtle border
                       !isMobileActive ? 'hidden sm:flex' : 'flex'
                     } ${
@@ -240,6 +241,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                         : 'border border-[#dce9ff] shadow-sm hover:shadow-md hover:-translate-y-1.5'
                     }`}
                   >
+                    {/* Glowing Border Beam for Popular Plan */}
+                    {isPopular && (
+                      <BorderBeam size={220} duration={8} colorFrom="#5bb8fe" colorTo="#006398" />
+                    )}
+
                     {/* Popular Pill Badge */}
                     {isPopular && (
                       <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-[#006398] to-[#0284c7] text-white text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider shadow-md flex items-center gap-1.5 whitespace-nowrap z-10">

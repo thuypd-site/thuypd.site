@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 44" width="220" height="44" fill="none">
+  <defs>
+    <!-- Brand Gradient: Khớp màu chủ đạo #006398 -> #5bb8fe của Landing -->
+    <linearGradient id="landing-brand-grad-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#006398" />
+      <stop offset="60%" stop-color="#1681be" />
+      <stop offset="100%" stop-color="#5bb8fe" />
+    </linearGradient>
+
+    <linearGradient id="accent-stem-grad-light" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#006398" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- Subtle container glow for light mode -->
+    <linearGradient id="icon-bg-grad-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#eff8ff" />
+    </linearGradient>
+  </defs>
+
+  <!-- BIỂU TƯỢNG MONOGRAM (ICON MARK) -->
+  <g transform="translate(2, 2)">
+    <!-- Nền bo góc mềm mại, nhẹ nhàng, hòa hợp với Header #f8f9ff -->
+    <rect x="0" y="0" width="40" height="40" rx="11" fill="url(#icon-bg-grad-light)" stroke="#dce9ff" stroke-width="1.2" />
+
+    <!-- Chữ T cách điệu thanh thoát, đường nét hài hòa bo góc -->
+    <!-- Thanh ngang chính (Top bar) -->
+    <path
+      d="M9 13.5C9 11.567 10.567 10 12.5 10H27.5C29.433 10 31 11.567 31 13.5C31 15.433 29.433 17 27.5 17H12.5C10.567 17 9 15.433 9 13.5Z"
+      fill="url(#landing-brand-grad-light)"
+    />
+
+    <!-- Trụ đứng (Vertical Stem) uốn bo cong mượt đáy -->
+    <path
+      d="M17.5 15.5H22.5V26.5C22.5 29.2614 20.2614 31.5 17.5 31.5C16.9477 31.5 16.5 31.0523 16.5 30.5V16.5C16.5 15.9477 16.9477 15.5 17.5 15.5Z"
+      fill="url(#accent-stem-grad-light)"
+    />
+
+    <!-- Nét phụ mềm mại bên phải (Flow Wing) -->
+    <path
+      d="M22.5 15.5H25.5C27.1569 15.5 28.5 16.8431 28.5 18.5V20.5C28.5 21.6046 27.6046 22.5 26.5 22.5C25.3954 22.5 24.5 21.6046 24.5 20.5V18C24.5 17.4477 24.0523 17 23.5 17H22.5V15.5Z"
+      fill="#5bb8fe"
+      opacity="0.85"
+    />
+
+    <!-- Điểm sáng tinh tế -->
+    <circle cx="27.5" cy="13.5" r="1.5" fill="#ffffff" />
+  </g>
+
+  <!-- PHẦN CHỮ TYPOGRAPHY (HÀI HÒA, NHẸ NHÀNG VỚI LANDING) -->
+  <g transform="translate(52, 0)">
+    <!-- Tên thương hiệu: THUYPD (Màu chữ #0b1c30 của Landing) -->
+    <text x="0" y="24" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="19" font-weight="800" letter-spacing="-0.3" fill="#0b1c30">
+      THUYPD
+    </text>
+
+    <!-- Hậu tố .SITE trong badge nhẹ nhàng thanh lịch -->
+    <g transform="translate(86, 10)">
+      <rect x="0" y="0" width="46" height="18" rx="5" fill="#eff8ff" stroke="#dbeafe" stroke-width="1" />
+      <text x="23" y="13" font-family="'Plus Jakarta Sans', ui-monospace, sans-serif" font-size="10.5" font-weight="800" letter-spacing="0.5" fill="#006398" text-anchor="middle">
+        .SITE
+      </text>
+    </g>
+
+    <!-- Tagline phụ tinh tế, nhẹ nhàng -->
+    <text x="1" y="37" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600" letter-spacing="1.2" fill="#5a6068" text-transform="uppercase">
+      Thiết Kế Website Theo Yêu Cầu
+    </text>
+  </g>
+</svg>

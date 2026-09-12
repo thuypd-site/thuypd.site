@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" fill="none">
+  <defs>
+    <!-- Brand Primary Gradient: #006398 -> #5bb8fe -->
+    <linearGradient id="landing-brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#006398" />
+      <stop offset="60%" stop-color="#2292d4" />
+      <stop offset="100%" stop-color="#5bb8fe" />
+    </linearGradient>
+
+    <!-- Soft Accent Glow Gradient -->
+    <linearGradient id="soft-glow-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#004f7c" />
+      <stop offset="100%" stop-color="#5bb8fe" />
+    </linearGradient>
+
+    <!-- Subtle container glow for light mode -->
+    <linearGradient id="container-soft-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#eff8ff" />
+    </linearGradient>
+  </defs>
+
+  <!-- Nền bo góc mềm mại, trong trẻo, không bị thô đen -->
+  <rect x="1" y="1" width="38" height="38" rx="10" fill="url(#container-soft-bg)" stroke="#dce9ff" stroke-width="1.2" />
+
+  <!-- Monogram chữ T cách điệu thanh thoát, mềm mại -->
+  <g>
+    <!-- Nét ngang cách điệu - Bo góc tròn mượt mà (Top Bar) -->
+    <path
+      d="M8 12.5C8 10.567 9.567 9 11.5 9H28.5C30.433 9 32 10.567 32 12.5C32 14.433 30.433 16 28.5 16H11.5C9.567 16 8 14.433 8 12.5Z"
+      fill="url(#landing-brand-grad)"
+    />
+
+    <!-- Nét trụ đứng vát lượn nhẹ nhàng (Stem) -->
+    <path
+      d="M17 14.5H23V27C23 29.7614 20.7614 32 18 32C17.4477 32 17 31.5523 17 31V14.5Z"
+      fill="url(#soft-glow-grad)"
+      opacity="0.95"
+    />
+
+    <!-- Cánh phụ khí động học / chuyển đổi nhẹ nhàng bên phải -->
+    <path
+      d="M23 14.5H26.5C28.433 14.5 30 16.067 30 18V21C30 22.1046 29.1046 23 28 23C26.8954 23 26 22.1046 26 21V17.5C26 16.9477 25.5523 16.5 25 16.5H23V14.5Z"
+      fill="#5bb8fe"
+      opacity="0.8"
+    />
+
+    <!-- Chấm tròn điểm nhấn tinh tế màu cyan sáng -->
+    <circle cx="28.5" cy="12.5" r="1.5" fill="#ffffff" />
+  </g>
+</svg>

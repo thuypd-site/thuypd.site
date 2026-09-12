@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useServices } from '../../hooks/useServices';
 import { ServicesSectionContent } from '../../types/landingConfig.types';
+import { BorderBeam, SpotlightCard } from '../common';
 
 const iconMap: Record<string, React.ReactNode> = {
   design_services: <Palette className="w-6 h-6 sm:w-7 sm:h-7" />,
@@ -77,30 +78,35 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: index * 0.06 }}
-                className="p-6 rounded-2xl bg-white shadow-sm border border-[#dce9ff]/80 hover:border-[#006398]/50 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                className="h-full"
               >
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
-                    {iconMap[service.icon] || <Sparkles className="w-6 h-6" />}
+                <SpotlightCard
+                  spotlightColor="rgba(91, 184, 254, 0.15)"
+                  className="h-full p-6 rounded-2xl bg-white shadow-sm border border-[#dce9ff]/80 hover:border-[#006398]/50 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div className="space-y-4">
+                    <div className="w-12 h-12 rounded-xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                      {iconMap[service.icon] || <Sparkles className="w-6 h-6" />}
+                    </div>
+                    <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors leading-snug">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors leading-snug">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
 
-                <div className="pt-4 mt-4 border-t border-[#eff4ff] flex items-center justify-between">
-                  <span className="text-xs text-[#006398] font-semibold">{service.tag}</span>
-                  <a
-                    href="#nhan-bao-gia"
-                    className="flex items-center gap-1 text-xs font-bold text-[#006398] group-hover:translate-x-1 transition-transform"
-                  >
-                    <span>Xem chi tiết</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
+                  <div className="pt-4 mt-4 border-t border-[#eff4ff] flex items-center justify-between">
+                    <span className="text-xs text-[#006398] font-semibold">{service.tag}</span>
+                    <a
+                      href="#nhan-bao-gia"
+                      className="flex items-center gap-1 text-xs font-bold text-[#006398] group-hover:translate-x-1 transition-transform"
+                    >
+                      <span>Xem chi tiết</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </SpotlightCard>
               </motion.div>
             ))}
           </div>
@@ -117,6 +123,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
               transition={{ duration: 0.4 }}
               className="md:col-span-12 lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0b1c30] to-[#0d2a4a] text-white shadow-xl relative overflow-hidden flex flex-col justify-between border border-[#006398]/30 group"
             >
+              {/* Border Beam subtle light trace */}
+              <BorderBeam size={280} duration={12} borderWidth={1.5} colorFrom="#38bdf8" colorTo="#0284c7" />
+
               {/* Background ambient lighting */}
               <div className="absolute top-0 right-0 w-80 h-80 bg-[#006398]/20 blur-3xl rounded-full pointer-events-none" />
 
@@ -174,27 +183,32 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="md:col-span-6 lg:col-span-4 p-6 sm:p-7 rounded-3xl bg-[#eff4ff] border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              className="md:col-span-6 lg:col-span-4 h-full"
             >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#006398] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                  <MousePointerClick className="w-6 h-6" />
+              <SpotlightCard
+                spotlightColor="rgba(91, 184, 254, 0.16)"
+                className="h-full p-6 sm:p-7 rounded-3xl bg-[#eff4ff] border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div className="space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#006398] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                    <MousePointerClick className="w-6 h-6" />
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                    Tối Ưu Chuyển Đổi
+                  </div>
+                  <h3 className="text-lg font-extrabold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                    Landing Page Quảng Cáo Tối Ưu Chốt Đơn
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                    Thiết kế phễu gom khách, tốc độ mở trang &lt; 0.8s, đẩy mạnh tỷ lệ đăng ký form và gọi hotline cho chiến dịch Ads.
+                  </p>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-                  Tối Ưu Chuyển Đổi
-                </div>
-                <h3 className="text-lg font-extrabold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-                  Landing Page Quảng Cáo Tối Ưu Chốt Đơn
-                </h3>
-                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                  Thiết kế phễu gom khách, tốc độ mở trang &lt; 0.8s, đẩy mạnh tỷ lệ đăng ký form và gọi hotline cho chiến dịch Ads.
-                </p>
-              </div>
 
-              <div className="pt-4 mt-3 border-t border-[#dce9ff] flex items-center justify-between text-xs">
-                <span className="font-semibold text-[#006398]">Tối ưu Facebook / TikTok Ads</span>
-                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
-              </div>
+                <div className="pt-4 mt-3 border-t border-[#dce9ff] flex items-center justify-between text-xs">
+                  <span className="font-semibold text-[#006398]">Tối ưu Facebook / TikTok Ads</span>
+                  <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+                </div>
+              </SpotlightCard>
             </motion.div>
 
             {/* 3. Lower Row: Card 1 (Website Giới Thiệu Doanh Nghiệp) */}
@@ -203,27 +217,32 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="md:col-span-6 lg:col-span-4 p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              className="md:col-span-6 lg:col-span-4 h-full"
             >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
-                  <Building2 className="w-6 h-6" />
+              <SpotlightCard
+                spotlightColor="rgba(91, 184, 254, 0.15)"
+                className="h-full p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div className="space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
+                    <Building2 className="w-6 h-6" />
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                    Nâng Tầm Uy Tín
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                    Website Giới Thiệu Doanh Nghiệp &amp; Dịch Vụ
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                    Khẳng định vị thế thương hiệu với bố cục chuyên nghiệp, thanh lịch, chuẩn hồ sơ năng lực số tiếp cận đối tác lớn.
+                  </p>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-                  Nâng Tầm Uy Tín
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-                  Website Giới Thiệu Doanh Nghiệp &amp; Dịch Vụ
-                </h3>
-                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                  Khẳng định vị thế thương hiệu với bố cục chuyên nghiệp, thanh lịch, chuẩn hồ sơ năng lực số tiếp cận đối tác lớn.
-                </p>
-              </div>
 
-              <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-                <span className="font-semibold text-[#006398]">Khẳng định thương hiệu</span>
-                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
-              </div>
+                <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
+                  <span className="font-semibold text-[#006398]">Khẳng định thương hiệu</span>
+                  <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+                </div>
+              </SpotlightCard>
             </motion.div>
 
             {/* 4. Lower Row: Card 2 (Chuẩn SEO & Core Web Vitals) */}
@@ -232,27 +251,32 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="md:col-span-6 lg:col-span-4 p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              className="md:col-span-6 lg:col-span-4 h-full"
             >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
-                  <TrendingUp className="w-6 h-6" />
+              <SpotlightCard
+                spotlightColor="rgba(91, 184, 254, 0.15)"
+                className="h-full p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div className="space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                    Chuẩn SEO Google
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                    Dịch Vụ Tối Ưu Chuẩn SEO &amp; Lên Top Google
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                    Cấu trúc thẻ Schema, tối ưu thẻ Title/Meta, Sitemap tự động và điểm Google PageSpeed 95+ giúp từ khóa trụ vững bền lâu.
+                  </p>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-                  Chuẩn SEO Google
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-                  Dịch Vụ Tối Ưu Chuẩn SEO &amp; Lên Top Google
-                </h3>
-                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                  Cấu trúc thẻ Schema, tối ưu thẻ Title/Meta, Sitemap tự động và điểm Google PageSpeed 95+ giúp từ khóa trụ vững bền lâu.
-                </p>
-              </div>
 
-              <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-                <span className="font-semibold text-[#006398]">Tăng traffic tự nhiên</span>
-                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
-              </div>
+                <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
+                  <span className="font-semibold text-[#006398]">Tăng traffic tự nhiên</span>
+                  <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+                </div>
+              </SpotlightCard>
             </motion.div>
 
             {/* 5. Lower Row: Card 3 (Tên Miền & Nâng Cấp Bảo Trì) */}
@@ -261,27 +285,32 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.25 }}
-              className="md:col-span-6 lg:col-span-4 p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              className="md:col-span-6 lg:col-span-4 h-full"
             >
-              <div className="space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
-                  <Server className="w-6 h-6" />
+              <SpotlightCard
+                spotlightColor="rgba(91, 184, 254, 0.15)"
+                className="h-full p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div className="space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
+                    <Server className="w-6 h-6" />
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+                    Hạ Tầng &amp; Nâng Cấp
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
+                    Tên Miền, Cloud NVMe &amp; Nâng Cấp Web Cũ
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
+                    Cung cấp máy chủ NVMe bảo mật cao, sao lưu dữ liệu mỗi tuần và dịch vụ hồi sinh giao diện web cũ chạy mượt mà ngay.
+                  </p>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-                  Hạ Tầng &amp; Nâng Cấp
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-                  Tên Miền, Cloud NVMe &amp; Nâng Cấp Web Cũ
-                </h3>
-                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                  Cung cấp máy chủ NVMe bảo mật cao, sao lưu dữ liệu mỗi tuần và dịch vụ hồi sinh giao diện web cũ chạy mượt mà ngay.
-                </p>
-              </div>
 
-              <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-                <span className="font-semibold text-[#006398]">Vận hành ổn định 99.9%</span>
-                <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
-              </div>
+                <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
+                  <span className="font-semibold text-[#006398]">Vận hành ổn định 99.9%</span>
+                  <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+                </div>
+              </SpotlightCard>
             </motion.div>
           </div>
         )}

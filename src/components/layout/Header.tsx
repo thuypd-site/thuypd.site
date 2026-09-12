@@ -7,6 +7,7 @@ import { Phone, Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 import { siteConfig } from '../../config/site.config';
 import { primaryNavItems } from '../../config/navigation.config';
 import { useSettings } from '../../hooks/useSettings';
+import { Logo } from '../common/Logo';
 
 interface HeaderProps {
   onOpenQuoteModal?: () => void;
@@ -85,13 +86,10 @@ export const Header: React.FC<HeaderProps> = ({
             e.preventDefault();
             handleNavClick('home', '#');
           }}
-          className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer focus:outline-none shrink-0"
+          className="group cursor-pointer focus:outline-none shrink-0"
         >
-          <img
-            alt={siteName}
-            className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-            src={siteConfig.logoUrl}
-          />
+          <Logo variant="light" size="sm" className="sm:hidden" />
+          <Logo variant="light" size="md" className="hidden sm:inline-flex" />
         </a>
 
         {/* Desktop & Laptop Navigation (1024px+) */}

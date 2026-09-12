@@ -6,6 +6,7 @@ import { Phone, Mail, MessageSquare, MapPin, Clock, Gauge, Award, Lock, Facebook
 import { siteConfig } from '../../config/site.config';
 import { footerServiceLinks, footerQuickLinks } from '../../config/navigation.config';
 import { useSettings } from '../../hooks/useSettings';
+import { Logo } from '../common/Logo';
 
 interface FooterProps {}
 
@@ -29,16 +30,8 @@ export const Footer: React.FC<FooterProps> = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-white/10">
           {/* Cột 1: Thương hiệu & Định vị */}
           <div className="lg:col-span-4 space-y-5">
-            <div className="flex items-center gap-3 group">
-              <img
-                alt={siteName}
-                className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
-                src={siteConfig.logoUrl}
-              />
-              <div className="flex flex-col">
-                <span className="text-white font-bold text-base tracking-wide">{siteName}</span>
-                <span className="text-xs text-slate-400">{settings?.tagline || 'Digital Solutions & Web Development'}</span>
-              </div>
+            <div className="group">
+              <Logo variant="dark" size="md" />
             </div>
 
             <p className="text-sm text-slate-300 max-w-sm leading-relaxed">
