@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-09-12T04:46:51.650Z",
+  "lastUpdated": "2026-09-12T04:50:52.276Z",
   "sections": [
     {
       "id": "hero",
@@ -28,7 +28,7 @@
         "badgeText": "Thiết Kế Website Theo Yêu Cầu • Chuẩn SEO Google • Bàn Giao Trọn Gói",
         "headlineMain": "Thiết Kế Website Chuyên Nghiệp,",
         "headlineHighlight": "Đúng Ý & Tối Ưu Chuyển Đổi",
-        "description": "Chúng tôi may đo website độc bản theo phong cách thương hiệu của bạn, tối ưu tốc độ mở trang dưới 1 giây, chuẩn SEO Google và bàn giao 100% quyền quản trị. Dễ dàng tự cập nhật nội dung, không lo phát sinh chi phí ngầm.",
+        "description": "Chúng tôi thiết kế và lập trình website độc bản theo phong cách thương hiệu của bạn, tối ưu tốc độ mở trang dưới 1 giây, chuẩn SEO Google và bàn giao 100% quyền quản trị. Dễ dàng tự cập nhật nội dung, không lo phát sinh chi phí ngầm.",
         "ctaPrimaryText": "Xem Báo Giá Trọn Gói",
         "ctaSecondaryText": "Tư Vấn Miễn Phí",
         "pillars": [
@@ -94,16 +94,16 @@
       ],
       "content": {
         "badge": "Dịch Vụ Trọng Tâm",
-        "title": "Giải Pháp Website May Đo & Công Nghệ Bứt Phá",
+        "title": "Giải Pháp Lập Trình Website & Công Nghệ Hiện Đại",
         "subtitle": "Lựa chọn kiến trúc website phù hợp nhất với mô hình kinh doanh của bạn, tối ưu chuyển đổi và đồng hành kỹ thuật bền lâu.",
         "items": [
           {
             "id": "service-custom",
             "serviceId": "service-custom",
             "icon": "design_services",
-            "title": "Thiết Kế Website May Đo Theo Yêu Cầu",
+            "title": "Thiết Kế & Lập Trình Website Theo Yêu Cầu",
             "description": "Nghiên cứu kỹ sản phẩm và dịch vụ của bạn để dựng giao diện độc quyền, tối ưu trải nghiệm người dùng và đáp ứng đúng mọi tính năng kinh doanh.",
-            "tag": "May đo 100% · Nhận diện độc quyền"
+            "tag": "Lập trình riêng 100% · Giao diện độc quyền"
           },
           {
             "id": "service-corporate",
@@ -291,7 +291,7 @@
             "renewal3Years": "3.600.000đ",
             "features": [
               "Thời gian hoàn thành: 5 - 7 ngày",
-              "May đo giao diện độc quyền theo nhận diện thương hiệu riêng",
+              "Thiết kế giao diện độc quyền theo nhận diện thương hiệu riêng",
               "Tặng tên miền quốc tế + Lưu trữ Cloud NVMe 8GB tốc độ cao",
               "Tối ưu tốc độ mở trang tức thì dưới 1 giây",
               "Tích hợp nút Gọi nhanh, Chat Zalo & Form nhận yêu cầu tự động",
@@ -303,11 +303,11 @@
           {
             "id": "plan-advanced",
             "planId": "plan-advanced",
-            "name": "Gói May Đo / Bán Hàng (Advanced)",
-            "tierSubtitle": "Theo Yêu Cầu Riêng",
+            "name": "Gói Lập Trình Theo Yêu Cầu (Advanced)",
+            "tierSubtitle": "Tùy Biến Chuyên Sâu",
             "price": 12990000,
             "formattedPrice": "12.990.000",
-            "description": "Dành cho website bán hàng thương mại điện tử hoặc có các yêu cầu tính năng may đo chuyên biệt.",
+            "description": "Dành cho website bán hàng thương mại điện tử hoặc có các yêu cầu tính năng lập trình chuyên biệt.",
             "completionDays": "10 - 15 ngày",
             "isPopular": false,
             "renewal1Year": "2.000.000đ",
@@ -420,7 +420,7 @@
         "items": [
           {
             "question": "Thời gian hoàn thiện một website là bao lâu?",
-            "answer": "Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói may đo theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết."
+            "answer": "Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói lập trình theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết."
           },
           {
             "question": "Chi phí trên đã bao gồm tên miền và máy chủ (hosting) chưa?",

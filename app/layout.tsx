@@ -13,7 +13,7 @@ const beVietnamPro = Be_Vietnam_Pro({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  let title = 'THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & May Đo Độc Bản';
+  let title = 'THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp, Chuẩn SEO & Đúng Ý';
   let description = 'Dịch vụ thiết kế website chuyên nghiệp theo yêu cầu THUYPD.SITE, chuẩn SEO Google, tối ưu Core Web Vitals 100 điểm, bàn giao 100% mã nguồn.';
   let ogImage = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';
 

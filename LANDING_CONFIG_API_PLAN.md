@@ -60,7 +60,7 @@ Trong file `vercel.json` ở project Frontend domain `thuypd.site`, thêm quy t�
   "data": {
     "version": 1,
     "lastUpdated": "2026-09-09T08:00:00.000Z",
-    "pageTitle": "THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & May Đo Độc Bản",
+    "pageTitle": "THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & lập trình theo yêu cầu Độc Bản",
     "metaDescription": "Dịch vụ thiết kế website chuẩn SEO, tối ưu tốc độ 99+ PageSpeed, giao diện độc bản và công nghệ hiện đại.",
     "ogImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
     "theme": {
@@ -112,14 +112,14 @@ interface BaseSection {
 - **`content` Schema**:
 ```json
 {
-  "badge": "✨ Giải Pháp Thiết Kế Web May Đo 2026",
-  "badgeText": "✨ Giải Pháp Thiết Kế Web May Đo 2026",
+  "badge": "✨ Giải Pháp Thiết Kế Web lập trình theo yêu cầu 2026",
+  "badgeText": "✨ Giải Pháp Thiết Kế Web lập trình theo yêu cầu 2026",
   "title": "Thiết Kế Website",
   "headlineMain": "Thiết Kế Website",
   "titleHighlight": "Chuyên Nghiệp & Chuẩn SEO",
   "headlineHighlight": "Chuyên Nghiệp & Chuẩn SEO",
-  "subtitle": "May đo giao diện độc quyền theo từng ý tưởng và ngành nghề kinh doanh, cấu trúc tối ưu chuẩn SEO On-page lên Top Google bền vững, tốc độ mở trang tức thì dưới 1 giây và bàn giao trọn gói 100% không phát sinh.",
-  "description": "May đo giao diện độc quyền theo từng ý tưởng và ngành nghề kinh doanh, cấu trúc tối ưu chuẩn SEO On-page lên Top Google bền vững, tốc độ mở trang tức thì dưới 1 giây và bàn giao trọn gói 100% không phát sinh.",
+  "subtitle": "lập trình theo yêu cầu giao diện độc quyền theo từng ý tưởng và ngành nghề kinh doanh, cấu trúc tối ưu chuẩn SEO On-page lên Top Google bền vững, tốc độ mở trang tức thì dưới 1 giây và bàn giao trọn gói 100% không phát sinh.",
+  "description": "lập trình theo yêu cầu giao diện độc quyền theo từng ý tưởng và ngành nghề kinh doanh, cấu trúc tối ưu chuẩn SEO On-page lên Top Google bền vững, tốc độ mở trang tức thì dưới 1 giây và bàn giao trọn gói 100% không phát sinh.",
   "ctaPrimaryText": "Nhận Tư Vấn Miễn Phí",
   "ctaPrimaryLink": "#nhan-bao-gia",
   "ctaSecondaryText": "Xem Kho Giao Diện",
@@ -131,7 +131,7 @@ interface BaseSection {
       "id": "p1",
       "value": "100%",
       "title": "Theo Yêu Cầu",
-      "desc": "May đo chuẩn nhận diện & tính năng riêng biệt"
+      "desc": "lập trình theo yêu cầu chuẩn nhận diện & tính năng riêng biệt"
     },
     {
       "id": "p2",
@@ -180,14 +180,14 @@ interface BaseSection {
 {
   "badge": "HỆ SINH THÁI TOÀN DIỆN",
   "title": "Giải Pháp Thiết Kế Website & Công Nghệ Bứt Phá",
-  "subtitle": "Lựa chọn kiến trúc website may đo độc bản, tối ưu chuyển đổi kinh doanh và đồng hành kỹ thuật dài hạn.",
+  "subtitle": "Lựa chọn kiến trúc website lập trình theo yêu cầu độc bản, tối ưu chuyển đổi kinh doanh và đồng hành kỹ thuật dài hạn.",
   "items": [
     {
       "id": "service-custom",
       "icon": "design_services",
-      "title": "Thiết Kế Web Theo Yêu Cầu (May Đo Riêng)",
+      "title": "Thiết Kế Web Theo Yêu Cầu (lập trình theo yêu cầu Riêng)",
       "description": "Nghiên cứu bản sắc thương hiệu, thiết kế UI/UX độc quyền, không sử dụng mẫu có sẵn.",
-      "tag": "May đo 100% · Độc bản"
+      "tag": "lập trình theo yêu cầu 100% · Độc bản"
     },
     {
       "id": "service-ecommerce",
@@ -324,7 +324,7 @@ interface BaseSection {
   "title": "Bảng Giá Thiết Kế Web Trọn Gói",
   "subtitle": "Minh bạch chi phí, bàn giao mã nguồn 100%, cam kết không phát sinh bất kỳ khoản phụ phí nào trong suốt quá trình triển khai.",
   "highlightPlanId": "plan-professional",
-  "footerNote": "💡 Cần tính năng đặc biệt hoặc may đo phức tạp? Hãy liên hệ để nhận báo giá riêng.",
+  "footerNote": "💡 Cần tính năng đặc biệt hoặc lập trình theo yêu cầu phức tạp? Hãy liên hệ để nhận báo giá riêng.",
   "plans": [
     {
       "id": "plan-business",
@@ -351,7 +351,7 @@ interface BaseSection {
       "isPopular": true,
       "features": [
         "Tặng tên miền quốc tế + Hosting Cloud NVMe 8GB",
-        "Thiết kế may đo giao diện độc quyền theo nhận diện",
+        "Thiết kế lập trình theo yêu cầu giao diện độc quyền theo nhận diện",
         "Chuẩn SEO On-page Google đạt điểm 95+ PageSpeed",
         "Tích hợp nút Gọi, Zalo chat, Form tư vấn tự động",
         "Bảo hành & hỗ trợ kỹ thuật trọn đời"
@@ -359,7 +359,7 @@ interface BaseSection {
     },
     {
       "id": "plan-custom",
-      "name": "Gói May Đo Cao Cấp",
+      "name": "Gói lập trình theo yêu cầu Cao Cấp",
       "targetAudience": "Tập đoàn, dự án lớn có luồng nghiệp vụ riêng biệt",
       "price": 15000000,
       "originalPrice": 20000000,
@@ -444,7 +444,7 @@ interface BaseSection {
   "items": [
     {
       "question": "Thời gian hoàn thành một website là bao lâu?",
-      "answer": "Thông thường với gói Business từ 3-5 ngày, gói Professional từ 5-10 ngày, và gói May đo độc bản từ 2-4 tuần tùy quy mô tính năng."
+      "answer": "Thông thường với gói Business từ 3-5 ngày, gói Professional từ 5-10 ngày, và gói lập trình theo yêu cầu độc bản từ 2-4 tuần tùy quy mô tính năng."
     },
     {
       "question": "Chi phí trên đã bao gồm tên miền và hosting chưa?",
@@ -586,14 +586,14 @@ Trong `LandingConfigContext.tsx`:
 Từ dữ liệu `pageTitle`, `metaDescription`, `ogImage` và khối `hero`:
 ```html
 <!-- Tiêu đề và Mô tả chuẩn Google Search -->
-<title>THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & May Đo Độc Bản</title>
+<title>THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & lập trình theo yêu cầu Độc Bản</title>
 <meta name="description" content="Dịch vụ thiết kế website chuẩn SEO Google, tối ưu tốc độ 99+ PageSpeed, giao diện độc bản và công nghệ hiện đại." />
 <link rel="canonical" href="/" />
 
 <!-- Open Graph cho Zalo, Facebook, LinkedIn -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:title" content="THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & May Đo Độc Bản" />
+<meta property="og:title" content="THUYPD.SITE — Thiết Kế Website Chuyên Nghiệp & lập trình theo yêu cầu Độc Bản" />
 <meta property="og:description" content="Dịch vụ thiết kế website chuẩn SEO Google, tối ưu tốc độ 99+ PageSpeed, giao diện độc bản và công nghệ hiện đại." />
 <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" />
 
@@ -639,7 +639,7 @@ Server tự động tạo schema chuẩn để Google bot hiển thị Rich Snip
         "name": "Thời gian hoàn thành một website là bao lâu?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Thông thường với gói Business từ 3-5 ngày, gói Professional từ 5-10 ngày, và gói May đo độc bản từ 2-4 tuần."
+          "text": "Thông thường với gói Business từ 3-5 ngày, gói Professional từ 5-10 ngày, và gói lập trình theo yêu cầu độc bản từ 2-4 tuần."
         }
       },
       {

@@ -47,7 +47,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
 
   const services = content?.items && content.items.length > 0 ? content.items : defaultServices;
   const badge = content?.badge || 'Dịch Vụ Trọng Tâm';
-  const title = content?.title || 'Giải Pháp Website May Đo & Công Nghệ Bứt Phá';
+  const title = content?.title || 'Giải Pháp Lập Trình Website & Công Nghệ Hiện Đại';
   const subtitle = content?.subtitle || 'Lựa chọn kiến trúc website phù hợp nhất với mô hình kinh doanh của bạn, tối ưu chuyển đổi và đồng hành kỹ thuật bền lâu.';
 
   return (
@@ -135,12 +135,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     FLAGSHIP SERVICE
                   </span>
                   <span className="px-3 py-1 rounded-full bg-white/10 text-cyan-300 font-mono text-[10px] sm:text-xs font-bold">
-                    May đo 100% · UI/UX Cao Cấp
+                    Lập trình riêng 100% · UI/UX Độc Quyền
                   </span>
                 </div>
 
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
-                  Thiết Kế Website May Đo Theo Yêu Cầu &amp; Hệ Thống Doanh Nghiệp
+                  Thiết Kế & Lập Trình Website Theo Yêu Cầu Doanh Nghiệp
                 </h3>
 
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
@@ -171,7 +171,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                   href="#nhan-bao-gia"
                   className="px-5 py-2.5 rounded-xl bg-white text-[#0b1c30] hover:bg-[#cce5ff] font-bold text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md group-hover:scale-105 active:scale-95"
                 >
-                  <span>Tư vấn may đo</span>
+                  <span>Tư vấn giải pháp</span>
                   <ArrowRight className="w-4 h-4 text-[#006398]" />
                 </a>
               </div>

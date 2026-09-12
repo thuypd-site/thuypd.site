@@ -63,7 +63,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
       title: 'Thiết kế sang trọng, độc bản',
       desc: 'Không trùng lặp, chuẩn phong cách riêng',
       icon: <Brush className="w-4 h-4 text-emerald-400" />,
-      solution: 'May đo giao diện riêng biệt theo phong cách thương hiệu của bạn, bố cục hiện đại, nâng tầm uy tín doanh nghiệp với đối tác.',
+      solution: 'Thiết kế & lập trình giao diện riêng biệt theo nhận diện thương hiệu của bạn, bố cục hiện đại, nâng tầm uy tín doanh nghiệp với đối tác.',
       solIcon: <Brush className="w-4 h-4 text-emerald-400" />,
     },
   ];
@@ -71,7 +71,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
   const badgeText = content?.badgeText || 'Thiết Kế Website Theo Yêu Cầu • Chuẩn SEO Google • Bàn Giao Trọn Gói';
   const headlineMain = content?.headlineMain || 'Thiết Kế Website Chuyên Nghiệp,';
   const headlineHighlight = content?.headlineHighlight || 'Đúng Ý & Tối Ưu Chuyển Đổi';
-  const description = content?.description || 'Chúng tôi may đo website độc bản theo phong cách thương hiệu của bạn, tối ưu tốc độ mở trang dưới 1 giây, chuẩn SEO Google và bàn giao 100% quyền quản trị. Dễ dàng tự cập nhật nội dung, không lo phát sinh chi phí ngầm.';
+  const description = content?.description || 'Chúng tôi thiết kế và lập trình website độc bản theo phong cách thương hiệu của bạn, tối ưu tốc độ mở trang dưới 1 giây, chuẩn SEO Google và bàn giao 100% quyền quản trị. Dễ dàng tự cập nhật nội dung, không lo phát sinh chi phí ngầm.';
   const ctaPrimary = content?.ctaPrimaryText || 'Xem Báo Giá Trọn Gói';
   const ctaSecondary = content?.ctaSecondaryText || 'Tư Vấn Miễn Phí';
   const ctaPrimaryLink = content?.ctaPrimaryLink || '#pricing';
@@ -320,7 +320,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                 <div>
                   <div className="text-base font-bold text-[#0b1c30]">Thiết Kế Độc Bản 100%</div>
                   <p className="text-xs sm:text-sm text-[#45464d] mt-1 leading-relaxed">
-                    Không dùng mẫu nhân bản đại trà, may đo chuẩn bản sắc thương hiệu.
+                    Không dùng mẫu nhân bản đại trà, lập trình và thiết kế chuẩn phong cách riêng.
                   </p>
                 </div>
               </SpotlightCard>

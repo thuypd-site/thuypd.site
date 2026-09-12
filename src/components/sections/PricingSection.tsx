@@ -68,7 +68,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const getTierSelectValue = (planId?: string) => {
     if (planId === 'plan-business' || planId === 'plan-basic') return 'Gói Khởi Nghiệp (4.990.000đ)';
     if (planId === 'plan-professional') return 'Gói Chuyên Nghiệp (7.990.000đ)';
-    return 'Gói May Đo / Bán Hàng (12.990.000đ)';
+    return 'Gói Lập Trình Theo Yêu Cầu (12.990.000đ)';
   };
 
   // Matrix Rows Comparison Data
@@ -77,7 +77,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
       category: 'Giao Diện & Trải Nghiệm',
       name: 'Thiết kế giao diện UI/UX',
       business: 'Chuẩn mẫu ngành tối ưu',
-      professional: 'May đo UI/UX riêng biệt',
+      professional: 'Thiết kế UI/UX riêng biệt',
       advanced: 'Độc quyền 100% không đụng hàng',
     },
     {
@@ -474,7 +474,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                           onClick={() => handleChoosePlan('Gói Advanced', 'Gói Thiết kế theo yêu cầu (> 15.000.000đ)')}
                           className="w-full py-2 sm:py-2.5 px-3 rounded-xl border border-[#dce9ff] bg-white text-slate-700 hover:bg-slate-100 font-bold text-xs transition-all shadow-xs active:scale-95 cursor-pointer truncate"
                         >
-                          Liên Hệ May Đo
+                          Liên Hệ Tư Vấn Riêng
                         </button>
                       </td>
                     </tr>

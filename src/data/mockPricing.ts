@@ -38,7 +38,7 @@ export const mockPricingPlans: PricingPlan[] = [
     renewal3Years: '3.600.000đ',
     features: [
       'Thời gian hoàn thành: 5 - 7 ngày',
-      'May đo giao diện độc quyền theo nhận diện thương hiệu riêng',
+      'Thiết kế giao diện độc quyền theo nhận diện thương hiệu riêng',
       'Tặng tên miền quốc tế + Lưu trữ Cloud NVMe 8GB tốc độ cao',
       'Tối ưu tốc độ mở trang tức thì dưới 1 giây',
       'Tích hợp nút Gọi nhanh, Chat Zalo & Form nhận yêu cầu tự động',
@@ -50,11 +50,11 @@ export const mockPricingPlans: PricingPlan[] = [
   {
     id: 'plan-advanced',
     planId: 'plan-advanced',
-    name: 'Gói May Đo / Bán Hàng (Advanced)',
-    tierSubtitle: 'Theo Yêu Cầu Riêng',
+    name: 'Gói Lập Trình Theo Yêu Cầu (Advanced)',
+    tierSubtitle: 'Tùy Biến Chuyên Sâu',
     price: 12990000,
     formattedPrice: '12.990.000',
-    description: 'Dành cho website bán hàng thương mại điện tử hoặc có các yêu cầu tính năng may đo chuyên biệt.',
+    description: 'Dành cho website bán hàng thương mại điện tử hoặc có các yêu cầu tính năng lập trình chuyên biệt.',
     completionDays: '10 - 15 ngày',
     isPopular: false,
     renewal1Year: '2.000.000đ',

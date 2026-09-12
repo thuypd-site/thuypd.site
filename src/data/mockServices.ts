@@ -5,9 +5,9 @@ export const mockServices: ServiceItem[] = [
     id: 'service-custom',
     serviceId: 'service-custom',
     icon: 'design_services',
-    title: 'Thiết Kế Website May Đo Theo Yêu Cầu',
+    title: 'Thiết Kế & Lập Trình Website Theo Yêu Cầu',
     description: 'Nghiên cứu kỹ sản phẩm và dịch vụ của bạn để dựng giao diện độc quyền, tối ưu trải nghiệm người dùng và đáp ứng đúng mọi tính năng kinh doanh.',
-    tag: 'May đo 100% · Nhận diện độc quyền',
+    tag: 'Lập trình riêng 100% · Giao diện độc quyền',
   },
   {
     id: 'service-corporate',
