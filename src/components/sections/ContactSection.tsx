@@ -85,7 +85,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section className="py-16 lg:py-24 relative" id="nhan-bao-gia">
+    <section className="py-16 lg:py-24 bg-[#f6f9fc] border-t border-slate-200/80 relative" id="nhan-bao-gia">
       <div id="contact-lead" className="absolute -top-24 left-0" />
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -107,7 +107,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             <div className="space-y-3 sm:space-y-4 pt-1 sm:pt-2">
               <a
                 href={`tel:${hotlineRaw}`}
-                className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-[#eff4ff] border border-[#dce9ff]/70 hover:border-[#006398]/30 hover:bg-[#e5eeff] transition-all duration-300 group cursor-pointer min-h-[56px]"
+                className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 hover:border-[#006398]/30 hover:bg-slate-50 transition-all duration-300 group cursor-pointer min-h-[56px] shadow-xs hover:shadow-md"
               >
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#006398] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
                   <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -122,7 +122,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               <a
                 href={`mailto:${email}`}
-                className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-[#eff4ff] border border-[#dce9ff]/70 hover:border-[#006398]/30 hover:bg-[#e5eeff] transition-all duration-300 group cursor-pointer min-h-[56px]"
+                className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 hover:border-[#006398]/30 hover:bg-slate-50 transition-all duration-300 group cursor-pointer min-h-[56px] shadow-xs hover:shadow-md"
               >
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#006398] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
                   <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -139,7 +139,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 href={zaloUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-[#eff4ff] border border-[#dce9ff]/70 hover:border-[#006398]/30 hover:bg-[#e5eeff] transition-all duration-300 group cursor-pointer min-h-[56px]"
+                className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 hover:border-[#006398]/30 hover:bg-slate-50 transition-all duration-300 group cursor-pointer min-h-[56px] shadow-xs hover:shadow-md"
               >
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#006398] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
                   <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -153,7 +153,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </a>
 
               {address && (
-                <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-[#eff4ff] border border-[#dce9ff]/70 transition-all duration-300 min-h-[56px]">
+                <div className="flex items-center gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 transition-all duration-300 min-h-[56px] shadow-xs">
                   <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#006398] text-white flex items-center justify-center shrink-0 shadow-sm">
                     <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
@@ -204,10 +204,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       type="text"
                       {...register('fullName')}
                       placeholder="Ví dụ: Nguyễn Văn A"
-                      className={`w-full px-4 py-3 rounded-xl bg-[#eff4ff] text-[#0b1c30] text-sm border focus:bg-white focus:ring-4 transition-all outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl bg-slate-50 text-[#0b1c30] text-sm border focus:bg-white focus:ring-4 transition-all outline-none ${
                         errors.fullName
                           ? 'border-red-500 focus:ring-red-200'
-                          : 'border-transparent focus:border-[#006398] focus:ring-[#006398]/20'
+                          : 'border-slate-200/90 focus:border-[#006398] focus:ring-[#006398]/20'
                       }`}
                     />
                     {errors.fullName && (
@@ -227,10 +227,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       type="tel"
                       {...register('phone')}
                       placeholder="Ví dụ: 0912 345 678"
-                      className={`w-full px-4 py-3 rounded-xl bg-[#eff4ff] text-[#0b1c30] text-sm border focus:bg-white focus:ring-4 transition-all outline-none ${
+                      className={`w-full px-4 py-3 rounded-xl bg-slate-50 text-[#0b1c30] text-sm border focus:bg-white focus:ring-4 transition-all outline-none ${
                         errors.phone
                           ? 'border-red-500 focus:ring-red-200'
-                          : 'border-transparent focus:border-[#006398] focus:ring-[#006398]/20'
+                          : 'border-slate-200/90 focus:border-[#006398] focus:ring-[#006398]/20'
                       }`}
                     />
                     {errors.phone && (
@@ -250,7 +250,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     </label>
                     <select
                       {...register('websiteType')}
-                      className="w-full px-4 py-3 rounded-xl bg-[#eff4ff] text-[#0b1c30] text-sm border border-transparent focus:border-[#006398] focus:bg-white focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none cursor-pointer"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 text-[#0b1c30] text-sm border border-slate-200/90 focus:border-[#006398] focus:bg-white focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none cursor-pointer"
                     >
                       <option value="Website Bán Hàng / Shop TMĐT">Website Bán Hàng / Shop TMĐT</option>
                       <option value="Website Giới Thiệu Doanh Nghiệp">Website Giới Thiệu Doanh Nghiệp</option>
@@ -267,11 +267,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     </label>
                     <select
                       {...register('budgetTier')}
-                      className="w-full px-4 py-3 rounded-xl bg-[#eff4ff] text-[#0b1c30] text-sm border border-transparent focus:border-[#006398] focus:bg-white focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none cursor-pointer"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 text-[#0b1c30] text-sm border border-slate-200/90 focus:border-[#006398] focus:bg-white focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none cursor-pointer"
                     >
-                      <option value="Gói Business (5.500.000đ)">Gói Business (5.500.000đ)</option>
-                      <option value="Gói Professional (7.990.000đ)">Gói Professional (7.990.000đ)</option>
-                      <option value="Gói Thiết kế theo yêu cầu (> 15.000.000đ)">Gói Thiết kế theo yêu cầu (&gt; 15.000.000đ)</option>
+                      <option value="Gói Khởi Nghiệp (4.990.000đ)">Gói Khởi Nghiệp (4.990.000đ)</option>
+                      <option value="Gói Chuyên Nghiệp (7.990.000đ)">Gói Chuyên Nghiệp (7.990.000đ)</option>
+                      <option value="Gói Phát Triển Theo Yêu Cầu (12.990.000đ)">Gói Phát Triển Theo Yêu Cầu (12.990.000đ)</option>
                     </select>
                   </div>
                 </div>
@@ -285,7 +285,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     rows={3}
                     {...register('notes')}
                     placeholder="Mô tả ngành nghề kinh doanh hoặc dán link website tham khảo nếu có..."
-                    className="w-full px-4 py-3 rounded-xl bg-[#eff4ff] text-[#0b1c30] text-sm border border-transparent focus:border-[#006398] focus:bg-white focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 text-[#0b1c30] text-sm border border-slate-200/90 focus:border-[#006398] focus:bg-white focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none resize-none"
                   />
                   {errors.notes && (
                     <span className="text-[11px] text-red-600 flex items-center gap-1 mt-0.5">

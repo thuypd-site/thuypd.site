@@ -106,9 +106,9 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
     : defaultRoadmapSteps;
 
   return (
-    <section className="py-16 lg:py-24 bg-[#eff4ff] relative overflow-hidden" id="loi-ich">
+    <section className="py-16 lg:py-24 bg-[#f6f9fc] border-y border-slate-200/80 relative overflow-hidden" id="loi-ich">
       {/* Subtle background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] bg-gradient-to-r from-blue-200/40 via-cyan-200/30 to-blue-200/40 blur-3xl pointer-events-none rounded-full -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] bg-gradient-to-r from-blue-100/40 via-cyan-100/30 to-blue-100/40 blur-3xl pointer-events-none rounded-full -z-10" />
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {/* Section Header */}
@@ -199,12 +199,12 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
                 >
                   <SpotlightCard
                     spotlightColor="rgba(91, 184, 254, 0.15)"
-                    className="h-full p-5 sm:p-6 rounded-3xl bg-white shadow-md border border-[#dce9ff] hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                    className="h-full p-5 sm:p-6 rounded-3xl bg-white shadow-md border border-slate-200/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
                   >
                     {/* Top Step Number Badge & Timeline Pill */}
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] border border-[#dce9ff] flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200/80 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
                           {item.icon}
                         </div>
 
@@ -230,8 +230,8 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
                     </div>
 
                     {/* Output Deliverable Banner */}
-                    <div className="mt-5 pt-3.5 border-t border-[#eff4ff]">
-                      <div className="p-2.5 rounded-xl bg-[#eff4ff] border border-[#dce9ff] text-[11px] sm:text-xs font-semibold text-[#006398] flex items-center gap-2">
+                    <div className="mt-5 pt-3.5 border-t border-slate-100">
+                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-[11px] sm:text-xs font-semibold text-[#006398] flex items-center gap-2">
                         <Sparkles className="w-3.5 h-3.5 text-[#006398] shrink-0" />
                         <span className="truncate">{item.output}</span>
                       </div>

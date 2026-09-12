@@ -21,7 +21,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ conten
   const isCompact = displayStyle === 'compact';
 
   return (
-    <section className="py-16 lg:py-24 bg-[#eff4ff]" id="danh-gia">
+    <section className="py-16 lg:py-24 bg-[#f6f9fc] border-y border-slate-200/80" id="danh-gia">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 sm:mb-14">
@@ -45,7 +45,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ conten
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className={`${isCompact ? 'p-4 sm:p-5' : 'p-5 sm:p-7'} rounded-2xl bg-white shadow-sm border border-[#dce9ff]/70 flex flex-col justify-between space-y-4 sm:space-y-5 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 star-hover-group`}
+              className={`${isCompact ? 'p-4 sm:p-5' : 'p-5 sm:p-7'} rounded-2xl bg-white shadow-sm border border-slate-200/80 flex flex-col justify-between space-y-4 sm:space-y-5 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 star-hover-group`}
             >
               <div className="space-y-3">
                 {/* 5 Stars */}

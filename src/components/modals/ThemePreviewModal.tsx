@@ -150,11 +150,11 @@ export const ThemePreviewModal: React.FC<ThemePreviewModalProps> = ({
                 </div>
                 <div className="flex items-center gap-1.5 text-emerald-700 font-medium">
                   <Check className="w-3.5 h-3.5" />
-                  <span>Miễn phí Cloud NVMe 5GB siêu tốc</span>
+                  <span>Miễn phí máy chủ tốc độ cao 5GB năm đầu</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-emerald-700 font-medium">
                   <Check className="w-3.5 h-3.5" />
-                  <span>Bàn giao 100% mã nguồn sạch</span>
+                  <span>Toàn quyền sở hữu website 100%</span>
                 </div>
               </div>
 

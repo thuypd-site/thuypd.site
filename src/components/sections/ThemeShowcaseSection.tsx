@@ -46,7 +46,7 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({ cont
   };
 
   return (
-    <section className="py-16 lg:py-24" id="kho-giao-dien">
+    <section className="py-16 lg:py-24 bg-white" id="kho-giao-dien">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full space-y-10">
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
@@ -79,10 +79,10 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({ cont
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 min-h-[40px] ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer min-h-[40px] flex items-center ${
                 selectedCategory === cat.id
-                  ? 'bg-[#006398] text-white shadow-md'
-                  : 'bg-[#eff4ff] text-[#0b1c30] hover:bg-[#dce9ff] hover:text-[#006398]'
+                  ? 'bg-[#006398] text-white shadow-sm'
+                  : 'bg-slate-100 text-[#0b1c30] hover:bg-slate-200/80 hover:text-[#006398]'
               }`}
             >
               {cat.label}
@@ -172,7 +172,7 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({ cont
         )}
 
         {/* Custom request banner */}
-        <div className="p-5 sm:p-8 rounded-2xl bg-[#eff4ff] border border-[#dce9ff]/80 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-center md:text-left">
+        <div className="p-5 sm:p-8 rounded-2xl bg-[#f6f9fc] border border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-center md:text-left">
           <div className="space-y-1">
             <h4 className="text-base sm:text-lg font-bold text-[#0b1c30]">Bạn vẫn chưa tìm được giao diện vừa ý?</h4>
             <p className="text-xs sm:text-sm text-[#45464d]">
@@ -181,7 +181,7 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({ cont
           </div>
           <a
             href="#nhan-bao-gia"
-            className="relative overflow-hidden group inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0f172a] text-white text-xs sm:text-sm font-semibold rounded-xl shadow-md hover:shadow-xl hover:bg-[#1e293b] active:scale-95 transition-all w-full sm:w-auto shrink-0 min-h-[48px]"
+            className="relative overflow-hidden group inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0b1c30] text-white text-xs sm:text-sm font-semibold rounded-xl shadow-md hover:shadow-xl hover:bg-[#004f7c] active:scale-95 transition-all w-full sm:w-auto shrink-0 min-h-[48px]"
           >
             <MessageCircleQuestion className="w-4 h-4" />
             <span>Tư Vấn Thiết Kế Riêng</span>

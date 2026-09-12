@@ -135,7 +135,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     FLAGSHIP SERVICE
                   </span>
                   <span className="px-3 py-1 rounded-full bg-white/10 text-cyan-300 font-mono text-[10px] sm:text-xs font-bold">
-                    Phát triển riêng 100% · UI/UX Độc Quyền
+                    Phát triển riêng 100% · Giao diện độc quyền
                   </span>
                 </div>
 
@@ -154,18 +154,18 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                   </span>
                   <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                    Tối ưu 100% On-page
+                    Chuẩn tìm kiếm Google
                   </span>
                   <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                    Mã nguồn độc quyền
+                    Toàn quyền sở hữu
                   </span>
                 </div>
               </div>
 
               <div className="relative z-10 pt-6 mt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
                 <span className="text-xs sm:text-sm text-cyan-300 font-semibold">
-                  Chuẩn hóa UI/UX sắc nét &amp; tối ưu điểm Google PageSpeed 98+
+                  Giao diện sắc nét, trải nghiệm mượt mà &amp; tải trang tức thì
                 </span>
                 <a
                   href="#nhan-bao-gia"
@@ -302,7 +302,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     Máy Chủ Tốc Độ Cao &amp; Nâng Cấp Web Cũ
                   </h3>
                   <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    Cung cấp máy chủ NVMe an toàn, sao lưu tự động hàng tuần và làm mới các website cũ chạy chậm trở nên nhanh mượt.
+                    Cung cấp máy chủ tốc độ cao an toàn, sao lưu tự động hàng tuần và nâng cấp các website cũ chạy chậm trở nên nhanh mượt.
                   </p>
                 </div>
 

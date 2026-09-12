@@ -14,7 +14,7 @@ const beVietnamPro = Be_Vietnam_Pro({
 
 export async function generateMetadata(): Promise<Metadata> {
   let title = 'THUYPD.SITE — Thiết Kế & Phát Triển Website Chuyên Nghiệp, Chuẩn SEO';
-  let description = 'Dịch vụ thiết kế website chuyên nghiệp theo yêu cầu THUYPD.SITE, chuẩn SEO Google, tối ưu Core Web Vitals 100 điểm, bàn giao 100% mã nguồn.';
+  let description = 'Dịch vụ thiết kế và phát triển website chuyên nghiệp theo yêu cầu THUYPD.SITE, chuẩn tìm kiếm Google, tốc độ mở trang tức thì dưới 1 giây, bàn giao trọn gói toàn quyền sở hữu.';
   let ogImage = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';
 
   try {
@@ -125,7 +125,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
       </head>
-      <body className={`${beVietnamPro.className} min-h-screen bg-[#f8f9ff] text-[#0b1c30] antialiased selection:bg-[#006398]/20 selection:text-[#006398]`}>
+      <body className={`${beVietnamPro.className} min-h-screen bg-[#f8fafd] text-[#0b1c30] antialiased selection:bg-[#006398]/20 selection:text-[#006398]`}>
         {children}
       </body>
     </html>

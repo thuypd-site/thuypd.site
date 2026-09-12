@@ -4,20 +4,20 @@ export const mockAdvantages: AdvantageItem[] = [
   {
     id: 'adv-01',
     icon: 'code',
-    title: 'Bàn Giao 100% Mã Nguồn — Bạn Làm Chủ Toàn Quyền',
-    description: 'Không ràng buộc hợp đồng, không giữ mã nguồn. Quý khách nắm toàn quyền quản trị máy chủ, tên miền và dữ liệu của mình vĩnh viễn.',
+    title: 'Toàn Quyền Sở Hữu 100% — Bạn Làm Chủ Vĩnh Viễn',
+    description: 'Không ràng buộc hợp đồng, không phụ thuộc bên làm web. Quý khách nắm toàn quyền quản trị website, tên miền và dữ liệu của mình vĩnh viễn.',
   },
   {
     id: 'adv-02',
     icon: 'search',
-    title: 'Tối Ưu Chuẩn SEO & Lên Top Google Bền Vững',
-    description: 'Cấu trúc website chuẩn chỉ từng thẻ tiêu đề, mô tả và sitemap tự động, giúp website dễ dàng tiếp cận lượng khách hàng tìm kiếm tự nhiên.',
+    title: 'Tối Ưu Chuẩn Tìm Kiếm & Lên Top Google Bền Vững',
+    description: 'Cấu trúc website chuẩn chỉ từng tiêu đề và nội dung, giúp website dễ dàng tiếp cận lượng khách hàng tìm kiếm tự nhiên.',
   },
   {
     id: 'adv-03',
     icon: 'speed',
     title: 'Tốc Độ Mở Trang Tức Thì Dưới 1 Giây',
-    description: 'Ứng dụng công nghệ nén ảnh thế hệ mới, bộ nhớ đệm thông minh và máy chủ NVMe cao cấp giúp web mở mượt mà ngay cả trên mạng 4G.',
+    description: 'Ứng dụng công nghệ xử lý ảnh thông minh, tăng tốc tự động và máy chủ tốc độ cao giúp website mở mượt mà ngay cả trên mạng 4G.',
   },
   {
     id: 'adv-04',

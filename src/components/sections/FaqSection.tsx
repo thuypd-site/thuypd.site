@@ -24,7 +24,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
     },
     {
       question: 'Chi phí trên đã bao gồm tên miền và máy chủ (hosting) chưa?',
-      answer: 'Tất cả các gói tại THUYPD.SITE đều đã bao gồm trọn gói năm đầu tiên cho tên miền quốc tế (.com / .net) và hosting Cloud NVMe tốc độ cao. Bạn không cần chi thêm khoản nào khác để chạy web.',
+      answer: 'Tất cả các gói tại THUYPD.SITE đều đã bao gồm trọn gói năm đầu tiên cho tên miền quốc tế (.com / .net) và máy chủ lưu trữ (hosting) tốc độ cao. Bạn không cần chi thêm khoản nào khác để vận hành web.',
     },
     {
       question: 'Tôi không rành về máy tính thì có tự quản lý website được không?',

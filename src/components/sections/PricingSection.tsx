@@ -71,24 +71,24 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const matrixFeatures = [
     {
       category: 'Giao Diện & Trải Nghiệm',
-      name: 'Thiết kế giao diện UI/UX',
-      basic: 'Chuẩn mẫu ngành tối ưu',
-      professional: 'Thiết kế UI/UX độc quyền riêng',
-      advanced: 'Độc bản 100% theo nhận diện riêng',
+      name: 'Thiết kế giao diện website',
+      basic: 'Chuẩn ngành nghề, đẹp mắt & tối ưu',
+      professional: 'Thiết kế độc quyền theo nhận diện riêng',
+      advanced: 'Thiết kế độc bản 100%, phong cách cao cấp',
     },
     {
       category: 'Hiệu Năng & Tốc Độ',
-      name: 'Tốc độ tải trang & Core Web Vitals',
-      basic: 'Điểm xanh 90+ (< 1.2s)',
-      professional: 'Điểm xanh 98+ (< 0.8s)',
-      advanced: 'Tối ưu đỉnh cao 100/100 (< 0.5s)',
+      name: 'Tốc độ tải trang',
+      basic: 'Tải nhanh, mượt mà (< 1.2s)',
+      professional: 'Tải siêu tốc tức thì (< 0.8s)',
+      advanced: 'Mở trang ngay lập tức (< 0.5s)',
     },
     {
       category: 'Hạ Tầng Lưu Trữ',
-      name: 'Lưu trữ Cloud SSD NVMe siêu tốc',
-      basic: '3 GB NVMe Siêu Tốc',
-      professional: '8 GB NVMe Siêu Tốc',
-      advanced: 'Không giới hạn dung lượng tải',
+      name: 'Dung lượng lưu trữ tốc độ cao',
+      basic: '3 GB lưu trữ tốc độ cao',
+      professional: '8 GB lưu trữ tốc độ cao',
+      advanced: '50 GB lưu trữ dung lượng lớn',
     },
     {
       category: 'Tên Miền & Bảo Mật',
@@ -99,31 +99,31 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
     },
     {
       category: 'SEO & Marketing',
-      name: 'Chuẩn SEO On-page Google',
-      basic: 'Cấu trúc On-page chuẩn chỉ',
-      professional: 'Tối ưu chuyên sâu + Schema AI',
-      advanced: 'Tối ưu SEO Tổng Thể + Audit liên tục',
+      name: 'Tối ưu tìm kiếm Google',
+      basic: 'Cấu hình chuẩn tìm kiếm cơ bản',
+      professional: 'Tối ưu chuyên sâu, dễ dàng lên top',
+      advanced: 'Chiến lược tối ưu toàn diện đa ngành',
     },
     {
       category: 'Tương Tác Khách Hàng',
-      name: 'Nút Gọi, Chat Zalo & Form tự động',
+      name: 'Nút Gọi, Chat Zalo & Form nhận tin',
       basic: 'Tích hợp đầy đủ',
-      professional: 'Đầy đủ + Tự động gửi về Zalo',
-      advanced: 'Full API CRM + Zalo / Telegram Bot',
+      professional: 'Đầy đủ + Tự động gửi thông báo về Zalo',
+      advanced: 'Kết nối tự động Zalo, Telegram & phần mềm CRM',
     },
     {
       category: 'Thương Mại Điện Tử',
       name: 'Cổng thanh toán & Giỏ hàng',
-      basic: 'Chuyển khoản QR ngân hàng',
-      professional: 'QR tự động + Cổng thanh toán',
-      advanced: 'Quản lý đơn hàng, kho hàng & E-Com',
+      basic: 'Chuyển khoản quét mã QR ngân hàng',
+      professional: 'QR tự động + Cổng thanh toán trực tuyến',
+      advanced: 'Hệ thống bán hàng, quản lý đơn hàng & kho',
     },
     {
       category: 'Sở Hữu & Bản Quyền',
-      name: 'Bàn giao mã nguồn & Database',
-      basic: '100% Toàn quyền sở hữu',
-      professional: '100% Toàn quyền sở hữu',
-      advanced: 'Toàn quyền + Bản quyền thiết kế riêng',
+      name: 'Bàn giao website & Toàn quyền sở hữu',
+      basic: '100% Toàn quyền sở hữu trọn đời',
+      professional: '100% Toàn quyền sở hữu trọn đời',
+      advanced: 'Toàn quyền sở hữu + Bản quyền thiết kế riêng',
     },
     {
       category: 'Bảo Hành & Đồng Hành',
@@ -135,11 +135,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   ];
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-[#eff4ff] relative overflow-hidden" id="bang-gia">
+    <section className="py-16 sm:py-20 lg:py-24 bg-[#f6f9fc] border-y border-slate-200/80 relative overflow-hidden" id="bang-gia">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-white/80 to-transparent pointer-events-none" />
-      <div className="absolute -top-32 right-0 w-96 h-96 bg-[#006398]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-white/90 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute -top-32 right-0 w-96 h-96 bg-[#006398]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 -left-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full relative z-10">
         {/* Header Block: Centered, balanced, and elegant */}
@@ -303,7 +303,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                         <span className="font-bold text-[#0b1c30]">{plan.renewal1Year || '1.200.000đ'}</span>
                       </div>
                       <div className="text-[10px] text-slate-400">
-                        Đã gồm Tên miền quốc tế + Cloud NVMe siêu tốc
+                        Đã gồm Tên miền quốc tế + Máy chủ lưu trữ năm đầu
                       </div>
                     </div>
 
@@ -314,7 +314,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                       className={`w-full py-3.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.98] cursor-pointer ${
                         isPopular
                           ? 'bg-gradient-to-r from-[#006398] to-[#0284c7] hover:from-[#004f7a] hover:to-[#006398] text-white shadow-lg shadow-[#006398]/30 hover:shadow-xl hover:scale-[1.01]'
-                          : 'bg-[#eff4ff] hover:bg-[#006398] text-[#006398] hover:text-white border border-[#dce9ff] hover:border-[#006398]'
+                          : 'bg-slate-100 hover:bg-[#006398] text-[#006398] hover:text-white border border-slate-200 hover:border-[#006398]'
                       }`}
                     >
                       <span>
@@ -471,8 +471,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
         )}
 
         {/* Bottom Trust & Transparency Guarantees */}
-        <div className="mt-12 pt-8 border-t border-[#dce9ff] grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
-          <div className="p-3 rounded-2xl bg-white/60 border border-[#dce9ff]/60">
+        <div className="mt-12 pt-8 border-t border-slate-200/80 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
             <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
               100% Không Phụ Phí Ẩn
@@ -480,23 +480,23 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
             <span className="text-[11px] text-slate-500">Hợp đồng rõ ràng, minh bạch</span>
           </div>
 
-          <div className="p-3 rounded-2xl bg-white/60 border border-[#dce9ff]/60">
+          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
             <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
               Tặng Tên Miền &amp; Hosting
             </span>
-            <span className="text-[11px] text-slate-500">Cloud NVMe cao cấp năm đầu</span>
+            <span className="text-[11px] text-slate-500">Máy chủ tốc độ cao năm đầu</span>
           </div>
 
-          <div className="p-3 rounded-2xl bg-white/60 border border-[#dce9ff]/60">
+          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
             <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
-              Bàn Giao Full Mã Nguồn
+              Toàn Quyền Sở Hữu 100%
             </span>
-            <span className="text-[11px] text-slate-500">Toàn quyền sở hữu vĩnh viễn</span>
+            <span className="text-[11px] text-slate-500">Toàn quyền quản trị vĩnh viễn</span>
           </div>
 
-          <div className="p-3 rounded-2xl bg-white/60 border border-[#dce9ff]/60">
+          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
             <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
               Bảo Hành Kỹ Thuật Trọn Đời

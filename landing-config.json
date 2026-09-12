@@ -186,7 +186,7 @@
             "id": "adv-03",
             "icon": "speed",
             "title": "Tốc Độ Mở Trang Tức Thì Dưới 1 Giây",
-            "description": "Ứng dụng công nghệ nén ảnh thế hệ mới, bộ nhớ đệm thông minh và máy chủ NVMe cao cấp giúp web mở mượt mà ngay cả trên mạng 4G."
+            "description": "Ứng dụng công nghệ xử lý ảnh thông minh, tăng tốc tự động và máy chủ tốc độ cao giúp website mở mượt mà ngay cả trên mạng 4G."
           },
           {
             "id": "adv-04",
@@ -270,10 +270,10 @@
               "Thời gian hoàn thiện: 2 - 3 ngày",
               "Giao diện chuẩn Responsive hiển thị đẹp mọi thiết bị",
               "Tặng tên miền quốc tế (.com / .net) năm đầu",
-              "Tặng lưu trữ Cloud NVMe 3GB tốc độ cao",
-              "Cài đặt miễn phí chứng chỉ bảo mật SSL",
-              "Cấu trúc website chuẩn SEO Google",
-              "Bàn giao 100% mã nguồn và tài khoản quản trị",
+              "Tặng máy chủ lưu trữ tốc độ cao 3GB năm đầu",
+              "Cài đặt miễn phí chứng chỉ bảo mật",
+              "Cấu hình chuẩn tìm kiếm Google",
+              "Bàn giao trọn gói website và tài khoản quản trị",
               "Bảo hành & Hỗ trợ kỹ thuật chu đáo 12 tháng"
             ]
           },
@@ -292,7 +292,7 @@
             "features": [
               "Thời gian hoàn thành: 5 - 7 ngày",
               "Thiết kế giao diện độc quyền theo nhận diện thương hiệu riêng",
-              "Tặng tên miền quốc tế + Lưu trữ Cloud NVMe 8GB tốc độ cao",
+              "Tặng tên miền quốc tế + Máy chủ lưu trữ tốc độ cao 8GB năm đầu",
               "Tối ưu tốc độ mở trang tức thì dưới 1 giây",
               "Tích hợp nút Gọi nhanh, Chat Zalo & Form nhận yêu cầu tự động",
               "Tặng thiết kế bộ banner trang chủ đồng bộ nhận diện",
@@ -424,7 +424,7 @@
           },
           {
             "question": "Chi phí trên đã bao gồm tên miền và máy chủ (hosting) chưa?",
-            "answer": "Tất cả các gói tại THUYPD.SITE đều đã bao gồm trọn gói năm đầu tiên cho tên miền quốc tế (.com / .net) và hosting Cloud NVMe tốc độ cao. Bạn không cần chi thêm khoản nào khác để chạy web."
+            "answer": "Tất cả các gói tại THUYPD.SITE đều đã bao gồm trọn gói năm đầu tiên cho tên miền quốc tế (.com / .net) và máy chủ lưu trữ (hosting) tốc độ cao. Bạn không cần chi thêm khoản nào khác để vận hành web."
           },
           {
             "question": "Tôi không rành về máy tính thì có tự quản lý website được không?",

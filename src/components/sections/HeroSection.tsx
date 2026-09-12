@@ -47,7 +47,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
       title: 'Web chạy chậm',
       desc: 'Tải lâu, khách sốt ruột thoát trang ngay',
       icon: <Gauge className="w-4 h-4 text-amber-400" />,
-      solution: 'Tối ưu hình ảnh thế hệ mới, bộ nhớ đệm thông minh và hạ tầng máy chủ NVMe cao cấp giúp website mở tức thì dưới 1 giây.',
+      solution: 'Tối ưu hình ảnh siêu nhẹ, công nghệ tăng tốc thông minh và máy chủ tốc độ cao giúp website mở tức thì dưới 1 giây.',
       solIcon: <Zap className="w-4 h-4 text-emerald-400" />,
     },
     {
@@ -303,7 +303,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                   <Gauge className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-base font-bold text-[#0b1c30]">100/100 Core Web Vitals</div>
+                  <div className="text-base font-bold text-[#0b1c30]">Tốc Độ Tải Trang Siêu Tốc</div>
                   <p className="text-xs sm:text-sm text-[#45464d] mt-1 leading-relaxed">
                     Trang tải tức thì dưới 1 giây, giữ chân khách hàng tuyệt đối.
                   </p>
@@ -446,7 +446,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
                   <li className="flex items-start gap-2.5">
                     <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                     <span>
-                      <strong className="text-white">Tốc độ mở trang tức thì &lt; 0.8s:</strong> Đạt 98-100 điểm Google PageSpeed, giữ chân khách hàng tối đa.
+                      <strong className="text-white">Tốc độ mở trang tức thì &lt; 0.8s:</strong> Tải trang nhanh vượt trội, giữ chân khách hàng tối đa.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">

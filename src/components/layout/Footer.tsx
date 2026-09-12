@@ -108,7 +108,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
             <p className="text-sm text-slate-300 max-w-sm leading-relaxed">
               {settings?.metaDescription ||
-                'Đơn vị tiên phong cung cấp giải pháp thiết kế và phát triển website chuyên nghiệp, chuẩn SEO Google Onpage 98+, tối ưu trải nghiệm người dùng và bàn giao mã nguồn 100% sở hữu vĩnh viễn.'}
+                'Đơn vị tiên phong cung cấp giải pháp thiết kế và phát triển website chuyên nghiệp, chuẩn tìm kiếm Google, tối ưu trải nghiệm người dùng và bàn giao trọn gói sở hữu vĩnh viễn.'}
             </p>
 
             {/* Live Operational Status Badge */}
@@ -117,7 +117,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
               </span>
-              <span>Hạ tầng Cloud NVMe: Sẵn sàng 99.9%</span>
+              <span>Hạ tầng máy chủ: Hoạt động ổn định 99.9%</span>
             </div>
 
             {/* Social Media Links */}
@@ -177,11 +177,11 @@ export const Footer: React.FC<FooterProps> = () => {
             <div className="grid grid-cols-3 gap-2 pt-1 max-w-sm">
               <div className="p-2 rounded-xl bg-white/[0.03] border border-white/10 text-center">
                 <Gauge className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
-                <span className="text-[11px] font-semibold text-slate-200 block">PageSpeed 98+</span>
+                <span className="text-[11px] font-semibold text-slate-200 block">Tải Trang &lt; 1s</span>
               </div>
               <div className="p-2 rounded-xl bg-white/[0.03] border border-white/10 text-center">
                 <Lock className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                <span className="text-[11px] font-semibold text-slate-200 block">Mã Nguồn 100%</span>
+                <span className="text-[11px] font-semibold text-slate-200 block">Sở Hữu 100%</span>
               </div>
               <div className="p-2 rounded-xl bg-white/[0.03] border border-white/10 text-center">
                 <Award className="w-4 h-4 text-amber-400 mx-auto mb-1" />
@@ -321,7 +321,7 @@ export const Footer: React.FC<FooterProps> = () => {
             </p>
             <p className="text-[11px] text-slate-400 flex items-center justify-center sm:justify-start gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Nền tảng công nghệ cao Next.js 14 & Cloud NVMe siêu tốc</span>
+              <span>Công nghệ web hiện đại, tải nhanh tức thì &amp; bảo mật cao</span>
             </p>
           </div>
 

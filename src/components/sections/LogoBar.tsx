@@ -23,7 +23,7 @@ export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'stand
   ];
 
   return (
-    <section className={`bg-[#eff4ff] border-y border-[#dce9ff]/60 ${displayStyle === 'compact' ? 'py-6' : 'py-10'}`}>
+    <section className={`bg-slate-50/80 border-y border-slate-200/70 ${displayStyle === 'compact' ? 'py-6' : 'py-10'}`}>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {/* Dynamic Key Stats Counter Grid from API */}
         {items.length > 0 && (
@@ -32,7 +32,7 @@ export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'stand
               <SpotlightCard
                 key={idx}
                 spotlightColor="rgba(91, 184, 254, 0.18)"
-                className="bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-[#dce9ff] text-center shadow-xs hover:shadow-md hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 group"
+                className="bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-slate-200/80 text-center shadow-xs hover:shadow-md hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 group"
               >
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#006398] tracking-tight group-hover:scale-105 transition-transform duration-300">
                   <CountUp value={it.number} />

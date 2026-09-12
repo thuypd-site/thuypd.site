@@ -36,9 +36,9 @@ export const DomainCheckerSection: React.FC<DomainCheckerSectionProps> = ({ cont
   };
 
   return (
-    <section className="py-12 sm:py-16" id="tra-cuu-ten-mien">
+    <section className="py-16 sm:py-20 bg-white" id="tra-cuu-ten-mien">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
-        <div className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-[#0f172a] text-white shadow-2xl relative overflow-hidden">
+        <div className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-[#0b1c30] text-white shadow-2xl relative overflow-hidden border border-slate-800/80">
           {/* Ambient Glows */}
           <div className="absolute -right-16 -top-16 w-80 h-80 bg-[#006398]/30 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -left-16 -bottom-16 w-80 h-80 bg-[#5bb8fe]/20 rounded-full blur-3xl pointer-events-none" />
@@ -79,7 +79,7 @@ export const DomainCheckerSection: React.FC<DomainCheckerSectionProps> = ({ cont
                 <select
                   value={tld}
                   onChange={(e) => setTld(e.target.value)}
-                  className="bg-[#eff4ff] px-3.5 py-2.5 sm:py-2.5 rounded-xl text-xs sm:text-sm text-[#0b1c30] font-bold focus:outline-none border-none cursor-pointer hover:bg-[#e5eeff] transition-colors min-h-[44px]"
+                  className="bg-slate-100 hover:bg-slate-200/80 px-3.5 py-2.5 sm:py-2.5 rounded-xl text-xs sm:text-sm text-[#0b1c30] font-bold focus:outline-none border-none cursor-pointer transition-colors min-h-[44px]"
                 >
                   <option value=".com">.com (299k/năm)</option>
                   <option value=".vn">.vn (650k/năm)</option>

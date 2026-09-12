@@ -24,7 +24,7 @@ export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({ content }) =
   const hotlineText = content?.hotlineText || `Hoặc gọi Hotline trực tiếp: ${hotline}`;
 
   return (
-    <section className="py-12 sm:py-16 bg-[#eff4ff]">
+    <section className="py-14 sm:py-18 bg-white">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         <div className="relative rounded-3xl bg-gradient-to-r from-[#006398] via-[#004f7c] to-[#0b1c30] text-white p-8 sm:p-12 lg:p-14 overflow-hidden shadow-xl">
           {/* Ambient Glow */}
