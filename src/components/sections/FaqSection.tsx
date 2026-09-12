@@ -20,7 +20,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
   const items = content?.items || [
     {
       question: 'Thời gian hoàn thiện một website là bao lâu?',
-      answer: 'Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói lập trình theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết.',
+      answer: 'Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói thiết kế & phát triển theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết.',
     },
     {
       question: 'Chi phí trên đã bao gồm tên miền và máy chủ (hosting) chưa?',

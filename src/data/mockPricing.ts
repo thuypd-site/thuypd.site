@@ -50,11 +50,11 @@ export const mockPricingPlans: PricingPlan[] = [
   {
     id: 'plan-advanced',
     planId: 'plan-advanced',
-    name: 'Gói Lập Trình Theo Yêu Cầu (Advanced)',
+    name: 'Gói Phát Triển Theo Yêu Cầu (Advanced)',
     tierSubtitle: 'Tùy Biến Chuyên Sâu',
     price: 12990000,
     formattedPrice: '12.990.000',
-    description: 'Dành cho website bán hàng thương mại điện tử hoặc có các yêu cầu tính năng lập trình chuyên biệt.',
+    description: 'Dành cho website bán hàng hoặc hệ thống có các yêu cầu tính năng và giải pháp kỹ thuật chuyên biệt.',
     completionDays: '10 - 15 ngày',
     isPopular: false,
     renewal1Year: '2.000.000đ',

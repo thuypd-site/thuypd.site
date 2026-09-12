@@ -68,7 +68,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const getTierSelectValue = (planId?: string) => {
     if (planId === 'plan-business' || planId === 'plan-basic') return 'Gói Khởi Nghiệp (4.990.000đ)';
     if (planId === 'plan-professional') return 'Gói Chuyên Nghiệp (7.990.000đ)';
-    return 'Gói Lập Trình Theo Yêu Cầu (12.990.000đ)';
+    return 'Gói Phát Triển Theo Yêu Cầu (12.990.000đ)';
   };
 
   // Matrix Rows Comparison Data

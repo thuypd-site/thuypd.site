@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = () => {
             </div>
 
             <p className="text-sm text-slate-300 max-w-sm leading-relaxed">
-              {settings?.metaDescription || 'Đơn vị tiên phong cung cấp giải pháp lập trình website theo yêu cầu, chuẩn SEO Google Onpage 98+, tối ưu trải nghiệm người dùng và bàn giao mã nguồn 100% sở hữu vĩnh viễn.'}
+              {settings?.metaDescription || 'Đơn vị tiên phong cung cấp giải pháp thiết kế và phát triển website chuyên nghiệp, chuẩn SEO Google Onpage 98+, tối ưu trải nghiệm người dùng và bàn giao mã nguồn 100% sở hữu vĩnh viễn.'}
             </p>
 
             {/* Social Links from Admin API */}

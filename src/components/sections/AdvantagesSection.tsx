@@ -70,7 +70,7 @@ export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, d
     {
       step: '03',
       days: 'Ngày 6 - 8',
-      title: 'Lập Trình & Tối Ưu Tốc Độ',
+      title: 'Xây Dựng & Tối Ưu Hệ Thống',
       desc: 'Hiện thực hóa các tính năng thực tế, tối ưu chuẩn SEO Google, cài đặt tốc độ mở trang dưới 1 giây và chạy thử nghiệm.',
       output: 'Đầu ra: Website chạy thử thực tế hoàn chỉnh',
       icon: <Code className="w-6 h-6 text-blue-600" />,

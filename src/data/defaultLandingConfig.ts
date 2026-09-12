@@ -22,7 +22,7 @@ export const defaultLandingConfig: LandingPageConfig = {
         badgeText: 'Thiết Kế Website Theo Yêu Cầu • Chuẩn SEO Google • Bàn Giao Trọn Gói',
         headlineMain: 'Thiết Kế Website Chuyên Nghiệp,',
         headlineHighlight: 'Đúng Ý & Tối Ưu Chuyển Đổi',
-        description: 'Chúng tôi thiết kế và lập trình website độc bản theo phong cách thương hiệu của bạn, tối ưu tốc độ mở trang dưới 1 giây, chuẩn SEO Google và bàn giao 100% quyền quản trị. Dễ dàng tự cập nhật nội dung, không lo phát sinh chi phí ngầm.',
+        description: 'Chúng tôi thiết kế và phát triển website độc bản theo nhận diện thương hiệu của bạn, tối ưu tốc độ mở trang dưới 1 giây, chuẩn SEO Google và bàn giao 100% quyền quản trị. Dễ dàng tự cập nhật nội dung, không lo phát sinh chi phí ngầm.',
         ctaPrimaryText: 'Xem Báo Giá Trọn Gói',
         ctaSecondaryText: 'Tư Vấn Miễn Phí',
         pillars: [
@@ -57,7 +57,7 @@ export const defaultLandingConfig: LandingPageConfig = {
       ],
       content: {
         badge: 'Dịch Vụ Trọng Tâm',
-        title: 'Giải Pháp Lập Trình Website & Công Nghệ Hiện Đại',
+        title: 'Giải Pháp Thiết Kế & Phát Triển Website Toàn Diện',
         subtitle: 'Lựa chọn kiến trúc website phù hợp nhất với mô hình kinh doanh của bạn, tối ưu chuyển đổi và đồng hành kỹ thuật bền lâu.',
         items: [...mockServices],
       },
@@ -155,7 +155,7 @@ export const defaultLandingConfig: LandingPageConfig = {
         items: [
           {
             question: 'Thời gian hoàn thiện một website là bao lâu?',
-            answer: 'Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói lập trình theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết.',
+            answer: 'Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói thiết kế & phát triển theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết.',
           },
           {
             question: 'Chi phí trên đã bao gồm tên miền và máy chủ (hosting) chưa?',

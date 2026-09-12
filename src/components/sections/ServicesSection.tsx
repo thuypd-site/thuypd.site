@@ -47,7 +47,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
 
   const services = content?.items && content.items.length > 0 ? content.items : defaultServices;
   const badge = content?.badge || 'Dịch Vụ Trọng Tâm';
-  const title = content?.title || 'Giải Pháp Lập Trình Website & Công Nghệ Hiện Đại';
+  const title = content?.title || 'Giải Pháp Thiết Kế & Phát Triển Website Toàn Diện';
   const subtitle = content?.subtitle || 'Lựa chọn kiến trúc website phù hợp nhất với mô hình kinh doanh của bạn, tối ưu chuyển đổi và đồng hành kỹ thuật bền lâu.';
 
   return (
@@ -135,12 +135,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
                     FLAGSHIP SERVICE
                   </span>
                   <span className="px-3 py-1 rounded-full bg-white/10 text-cyan-300 font-mono text-[10px] sm:text-xs font-bold">
-                    Lập trình riêng 100% · UI/UX Độc Quyền
+                    Phát triển riêng 100% · UI/UX Độc Quyền
                   </span>
                 </div>
 
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
-                  Thiết Kế & Lập Trình Website Theo Yêu Cầu Doanh Nghiệp
+                  Thiết Kế & Xây Dựng Website Theo Yêu Cầu Doanh Nghiệp
                 </h3>
 
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
