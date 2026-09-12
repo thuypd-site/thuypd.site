@@ -13,7 +13,13 @@ export async function GET(req: NextRequest) {
 
     if (res.ok) {
       const data = await res.json();
-      return NextResponse.json(data);
+      return NextResponse.json(data, {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      });
     }
   } catch (err) {
     console.warn('[Server Proxy] /api/landing-config proxy error, serving default config:', err);
@@ -26,5 +32,9 @@ export async function GET(req: NextRequest) {
     message: 'Lấy cấu hình thành công (fallback)',
     config: defaultLandingConfig,
     data: defaultLandingConfig,
+  }, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate',
+    },
   });
 }

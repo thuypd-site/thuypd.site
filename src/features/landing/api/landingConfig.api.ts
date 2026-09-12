@@ -289,7 +289,13 @@ export async function fetchLandingConfigApi(): Promise<{
   message?: string;
 }> {
   try {
-    const res = await fetch(API_BASE);
+    const res = await fetch(`${API_BASE}?_t=${Date.now()}`, {
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/json',
+        'Cache-Control': 'no-cache',
+      },
+    });
 
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);

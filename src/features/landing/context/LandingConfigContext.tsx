@@ -137,6 +137,30 @@ export const LandingConfigProvider: React.FC<LandingConfigProviderProps> = ({ ch
     };
   }, []);
 
+  // Support cross-tab real-time sync via BroadcastChannel
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('BroadcastChannel' in window)) return;
+
+    try {
+      const channel = new BroadcastChannel('thuypd_landing_channel');
+      channel.onmessage = (event) => {
+        if (event.data && (event.data.type === 'CONFIG_UPDATED' || event.data.type === 'THUYPD_PREVIEW_UPDATE')) {
+          if (event.data.config) {
+            setConfig(normalizeLandingPageConfig(event.data.config));
+          } else {
+            refreshConfig();
+          }
+        }
+      };
+
+      return () => {
+        channel.close();
+      };
+    } catch {
+      // ignore
+    }
+  }, [refreshConfig]);
+
   return (
     <LandingConfigContext.Provider
       value={{
