@@ -55,6 +55,20 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     }
   }, [initialNotes, setValue]);
 
+  useEffect(() => {
+    const handleDomainSelect = (e: any) => {
+      if (e.detail?.domain) {
+        const domainText = e.detail.price
+          ? `Tôi muốn tư vấn thiết kế website và đăng ký giữ tên miền: ${e.detail.domain} (${e.detail.price})`
+          : `Tôi muốn tư vấn thiết kế website và đăng ký giữ tên miền: ${e.detail.domain}`;
+        setValue('notes', domainText);
+      }
+    };
+
+    window.addEventListener('select-domain', handleDomainSelect);
+    return () => window.removeEventListener('select-domain', handleDomainSelect);
+  }, [setValue]);
+
   const { mutate: submitQuote, isPending, isSuccess, isError, error } = useContactMutation();
 
   const onSubmit = (data: ContactFormInput) => {

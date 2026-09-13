@@ -11,7 +11,9 @@ export interface DomainVariantProps {
   setDomainName: (val: string) => void;
   tld: string;
   setTld: (val: string) => void;
-  handleSearch: (e: React.FormEvent) => void;
+  handleSearch: (e?: React.FormEvent, overrideTld?: string) => void;
+  handleSelectAlternative?: (altTld: string) => void;
+  handleRegisterDomain?: (targetDomain: string, targetPrice?: string) => void;
   isPending: boolean;
   validationError: string;
   result: any;
@@ -26,6 +28,8 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
   tld,
   setTld,
   handleSearch,
+  handleSelectAlternative,
+  handleRegisterDomain,
   isPending,
   validationError,
   result,
@@ -107,32 +111,106 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
 
         {/* API Result Display */}
         {result && !validationError && (
-          <div
-            className={`p-4 rounded-xl text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-between gap-3 backdrop-blur-md border ${
-              result.isAvailable
-                ? 'bg-emerald-500/20 text-emerald-100 border-emerald-500/30'
-                : 'bg-amber-500/20 text-amber-100 border-amber-500/30'
-            }`}
-          >
-            <div className="flex items-center gap-2 text-left">
+          <div className="space-y-3 text-left">
+            {/* Primary Domain Result */}
+            <div
+              className={`p-4 rounded-xl text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-between gap-3 backdrop-blur-md border ${
+                result.isAvailable
+                  ? 'bg-emerald-500/20 text-emerald-100 border-emerald-500/30'
+                  : 'bg-amber-500/20 text-amber-100 border-amber-500/30'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                {result.isAvailable ? (
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                ) : (
+                  <AlertCircle className="w-5 h-5 text-amber-400 shrink-0" />
+                )}
+                <div>
+                  <div className="font-bold text-sm sm:text-base">
+                    {result.fullDomain} ·{' '}
+                    <span className={result.isAvailable ? 'text-emerald-300' : 'text-amber-300'}>
+                      {result.isAvailable ? 'Còn trống (Sẵn sàng đăng ký)' : 'Đã có chủ sở hữu'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 opacity-90">{result.message}</p>
+                  {result.details?.registrar && (
+                    <p className="text-[11px] text-slate-400 mt-0.5">
+                      Đơn vị quản lý: {result.details.registrar}
+                    </p>
+                  )}
+                </div>
+              </div>
+
               {result.isAvailable ? (
-                <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleRegisterDomain
+                      ? handleRegisterDomain(result.fullDomain, result.pricePerYear)
+                      : (window.location.hash = 'nhan-bao-gia')
+                  }
+                  className="w-full sm:w-auto text-center px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold shrink-0 transition-colors shadow-sm min-h-[38px] flex items-center justify-center cursor-pointer"
+                >
+                  Đăng ký giữ tên ({result.pricePerYear})
+                </button>
               ) : (
-                <AlertCircle className="w-5 h-5 text-amber-500 shrink-0" />
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (handleSelectAlternative) {
+                      handleSelectAlternative('.vn');
+                    }
+                  }}
+                  className="w-full sm:w-auto text-center px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-200 rounded-lg text-xs font-semibold shrink-0 transition-colors"
+                >
+                  Thử đuôi .vn
+                </button>
               )}
-              <span>{result.message}</span>
             </div>
 
-            {result.isAvailable && (
-              <a
-                href="#nhan-bao-gia"
-                className="w-full sm:w-auto text-center px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold shrink-0 transition-colors shadow-sm min-h-[38px] flex items-center justify-center"
-              >
-                Đăng ký giữ tên ({result.pricePerYear})
-              </a>
+            {/* Alternatives / Gợi ý các đuôi khác kèm giá */}
+            {result.alternatives && result.alternatives.length > 0 && (
+              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2.5">
+                  Gợi ý các đuôi tên miền khác cho thương hiệu của bạn:
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                  {result.alternatives.map((alt: any) => (
+                    <div
+                      key={alt.fullDomain}
+                      className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/60 flex items-center justify-between gap-2 hover:border-[#006398]/50 transition-colors"
+                    >
+                      <div className="truncate">
+                        <span className="font-bold text-white block truncate">{alt.fullDomain}</span>
+                        <span className="text-[11px] text-slate-400">{alt.pricePerYear}</span>
+                      </div>
+
+                      {alt.isAvailable ? (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleRegisterDomain
+                              ? handleRegisterDomain(alt.fullDomain, alt.pricePerYear)
+                              : (window.location.hash = 'nhan-bao-gia')
+                          }
+                          className="px-2.5 py-1 rounded bg-emerald-600/80 hover:bg-emerald-600 text-white text-[11px] font-bold shrink-0 transition-colors"
+                        >
+                          Giữ tên
+                        </button>
+                      ) : (
+                        <span className="px-2 py-0.5 rounded bg-slate-700 text-slate-400 text-[10px] shrink-0 font-medium">
+                          Đã mua
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         )}
+
 
         {/* Security and SLA badges */}
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-6 text-xs text-slate-400 pt-2">
