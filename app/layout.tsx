@@ -1,15 +1,15 @@
 import React, { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { Saira } from 'next/font/google';
+import { Be_Vietnam_Pro } from 'next/font/google';
 import './globals.css';
 import { BACKEND_URL } from '@/src/lib/backend-proxy';
 import { siteConfig } from '@/src/config/site.config';
 
-const saira = Saira({
+const beVietnamPro = Be_Vietnam_Pro({
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin', 'vietnamese'],
   display: 'swap',
-  variable: '--font-saira',
+  variable: '--font-be-vietnam-pro',
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -139,14 +139,14 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   ];
 
   return (
-    <html lang="vi" className={`scroll-smooth ${saira.variable}`}>
+    <html lang="vi" className={`scroll-smooth ${beVietnamPro.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
       </head>
-      <body className={`${saira.className} min-h-screen bg-[#f8fafd] text-[#0b1c30] antialiased selection:bg-[#006398]/20 selection:text-[#006398]`}>
+      <body className={`${beVietnamPro.className} min-h-screen bg-[#f8fafd] text-[#0b1c30] antialiased selection:bg-[#006398]/20 selection:text-[#006398]`}>
         {children}
       </body>
     </html>
