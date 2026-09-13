@@ -15,7 +15,13 @@ export const HeroVariantB: React.FC<HeroVariantProps> = ({
   ctaSecondary,
   ctaPrimaryLink,
   ctaSecondaryLink,
+  pillars = [],
 }) => {
+  const pillarIcons = [
+    <Gauge key="gauge" className="w-6 h-6" />,
+    <Award key="award" className="w-6 h-6" />,
+    <CheckCircle key="check" className="w-6 h-6" />,
+  ];
   return (
     <motion.div
       key="hero-b"
@@ -61,50 +67,27 @@ export const HeroVariantB: React.FC<HeroVariantProps> = ({
 
       {/* 3 Large Feature Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl pt-4 text-left">
-        <SpotlightCard
-          spotlightColor="rgba(91, 184, 254, 0.15)"
-          className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4"
-        >
-          <div className="w-12 h-12 rounded-xl bg-[#006398]/10 text-[#006398] flex items-center justify-center shrink-0">
-            <Gauge className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="text-base font-bold text-[#0b1c30]">Tốc Độ Tải Trang Siêu Tốc</div>
-            <p className="text-xs sm:text-sm text-[#45464d] mt-1 leading-relaxed">
-              Trang tải tức thì dưới 1 giây, giữ chân khách hàng tuyệt đối.
-            </p>
-          </div>
-        </SpotlightCard>
-
-        <SpotlightCard
-          spotlightColor="rgba(91, 184, 254, 0.15)"
-          className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4"
-        >
-          <div className="w-12 h-12 rounded-xl bg-[#006398]/10 text-[#006398] flex items-center justify-center shrink-0">
-            <Award className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="text-base font-bold text-[#0b1c30]">Thiết Kế Độc Bản 100%</div>
-            <p className="text-xs sm:text-sm text-[#45464d] mt-1 leading-relaxed">
-              Không dùng mẫu nhân bản đại trà, thiết kế và phát triển chuẩn phong cách riêng.
-            </p>
-          </div>
-        </SpotlightCard>
-
-        <SpotlightCard
-          spotlightColor="rgba(91, 184, 254, 0.15)"
-          className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4"
-        >
-          <div className="w-12 h-12 rounded-xl bg-[#006398]/10 text-[#006398] flex items-center justify-center shrink-0">
-            <CheckCircle className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="text-base font-bold text-[#0b1c30]">Toàn Quyền Sở Hữu 100%</div>
-            <p className="text-xs sm:text-sm text-[#45464d] mt-1 leading-relaxed">
-              Bàn giao trọn gói website và quyền quản trị, bảo hành đồng hành trọn đời.
-            </p>
-          </div>
-        </SpotlightCard>
+        {(pillars && pillars.length > 0 ? pillars.slice(0, 3) : [
+          { id: '1', title: 'Tốc Độ Tải Trang Siêu Tốc', desc: 'Trang tải tức thì dưới 1 giây, giữ chân khách hàng tuyệt đối.' },
+          { id: '2', title: 'Thiết Kế Độc Bản 100%', desc: 'Không dùng mẫu nhân bản đại trà, thiết kế và phát triển chuẩn phong cách riêng.' },
+          { id: '3', title: 'Toàn Quyền Sở Hữu 100%', desc: 'Bàn giao trọn gói website và quyền quản trị, bảo hành đồng hành trọn đời.' },
+        ]).map((pillar, idx) => (
+          <SpotlightCard
+            key={pillar.id || idx}
+            spotlightColor="rgba(91, 184, 254, 0.15)"
+            className="p-5 sm:p-6 rounded-2xl bg-white shadow-md border border-[#dce9ff] hover:border-[#006398]/40 hover:-translate-y-0.5 transition-all duration-300 flex items-start gap-4"
+          >
+            <div className="w-12 h-12 rounded-xl bg-[#006398]/10 text-[#006398] flex items-center justify-center shrink-0">
+              {pillarIcons[idx % pillarIcons.length]}
+            </div>
+            <div>
+              <div className="text-base font-bold text-[#0b1c30]">{pillar.title}</div>
+              <p className="text-xs sm:text-sm text-[#45464d] mt-1 leading-relaxed">
+                {pillar.desc}
+              </p>
+            </div>
+          </SpotlightCard>
+        ))}
       </div>
     </motion.div>
   );

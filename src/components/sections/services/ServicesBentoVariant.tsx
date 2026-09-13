@@ -12,7 +12,40 @@ import {
 } from 'lucide-react';
 import { BorderBeam, SpotlightCard } from '../../common';
 
-export const ServicesBentoVariant: React.FC = () => {
+export interface ServicesBentoVariantProps {
+  services?: any[];
+}
+
+export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ services = [] }) => {
+  const s0 = services[0] || {
+    title: 'Thiết Kế & Xây Dựng Website Theo Yêu Cầu Doanh Nghiệp',
+    description: 'Phát triển giao diện độc bản theo nhận diện thương hiệu, đáp ứng chính xác mô hình kinh doanh, dễ dàng kết nối phần mềm quản trị và cổng thanh toán tự động.',
+    tag: 'DỊCH VỤ TRỌNG TÂM',
+  };
+
+  const s1 = services[1] || {
+    title: 'Landing Page Quảng Cáo Tối Ưu Chốt Đơn',
+    description: 'Bố cục dẫn dắt tâm lý người mua, nút gọi và chat Zalo nổi bật, tốc độ mở trang tức thì giúp tối ưu tối đa chi phí quảng cáo Ads.',
+    tag: 'Tối Ưu Chuyển Đổi',
+  };
+
+  const s2 = services[2] || {
+    title: 'Website Giới Thiệu Công Ty & Dịch Vụ',
+    description: 'Khẳng định uy tín thương hiệu với phong cách hiện đại, thanh lịch, như một hồ sơ năng lực số chuyên nghiệp tiếp cận đối tác lớn.',
+    tag: 'Nâng Tầm Uy Tín',
+  };
+
+  const s3 = services[3] || {
+    title: 'Tối Ưu Chuẩn SEO & Lên Top Bền Vững',
+    description: 'Cấu trúc website thân thiện với Google, tối ưu tốc độ và thẻ tìm kiếm giúp thương hiệu của bạn tiếp cận khách hàng tiềm năng lâu dài.',
+    tag: 'Chuẩn SEO Google',
+  };
+
+  const s4 = services[4] || {
+    title: 'Máy Chủ Tốc Độ Cao & Nâng Cấp Web Cũ',
+    description: 'Cung cấp máy chủ tốc độ cao an toàn, sao lưu tự động hàng tuần và nâng cấp các website cũ chạy chậm trở nên nhanh mượt.',
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
       {/* 1. Large Flagship Card (col-span-12 lg:col-span-8) */}
@@ -32,7 +65,7 @@ export const ServicesBentoVariant: React.FC = () => {
         <div className="relative z-10 space-y-4">
           <div className="flex flex-wrap items-center gap-2">
             <span className="px-3 py-1 rounded-full bg-[#006398] text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider">
-              DỊCH VỤ TRỌNG TÂM
+              {s0.tag || 'DỊCH VỤ TRỌNG TÂM'}
             </span>
             <span className="px-3 py-1 rounded-full bg-white/10 text-cyan-300 font-mono text-[10px] sm:text-xs font-bold">
               Phát triển riêng 100% · Giao diện độc quyền
@@ -40,11 +73,11 @@ export const ServicesBentoVariant: React.FC = () => {
           </div>
 
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
-            Thiết Kế &amp; Xây Dựng Website Theo Yêu Cầu Doanh Nghiệp
+            {s0.title}
           </h3>
 
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-            Phát triển giao diện độc bản theo nhận diện thương hiệu, đáp ứng chính xác mô hình kinh doanh, dễ dàng kết nối phần mềm quản trị và cổng thanh toán tự động.
+            {s0.description}
           </p>
 
           <div className="flex flex-wrap gap-2 pt-2">
@@ -94,13 +127,13 @@ export const ServicesBentoVariant: React.FC = () => {
               <MousePointerClick className="w-6 h-6" />
             </div>
             <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-              Tối Ưu Chuyển Đổi
+              {s1.tag || 'Tối Ưu Chuyển Đổi'}
             </div>
             <h3 className="text-lg font-extrabold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-              Landing Page Quảng Cáo Tối Ưu Chốt Đơn
+              {s1.title}
             </h3>
             <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-              Bố cục dẫn dắt tâm lý người mua, nút gọi và chat Zalo nổi bật, tốc độ mở trang tức thì giúp tối ưu tối đa chi phí quảng cáo Ads.
+              {s1.description}
             </p>
           </div>
 
@@ -128,18 +161,18 @@ export const ServicesBentoVariant: React.FC = () => {
               <Building2 className="w-6 h-6" />
             </div>
             <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-              Nâng Tầm Uy Tín
+              {s2.tag || 'Nâng Tầm Uy Tín'}
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-              Website Giới Thiệu Công Ty &amp; Dịch Vụ
+              {s2.title}
             </h3>
             <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-              Khẳng định uy tín thương hiệu với phong cách hiện đại, thanh lịch, như một hồ sơ năng lực số chuyên nghiệp tiếp cận đối tác lớn.
+              {s2.description}
             </p>
           </div>
 
           <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#006398]">Khẳng định uy tín thương hiệu</span>
+            <span className="font-semibold text-[#006398]">{s2.tag || 'Khẳng định uy tín thương hiệu'}</span>
             <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
           </div>
         </SpotlightCard>
@@ -162,18 +195,18 @@ export const ServicesBentoVariant: React.FC = () => {
               <TrendingUp className="w-6 h-6" />
             </div>
             <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-              Chuẩn SEO Google
+              {s3.tag || 'Chuẩn SEO Google'}
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-              Tối Ưu Chuẩn SEO &amp; Lên Top Bền Vững
+              {s3.title}
             </h3>
             <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-              Cấu trúc website thân thiện với Google, tối ưu tốc độ và thẻ tìm kiếm giúp thương hiệu của bạn tiếp cận khách hàng tiềm năng lâu dài.
+              {s3.description}
             </p>
           </div>
 
           <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#006398]">Tăng lượng khách tự nhiên</span>
+            <span className="font-semibold text-[#006398]">{s3.tag || 'Tăng lượng khách tự nhiên'}</span>
             <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
           </div>
         </SpotlightCard>
@@ -196,18 +229,18 @@ export const ServicesBentoVariant: React.FC = () => {
               <Server className="w-6 h-6" />
             </div>
             <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
-              Hạ Tầng &amp; Nâng Cấp
+              {s4.tag || 'Hạ Tầng & Nâng Cấp'}
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
-              Máy Chủ Tốc Độ Cao &amp; Nâng Cấp Web Cũ
+              {s4.title}
             </h3>
             <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-              Cung cấp máy chủ tốc độ cao an toàn, sao lưu tự động hàng tuần và nâng cấp các website cũ chạy chậm trở nên nhanh mượt.
+              {s4.description}
             </p>
           </div>
 
           <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#006398]">Vận hành ổn định 99.9%</span>
+            <span className="font-semibold text-[#006398]">{s4.tag || 'Vận hành ổn định 99.9%'}</span>
             <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
           </div>
         </SpotlightCard>

@@ -47,7 +47,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
         {activeStyle === 'services-a' && <ServicesGridVariant services={services} />}
 
         {/* Style B: Bento Grid */}
-        {activeStyle === 'services-b' && <ServicesBentoVariant />}
+        {activeStyle === 'services-b' && <ServicesBentoVariant services={services} />}
       </div>
     </section>
   );

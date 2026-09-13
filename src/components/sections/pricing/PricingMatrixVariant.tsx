@@ -13,6 +13,7 @@ export interface PricingMatrixRow {
 
 export interface PricingMatrixVariantProps {
   matrixFeatures: PricingMatrixRow[];
+  pricingPlans?: any[];
   onChoosePlan: (planName: string, budgetTier: string) => void;
   showScrollHint: boolean;
   onTableScroll: () => void;
@@ -21,11 +22,15 @@ export interface PricingMatrixVariantProps {
 
 export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
   matrixFeatures,
+  pricingPlans = [],
   onChoosePlan,
   showScrollHint,
   onTableScroll,
   tableContainerRef,
 }) => {
+  const plan0 = pricingPlans[0] || { name: 'Gói Khởi Nghiệp', formattedPrice: '4.990.000 ₫' };
+  const plan1 = pricingPlans[1] || { name: 'Gói Chuyên Nghiệp', formattedPrice: '7.990.000 ₫' };
+  const plan2 = pricingPlans[2] || { name: 'Gói Phát Triển Theo Yêu Cầu', formattedPrice: '12.990.000 ₫+' };
   return (
     <div className="space-y-3">
       {showScrollHint && (
@@ -58,8 +63,8 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                 {/* Column 2: Basic */}
                 <th className="p-4 sm:p-5 text-center w-[22%] align-bottom">
                   <div className="text-[10px] sm:text-xs font-bold uppercase text-slate-500">Khởi Đầu</div>
-                  <div className="text-sm sm:text-base font-black text-[#0b1c30] mt-0.5">Gói Khởi Nghiệp</div>
-                  <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">4.990.000 ₫</div>
+                  <div className="text-sm sm:text-base font-black text-[#0b1c30] mt-0.5">{plan0.name}</div>
+                  <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">{plan0.formattedPrice} {plan0.formattedPrice?.includes('₫') ? '' : '₫'}</div>
                 </th>
 
                 {/* Column 3: Professional (HIGHLIGHTED) */}
@@ -68,15 +73,15 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                     Khuyên Dùng
                   </span>
                   <div className="text-[10px] sm:text-xs font-bold uppercase text-[#006398] mt-2">Doanh Nghiệp</div>
-                  <div className="text-sm sm:text-base font-black text-[#006398] mt-0.5">Gói Chuyên Nghiệp</div>
-                  <div className="text-xs sm:text-sm font-black text-[#006398] mt-1">7.990.000 ₫</div>
+                  <div className="text-sm sm:text-base font-black text-[#006398] mt-0.5">{plan1.name}</div>
+                  <div className="text-xs sm:text-sm font-black text-[#006398] mt-1">{plan1.formattedPrice} {plan1.formattedPrice?.includes('₫') ? '' : '₫'}</div>
                 </th>
 
                 {/* Column 4: Advanced */}
                 <th className="p-4 sm:p-5 text-center w-[20%] align-bottom">
                   <div className="text-[10px] sm:text-xs font-bold uppercase text-slate-500">Tùy Biến</div>
-                  <div className="text-sm sm:text-base font-black text-[#0b1c30] mt-0.5">Gói Theo Yêu Cầu</div>
-                  <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">12.990.000 ₫+</div>
+                  <div className="text-sm sm:text-base font-black text-[#0b1c30] mt-0.5">{plan2.name}</div>
+                  <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">{plan2.formattedPrice} {plan2.formattedPrice?.includes('₫') ? '' : '₫+'}</div>
                 </th>
               </tr>
             </thead>
@@ -116,44 +121,44 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                   Bàn giao đầy đủ mã nguồn &amp; hợp đồng cam kết 0 phụ phí
                 </td>
 
-                {/* Basic Button */}
-                <td className="p-3 sm:p-4 text-center">
-                  <button
-                    type="button"
-                    onClick={() => onChoosePlan('Gói Khởi Nghiệp', 'Gói Khởi Nghiệp (4.990.000đ)')}
-                    className="w-full py-2.5 px-3 rounded-xl border border-[#dce9ff] bg-white text-[#006398] hover:bg-[#006398] hover:text-white font-bold text-xs transition-all shadow-xs active:scale-95 cursor-pointer truncate"
-                  >
-                    Chọn Khởi Nghiệp
-                  </button>
-                </td>
+                      {/* Basic Button */}
+                      <td className="p-3 sm:p-4 text-center">
+                        <button
+                          type="button"
+                          onClick={() => onChoosePlan(plan0.name, `${plan0.name} (${plan0.formattedPrice})`)}
+                          className="w-full py-2.5 px-3 rounded-xl border border-[#dce9ff] bg-white text-[#006398] hover:bg-[#006398] hover:text-white font-bold text-xs transition-all shadow-xs active:scale-95 cursor-pointer truncate"
+                        >
+                          Chọn {plan0.name?.replace('Gói ', '') || 'Khởi Nghiệp'}
+                        </button>
+                      </td>
 
-                {/* Professional Button */}
-                <td className="p-3 sm:p-4 text-center bg-[#006398]/5 border-x-2 border-[#006398]/30">
-                  <button
-                    type="button"
-                    onClick={() => onChoosePlan('Gói Chuyên Nghiệp', 'Gói Chuyên Nghiệp (7.990.000đ)')}
-                    className="w-full py-2.5 px-3 rounded-xl bg-[#006398] hover:bg-[#004f7a] text-white font-bold text-xs shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 truncate"
-                  >
-                    <span>Chọn Chuyên Nghiệp</span>
-                    <Sparkles className="w-3.5 h-3.5 hidden sm:inline" />
-                  </button>
-                </td>
+                      {/* Professional Button */}
+                      <td className="p-3 sm:p-4 text-center bg-[#006398]/5 border-x-2 border-[#006398]/30">
+                        <button
+                          type="button"
+                          onClick={() => onChoosePlan(plan1.name, `${plan1.name} (${plan1.formattedPrice})`)}
+                          className="w-full py-2.5 px-3 rounded-xl bg-[#006398] hover:bg-[#004f7a] text-white font-bold text-xs shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 truncate"
+                        >
+                          <span>Chọn {plan1.name?.replace('Gói ', '') || 'Chuyên Nghiệp'}</span>
+                          <Sparkles className="w-3.5 h-3.5 hidden sm:inline" />
+                        </button>
+                      </td>
 
-                {/* Advanced Button */}
-                <td className="p-3 sm:p-4 text-center">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onChoosePlan(
-                        'Gói Phát Triển Theo Yêu Cầu',
-                        'Gói Phát Triển Theo Yêu Cầu (12.990.000đ)'
-                      )
-                    }
-                    className="w-full py-2.5 px-3 rounded-xl border border-[#dce9ff] bg-white text-slate-700 hover:bg-slate-100 font-bold text-xs transition-all shadow-xs active:scale-95 cursor-pointer truncate"
-                  >
-                    Liên Hệ Tư Vấn Riêng
-                  </button>
-                </td>
+                      {/* Advanced Button */}
+                      <td className="p-3 sm:p-4 text-center">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            onChoosePlan(
+                              plan2.name,
+                              `${plan2.name} (${plan2.formattedPrice})`
+                            )
+                          }
+                          className="w-full py-2.5 px-3 rounded-xl border border-[#dce9ff] bg-white text-slate-700 hover:bg-slate-100 font-bold text-xs transition-all shadow-xs active:scale-95 cursor-pointer truncate"
+                        >
+                          {plan2.name?.includes('Yêu Cầu') ? 'Liên Hệ Tư Vấn Riêng' : `Chọn ${plan2.name}`}
+                        </button>
+                      </td>
               </tr>
             </tfoot>
           </table>

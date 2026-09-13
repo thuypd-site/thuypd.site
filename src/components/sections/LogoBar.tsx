@@ -13,7 +13,7 @@ export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'stand
   const title = content?.title || 'Thương Hiệu & Khách Hàng Tin Tưởng Đồng Hành';
   const items = content?.items || [];
 
-  const brands = [
+  const defaultBrands = [
     { name: 'VICI', style: 'font-black tracking-widest' },
     { name: 'DENTIA CLINIC', style: 'font-bold tracking-tight' },
     { name: 'HONDA', style: 'font-black tracking-wider' },
@@ -21,6 +21,8 @@ export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'stand
     { name: 'MAROSE', style: 'font-mono font-bold tracking-tighter' },
     { name: 'LOGIFLOW', style: 'font-black tracking-normal' },
   ];
+
+  const brands = (content as any)?.brands && (content as any).brands.length > 0 ? (content as any).brands : defaultBrands;
 
   const isCompact = displayStyle === 'compact';
 

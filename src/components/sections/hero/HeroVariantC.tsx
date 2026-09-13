@@ -15,6 +15,7 @@ export const HeroVariantC: React.FC<HeroVariantProps> = ({
   ctaSecondary,
   ctaPrimaryLink,
   ctaSecondaryLink,
+  pillars = [],
 }) => {
   // Diagnostic tool state
   const [selectedDiagnostic, setSelectedDiagnostic] = useState<number>(0);
@@ -145,30 +146,43 @@ export const HeroVariantC: React.FC<HeroVariantProps> = ({
           </div>
 
           <ul className="space-y-3 text-xs sm:text-sm text-slate-200">
-            <li className="flex items-start gap-2.5">
-              <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span>
-                <strong className="text-white">Tốc độ mở trang tức thì &lt; 0.8s:</strong> Tải trang nhanh vượt trội, giữ chân khách hàng tối đa.
-              </span>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span>
-                <strong className="text-white">Báo giá trọn gói 0 đồng phát sinh:</strong> Hợp đồng minh bạch từng mục, cam kết hoàn tiền nếu thu thêm phí.
-              </span>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span>
-                <strong className="text-white">Bàn giao 100% quyền sở hữu:</strong> Cấp đầy đủ tài khoản quản trị và mã nguồn để bạn toàn quyền làm chủ.
-              </span>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-              <span>
-                <strong className="text-white">Giao diện đẹp mắt, dễ quản trị:</strong> Thiết kế chuẩn nhận diện thương hiệu, tự sửa bài viết và giá bán dễ dàng.
-              </span>
-            </li>
+            {pillars && pillars.length > 0 ? (
+              pillars.map((pillar, idx) => (
+                <li key={pillar.id || idx} className="flex items-start gap-2.5">
+                  <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong className="text-white">{pillar.title}: </strong> {pillar.desc}
+                  </span>
+                </li>
+              ))
+            ) : (
+              <>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong className="text-white">Tốc độ mở trang tức thì &lt; 0.8s:</strong> Tải trang nhanh vượt trội, giữ chân khách hàng tối đa.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong className="text-white">Báo giá trọn gói 0 đồng phát sinh:</strong> Hợp đồng minh bạch từng mục, cam kết hoàn tiền nếu thu thêm phí.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong className="text-white">Bàn giao 100% quyền sở hữu:</strong> Cấp đầy đủ tài khoản quản trị và mã nguồn để bạn toàn quyền làm chủ.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong className="text-white">Giao diện đẹp mắt, dễ quản trị:</strong> Thiết kế chuẩn nhận diện thương hiệu, tự sửa bài viết và giá bán dễ dàng.
+                  </span>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
