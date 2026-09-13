@@ -202,8 +202,8 @@ export interface LandingPageConfig {
     fontFamily?: string;
   };
   sections: SectionConfig[];
-  header?: HeaderSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string };
-  footer?: FooterSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string };
+  header?: HeaderSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string; variant?: string };
+  footer?: FooterSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string; variant?: string };
 }
 
 declare global {

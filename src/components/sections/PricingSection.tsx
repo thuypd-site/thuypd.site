@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   CheckCircle,
@@ -31,9 +31,13 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
 }) => {
   const { data: defaultPlans = [] } = usePricing();
 
-  // Prioritize 'cards' for clean balanced layout, allow matrix toggle
-  const initialView = displayStyle === 'price-b' ? 'cards' : 'cards';
-  const [viewMode, setViewMode] = useState<'cards' | 'matrix'>(initialView);
+  const isMatrixDefault = displayStyle === 'price-b' || displayStyle === 'matrix';
+  const [viewMode, setViewMode] = useState<'cards' | 'matrix'>(isMatrixDefault ? 'matrix' : 'cards');
+
+  useEffect(() => {
+    setViewMode(displayStyle === 'price-b' || displayStyle === 'matrix' ? 'matrix' : 'cards');
+  }, [displayStyle]);
+
   const [showScrollHint, setShowScrollHint] = useState<boolean>(true);
   const tableContainerRef = useRef<HTMLDivElement | null>(null);
 

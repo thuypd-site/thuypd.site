@@ -32,6 +32,7 @@ export const Footer: React.FC<FooterProps> = () => {
   const { data: settings } = useSettings();
   const { config } = useLandingConfig();
   const footerConfig = config?.footer;
+  const isCompact = footerConfig?.displayStyle === 'compact' || footerConfig?.variant === 'compact';
 
   const siteName = settings?.siteName || siteConfig.name;
   const hotline = settings?.hotline || siteConfig.hotline;
@@ -84,15 +85,77 @@ export const Footer: React.FC<FooterProps> = () => {
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-[#5bb8fe]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full pt-12 sm:pt-16 pb-10 relative z-10">
-        {/* 1. Pre-Footer Quick Consultation & Action Strip */}
-        <div className="mb-12 sm:mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-white/[0.05] to-white/[0.02] border border-white/10 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-cyan-500/15 transition-all duration-500" />
+      {isCompact ? (
+        /* ========================================================================= */
+        /* COMPACT 1-ROW FOOTER                                                      */
+        /* ========================================================================= */
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full py-8 sm:py-10 relative z-10 space-y-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5 pb-6 border-b border-white/10">
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+              <Logo variant="dark" size="md" />
+              <p className="text-xs text-slate-400 max-w-md hidden md:block border-l border-slate-700 pl-4">
+                {brandDescription}
+              </p>
+            </div>
 
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006398]/25 text-cyan-300 text-xs font-bold border border-[#5bb8fe]/30">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs text-slate-300">
+              <a
+                href={`tel:${hotlineRaw}`}
+                className="hover:text-cyan-300 flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/5"
+              >
+                <Phone className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="font-bold">{hotline}</span>
+              </a>
+              <a
+                href={zaloUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-cyan-300 flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/5"
+              >
+                <MessageSquare className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Zalo: {zaloPhone}</span>
+              </a>
+              <a
+                href={`mailto:${email}`}
+                className="hover:text-cyan-300 flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/5 hidden sm:flex"
+              >
+                <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                <span>{email}</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <p className="text-slate-300 text-center sm:text-left">{copyrightText}</p>
+            <div className="flex items-center gap-5">
+              <span className="text-[11px] text-slate-400 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{systemStatusText}</span>
+              </span>
+              <button
+                onClick={scrollToTop}
+                aria-label="Cuộn lên đầu trang"
+                title="Cuộn lên đầu trang"
+                className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-[#006398] text-slate-300 hover:text-white border border-white/10 flex items-center justify-center transition-all hover:-translate-y-0.5"
+              >
+                <ChevronUp className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* ========================================================================= */
+        /* STANDARD 4-COLUMN MEGA FOOTER                                             */
+        /* ========================================================================= */
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full pt-12 sm:pt-16 pb-10 relative z-10">
+          {/* 1. Pre-Footer Quick Consultation & Action Strip */}
+          <div className="mb-12 sm:mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-white/[0.05] to-white/[0.02] border border-white/10 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-cyan-500/15 transition-all duration-500" />
+
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="space-y-2 max-w-2xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006398]/25 text-cyan-300 text-xs font-bold border border-[#5bb8fe]/30">
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                 <span>{preFooterBadge}</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
@@ -390,6 +453,7 @@ export const Footer: React.FC<FooterProps> = () => {
           </div>
         </div>
       </div>
+      )}
     </footer>
   );
 };
