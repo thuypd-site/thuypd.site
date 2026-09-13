@@ -5,7 +5,13 @@ import { Header, Footer, FloatingWidget } from '@/src/components/layout';
 import { LandingPageRenderer } from '@/src/components/landing/LandingPageRenderer';
 import { ThemeItem } from '@/src/types';
 
+import { useLandingConfig } from '@/src/features/landing/context/LandingConfigContext';
+
 export function ClientApp() {
+  const { config } = useLandingConfig();
+  const isHeaderVisible = config?.header?.enabled !== false && config?.header?.isVisible !== false;
+  const isFooterVisible = config?.footer?.enabled !== false && config?.footer?.isVisible !== false;
+
   const [selectedBudgetTier, setSelectedBudgetTier] = useState<string>('Gói Chuyên Nghiệp (7.990.000đ)');
   const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Website Bán Hàng / Cửa Hàng Trực Tuyến');
   const [selectedNotes, setSelectedNotes] = useState<string>('');
@@ -40,10 +46,10 @@ export function ClientApp() {
   return (
     <div className="min-h-screen bg-[#f8f9ff] text-[#0b1c30] flex flex-col font-sans selection:bg-[#006398]/20 selection:text-[#006398]">
       {/* Navigation Bar */}
-      <Header onOpenQuoteModal={handleOpenQuoteModal} />
+      {isHeaderVisible && <Header onOpenQuoteModal={handleOpenQuoteModal} />}
 
       {/* Main Dynamic Landing Sections */}
-      <main className="w-full pt-20 pb-16 sm:pb-0">
+      <main className={`w-full ${isHeaderVisible ? 'pt-20' : 'pt-0'} pb-16 sm:pb-0`}>
         <LandingPageRenderer
           onSelectTheme={handleSelectTheme}
           onSelectPlan={handleSelectPlan}
@@ -54,7 +60,7 @@ export function ClientApp() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      {isFooterVisible && <Footer />}
 
       {/* Floating Quick Action Contacts */}
       <FloatingWidget />

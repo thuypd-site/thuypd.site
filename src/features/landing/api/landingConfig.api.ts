@@ -20,6 +20,7 @@ export function normalizeServerSection(rawSec: any): SectionConfig | null {
     id = 'advantages';
   } else if (
     [
+      'header',
       'hero',
       'logobar',
       'services',
@@ -31,6 +32,7 @@ export function normalizeServerSection(rawSec: any): SectionConfig | null {
       'faq',
       'cta',
       'contact',
+      'footer',
     ].includes(rawKey)
   ) {
     id = rawKey as SectionId;
@@ -60,6 +62,21 @@ export function normalizeServerSection(rawSec: any): SectionConfig | null {
   const rawContent = rawSec.content || {};
 
   switch (id) {
+    case 'header': {
+      const defContent = defaultSec?.id === 'header' ? defaultSec.content : null;
+      return {
+        ...baseConfig,
+        id: 'header',
+        content: {
+          hotlineLabel: rawContent.hotlineLabel || defContent?.hotlineLabel || 'Hotline 24/7',
+          ctaText: rawContent.ctaText || defContent?.ctaText || 'Nhận Báo Giá Ngay',
+          ctaLink: rawContent.ctaLink || defContent?.ctaLink || '#nhan-bao-gia',
+          sticky: rawContent.sticky !== undefined ? Boolean(rawContent.sticky) : (defContent?.sticky ?? true),
+          navItems: rawContent.navItems && rawContent.navItems.length > 0 ? rawContent.navItems : (defContent?.navItems || []),
+        },
+      };
+    }
+
     case 'hero': {
       const defContent = defaultSec?.id === 'hero' ? defaultSec.content : null;
       return {
@@ -235,6 +252,26 @@ export function normalizeServerSection(rawSec: any): SectionConfig | null {
       };
     }
 
+    case 'footer': {
+      const defContent = defaultSec?.id === 'footer' ? defaultSec.content : null;
+      return {
+        ...baseConfig,
+        id: 'footer',
+        content: {
+          preFooterBadge: rawContent.preFooterBadge || defContent?.preFooterBadge || 'Tư Vấn Miễn Phí • Báo Giá Trong 15 Phút',
+          preFooterTitle: rawContent.preFooterTitle || defContent?.preFooterTitle || 'Bạn Cần Website Chuẩn Gu, Vận Hành Mượt Mà?',
+          preFooterSubtitle: rawContent.preFooterSubtitle || defContent?.preFooterSubtitle || 'Nhắn ngay qua Zalo để nhận tư vấn kiến trúc giải pháp và demo phác thảo giao diện phù hợp nhất với ngành nghề của bạn.',
+          preFooterCtaZaloText: rawContent.preFooterCtaZaloText || defContent?.preFooterCtaZaloText || 'Nhắn Zalo Tư Vấn Ngay',
+          brandDescription: rawContent.brandDescription || defContent?.brandDescription || 'Chuyên gia thiết kế và phát triển website doanh nghiệp, bán hàng, landing page theo yêu cầu. Chuẩn SEO Google, tốc độ tải trang vượt trội và cam kết bàn giao 100% mã nguồn.',
+          systemStatusText: rawContent.systemStatusText || defContent?.systemStatusText || 'Hạ tầng máy chủ: Hoạt động ổn định 99.9%',
+          servicesTitle: rawContent.servicesTitle || defContent?.servicesTitle || 'Dịch Vụ Nổi Bật',
+          quickLinksTitle: rawContent.quickLinksTitle || defContent?.quickLinksTitle || 'Liên Kết Nhanh',
+          contactTitle: rawContent.contactTitle || defContent?.contactTitle || 'Thông Tin Liên Hệ',
+          copyrightText: rawContent.copyrightText || defContent?.copyrightText || '© 2026 THUYPD.SITE. Tất cả quyền được bảo lưu. Thiết kế & phát triển với tiêu chuẩn chất lượng cao nhất.',
+        },
+      };
+    }
+
     default:
       return null;
   }
@@ -259,6 +296,14 @@ export function normalizeLandingPageConfig(rawConfig: any): LandingPageConfig {
     }
   }
 
+  // Ensure 'header' section is retained if not explicitly present
+  if (!normalizedSections.some((s) => s.id === 'header')) {
+    const defaultHeader = defaultLandingConfig.sections.find((s) => s.id === 'header');
+    if (defaultHeader) {
+      normalizedSections.unshift(defaultHeader);
+    }
+  }
+
   // Ensure 'domain' section is retained if not explicitly present
   if (!normalizedSections.some((s) => s.id === 'domain')) {
     const defaultDomain = defaultLandingConfig.sections.find((s) => s.id === 'domain');
@@ -272,6 +317,35 @@ export function normalizeLandingPageConfig(rawConfig: any): LandingPageConfig {
     }
   }
 
+  // Ensure 'footer' section is retained if not explicitly present
+  if (!normalizedSections.some((s) => s.id === 'footer')) {
+    const defaultFooter = defaultLandingConfig.sections.find((s) => s.id === 'footer');
+    if (defaultFooter) {
+      normalizedSections.push(defaultFooter);
+    }
+  }
+
+  const headerSec = normalizedSections.find((s) => s.id === 'header');
+  const footerSec = normalizedSections.find((s) => s.id === 'footer');
+
+  const header = headerSec
+    ? {
+        ...headerSec.content,
+        enabled: headerSec.enabled,
+        isVisible: headerSec.enabled,
+        displayStyle: headerSec.displayStyle,
+      }
+    : (rawConfig.header || defaultLandingConfig.header);
+
+  const footer = footerSec
+    ? {
+        ...footerSec.content,
+        enabled: footerSec.enabled,
+        isVisible: footerSec.enabled,
+        displayStyle: footerSec.displayStyle,
+      }
+    : (rawConfig.footer || defaultLandingConfig.footer);
+
   return {
     version: rawConfig.version || defaultLandingConfig.version,
     lastUpdated: rawConfig.lastUpdated || new Date().toISOString(),
@@ -280,6 +354,8 @@ export function normalizeLandingPageConfig(rawConfig: any): LandingPageConfig {
     ogImage: rawConfig.ogImage,
     theme: rawConfig.theme,
     sections: normalizedSections,
+    header,
+    footer,
   };
 }
 

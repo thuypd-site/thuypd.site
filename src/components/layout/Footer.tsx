@@ -23,12 +23,16 @@ import {
 import { siteConfig } from '../../config/site.config';
 import { footerServiceLinks, footerQuickLinks } from '../../config/navigation.config';
 import { useSettings } from '../../hooks/useSettings';
+import { useLandingConfig } from '../../features/landing/context/LandingConfigContext';
 import { Logo } from '../common/Logo';
 
 interface FooterProps {}
 
 export const Footer: React.FC<FooterProps> = () => {
   const { data: settings } = useSettings();
+  const { config } = useLandingConfig();
+  const footerConfig = config?.footer;
+
   const siteName = settings?.siteName || siteConfig.name;
   const hotline = settings?.hotline || siteConfig.hotline;
   const hotlineRaw = settings?.hotlineRaw || siteConfig.hotlineRaw;
@@ -37,6 +41,29 @@ export const Footer: React.FC<FooterProps> = () => {
   const email = settings?.contactEmail || siteConfig.email;
   const address = settings?.officeAddress || siteConfig.address;
   const workingHours = settings?.workingHours || siteConfig.workingHours;
+
+  const preFooterBadge = footerConfig?.preFooterBadge || 'ĐỒNG HÀNH KỸ THUẬT 1-1 CHUYÊN SÂU';
+  const preFooterTitle = footerConfig?.preFooterTitle || 'Bạn có ý tưởng dự án hoặc muốn nâng cấp website cũ?';
+  const preFooterSubtitle =
+    footerConfig?.preFooterSubtitle ||
+    'Trao đổi trực tiếp cùng đội ngũ kỹ sư để nhận bản tư vấn kiến trúc công nghệ & bảng báo giá trọn gói trong 15 phút.';
+  const preFooterCtaZaloText = footerConfig?.preFooterCtaZaloText || 'Nhắn Zalo Tư Vấn Ngay';
+  const brandDescription =
+    footerConfig?.brandDescription ||
+    settings?.metaDescription ||
+    'Đơn vị tiên phong cung cấp giải pháp thiết kế và phát triển website chuyên nghiệp, chuẩn tìm kiếm Google, tối ưu trải nghiệm người dùng và bàn giao trọn gói sở hữu vĩnh viễn.';
+  const systemStatusText = footerConfig?.systemStatusText || 'Hạ tầng máy chủ: Hoạt động ổn định 99.9%';
+  const servicesTitle = footerConfig?.servicesTitle || 'Dịch Vụ Trọng Tâm';
+  const quickLinksTitle = footerConfig?.quickLinksTitle || 'Khám Phá';
+  const contactTitle = footerConfig?.contactTitle || 'Thông Tin Liên Hệ';
+  const copyrightText =
+    footerConfig?.copyrightText ||
+    settings?.copyrightText ||
+    `© ${new Date().getFullYear()} ${siteName}. Toàn bộ bản quyền đã được đăng ký và bảo hộ.`;
+
+  if (footerConfig?.enabled === false || footerConfig?.isVisible === false) {
+    return null;
+  }
 
   const scrollToTop = () => {
     if (typeof window !== 'undefined') {
@@ -66,13 +93,13 @@ export const Footer: React.FC<FooterProps> = () => {
             <div className="space-y-2 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006398]/25 text-cyan-300 text-xs font-bold border border-[#5bb8fe]/30">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>ĐỒNG HÀNH KỸ THUẬT 1-1 CHUYÊN SÂU</span>
+                <span>{preFooterBadge}</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                Bạn có ý tưởng dự án hoặc muốn nâng cấp website cũ?
+                {preFooterTitle}
               </h3>
               <p className="text-sm text-slate-300 leading-relaxed">
-                Trao đổi trực tiếp cùng đội ngũ kỹ sư để nhận bản tư vấn kiến trúc công nghệ & bảng báo giá trọn gói trong 15 phút.
+                {preFooterSubtitle}
               </p>
             </div>
 
@@ -84,7 +111,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#0068ff] to-[#0084ff] hover:from-[#0052cc] hover:to-[#0068ff] text-white font-bold text-sm shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Nhắn Zalo Tư Vấn Ngay</span>
+                <span>{preFooterCtaZaloText}</span>
               </a>
 
               <a
@@ -107,8 +134,7 @@ export const Footer: React.FC<FooterProps> = () => {
             </div>
 
             <p className="text-sm text-slate-300 max-w-sm leading-relaxed">
-              {settings?.metaDescription ||
-                'Đơn vị tiên phong cung cấp giải pháp thiết kế và phát triển website chuyên nghiệp, chuẩn tìm kiếm Google, tối ưu trải nghiệm người dùng và bàn giao trọn gói sở hữu vĩnh viễn.'}
+              {brandDescription}
             </p>
 
             {/* Live Operational Status Badge */}
@@ -117,7 +143,7 @@ export const Footer: React.FC<FooterProps> = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
               </span>
-              <span>Hạ tầng máy chủ: Hoạt động ổn định 99.9%</span>
+              <span>{systemStatusText}</span>
             </div>
 
             {/* Social Media Links */}
@@ -207,7 +233,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#5bb8fe] shadow-[0_0_8px_#5bb8fe]" />
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">Dịch Vụ Trọng Tâm</h4>
+              <h4 className="text-sm font-bold text-white uppercase tracking-wider">{servicesTitle}</h4>
             </div>
             <ul className="space-y-2.5 text-sm">
               {footerServiceLinks.map((link, idx) => (
@@ -236,7 +262,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">Khám Phá</h4>
+              <h4 className="text-sm font-bold text-white uppercase tracking-wider">{quickLinksTitle}</h4>
             </div>
             <ul className="space-y-2.5 text-sm">
               {footerQuickLinks.map((link, idx) => (
@@ -260,7 +286,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]" />
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">Thông Tin Liên Hệ</h4>
+              <h4 className="text-sm font-bold text-white uppercase tracking-wider">{contactTitle}</h4>
             </div>
 
             <div className="space-y-3 text-sm">
@@ -329,8 +355,7 @@ export const Footer: React.FC<FooterProps> = () => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-slate-400">
           <div className="space-y-1 text-center sm:text-left">
             <p className="text-slate-300">
-              {settings?.copyrightText ||
-                `© ${new Date().getFullYear()} ${siteName}. Toàn bộ bản quyền đã được đăng ký và bảo hộ.`}
+              {copyrightText}
             </p>
             <p className="text-[11px] text-slate-400 flex items-center justify-center sm:justify-start gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />

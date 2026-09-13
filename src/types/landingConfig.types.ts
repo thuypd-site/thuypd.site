@@ -1,6 +1,7 @@
 import { ServiceItem, AdvantageItem, PricingPlan, TestimonialItem, ThemeItem } from './index';
 
 export type SectionId = 
+  | 'header'
   | 'hero' 
   | 'logobar' 
   | 'services' 
@@ -11,7 +12,37 @@ export type SectionId =
   | 'testimonials' 
   | 'faq'
   | 'cta'
-  | 'contact';
+  | 'contact'
+  | 'footer';
+
+export interface HeaderNavItem {
+  id?: string;
+  name: string;
+  href: string;
+  target?: string;
+  badge?: string;
+}
+
+export interface HeaderSectionContent {
+  hotlineLabel?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  sticky?: boolean;
+  navItems?: HeaderNavItem[];
+}
+
+export interface FooterSectionContent {
+  preFooterBadge?: string;
+  preFooterTitle?: string;
+  preFooterSubtitle?: string;
+  preFooterCtaZaloText?: string;
+  brandDescription?: string;
+  systemStatusText?: string;
+  servicesTitle?: string;
+  quickLinksTitle?: string;
+  contactTitle?: string;
+  copyrightText?: string;
+}
 
 export interface SectionStyleOption {
   value: string;
@@ -145,6 +176,7 @@ export interface CtaSectionContent {
 }
 
 export type SectionConfig = 
+  | (BaseSectionConfig & { id: 'header'; content: HeaderSectionContent })
   | (BaseSectionConfig & { id: 'hero'; content: HeroSectionContent })
   | (BaseSectionConfig & { id: 'logobar'; content: LogoBarContent })
   | (BaseSectionConfig & { id: 'services'; content: ServicesSectionContent })
@@ -155,7 +187,8 @@ export type SectionConfig =
   | (BaseSectionConfig & { id: 'testimonials'; content: TestimonialsSectionContent })
   | (BaseSectionConfig & { id: 'faq'; content: FaqSectionContent })
   | (BaseSectionConfig & { id: 'cta'; content: CtaSectionContent })
-  | (BaseSectionConfig & { id: 'contact'; content: ContactSectionContent });
+  | (BaseSectionConfig & { id: 'contact'; content: ContactSectionContent })
+  | (BaseSectionConfig & { id: 'footer'; content: FooterSectionContent });
 
 export interface LandingPageConfig {
   version: number;
@@ -169,6 +202,8 @@ export interface LandingPageConfig {
     fontFamily?: string;
   };
   sections: SectionConfig[];
+  header?: HeaderSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string };
+  footer?: FooterSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string };
 }
 
 declare global {

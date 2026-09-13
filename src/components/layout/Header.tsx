@@ -7,6 +7,7 @@ import { Phone, Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 import { siteConfig } from '../../config/site.config';
 import { primaryNavItems } from '../../config/navigation.config';
 import { useSettings } from '../../hooks/useSettings';
+import { useLandingConfig } from '../../features/landing/context/LandingConfigContext';
 import { Logo } from '../common/Logo';
 
 interface HeaderProps {
@@ -17,18 +18,35 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenQuoteModal,
 }) => {
   const { data: settings } = useSettings();
+  const { config } = useLandingConfig();
+  const headerConfig = config?.header;
+
   const hotline = settings?.hotline || siteConfig.hotline;
   const hotlineRaw = settings?.hotlineRaw || siteConfig.hotlineRaw;
   const siteName = settings?.siteName || siteConfig.name;
 
+  const hotlineLabel = headerConfig?.hotlineLabel || 'Hotline 24/7';
+  const ctaText = headerConfig?.ctaText || 'Nhận Báo Giá Ngay';
+  const ctaLink = headerConfig?.ctaLink || '#nhan-bao-gia';
+
+  const navItems = headerConfig?.navItems && headerConfig.navItems.length > 0
+    ? headerConfig.navItems.map((item) => ({
+        id: item.id || item.name,
+        label: item.name,
+        href: item.href,
+      }))
+    : primaryNavItems;
+
   const handleOpenQuote = () => {
     if (onOpenQuoteModal) {
       onOpenQuoteModal();
-    } else {
-      const target = document.querySelector('#nhan-bao-gia');
+    } else if (ctaLink.startsWith('#')) {
+      const target = document.querySelector(ctaLink);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      window.location.href = ctaLink;
     }
   };
 
@@ -69,6 +87,10 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  if (headerConfig?.enabled === false || headerConfig?.isVisible === false) {
+    return null;
+  }
+
   return (
     <header
       id="main-header"
@@ -97,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({
           aria-label="Chính"
           className="hidden lg:flex items-center gap-1 p-1 bg-[#eff4ff]/80 backdrop-blur-md rounded-full shadow-inner border border-[#dce9ff]/60"
         >
-          {primaryNavItems.map((link) => {
+          {navItems.map((link) => {
             const isActive = activeNav === link.id;
             return (
               <a
@@ -123,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Desktop/Tablet Hotline */}
           <div className="hidden md:flex flex-col text-right pr-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">Hotline 24/7</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">{hotlineLabel}</span>
             <a
               href={`tel:${hotlineRaw}`}
               className="text-sm xl:text-[1.05rem] text-[#006398] hover:text-[#00476e] font-black tracking-tight transition-colors inline-flex items-center gap-1"
@@ -139,7 +161,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#006398] to-[#004f7b] text-white text-xs sm:text-xs font-bold uppercase tracking-wider shadow-md shadow-[#006398]/20 hover:shadow-lg hover:shadow-[#006398]/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-300" />
-            <span className="whitespace-nowrap">Nhận Báo Giá Ngay</span>
+            <span className="whitespace-nowrap">{ctaText}</span>
           </button>
 
           {/* Mobile Menu Hamburger Toggle */}
@@ -165,7 +187,7 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <div className="max-w-[1200px] mx-auto px-4 py-6 space-y-4">
               <nav className="flex flex-col space-y-1">
-                {primaryNavItems.map((link) => {
+                {navItems.map((link) => {
                   const isActive = activeNav === link.id;
                   return (
                     <a
@@ -192,7 +214,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <div className="flex items-center justify-between p-3 rounded-xl bg-[#eff4ff]">
                   <div className="flex items-center gap-2.5 text-[#006398]">
                     <Phone className="w-4 h-4" />
-                    <span className="text-xs font-bold">Hotline Kỹ Thuật 24/7</span>
+                    <span className="text-xs font-bold">{hotlineLabel}</span>
                   </div>
                   <a
                     href={`tel:${hotlineRaw}`}
@@ -205,12 +227,12 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    handleOpenQuote?.();
+                    handleOpenQuote();
                   }}
                   className="w-full py-3 rounded-xl bg-[#006398] text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-[#006398]/20"
                 >
                   <Sparkles className="w-4 h-4 text-cyan-300" />
-                  <span>Tư Vấn & Nhận Báo Giá Miễn Phí</span>
+                  <span>{ctaText}</span>
                 </button>
               </div>
             </div>
