@@ -64,6 +64,7 @@ export async function proxyToBackend(
       headers: requestHeaders,
       body: body !== undefined ? (typeof body === 'string' ? body : JSON.stringify(body)) : undefined,
       signal: controller.signal,
+      cache: 'no-store',
     });
     clearTimeout(timeoutId);
     return response;

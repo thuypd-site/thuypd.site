@@ -13,16 +13,29 @@ export async function GET(req: NextRequest) {
 
     if (res.ok) {
       const data = await res.json();
-      return NextResponse.json(data);
+      return NextResponse.json(data, {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      });
     }
   } catch (err) {
     console.warn('[Server Proxy] /api/client/settings error:', err);
   }
 
-  return NextResponse.json({
-    success: true,
-    statusCode: 200,
-    data: siteConfig,
-    settings: siteConfig,
-  });
+  return NextResponse.json(
+    {
+      success: true,
+      statusCode: 200,
+      data: siteConfig,
+      settings: siteConfig,
+    },
+    {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
+    }
+  );
 }

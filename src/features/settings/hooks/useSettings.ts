@@ -16,15 +16,10 @@ const defaultFallbackSettings: SiteSettings = {
 };
 
 export const useSettings = () => {
-  const initialData =
-    typeof window !== 'undefined' && (window as any).__INITIAL_SETTINGS__
-      ? (window as any).__INITIAL_SETTINGS__
-      : defaultFallbackSettings;
-
   return useQuery<SiteSettings>({
     queryKey: ['site-settings'],
     queryFn: fetchSettingsApi,
-    initialData,
+    placeholderData: defaultFallbackSettings,
     staleTime: 5 * 60 * 1000,
   });
 };

@@ -6,9 +6,9 @@ export const fetchSettingsApi = async (): Promise<SiteSettings> => {
   try {
     let data: any = null;
     try {
-      data = await httpClient<any>('/api/client/settings');
+      data = await httpClient<any>(`/api/client/settings?_t=${Date.now()}`);
     } catch {
-      data = await httpClient<any>('/api/settings');
+      data = await httpClient<any>(`/api/settings?_t=${Date.now()}`);
     }
 
     const s = data?.data || data?.settings || data;

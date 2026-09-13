@@ -91,25 +91,46 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+  let telephone = siteConfig.hotline || '';
+  let orgName = siteConfig.name || 'THUYPD.SITE';
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch(`${BACKEND_URL}/api/client/settings`, {
+      signal: controller.signal,
+      headers: { Accept: 'application/json' },
+      cache: 'no-store',
+    });
+    clearTimeout(timeoutId);
+    if (res.ok) {
+      const data = await res.json();
+      const s = data?.data || data?.settings || data;
+      if (s?.hotline) telephone = s.hotline;
+      if (s?.siteName) orgName = s.siteName;
+    }
+  } catch {
+    // fallback to siteConfig
+  }
 
   const jsonLdData = [
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: siteConfig.name || 'THUYPD.SITE',
+      name: orgName,
       url: siteUrl,
       description: 'Dịch vụ thiết kế website chuyên nghiệp theo yêu cầu, chuẩn SEO Google, tối ưu chuyển đổi số.',
     },
     {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: siteConfig.name || 'THUYPD.SITE',
+      name: orgName,
       url: siteUrl,
       contactPoint: {
         '@type': 'ContactPoint',
-        telephone: siteConfig.hotline || '',
+        telephone: telephone,
         contactType: 'customer service',
         areaServed: 'VN',
         availableLanguage: ['Vietnamese', 'English'],
