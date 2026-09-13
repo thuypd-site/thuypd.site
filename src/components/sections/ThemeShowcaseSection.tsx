@@ -1,15 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-
-import { Eye, ArrowRight, Sparkles, MessageCircleQuestion } from 'lucide-react';
+import { ArrowRight, MessageCircleQuestion } from 'lucide-react';
 import { ThemeCategory, ThemeItem } from '../../types';
 import { useThemes } from '../../hooks/useThemes';
 import { ThemePreviewModal } from '../modals/ThemePreviewModal';
 import { ThemesSectionContent } from '../../types/landingConfig.types';
+import { ThemeCompactVariant, ThemeStandardVariant } from './themes';
 
-interface ThemeShowcaseSectionProps {
+export interface ThemeShowcaseSectionProps {
   content?: ThemesSectionContent;
   displayStyle?: string;
   onSelectTheme?: (theme: ThemeItem) => void;
@@ -28,7 +27,6 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({
   const title = content?.title || 'Mẫu Giao Diện Website Đẹp Mắt & Thu Hút Khách Hàng';
   const subtitle = content?.subtitle || 'Bộ sưu tập mẫu giao diện thực tế đa ngành nghề, dễ dàng tùy biến theo nhận diện thương hiệu của bạn.';
 
-  // TanStack Query for caching and server state
   const { data: themes = [], isLoading } = useThemes(selectedCategory);
 
   const categories: { id: ThemeCategory; label: string }[] = [
@@ -78,7 +76,7 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({
           </div>
         </div>
 
-        {/* Category Filter Tabs (Swipeable on mobile, flex-wrap on tablet/desktop) */}
+        {/* Category Filter Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap no-scrollbar">
           {categories.map((cat) => (
             <button
@@ -95,7 +93,7 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({
           ))}
         </div>
 
-        {/* Theme Grid (Standard 3 cols vs Compact 4 cols) */}
+        {/* Theme Grid */}
         {isLoading ? (
           <div className={`grid ${isCompact ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8'}`}>
             {[1, 2, 3, 4, 5, 6].slice(0, isCompact ? 8 : 6).map((n) => (
@@ -109,78 +107,18 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({
               </div>
             ))}
           </div>
+        ) : isCompact ? (
+          <ThemeCompactVariant
+            themes={themes}
+            onPreviewTheme={setActivePreviewTheme}
+            onSelectTheme={handleSelectTheme}
+          />
         ) : (
-          <motion.div
-            layout
-            className={`grid ${
-              isCompact
-                ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5'
-                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8'
-            }`}
-          >
-            {themes.map((theme) => (
-              <motion.div
-                key={theme.id}
-                layout
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 15 }}
-                transition={{ duration: 0.3 }}
-                className={`rounded-2xl bg-white shadow-sm border border-[#dce9ff]/70 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col group`}
-              >
-                {/* Image Showcase */}
-                <div className="relative overflow-hidden aspect-[16/10] bg-[#eff4ff]">
-                  <img
-                    src={theme.imageUrl}
-                    alt={theme.imageAlt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 will-change-transform"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-md bg-white/90 backdrop-blur-md text-[#006398] text-xs font-bold shadow-sm">
-                    {theme.categoryName}
-                  </div>
-                  <button
-                    onClick={() => setActivePreviewTheme(theme)}
-                    className="absolute inset-0 bg-[#0b1c30]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-semibold text-xs backdrop-blur-[2px]"
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>Xem Thử Giao Diện</span>
-                  </button>
-                </div>
-
-                {/* Content */}
-                <div className={`${isCompact ? 'p-4 sm:p-5 space-y-3' : 'p-5 sm:p-6 space-y-4'} flex flex-col justify-between flex-1`}>
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <h4 className={`${isCompact ? 'text-sm' : 'text-base'} font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors truncate`}>
-                        {theme.title}
-                      </h4>
-                      <span className={`${isCompact ? 'text-sm' : 'text-base'} font-extrabold text-[#006398] shrink-0`}>{theme.formattedPrice}</span>
-                    </div>
-                    <p className="text-xs text-[#45464d] mt-1 line-clamp-2">{theme.description}</p>
-                  </div>
-
-                  {/* Actions (44px min tap targets) */}
-                  <div className="flex items-center gap-2 pt-2 border-t border-[#eff4ff]">
-                    <button
-                      onClick={() => setActivePreviewTheme(theme)}
-                      className={`flex-1 py-2 px-2.5 text-center rounded-xl bg-[#eff4ff] text-[#0b1c30] text-xs font-semibold hover:bg-[#dce9ff] active:scale-95 transition-all flex items-center justify-center gap-1 min-h-[40px]`}
-                    >
-                      <Eye className="w-3.5 h-3.5" />
-                      <span>Xem Demo</span>
-                    </button>
-                    <button
-                      onClick={() => handleSelectTheme(theme)}
-                      className={`flex-1 py-2 px-2.5 text-center rounded-xl bg-[#006398] text-white text-xs font-semibold hover:bg-[#00476e] hover:shadow-md hover:shadow-[#006398]/20 active:scale-95 transition-all flex items-center justify-center gap-1 min-h-[40px]`}
-                    >
-                      <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-                      <span>Chọn Mẫu</span>
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <ThemeStandardVariant
+            themes={themes}
+            onPreviewTheme={setActivePreviewTheme}
+            onSelectTheme={handleSelectTheme}
+          />
         )}
 
         {/* Custom request banner */}

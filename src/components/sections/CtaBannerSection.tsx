@@ -1,13 +1,12 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
-
 import { CtaSectionContent } from '../../types/landingConfig.types';
 import { siteConfig } from '../../config/site.config';
 import { useSettings } from '../../hooks/useSettings';
+import { CtaBoxedVariant, CtaMinimalVariant } from './cta';
 
-interface CtaBannerSectionProps {
+export interface CtaBannerSectionProps {
   content?: CtaSectionContent;
   displayStyle?: string;
 }
@@ -27,83 +26,22 @@ export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({
   const buttonLink = content?.buttonLink || '#nhan-bao-gia';
   const hotlineText = content?.hotlineText || `Hoặc gọi Hotline trực tiếp: ${hotline}`;
 
+  const variantProps = {
+    title,
+    subtitle,
+    buttonText,
+    buttonLink,
+    hotlineText,
+    hotlineRaw,
+  };
+
   return (
     <section className="py-12 sm:py-16 bg-white">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {isMinimal ? (
-          /* Minimal Layout: Clean horizontal ribbon */
-          <div className="rounded-2xl sm:rounded-3xl bg-slate-50 border border-[#dce9ff] p-6 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-xs">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs font-bold border border-[#006398]/15">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>BẮT ĐẦU DỰ ÁN NGAY</span>
-              </div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0b1c30] tracking-tight">
-                {title}
-              </h2>
-              <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                {subtitle}
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-              <a
-                href={buttonLink}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#006398] text-white font-bold text-xs sm:text-sm hover:bg-[#00476e] active:scale-95 transition-all shadow-md hover:shadow-lg hover:shadow-[#006398]/20"
-              >
-                <span>{buttonText}</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-
-              <a
-                href={`tel:${hotlineRaw}`}
-                className="inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-white text-[#0b1c30] border border-[#dce9ff] font-semibold text-xs sm:text-sm hover:bg-slate-100 transition-all"
-              >
-                <PhoneCall className="w-4 h-4 text-[#006398]" />
-                <span>{hotlineText}</span>
-              </a>
-            </div>
-          </div>
+          <CtaMinimalVariant {...variantProps} />
         ) : (
-          /* Boxed Gradient Banner (Standard) */
-          <div className="relative rounded-3xl bg-gradient-to-r from-[#006398] via-[#004f7c] to-[#0b1c30] text-white p-8 sm:p-12 lg:p-14 overflow-hidden shadow-xl">
-            {/* Ambient Glow */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10 max-w-3xl space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-cyan-300 text-xs font-bold backdrop-blur-sm border border-white/15">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>BẮT ĐẦU DỰ ÁN NGAY HÔM NAY</span>
-              </div>
-
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                {title}
-              </h2>
-
-              <p className="text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl">
-                {subtitle}
-              </p>
-
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
-                <a
-                  href={buttonLink}
-                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-white text-[#006398] font-bold text-sm hover:bg-slate-100 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg"
-                >
-                  <span>{buttonText}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-
-                <a
-                  href={`tel:${hotlineRaw}`}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm backdrop-blur-sm transition-all"
-                >
-                  <PhoneCall className="w-4 h-4 text-emerald-400" />
-                  <span>{hotlineText}</span>
-                </a>
-              </div>
-            </div>
-          </div>
+          <CtaBoxedVariant {...variantProps} />
         )}
       </div>
     </section>
