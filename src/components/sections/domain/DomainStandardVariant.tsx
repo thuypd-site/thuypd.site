@@ -2,11 +2,13 @@
 
 import React from 'react';
 import { Search, Loader2, CheckCircle2, AlertCircle, Zap, Shield, Lock } from 'lucide-react';
+import { DomainTldPricing } from '../../../types/landingConfig.types';
 
 export interface DomainVariantProps {
   badge: string;
   title: string;
   subtitle: string;
+  pricing?: DomainTldPricing[];
   domainName: string;
   setDomainName: (val: string) => void;
   tld: string;
@@ -23,6 +25,7 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
   badge,
   title,
   subtitle,
+  pricing,
   domainName,
   setDomainName,
   tld,
@@ -75,10 +78,21 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
               onChange={(e) => setTld(e.target.value)}
               className="bg-slate-100 hover:bg-slate-200/80 px-3.5 py-2.5 sm:py-2.5 rounded-xl text-xs sm:text-sm text-[#0b1c30] font-bold focus:outline-none border-none cursor-pointer transition-colors min-h-[44px]"
             >
-              <option value=".com">.com (299k/năm)</option>
-              <option value=".vn">.vn (650k/năm)</option>
-              <option value=".net">.net (320k/năm)</option>
-              <option value=".com.vn">.com.vn (550k/năm)</option>
+              {pricing && pricing.length > 0 ? (
+                pricing.map((opt) => (
+                  <option key={opt.tld} value={opt.tld}>
+                    {opt.label || `${opt.tld} (${opt.price})`}
+                  </option>
+                ))
+              ) : (
+                <>
+                  <option value=".com">.com (299k/năm)</option>
+                  <option value=".vn">.vn (650k/năm)</option>
+                  <option value=".net">.net (320k/năm)</option>
+                  <option value=".com.vn">.com.vn (550k/năm)</option>
+                  <option value=".site">.site (199k/năm)</option>
+                </>
+              )}
             </select>
 
             <button

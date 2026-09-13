@@ -75,10 +75,13 @@ export const DomainCheckerSection: React.FC<DomainCheckerSectionProps> = ({
     }
   };
 
+  const pricing = content?.pricing;
+
   const variantProps = {
     badge,
     title,
     subtitle,
+    pricing,
     domainName,
     setDomainName,
     tld,

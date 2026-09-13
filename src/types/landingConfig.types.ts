@@ -135,11 +135,20 @@ export interface PricingSectionContent {
   plans: PricingPlan[];
 }
 
+export interface DomainTldPricing {
+  tld: string;
+  price: string;
+  label?: string;
+  popular?: boolean;
+}
+
 export interface DomainSectionContent {
   badge: string;
   title: string;
   subtitle: string;
+  pricing?: DomainTldPricing[];
 }
+
 
 export interface TestimonialsSectionContent {
   badge: string;
