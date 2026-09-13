@@ -107,10 +107,10 @@ export const Header: React.FC<HeaderProps> = ({
                   e.preventDefault();
                   handleNavClick(link.id, link.href);
                 }}
-                className={`px-3.5 xl:px-4 py-1.5 text-xs xl:text-sm transition-all duration-200 rounded-full font-medium ${
+                className={`px-3.5 xl:px-4 py-2 text-[0.85rem] xl:text-[0.9rem] uppercase tracking-[0.04em] transition-all duration-200 rounded-full font-bold ${
                   isActive
-                    ? 'bg-[#006398] text-white shadow-sm font-semibold'
-                    : 'text-[#45464d] hover:text-[#006398] hover:bg-[#dce9ff]/50'
+                    ? 'bg-[#006398] text-white shadow-sm font-bold'
+                    : 'text-[#334155] hover:text-[#006398] hover:bg-[#dce9ff]/50'
                 }`}
               >
                 {link.label}
@@ -123,10 +123,10 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Desktop/Tablet Hotline */}
           <div className="hidden md:flex flex-col text-right pr-1">
-            <span className="text-[11px] font-semibold text-[#45464d] tracking-wide">Hotline 24/7</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">Hotline 24/7</span>
             <a
               href={`tel:${hotlineRaw}`}
-              className="text-sm xl:text-base text-[#006398] hover:text-[#00476e] font-extrabold tracking-tight transition-colors inline-flex items-center gap-1"
+              className="text-sm xl:text-[1.05rem] text-[#006398] hover:text-[#00476e] font-black tracking-tight transition-colors inline-flex items-center gap-1"
             >
               <Phone className="w-3.5 h-3.5" />
               <span>{hotline}</span>
@@ -136,7 +136,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Consultation CTA Button */}
           <button
             onClick={handleOpenQuote}
-            className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-[#006398] to-[#004f7b] text-white text-xs sm:text-sm font-bold tracking-tight shadow-md shadow-[#006398]/20 hover:shadow-lg hover:shadow-[#006398]/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#006398] to-[#004f7b] text-white text-xs sm:text-xs font-bold uppercase tracking-wider shadow-md shadow-[#006398]/20 hover:shadow-lg hover:shadow-[#006398]/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-300" />
             <span className="whitespace-nowrap">Nhận Báo Giá Ngay</span>

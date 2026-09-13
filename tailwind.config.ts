@@ -33,8 +33,9 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['var(--font-be-vietnam-pro)', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
-        display: ['var(--font-be-vietnam-pro)', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-saira)', 'Saira', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['var(--font-saira)', 'Saira', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        heading: ['var(--font-saira)', 'Saira', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       keyframes: {
         float: {
