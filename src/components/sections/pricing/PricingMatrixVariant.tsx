@@ -83,24 +83,18 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
               Theo Yêu Cầu
             </button>
           </div>
-
-          <div className="flex items-center justify-between w-full px-1 text-[11px] text-slate-500">
-            <span>Đang so sánh tính năng gói:</span>
-            <span className="font-bold text-[#006398]">
-              {currentMobilePlan.name} ({currentMobilePlan.formattedPrice}
-              {currentMobilePlan.formattedPrice?.includes('₫') ? '' : '₫'})
-            </span>
-          </div>
         </div>
 
         {/* 2-Column Mobile Comparison Table */}
         {!mobileViewAll ? (
-          <div className="bg-white rounded-2xl border border-[#dce9ff] shadow-md overflow-hidden">
-            <div className="p-3.5 bg-slate-50 border-b border-[#dce9ff] flex items-center justify-between">
+          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-md overflow-hidden">
+            <div className="p-3.5 bg-slate-50 border-b border-slate-200/80 flex items-center justify-between">
               <span className="text-xs font-extrabold text-[#0b1c30]">Hạng mục tính năng</span>
               <div className="text-right">
                 <span className="text-xs font-black text-[#006398] block">{currentMobilePlan.name}</span>
-                <span className="text-[10px] text-slate-500 font-semibold">{currentMobilePlan.formattedPrice} {currentMobilePlan.formattedPrice?.includes('₫') ? '' : '₫'}</span>
+                <span className="text-[10px] text-slate-500 font-semibold">
+                  {currentMobilePlan.formattedPrice} {currentMobilePlan.formattedPrice?.includes('₫') ? '' : '₫'}
+                </span>
               </div>
             </div>
 
@@ -112,9 +106,11 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                     <span className="font-medium text-[#0b1c30] leading-snug">{row.name}</span>
                   </div>
 
-                  <div className={`w-[50%] text-right font-semibold leading-snug ${
-                    selectedMobilePlan === 1 ? 'text-[#006398]' : 'text-slate-700'
-                  }`}>
+                  <div
+                    className={`w-[50%] text-right font-semibold leading-snug ${
+                      selectedMobilePlan === 1 ? 'text-[#006398]' : 'text-slate-700'
+                    }`}
+                  >
                     {row[currentPlanKey]}
                   </div>
                 </div>
@@ -122,7 +118,7 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
             </div>
 
             {/* Mobile Footer Action */}
-            <div className="p-4 bg-slate-50/80 border-t border-[#dce9ff] space-y-3">
+            <div className="p-4 bg-slate-50/80 border-t border-slate-200/80 space-y-3">
               <button
                 type="button"
                 onClick={() =>
@@ -143,52 +139,36 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                 className="w-full text-center text-xs text-[#006398] font-semibold hover:underline py-1 flex items-center justify-center gap-1 cursor-pointer"
               >
                 <Table2 className="w-3.5 h-3.5" />
-                <span>Xem bảng đối chiếu 3 cột đầy đủ (cuộn ngang)</span>
+                <span>Xem đối chiếu 3 cột đầy đủ</span>
               </button>
             </div>
           </div>
         ) : (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-500 italic">Bảng so sánh 3 gói đầy đủ</span>
-              <button
-                type="button"
-                onClick={() => setMobileViewAll(false)}
-                className="text-xs text-[#006398] font-bold hover:underline cursor-pointer"
-              >
-                ✕ Thu gọn bảng 2 cột
-              </button>
-            </div>
+          <div className="flex justify-end pb-1">
+            <button
+              type="button"
+              onClick={() => setMobileViewAll(false)}
+              className="text-xs text-[#006398] font-bold hover:underline cursor-pointer"
+            >
+              ✕ Thu gọn xem theo từng gói
+            </button>
           </div>
         )}
       </div>
 
       {/* FULL DESKTOP & TABLET MATRIX TABLE (Or when expanded on mobile) */}
       <div className={`space-y-3 ${mobileViewAll ? 'block' : 'hidden md:block'}`}>
-        {showScrollHint && (
-          <div className="lg:hidden flex items-center justify-between gap-2 px-4 py-2 rounded-xl bg-cyan-50 border border-cyan-200/80 text-cyan-900 text-xs font-medium animate-pulse">
-            <div className="flex items-center gap-1.5">
-              <Info className="w-4 h-4 text-cyan-600 shrink-0" />
-              <span>Cột tính năng được ghim cố định. Vuốt sang ngang để so sánh các gói.</span>
-            </div>
-            <div className="flex items-center gap-0.5 text-cyan-600 font-bold shrink-0">
-              <span>Vuốt</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </div>
-          </div>
-        )}
-
-        <div className="bg-white rounded-3xl border border-[#dce9ff] shadow-xl overflow-hidden relative">
+        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-lg overflow-hidden relative">
           <div
             ref={tableContainerRef}
             onScroll={onTableScroll}
-            className="overflow-x-auto scrollbar-thin scrollbar-thumb-[#dce9ff] scrollbar-track-slate-50"
+            className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-slate-50"
           >
             <table className="w-full text-left border-collapse min-w-[720px] sm:min-w-[840px]">
               <thead>
-                <tr className="border-b border-[#dce9ff] bg-slate-50/80">
+                <tr className="border-b border-slate-200/90 bg-slate-50/80">
                   {/* Column 1: Feature Name Sticky */}
-                  <th className="p-4 sm:p-5 lg:p-6 text-xs sm:text-sm font-extrabold text-[#0b1c30] w-[34%] sm:w-[32%] sticky left-0 z-20 bg-slate-50/95 backdrop-blur-md border-r border-[#dce9ff] shadow-[3px_0_8px_rgba(0,0,0,0.04)]">
+                  <th className="p-4 sm:p-5 lg:p-6 text-xs sm:text-sm font-extrabold text-[#0b1c30] w-[34%] sm:w-[32%] sticky left-0 z-20 bg-slate-50/95 backdrop-blur-md border-r border-slate-200/80 shadow-[3px_0_8px_rgba(0,0,0,0.03)]">
                     Hạng mục tính năng &amp; Kỹ thuật
                   </th>
 
@@ -196,33 +176,39 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                   <th className="p-4 sm:p-5 text-center w-[22%] align-bottom">
                     <div className="text-[10px] sm:text-xs font-bold uppercase text-slate-500">Khởi Đầu</div>
                     <div className="text-sm sm:text-base font-black text-[#0b1c30] mt-0.5">{plan0.name}</div>
-                    <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">{plan0.formattedPrice} {plan0.formattedPrice?.includes('₫') ? '' : '₫'}</div>
+                    <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">
+                      {plan0.formattedPrice} {plan0.formattedPrice?.includes('₫') ? '' : '₫'}
+                    </div>
                   </th>
 
                   {/* Column 3: Professional (HIGHLIGHTED) */}
-                  <th className="p-4 sm:p-5 text-center w-[24%] bg-[#006398]/5 border-x-2 border-[#006398]/30 relative align-bottom">
+                  <th className="p-4 sm:p-5 text-center w-[24%] bg-[#006398]/[0.04] border-x-2 border-[#006398]/25 relative align-bottom">
                     <span className="absolute -top-1 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-b-lg bg-[#006398] text-white text-[9px] sm:text-[10px] font-black uppercase tracking-wider shadow-sm whitespace-nowrap">
                       Khuyên Dùng
                     </span>
                     <div className="text-[10px] sm:text-xs font-bold uppercase text-[#006398] mt-2">Doanh Nghiệp</div>
                     <div className="text-sm sm:text-base font-black text-[#006398] mt-0.5">{plan1.name}</div>
-                    <div className="text-xs sm:text-sm font-black text-[#006398] mt-1">{plan1.formattedPrice} {plan1.formattedPrice?.includes('₫') ? '' : '₫'}</div>
+                    <div className="text-xs sm:text-sm font-black text-[#006398] mt-1">
+                      {plan1.formattedPrice} {plan1.formattedPrice?.includes('₫') ? '' : '₫'}
+                    </div>
                   </th>
 
                   {/* Column 4: Advanced */}
                   <th className="p-4 sm:p-5 text-center w-[20%] align-bottom">
                     <div className="text-[10px] sm:text-xs font-bold uppercase text-slate-500">Tùy Biến</div>
                     <div className="text-sm sm:text-base font-black text-[#0b1c30] mt-0.5">{plan2.name}</div>
-                    <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">{plan2.formattedPrice} {plan2.formattedPrice?.includes('₫') ? '' : '₫+'}</div>
+                    <div className="text-xs sm:text-sm font-bold text-[#006398] mt-1">
+                      {plan2.formattedPrice} {plan2.formattedPrice?.includes('₫') ? '' : '₫+'}
+                    </div>
                   </th>
                 </tr>
               </thead>
 
-              <tbody className="divide-y divide-[#eff4ff] text-xs sm:text-[13px] text-[#0b1c30]">
+              <tbody className="divide-y divide-slate-100 text-xs sm:text-[13px] text-[#0b1c30]">
                 {matrixFeatures.map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-50/70 transition-colors group">
                     {/* Sticky Feature Name */}
-                    <td className="p-3.5 sm:p-4 lg:p-5 font-semibold text-[#0b1c30] sticky left-0 z-10 bg-white/95 backdrop-blur-md border-r border-[#dce9ff] shadow-[3px_0_8px_rgba(0,0,0,0.04)] group-hover:bg-slate-50/95 transition-colors">
+                    <td className="p-3.5 sm:p-4 lg:p-5 font-semibold text-[#0b1c30] sticky left-0 z-10 bg-white/95 backdrop-blur-md border-r border-slate-200/80 shadow-[3px_0_8px_rgba(0,0,0,0.03)] group-hover:bg-slate-50/95 transition-colors">
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#006398] shrink-0" />
                         <span className="leading-snug">{row.name}</span>
@@ -230,27 +216,23 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                     </td>
 
                     {/* Basic Value */}
-                    <td className="p-3.5 sm:p-4 text-center text-slate-600">
-                      {row.basic}
-                    </td>
+                    <td className="p-3.5 sm:p-4 text-center text-slate-600">{row.basic}</td>
 
                     {/* Professional Value (Highlighted) */}
-                    <td className="p-3.5 sm:p-4 text-center font-bold text-[#006398] bg-[#006398]/5 border-x-2 border-[#006398]/30">
+                    <td className="p-3.5 sm:p-4 text-center font-bold text-[#006398] bg-[#006398]/[0.04] border-x-2 border-[#006398]/25">
                       {row.professional}
                     </td>
 
                     {/* Advanced Value */}
-                    <td className="p-3.5 sm:p-4 text-center text-slate-700 font-medium">
-                      {row.advanced}
-                    </td>
+                    <td className="p-3.5 sm:p-4 text-center text-slate-700 font-medium">{row.advanced}</td>
                   </tr>
                 ))}
               </tbody>
 
               <tfoot>
-                <tr className="border-t-2 border-[#dce9ff] bg-slate-50/80">
-                  <td className="p-4 sm:p-5 font-bold text-[11px] sm:text-xs text-slate-500 sticky left-0 z-10 bg-slate-50/95 backdrop-blur-md border-r border-[#dce9ff] shadow-[3px_0_8px_rgba(0,0,0,0.04)]">
-                    Toàn quyền quản trị website &amp; hợp đồng cam kết 0 phụ phí
+                <tr className="border-t-2 border-slate-200/90 bg-slate-50/80">
+                  <td className="p-4 sm:p-5 font-bold text-xs text-[#0b1c30] sticky left-0 z-10 bg-slate-50/95 backdrop-blur-md border-r border-slate-200/80 shadow-[3px_0_8px_rgba(0,0,0,0.03)]">
+                    Đăng ký tư vấn gói
                   </td>
 
                   {/* Basic Button */}

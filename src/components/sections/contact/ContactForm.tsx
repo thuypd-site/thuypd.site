@@ -85,7 +85,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         {/* Full Name */}
         <div className="space-y-1">
           <label className="text-xs font-semibold text-[#0b1c30]">
-            Họ và tên của bạn *
+            Họ và tên của bạn
           </label>
           <input
             type="text"
@@ -108,7 +108,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         {/* Phone / Zalo */}
         <div className="space-y-1">
           <label className="text-xs font-semibold text-[#0b1c30]">
-            Số điện thoại / Zalo *
+            Số điện thoại / Zalo
           </label>
           <input
             type="tel"

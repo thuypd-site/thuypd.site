@@ -48,7 +48,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
   return (
     <div className="space-y-6">
       {/* Mobile/Tablet Quick Tab Selector (Chỉ hiện dưới màn hình Desktop lg) */}
-      <div className="lg:hidden flex flex-col items-center gap-2">
+      <div className="lg:hidden flex flex-col items-center">
         <div className="inline-flex p-1 bg-slate-100/90 backdrop-blur-xs rounded-2xl border border-slate-200/80 shadow-xs max-w-full overflow-x-auto scrollbar-none">
           {pricingPlans.map((plan, idx) => {
             const currentPlanId = plan.id || plan.planId;
@@ -73,9 +73,6 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
             );
           })}
         </div>
-        <span className="text-[11px] text-slate-400 font-medium">
-          Vuốt ngang hoặc chọn tab để so sánh nhanh
-        </span>
       </div>
 
       {/* Cards Container: Snap Carousel on Mobile/Tablet -> 3-Col Grid on Desktop */}
@@ -101,8 +98,8 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
               transition={{ duration: 0.35, delay: index * 0.08 }}
               className={`snap-center shrink-0 w-[86vw] max-w-[360px] sm:max-w-[400px] lg:w-full lg:max-w-none relative p-6 sm:p-7 xl:p-8 rounded-3xl bg-white flex flex-col justify-between transition-all duration-300 ${
                 isPopular
-                  ? 'border-2 border-[#006398] shadow-2xl shadow-[#006398]/12 lg:-translate-y-2 ring-4 ring-[#006398]/10 hover:-translate-y-3'
-                  : 'border border-[#dce9ff] shadow-md hover:shadow-xl hover:-translate-y-1.5'
+                  ? 'border-2 border-[#006398] shadow-xl shadow-[#006398]/12 lg:-translate-y-2 ring-4 ring-[#006398]/10 hover:-translate-y-3'
+                  : 'border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-[#006398]/30 hover:-translate-y-1.5'
               }`}
             >
               {/* Glowing Border Beam for Popular Plan */}
@@ -149,18 +146,16 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                 </p>
 
                 {/* Price Block */}
-                <div className="p-4 rounded-2xl bg-[#f8fafd] border border-[#dce9ff]/80">
-                  <div className="flex items-baseline flex-wrap gap-1.5">
+                <div className="py-3 px-4 rounded-2xl bg-[#f8fafd] border border-slate-200/80">
+                  <div className="flex items-baseline flex-wrap gap-1">
                     <span className="text-3xl sm:text-4xl font-black text-[#006398] tracking-tight">
                       {plan.formattedPrice}
                     </span>
-                    <span className="text-sm font-bold text-[#5d606a]">VNĐ</span>
+                    <span className="text-sm font-bold text-[#5d606a]">₫</span>
                     {currentPlanId === 'plan-advanced' && (
                       <span className="text-[#006398] font-black text-xl">+</span>
                     )}
-                  </div>
-                  <div className="text-[11px] font-medium text-slate-500 mt-1">
-                    Chi phí trọn gói 1 lần • Không phụ phí ngầm
+                    <span className="text-xs text-slate-400 font-medium ml-1">/ trọn gói bàn giao</span>
                   </div>
                 </div>
 
@@ -182,19 +177,8 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                 </div>
               </div>
 
-              {/* Bottom Footer Section: Compact Renewal Pill + CTA Button */}
-              <div className="mt-6 pt-5 border-t border-[#eff4ff] space-y-3.5">
-                {/* Compact Server Renewal Box */}
-                <div className="p-2.5 sm:p-3 rounded-xl bg-[#f6f9ff] border border-[#dce9ff]/70 text-[#45464d] text-[11px] flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#006398] shrink-0" />
-                    <span className="text-slate-600 truncate">Duy trì từ năm 2:</span>
-                  </div>
-                  <span className="font-bold text-[#0b1c30] shrink-0">
-                    {plan.renewal1Year || '1.200.000đ'}/năm
-                  </span>
-                </div>
-
+              {/* Bottom Footer Section: CTA Button + Subtle Renewal Info */}
+              <div className="mt-6 pt-5 border-t border-slate-100 space-y-2.5">
                 {/* Choose Plan CTA Button */}
                 <button
                   type="button"
@@ -212,6 +196,15 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                   </span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
+
+                {/* Subtle Renewal Info below button */}
+                <div className="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5 pt-0.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#006398] shrink-0" />
+                  <span>Duy trì máy chủ từ năm 2:</span>
+                  <span className="font-semibold text-slate-600">
+                    {plan.renewal1Year || '1.200.000đ'}/năm
+                  </span>
+                </div>
               </div>
             </motion.div>
           );

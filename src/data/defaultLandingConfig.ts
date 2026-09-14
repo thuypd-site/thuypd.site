@@ -130,7 +130,6 @@ export const defaultLandingConfig: LandingPageConfig = {
         title: 'Bảng Giá Thiết Kế Website Trọn Gói',
         subtitle: 'Minh bạch từng hạng mục, toàn quyền sở hữu website vĩnh viễn, cam kết không phát sinh chi phí ngầm trong suốt quá trình thực hiện.',
         highlightPlanId: 'plan-professional',
-        footerNote: '💡 Cần giải pháp xây dựng chuyên sâu hoặc phát triển hệ thống quản trị riêng? Liên hệ ngay để nhận báo giá chi tiết.',
         plans: [...mockPricingPlans],
         matrixFeatures: [
           {

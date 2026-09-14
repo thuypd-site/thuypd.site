@@ -144,15 +144,18 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
       : defaultMatrixFeatures;
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-[#f6f9fc] border-y border-slate-200/80 relative overflow-hidden" id="bang-gia">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-white/90 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute -top-32 right-0 w-96 h-96 bg-[#006398]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 -left-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+    <section
+      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white via-[#f7fafe] to-white relative overflow-hidden"
+      id="bang-gia"
+    >
+      {/* Subtle ambient lighting for smooth visual transition */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-r from-blue-100/30 via-cyan-100/25 to-blue-100/30 blur-3xl rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-12 right-0 w-80 h-80 bg-[#006398]/[0.03] rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-12 left-0 w-80 h-80 bg-cyan-500/[0.03] rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full relative z-10">
         {/* Header Block: Centered, balanced, and elegant */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3.5">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-bold border border-[#006398]/15 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#006398]" />
             <span>{badge}</span>
@@ -162,7 +165,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
             {title}
           </h2>
 
-          <p className="text-xs sm:text-sm md:text-base text-[#45464d] leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-[#45464d] leading-relaxed max-w-2xl mx-auto">
             {subtitle}
           </p>
         </div>
@@ -186,46 +189,46 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
           />
         )}
 
-        {/* Bottom Trust & Transparency Guarantees */}
-        <div className="mt-12 pt-8 border-t border-slate-200/80 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 text-center">
-          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
-            <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
-              100% Không Phụ Phí Ẩn
-            </span>
-            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Hợp đồng rõ ràng, minh bạch</span>
-          </div>
+        {/* Sleek Trust & Value Guarantees Strip */}
+        <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200/70">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+              </span>
+              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
+                100% Không Phụ Phí Ẩn
+              </span>
+            </div>
 
-          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
-            <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
-              Tặng Tên Miền &amp; Hosting
-            </span>
-            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Máy chủ tốc độ cao năm đầu</span>
-          </div>
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+              </span>
+              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
+                Tặng Tên Miền &amp; Hosting
+              </span>
+            </div>
 
-          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
-            <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
-              Toàn Quyền Sở Hữu 100%
-            </span>
-            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Toàn quyền quản trị vĩnh viễn</span>
-          </div>
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+              </span>
+              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
+                Toàn Quyền Sở Hữu 100%
+              </span>
+            </div>
 
-          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
-            <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
-              Bảo Hành Kỹ Thuật Trọn Đời
-            </span>
-            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Hỗ trợ 24/7 qua Hotline &amp; Zalo</span>
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+              </span>
+              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
+                Bảo Hành &amp; Hỗ Trợ 24/7
+              </span>
+            </div>
           </div>
         </div>
-
-        {content?.footerNote && (
-          <p className="mt-6 text-center text-xs text-[#45464d] max-w-2xl mx-auto italic">
-            * {content.footerNote}
-          </p>
-        )}
       </div>
     </section>
   );
