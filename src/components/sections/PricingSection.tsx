@@ -29,7 +29,23 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   const [showScrollHint, setShowScrollHint] = useState<boolean>(true);
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
-  const pricingPlans = content?.plans && content.plans.length > 0 ? content.plans : defaultPlans;
+  const rawPlans = content?.plans && content.plans.length > 0 ? content.plans : defaultPlans;
+  const pricingPlans = rawPlans.map((plan: any) => {
+    let formattedPrice = plan.formattedPrice || plan.price;
+    if (typeof formattedPrice === 'number') {
+      formattedPrice = formattedPrice.toLocaleString('vi-VN');
+    } else if (typeof formattedPrice === 'string') {
+      formattedPrice = formattedPrice.replace(/[đ₫]/g, '').trim();
+    }
+    return {
+      ...plan,
+      id: plan.id || plan.planId,
+      planId: plan.planId || plan.id,
+      description: plan.description || plan.desc || plan.targetAudience || '',
+      formattedPrice: formattedPrice || '4.990.000',
+    };
+  });
+
   const badge = content?.badge || 'Chi Phí Rõ Ràng';
   const title = content?.title || 'Bảng Giá Thiết Kế Website Trọn Gói';
   const subtitle =
@@ -60,7 +76,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
   };
 
   // Matrix Rows Comparison Data synchronized with current packages
-  const matrixFeatures = [
+  const defaultMatrixFeatures = [
     {
       category: 'Giao Diện & Trải Nghiệm',
       name: 'Thiết kế giao diện website',
@@ -126,6 +142,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
     },
   ];
 
+  const activeMatrixFeatures =
+    content?.matrixFeatures && content.matrixFeatures.length > 0
+      ? content.matrixFeatures
+      : defaultMatrixFeatures;
+
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-[#f6f9fc] border-y border-slate-200/80 relative overflow-hidden" id="bang-gia">
       {/* Background ambient lighting */}
@@ -151,30 +172,30 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
 
           {/* Centered Segmented Control: Dạng Thẻ Gói vs So Sánh Chi Tiết */}
           <div className="pt-2 flex justify-center">
-            <div className="inline-flex items-center bg-white p-1 rounded-2xl border border-[#dce9ff] shadow-sm">
+            <div className="inline-flex items-center bg-white p-1.5 rounded-2xl border border-[#dce9ff] shadow-sm">
               <button
                 type="button"
                 onClick={() => setViewMode('cards')}
-                className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                className={`min-h-[44px] flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   viewMode === 'cards'
                     ? 'bg-[#006398] text-white shadow-md shadow-[#006398]/20'
                     : 'text-[#45464d] hover:text-[#0b1c30] hover:bg-slate-50'
                 }`}
               >
-                <Layers className="w-4 h-4" />
+                <Layers className="w-4 h-4 shrink-0" />
                 <span>Dạng Thẻ Gói</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setViewMode('matrix')}
-                className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                className={`min-h-[44px] flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   viewMode === 'matrix'
                     ? 'bg-[#006398] text-white shadow-md shadow-[#006398]/20'
                     : 'text-[#45464d] hover:text-[#0b1c30] hover:bg-slate-50'
                 }`}
               >
-                <Table2 className="w-4 h-4" />
+                <Table2 className="w-4 h-4 shrink-0" />
                 <span>So Sánh Chi Tiết</span>
               </button>
             </div>
@@ -194,7 +215,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
         {/* View 2: Bảng So Sánh Ma Trận */}
         {viewMode === 'matrix' && (
           <PricingMatrixVariant
-            matrixFeatures={matrixFeatures}
+            matrixFeatures={activeMatrixFeatures}
             pricingPlans={pricingPlans}
             onChoosePlan={handleChoosePlan}
             showScrollHint={showScrollHint}
@@ -204,37 +225,37 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
         )}
 
         {/* Bottom Trust & Transparency Guarantees */}
-        <div className="mt-12 pt-8 border-t border-slate-200/80 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
-          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+        <div className="mt-12 pt-8 border-t border-slate-200/80 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 text-center">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
+            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
               100% Không Phụ Phí Ẩn
             </span>
-            <span className="text-[11px] text-slate-500">Hợp đồng rõ ràng, minh bạch</span>
+            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Hợp đồng rõ ràng, minh bạch</span>
           </div>
 
-          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
+            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
               Tặng Tên Miền &amp; Hosting
             </span>
-            <span className="text-[11px] text-slate-500">Máy chủ tốc độ cao năm đầu</span>
+            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Máy chủ tốc độ cao năm đầu</span>
           </div>
 
-          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
+            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
               Toàn Quyền Sở Hữu 100%
             </span>
-            <span className="text-[11px] text-slate-500">Toàn quyền quản trị vĩnh viễn</span>
+            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Toàn quyền quản trị vĩnh viễn</span>
           </div>
 
-          <div className="p-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-[#006398]/30 transition-all flex flex-col justify-center">
             <Check className="w-4 h-4 text-emerald-600 font-bold mx-auto mb-1.5" />
-            <span className="text-xs sm:text-[13px] font-semibold text-[#0b1c30] block">
+            <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30] block">
               Bảo Hành Kỹ Thuật Trọn Đời
             </span>
-            <span className="text-[11px] text-slate-500">Hỗ trợ 24/7 qua Hotline &amp; Zalo</span>
+            <span className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5">Hỗ trợ 24/7 qua Hotline &amp; Zalo</span>
           </div>
         </div>
 

@@ -133,6 +133,7 @@ export interface PricingSectionContent {
   highlightPlanId?: string;
   footerNote?: string;
   plans: PricingPlan[];
+  matrixFeatures?: any[];
 }
 
 export interface DomainTldPricing {
