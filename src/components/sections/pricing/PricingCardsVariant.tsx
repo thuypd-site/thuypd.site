@@ -14,7 +14,7 @@ export interface PricingCardsVariantProps {
   pricingPlans: any[];
   highlightPlanId?: string;
   onChoosePlan: (planName: string, budgetTier: string) => void;
-  getTierSelectValue: (planId?: string) => string;
+  getTierSelectValue: (planOrId?: any) => string;
 }
 
 export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
@@ -163,7 +163,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                       {plan.formattedPrice}
                     </span>
                     <span className="text-sm font-bold text-slate-600">₫</span>
-                    {(plan.isCustom || currentPlanId === 'plan-advanced' || plan.name?.toLowerCase().includes('yêu cầu')) && (
+                    {(plan.isCustom || currentPlanId === 'plan-advanced' || plan.name?.toLowerCase().includes('yêu cầu') || String(plan.rawPrice || '').includes('+')) && (
                       <span className="text-[#006398] font-black text-xl">+</span>
                     )}
                     <span className="text-xs text-slate-500 font-medium ml-1">/ trọn gói bàn giao</span>
@@ -192,7 +192,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                 {/* Choose Plan CTA Button */}
                 <button
                   type="button"
-                  onClick={() => onChoosePlan(plan.name, getTierSelectValue(currentPlanId))}
+                  onClick={() => onChoosePlan(plan.name, getTierSelectValue(plan))}
                   className={`w-full min-h-[46px] sm:min-h-[48px] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.98] cursor-pointer ${
                     isPopular
                       ? 'bg-[#006398] hover:bg-[#004f7a] text-white shadow-md shadow-[#006398]/20 hover:shadow-lg'

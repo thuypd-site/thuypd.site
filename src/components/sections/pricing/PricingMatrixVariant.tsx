@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { IconArrowRight } from '../../icons/CustomIcons';
+import { formatPriceNumber, formatPriceWithVND } from '../../../core/utils/formatters';
 
 export interface PricingMatrixRow {
   category: string;
@@ -45,7 +46,7 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
 
   const currentMobilePlan = pricingPlans[selectedMobilePlan] || pricingPlans[0] || {
     name: 'Gói Chuyên Nghiệp',
-    formattedPrice: '7.990.000 ₫',
+    formattedPrice: '7.990.000',
   };
 
   // Helper lấy giá trị tính năng linh hoạt từ BE data
@@ -122,8 +123,7 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                   {currentMobilePlan.name}
                 </span>
                 <span className="text-xs font-bold text-slate-600">
-                  {currentMobilePlan.formattedPrice || currentMobilePlan.price}
-                  {(currentMobilePlan.formattedPrice || currentMobilePlan.price)?.toString().includes('₫') ? '' : '₫'}
+                  {formatPriceWithVND(currentMobilePlan.formattedPrice || currentMobilePlan.price)}
                 </span>
               </div>
             </div>
@@ -166,7 +166,7 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                 onClick={() =>
                   onChoosePlan(
                     currentMobilePlan.name,
-                    `${currentMobilePlan.name} (${currentMobilePlan.formattedPrice || currentMobilePlan.price})`
+                    `${currentMobilePlan.name} (${formatPriceNumber(currentMobilePlan.formattedPrice || currentMobilePlan.price)}đ)`
                   )
                 }
                 className="w-full py-3 px-4 rounded-xl bg-[#006398] hover:bg-[#004f7a] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
@@ -226,7 +226,14 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                   {pricingPlans.map((plan, pIdx) => {
                     const isPopular = isPlanHighlighted(plan, pIdx);
                     const subtitle = plan.tierSubtitle || (isPopular ? 'Khuyên Dùng' : 'Tiêu Chuẩn');
-                    const formattedPrice = plan.formattedPrice || plan.price;
+                    const rawPrice = plan.formattedPrice || plan.price;
+                    const formattedPriceStr = formatPriceWithVND(rawPrice);
+                    const hasPlus =
+                      plan.isCustom ||
+                      plan.id === 'plan-advanced' ||
+                      plan.planId === 'plan-advanced' ||
+                      plan.name?.toLowerCase().includes('yêu cầu') ||
+                      String(rawPrice).includes('+');
 
                     return (
                       <th
@@ -254,8 +261,8 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                             {plan.name}
                           </div>
                           <div className="text-sm sm:text-base font-black text-[#006398] pt-0.5">
-                            {formattedPrice} {formattedPrice?.toString().includes('₫') ? '' : '₫'}
-                            {plan.isCustom || plan.id === 'plan-advanced' ? '+' : ''}
+                            {formattedPriceStr}
+                            {hasPlus && !formattedPriceStr.includes('+') ? '+' : ''}
                           </div>
                         </div>
                       </th>
@@ -338,7 +345,7 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                           onClick={() =>
                             onChoosePlan(
                               plan.name,
-                              `${plan.name} (${plan.formattedPrice || plan.price})`
+                              `${plan.name} (${formatPriceNumber(plan.formattedPrice || plan.price)}đ)`
                             )
                           }
                           className={`w-full min-h-[42px] py-2.5 px-3 rounded-xl font-bold text-xs sm:text-[13px] transition-all shadow-xs active:scale-95 cursor-pointer whitespace-nowrap flex items-center justify-center ${

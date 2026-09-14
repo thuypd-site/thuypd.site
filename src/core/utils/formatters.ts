@@ -3,10 +3,70 @@
  */
 
 /**
- * Format number to Vietnamese currency format (e.g. 7.990.000 ₫)
+ * Format any price value (number, string, or string with currency) to Vietnamese formatted number string
+ * e.g. 4990000 -> "4.990.000"
+ * "4990000" -> "4.990.000"
+ * "4990000đ" -> "4.990.000"
+ * "4.990.000 ₫" -> "4.990.000"
+ * "12990000+" -> "12.990.000+"
+ * "Liên hệ" -> "Liên hệ"
  */
-export function formatCurrencyVND(amount: number): string {
-  return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫';
+export function formatPriceNumber(value: unknown): string {
+  if (value === undefined || value === null || value === '') return '';
+  if (typeof value === 'number') {
+    if (isNaN(value)) return '';
+    return new Intl.NumberFormat('vi-VN').format(value);
+  }
+
+  const str = String(value).trim();
+  if (!str) return '';
+
+  // Non-numeric label like "Liên hệ", "Thỏa thuận"
+  if (!/\d/.test(str)) return str;
+
+  const hasPlus = str.includes('+');
+
+  // Strip currency symbols and whitespace
+  const clean = str.replace(/[đ₫\s]/gi, '').replace(/\+$/, '').trim();
+
+  // If clean is already formatted with dots e.g. "4.990.000"
+  if (/^\d{1,3}(\.\d{3})+$/.test(clean)) {
+    return clean + (hasPlus ? '+' : '');
+  }
+
+  // Extract all digits
+  const digitsOnly = clean.replace(/\D/g, '');
+  if (!digitsOnly) return str;
+
+  const num = parseInt(digitsOnly, 10);
+  if (isNaN(num)) return str;
+
+  return new Intl.NumberFormat('vi-VN').format(num) + (hasPlus ? '+' : '');
+}
+
+/**
+ * Format any price value with ₫ currency symbol
+ * e.g. 4990000 -> "4.990.000 ₫"
+ * "4990000" -> "4.990.000 ₫"
+ * "4.990.000" -> "4.990.000 ₫"
+ * "12.990.000+" -> "12.990.000 ₫+"
+ * "Liên hệ" -> "Liên hệ"
+ */
+export function formatPriceWithVND(value: unknown): string {
+  const formatted = formatPriceNumber(value);
+  if (!formatted) return '';
+  if (!/\d/.test(formatted)) return formatted;
+
+  const hasPlus = formatted.endsWith('+');
+  const baseNumber = formatted.replace(/\+$/, '').trim();
+  return `${baseNumber} ₫${hasPlus ? '+' : ''}`;
+}
+
+/**
+ * Format number or numeric string to Vietnamese currency format (e.g. 7.990.000 ₫)
+ */
+export function formatCurrencyVND(amount: number | string): string {
+  return formatPriceWithVND(amount);
 }
 
 /**

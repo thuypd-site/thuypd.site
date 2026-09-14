@@ -5,6 +5,7 @@ import { Sparkles, Check } from 'lucide-react';
 import { usePricing } from '../../hooks/usePricing';
 import { PricingSectionContent } from '../../types/landingConfig.types';
 import { PricingCardsVariant, PricingMatrixVariant } from './pricing';
+import { formatPriceNumber, formatPriceWithVND } from '../../core/utils/formatters';
 
 export interface PricingSectionProps {
   content?: PricingSectionContent;
@@ -27,18 +28,22 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
 
   const rawPlans = content?.plans && content.plans.length > 0 ? content.plans : defaultPlans;
   const pricingPlans = rawPlans.map((plan: any) => {
-    let formattedPrice = plan.formattedPrice || plan.price;
-    if (typeof formattedPrice === 'number') {
-      formattedPrice = formattedPrice.toLocaleString('vi-VN');
-    } else if (typeof formattedPrice === 'string') {
-      formattedPrice = formattedPrice.replace(/[đ₫]/g, '').trim();
+    const rawPrice = plan.formattedPrice ?? plan.price;
+    let formattedPrice = formatPriceNumber(rawPrice);
+    if (!formattedPrice) {
+      formattedPrice = '4.990.000';
     }
+    // Remove trailing '+' if present from formattedPrice since the cards UI renders '+' in a separate span
+    const cleanNumber = formattedPrice.replace(/\+$/, '').trim();
+
     return {
       ...plan,
       id: plan.id || plan.planId,
       planId: plan.planId || plan.id,
       description: plan.description || plan.desc || plan.targetAudience || '',
-      formattedPrice: formattedPrice || '4.990.000',
+      formattedPrice: cleanNumber,
+      rawPrice,
+      price: typeof plan.price === 'number' ? plan.price : parseInt(String(rawPrice).replace(/\D/g, ''), 10) || 0,
     };
   });
 
@@ -65,10 +70,21 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
     }
   };
 
-  const getTierSelectValue = (planId?: string) => {
+  const getTierSelectValue = (planOrId?: any) => {
+    const plan =
+      typeof planOrId === 'object' && planOrId !== null
+        ? planOrId
+        : pricingPlans.find((p: any) => p.id === planOrId || p.planId === planOrId);
+
+    const planId = plan?.id || plan?.planId || planOrId;
     if (planId === 'plan-business' || planId === 'plan-basic') return 'Gói Khởi Nghiệp (4.990.000đ)';
     if (planId === 'plan-professional') return 'Gói Chuyên Nghiệp (7.990.000đ)';
-    return 'Gói Phát Triển Theo Yêu Cầu (12.990.000đ)';
+    if (planId === 'plan-advanced' || planId === 'plan-custom') return 'Gói Phát Triển Theo Yêu Cầu (12.990.000đ)';
+    if (plan) {
+      const priceText = formatPriceNumber(plan.formattedPrice || plan.price);
+      return `${plan.name} (${priceText}đ)`;
+    }
+    return 'Gói Chuyên Nghiệp (7.990.000đ)';
   };
 
   // Matrix Rows Comparison Data synchronized with current packages
