@@ -41,24 +41,24 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-white" id="faq">
+    <section className="py-16 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc]" id="faq">
       <div className="max-w-[1000px] mx-auto px-4 sm:px-6 w-full space-y-10">
         {/* Header */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="px-4 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-bold border border-[#006398]/15 inline-flex items-center gap-1.5">
-            <HelpCircle className="w-3.5 h-3.5" />
+          <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold border border-slate-200/80 shadow-2xs inline-flex items-center gap-1.5">
+            <HelpCircle className="w-3.5 h-3.5 text-[#006398]" />
             <span>{badge}</span>
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight">
             {title}
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-[#45464d] leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             {subtitle}
           </p>
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-3.5">
+        <div className="space-y-3">
           {items.map((item, index) => {
             const isOpen = openIndex === index;
             return (
@@ -66,8 +66,8 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
                 key={index}
                 className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'bg-[#eff4ff]/60 border-[#006398]/30 shadow-sm'
-                    : 'bg-white border-[#dce9ff]/70 hover:border-[#006398]/30 hover:bg-[#eff4ff]/20'
+                    ? 'bg-slate-50 border-[#006398]/30 shadow-2xs'
+                    : 'bg-white border-slate-200/80 hover:border-[#006398]/30 hover:bg-slate-50/40'
                 }`}
               >
                 <button
@@ -77,14 +77,14 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
                   aria-expanded={isOpen}
                 >
                   <span className="text-sm sm:text-base font-bold text-[#0b1c30] flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-[#006398]/10 text-[#006398] text-xs flex items-center justify-center font-bold shrink-0">
+                    <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] text-xs flex items-center justify-center font-bold shrink-0">
                       {index + 1}
                     </span>
                     {item.question}
                   </span>
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 bg-[#006398] text-white' : 'bg-[#dce9ff] text-[#006398]'
+                      isOpen ? 'rotate-180 bg-[#006398] text-white' : 'bg-slate-100 text-slate-600'
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -99,7 +99,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25 }}
                     >
-                      <div className="px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-[#45464d] leading-relaxed border-t border-[#dce9ff]/40">
+                      <div className="px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60">
                         {item.answer}
                       </div>
                     </motion.div>

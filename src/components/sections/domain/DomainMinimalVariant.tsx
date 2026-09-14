@@ -1,8 +1,15 @@
 'use client';
 
 import React from 'react';
-import { Search, Loader2, CheckCircle2, AlertCircle, Zap, Shield, Lock } from 'lucide-react';
+import { Loader2, AlertCircle } from 'lucide-react';
 import { DomainVariantProps } from './DomainStandardVariant';
+import {
+  IconSearch,
+  IconCheckCircle,
+  IconShieldSecurity,
+  IconClock,
+  IconSparkle,
+} from '../../icons/CustomIcons';
 
 export const DomainMinimalVariant: React.FC<DomainVariantProps> = ({
   badge,
@@ -21,9 +28,9 @@ export const DomainMinimalVariant: React.FC<DomainVariantProps> = ({
   result,
 }) => {
   return (
-    <div className="p-6 sm:p-10 rounded-2xl sm:rounded-3xl bg-slate-50 border border-[#dce9ff] text-[#0b1c30] shadow-sm">
+    <div className="p-6 sm:p-10 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 text-[#0b1c30] shadow-sm">
       <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-5">
-        <span className="px-4 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-bold tracking-wider border border-[#006398]/15 inline-block">
+        <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold tracking-wider border border-slate-200/80 inline-block">
           {badge}
         </span>
 
@@ -86,7 +93,7 @@ export const DomainMinimalVariant: React.FC<DomainVariantProps> = ({
                 </>
               ) : (
                 <>
-                  <Search className="w-4 h-4" />
+                  <IconSearch className="w-4 h-4" />
                   <span>Kiểm Tra</span>
                 </>
               )}
@@ -115,7 +122,7 @@ export const DomainMinimalVariant: React.FC<DomainVariantProps> = ({
             >
               <div className="flex items-center gap-2.5">
                 {result.isAvailable ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <IconCheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
                 ) : (
                   <AlertCircle className="w-5 h-5 text-amber-600 shrink-0" />
                 )}
@@ -164,7 +171,7 @@ export const DomainMinimalVariant: React.FC<DomainVariantProps> = ({
 
             {/* Alternatives / Gợi ý các đuôi khác kèm giá */}
             {result.alternatives && result.alternatives.length > 0 && (
-              <div className="p-4 rounded-xl bg-white border border-[#dce9ff] text-xs">
+              <div className="p-4 rounded-xl bg-white border border-slate-200 text-xs">
                 <div className="text-[11px] font-bold text-[#45464d] uppercase tracking-wider mb-2.5">
                   Gợi ý các đuôi tên miền khác cho thương hiệu của bạn:
                 </div>
@@ -206,15 +213,15 @@ export const DomainMinimalVariant: React.FC<DomainVariantProps> = ({
 
 
         {/* Security and SLA badges */}
-        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-6 text-xs text-[#45464d] pt-2">
+        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-6 text-xs text-slate-500 pt-2">
           <span className="flex items-center gap-1.5">
-            <Zap className="w-4 h-4 text-[#006398]" /> Kích hoạt chỉ trong 1 phút
+            <IconClock className="w-4 h-4 text-slate-600" /> Kích hoạt chỉ trong 1 phút
           </span>
           <span className="flex items-center gap-1.5">
-            <Shield className="w-4 h-4 text-[#006398]" /> Quyền sở hữu chính chủ 100%
+            <IconShieldSecurity className="w-4 h-4 text-slate-600" /> Quyền sở hữu chính chủ 100%
           </span>
           <span className="flex items-center gap-1.5">
-            <Lock className="w-4 h-4 text-[#006398]" /> Miễn phí bảo vệ danh tính cá nhân
+            <IconSparkle className="w-4 h-4 text-slate-600" /> Miễn phí bảo vệ danh tính cá nhân
           </span>
         </div>
       </div>

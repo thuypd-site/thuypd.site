@@ -145,18 +145,16 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
 
   return (
     <section
-      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white via-[#f7fafe] to-white relative overflow-hidden"
+      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc] relative overflow-hidden"
       id="bang-gia"
     >
       {/* Subtle ambient lighting for smooth visual transition */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-r from-blue-100/30 via-cyan-100/25 to-blue-100/30 blur-3xl rounded-full pointer-events-none -z-10" />
-      <div className="absolute top-12 right-0 w-80 h-80 bg-[#006398]/[0.03] rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-12 left-0 w-80 h-80 bg-cyan-500/[0.03] rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-r from-slate-200/20 via-blue-100/15 to-slate-200/20 blur-3xl rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full relative z-10">
         {/* Header Block: Centered, balanced, and elegant */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3.5">
-          <div className="inline-flex items-center px-4 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-extrabold tracking-wider border border-[#006398]/15 shadow-xs">
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-extrabold tracking-wider border border-slate-200/80 shadow-2xs">
             <span>{badge}</span>
           </div>
 
@@ -164,7 +162,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
             {title}
           </h2>
 
-          <p className="text-sm sm:text-base text-[#45464d] leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
             {subtitle}
           </p>
         </div>
@@ -192,8 +190,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
         {/* Sleek Trust & Value Guarantees Strip */}
         <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200/70">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5 stroke-[2.5]" />
               </span>
               <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
@@ -201,8 +199,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
               </span>
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5 stroke-[2.5]" />
               </span>
               <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
@@ -210,8 +208,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
               </span>
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5 stroke-[2.5]" />
               </span>
               <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
@@ -219,8 +217,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
               </span>
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
+              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5 stroke-[2.5]" />
               </span>
               <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">

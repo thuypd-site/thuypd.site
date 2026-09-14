@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { IconArrowRight } from '../../icons/CustomIcons';
 
 export interface PricingMatrixRow {
   category: string;
@@ -172,7 +172,7 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                 className="w-full py-3 px-4 rounded-xl bg-[#006398] hover:bg-[#004f7a] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Đăng Ký {currentMobilePlan.name}</span>
-                <ArrowRight className="w-4 h-4" />
+                <IconArrowRight className="w-4 h-4" />
               </button>
 
               <button

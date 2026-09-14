@@ -52,15 +52,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, displayStyle 
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-gradient(rgba(0, 99, 152, 0.12) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(rgba(0, 99, 152, 0.07) 1px, transparent 1px)',
             backgroundSize: '24px 24px',
             maskImage: 'radial-gradient(ellipse 70% 70% at 50% 35%, #000 30%, transparent 80%)',
             WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at 50% 35%, #000 30%, transparent 80%)',
           }}
         />
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[1000px] h-[520px] bg-gradient-to-tr from-[#006398]/15 via-[#dce9ff]/60 to-transparent blur-3xl rounded-full opacity-80 animate-pulse-glow" />
-        <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#5bb8fe]/20 blur-3xl rounded-full animate-pulse-glow" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/3 -right-32 w-80 h-80 bg-[#006398]/10 blur-3xl rounded-full animate-pulse-glow" style={{ animationDelay: '4s' }} />
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[480px] bg-gradient-to-tr from-[#006398]/08 via-[#e2e8f0]/40 to-transparent blur-3xl rounded-full opacity-60 animate-pulse-glow" />
+        <div className="absolute top-1/4 -left-40 w-80 h-80 bg-[#006398]/05 blur-3xl rounded-full animate-pulse-glow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/3 -right-32 w-72 h-72 bg-[#5bb8fe]/05 blur-3xl rounded-full animate-pulse-glow" style={{ animationDelay: '4s' }} />
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">

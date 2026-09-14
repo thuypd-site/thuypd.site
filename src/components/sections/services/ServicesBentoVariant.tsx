@@ -2,15 +2,17 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import {
-  ArrowRight,
-  Building2,
-  MousePointerClick,
-  TrendingUp,
-  Server,
-  CheckCircle,
-} from 'lucide-react';
 import { BorderBeam, SpotlightCard } from '../../common';
+import {
+  IconWebDesign,
+  IconEcommerce,
+  IconCorporate,
+  IconSEO,
+  IconCloudServer,
+  IconCheckCircle,
+  IconArrowRight,
+  IconBadge,
+} from '../../icons';
 
 export interface ServicesBentoVariantProps {
   services?: any[];
@@ -44,6 +46,7 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
   const s4 = services[4] || {
     title: 'Máy Chủ Tốc Độ Cao & Nâng Cấp Web Cũ',
     description: 'Cung cấp máy chủ tốc độ cao an toàn, sao lưu tự động hàng tuần và nâng cấp các website cũ chạy chậm trở nên nhanh mượt.',
+    tag: 'Hạ Tầng & Nâng Cấp',
   };
 
   return (
@@ -60,7 +63,7 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
         <BorderBeam size={280} duration={12} borderWidth={1.5} colorFrom="#38bdf8" colorTo="#0284c7" />
 
         {/* Background ambient lighting */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#006398]/20 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#006398]/15 blur-3xl rounded-full pointer-events-none" />
 
         <div className="relative z-10 space-y-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -81,31 +84,31 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
           </p>
 
           <div className="flex flex-wrap gap-2 pt-2">
-            <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
-              <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="px-3 py-1.5 rounded-lg bg-white/10 text-slate-200 text-xs font-medium border border-white/10 flex items-center gap-1.5">
+              <IconCheckCircle size={15} className="text-cyan-300" />
               Bảo hành trọn đời
             </span>
-            <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
-              <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="px-3 py-1.5 rounded-lg bg-white/10 text-slate-200 text-xs font-medium border border-white/10 flex items-center gap-1.5">
+              <IconCheckCircle size={15} className="text-cyan-300" />
               Chuẩn tìm kiếm Google
             </span>
-            <span className="px-3 py-1 rounded-lg bg-white/10 text-white text-xs font-medium border border-white/15 flex items-center gap-1.5">
-              <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="px-3 py-1.5 rounded-lg bg-white/10 text-slate-200 text-xs font-medium border border-white/10 flex items-center gap-1.5">
+              <IconCheckCircle size={15} className="text-cyan-300" />
               Toàn quyền sở hữu
             </span>
           </div>
         </div>
 
         <div className="relative z-10 pt-6 mt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
-          <span className="text-xs sm:text-sm text-cyan-300 font-semibold">
+          <span className="text-xs sm:text-sm text-slate-300 font-medium">
             Giao diện sắc nét, trải nghiệm mượt mà &amp; tải trang tức thì
           </span>
           <a
             href="#nhan-bao-gia"
-            className="px-5 py-2.5 rounded-xl bg-white text-[#0b1c30] hover:bg-[#cce5ff] font-bold text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md group-hover:scale-105 active:scale-95"
+            className="px-5 py-2.5 rounded-xl bg-white text-[#0b1c30] hover:bg-[#e0f0ff] font-bold text-xs sm:text-sm flex items-center gap-2 transition-all shadow-md group-hover:scale-105 active:scale-95 cursor-pointer"
           >
             <span>Tư vấn giải pháp</span>
-            <ArrowRight className="w-4 h-4 text-[#006398]" />
+            <IconArrowRight size={16} className="text-[#006398]" />
           </a>
         </div>
       </motion.div>
@@ -119,14 +122,14 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
         className="md:col-span-6 lg:col-span-4 h-full"
       >
         <SpotlightCard
-          spotlightColor="rgba(91, 184, 254, 0.16)"
-          className="h-full p-6 sm:p-7 rounded-3xl bg-[#eff4ff] border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+          spotlightColor="rgba(0, 99, 152, 0.08)"
+          className="h-full p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-lg hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
         >
           <div className="space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-[#006398] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-              <MousePointerClick className="w-6 h-6" />
-            </div>
-            <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+            <IconBadge size="md">
+              <IconEcommerce size={24} />
+            </IconBadge>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
               {s1.tag || 'Tối Ưu Chuyển Đổi'}
             </div>
             <h3 className="text-lg font-extrabold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
@@ -137,9 +140,9 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
             </p>
           </div>
 
-          <div className="pt-4 mt-3 border-t border-[#dce9ff] flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#006398]">Tối ưu Facebook / TikTok / Google Ads</span>
-            <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+          <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span className="font-semibold text-slate-600">Tối ưu Facebook / TikTok / Google Ads</span>
+            <IconArrowRight size={15} className="text-[#006398] group-hover:translate-x-1 transition-transform" />
           </div>
         </SpotlightCard>
       </motion.div>
@@ -153,14 +156,14 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
         className="md:col-span-6 lg:col-span-4 h-full"
       >
         <SpotlightCard
-          spotlightColor="rgba(91, 184, 254, 0.15)"
-          className="h-full p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+          spotlightColor="rgba(0, 99, 152, 0.08)"
+          className="h-full p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-lg hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
         >
           <div className="space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
-              <Building2 className="w-6 h-6" />
-            </div>
-            <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+            <IconBadge size="md">
+              <IconCorporate size={24} />
+            </IconBadge>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
               {s2.tag || 'Nâng Tầm Uy Tín'}
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
@@ -171,9 +174,9 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
             </p>
           </div>
 
-          <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#006398]">{s2.tag || 'Khẳng định uy tín thương hiệu'}</span>
-            <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+          <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span className="font-semibold text-slate-600">{s2.tag || 'Khẳng định uy tín thương hiệu'}</span>
+            <IconArrowRight size={15} className="text-[#006398] group-hover:translate-x-1 transition-transform" />
           </div>
         </SpotlightCard>
       </motion.div>
@@ -187,14 +190,14 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
         className="md:col-span-6 lg:col-span-4 h-full"
       >
         <SpotlightCard
-          spotlightColor="rgba(91, 184, 254, 0.15)"
-          className="h-full p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+          spotlightColor="rgba(0, 99, 152, 0.08)"
+          className="h-full p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-lg hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
         >
           <div className="space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
-              <TrendingUp className="w-6 h-6" />
-            </div>
-            <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+            <IconBadge size="md">
+              <IconSEO size={24} />
+            </IconBadge>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
               {s3.tag || 'Chuẩn SEO Google'}
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
@@ -205,9 +208,9 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
             </p>
           </div>
 
-          <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#006398]">{s3.tag || 'Tăng lượng khách tự nhiên'}</span>
-            <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+          <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span className="font-semibold text-slate-600">{s3.tag || 'Tăng lượng khách tự nhiên'}</span>
+            <IconArrowRight size={15} className="text-[#006398] group-hover:translate-x-1 transition-transform" />
           </div>
         </SpotlightCard>
       </motion.div>
@@ -221,14 +224,14 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
         className="md:col-span-6 lg:col-span-4 h-full"
       >
         <SpotlightCard
-          spotlightColor="rgba(91, 184, 254, 0.15)"
-          className="h-full p-6 rounded-3xl bg-white border border-[#dce9ff] shadow-sm hover:shadow-xl hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
+          spotlightColor="rgba(0, 99, 152, 0.08)"
+          className="h-full p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-lg hover:border-[#006398]/40 transition-all duration-300 flex flex-col justify-between group"
         >
           <div className="space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white transition-all">
-              <Server className="w-6 h-6" />
-            </div>
-            <div className="text-xs font-bold uppercase tracking-wider text-[#006398]">
+            <IconBadge size="md">
+              <IconCloudServer size={24} />
+            </IconBadge>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
               {s4.tag || 'Hạ Tầng & Nâng Cấp'}
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors">
@@ -239,12 +242,13 @@ export const ServicesBentoVariant: React.FC<ServicesBentoVariantProps> = ({ serv
             </p>
           </div>
 
-          <div className="pt-4 mt-3 border-t border-[#eff4ff] flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#006398]">{s4.tag || 'Vận hành ổn định 99.9%'}</span>
-            <ArrowRight className="w-4 h-4 text-[#006398] group-hover:translate-x-1 transition-transform" />
+          <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span className="font-semibold text-slate-600">{s4.tag || 'Vận hành ổn định 99.9%'}</span>
+            <IconArrowRight size={15} className="text-[#006398] group-hover:translate-x-1 transition-transform" />
           </div>
         </SpotlightCard>
       </motion.div>
     </div>
   );
 };
+

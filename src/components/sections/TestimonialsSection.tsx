@@ -21,17 +21,17 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ conten
   const isCompact = displayStyle === 'compact';
 
   return (
-    <section className="py-16 lg:py-24 bg-[#f6f9fc] border-y border-slate-200/80" id="danh-gia">
+    <section className="py-16 lg:py-24 bg-[#fafbfc] border-y border-slate-200/70" id="danh-gia">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 sm:mb-14">
-          <span className="px-4 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-bold border border-[#006398]/15">
+          <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold border border-slate-200/80 shadow-2xs">
             {badge}
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30]">
             {title}
           </h2>
-          <p className="text-xs sm:text-sm md:text-base text-[#45464d] leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             {subtitle}
           </p>
         </div>
@@ -58,23 +58,23 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ conten
                   ))}
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#45464d] italic leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed">
                   &ldquo;{item.quote}&rdquo;
                 </p>
 
               </div>
 
               {/* Author info */}
-              <div className="flex items-center gap-3 pt-3 border-t border-[#eff4ff]">
+              <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
                 <img
                   src={item.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
                   alt={item.author}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-[#006398]/20 group-hover:ring-[#006398] transition-all shrink-0"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-[#006398]/10 group-hover:ring-[#006398] transition-all shrink-0"
                   loading="lazy"
                 />
                 <div>
                   <div className="text-xs sm:text-sm font-bold text-[#0b1c30]">{item.author}</div>
-                  <div className="text-[11px] sm:text-xs text-[#45464d]">
+                  <div className="text-[11px] sm:text-xs text-slate-500">
                     {item.role} · <span className="text-[#006398] font-medium">{item.company}</span>
                   </div>
                 </div>

@@ -36,7 +36,7 @@ export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({
   };
 
   return (
-    <section className="py-12 sm:py-16 bg-white">
+    <section className="py-12 sm:py-16 bg-[#fafbfc]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {isMinimal ? (
           <CtaMinimalVariant {...variantProps} />

@@ -2,25 +2,46 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import {
-  ArrowRight,
-  Palette,
-  Building2,
-  MousePointerClick,
-  TrendingUp,
-  Server,
-  Wrench,
-  Sparkles,
-} from 'lucide-react';
 import { SpotlightCard } from '../../common';
+import {
+  IconWebDesign,
+  IconCorporate,
+  IconEcommerce,
+  IconSEO,
+  IconCloudServer,
+  IconShieldSecurity,
+  IconSpeed,
+  IconArrowRight,
+  IconBadge,
+} from '../../icons';
 
-const iconMap: Record<string, React.ReactNode> = {
-  design_services: <Palette className="w-6 h-6 sm:w-7 sm:h-7" />,
-  domain: <Building2 className="w-6 h-6 sm:w-7 sm:h-7" />,
-  ads_click: <MousePointerClick className="w-6 h-6 sm:w-7 sm:h-7" />,
-  query_stats: <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7" />,
-  dns: <Server className="w-6 h-6 sm:w-7 sm:h-7" />,
-  build_circle: <Wrench className="w-6 h-6 sm:w-7 sm:h-7" />,
+const getServiceIcon = (iconKey?: string, index: number = 0) => {
+  const iconProps = { size: 24, className: 'transition-transform duration-300 group-hover:scale-110' };
+  switch (iconKey) {
+    case 'design_services':
+      return <IconWebDesign {...iconProps} />;
+    case 'domain':
+      return <IconCorporate {...iconProps} />;
+    case 'ads_click':
+      return <IconEcommerce {...iconProps} />;
+    case 'query_stats':
+      return <IconSEO {...iconProps} />;
+    case 'dns':
+      return <IconCloudServer {...iconProps} />;
+    case 'build_circle':
+      return <IconSpeed {...iconProps} />;
+    default: {
+      const fallbackIcons = [
+        <IconWebDesign {...iconProps} key="0" />,
+        <IconEcommerce {...iconProps} key="1" />,
+        <IconCorporate {...iconProps} key="2" />,
+        <IconSEO {...iconProps} key="3" />,
+        <IconCloudServer {...iconProps} key="4" />,
+        <IconShieldSecurity {...iconProps} key="5" />,
+      ];
+      return fallbackIcons[index % fallbackIcons.length];
+    }
+  }
 };
 
 export interface ServicesGridVariantProps {
@@ -40,13 +61,14 @@ export const ServicesGridVariant: React.FC<ServicesGridVariantProps> = ({ servic
           className="h-full"
         >
           <SpotlightCard
-            spotlightColor="rgba(91, 184, 254, 0.15)"
-            className="h-full p-6 rounded-2xl bg-white shadow-sm border border-[#dce9ff]/80 hover:border-[#006398]/50 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+            spotlightColor="rgba(0, 99, 152, 0.08)"
+            className="h-full p-6 sm:p-7 rounded-2xl bg-white shadow-2xs border border-slate-200/80 hover:border-[#006398]/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
           >
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-[#eff4ff] text-[#006398] flex items-center justify-center group-hover:bg-[#006398] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
-                {iconMap[service.icon] || <Sparkles className="w-6 h-6" />}
-              </div>
+              <IconBadge size="md">
+                {getServiceIcon(service.icon, index)}
+              </IconBadge>
+
               <h3 className="text-base sm:text-lg font-bold text-[#0b1c30] group-hover:text-[#006398] transition-colors leading-snug">
                 {service.title}
               </h3>
@@ -55,14 +77,16 @@ export const ServicesGridVariant: React.FC<ServicesGridVariantProps> = ({ servic
               </p>
             </div>
 
-            <div className="pt-4 mt-4 border-t border-[#eff4ff] flex items-center justify-between">
-              <span className="text-xs text-[#006398] font-semibold">{service.tag}</span>
+            <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <span className="text-xs text-slate-500 font-semibold group-hover:text-[#006398] transition-colors">
+                {service.tag}
+              </span>
               <a
                 href="#nhan-bao-gia"
                 className="flex items-center gap-1 text-xs font-bold text-[#006398] group-hover:translate-x-1 transition-transform"
               >
                 <span>Xem chi tiết</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <IconArrowRight size={15} />
               </a>
             </div>
           </SpotlightCard>

@@ -26,12 +26,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displ
   const subtitle = content?.subtitle || 'Lựa chọn kiến trúc website phù hợp nhất với mô hình kinh doanh của bạn, tối ưu chuyển đổi và đồng hành kỹ thuật bền lâu.';
 
   return (
-    <section className="py-16 lg:py-24 bg-white" id="dich-vu">
+    <section className="py-16 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc]" id="dich-vu">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {/* Section Header */}
         <div className="mb-10 lg:mb-14">
           <div className="space-y-3 max-w-2xl">
-            <span className="px-3.5 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-bold border border-[#006398]/15 inline-block">
+            <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold border border-slate-200/80 inline-block">
               {badge}
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight">

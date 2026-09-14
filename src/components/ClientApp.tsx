@@ -44,7 +44,7 @@ export function ClientApp() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9ff] text-[#0b1c30] flex flex-col font-sans selection:bg-[#006398]/20 selection:text-[#006398]">
+    <div className="min-h-screen bg-[#fafbfc] text-[#0b1c30] flex flex-col font-sans selection:bg-[#006398]/20 selection:text-[#006398]">
       {/* Navigation Bar */}
       {isHeaderVisible && <Header onOpenQuoteModal={handleOpenQuoteModal} />}
 

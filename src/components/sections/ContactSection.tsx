@@ -51,7 +51,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-[#f6f9fc] border-t border-slate-200/80 relative" id="nhan-bao-gia">
+    <section className="py-16 lg:py-24 bg-[#fafbfc] border-t border-slate-200/70 relative" id="nhan-bao-gia">
       <div id="contact-lead" className="absolute -top-24 left-0" />
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {isCentered ? (

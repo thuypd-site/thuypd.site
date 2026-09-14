@@ -95,7 +95,7 @@ export const DomainCheckerSection: React.FC<DomainCheckerSectionProps> = ({
   };
 
   return (
-    <section className="py-16 sm:py-20 bg-white" id="tra-cuu-ten-mien">
+    <section className="py-16 sm:py-20 bg-[#fafbfc]" id="tra-cuu-ten-mien">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
         {isMinimal ? (
           <DomainMinimalVariant {...variantProps} />

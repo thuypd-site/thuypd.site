@@ -1,8 +1,15 @@
 'use client';
 
 import React from 'react';
-import { Search, Loader2, CheckCircle2, AlertCircle, Zap, Shield, Lock } from 'lucide-react';
+import { Loader2, AlertCircle } from 'lucide-react';
 import { DomainTldPricing } from '../../../types/landingConfig.types';
+import {
+  IconSearch,
+  IconCheckCircle,
+  IconShieldSecurity,
+  IconClock,
+  IconSparkle,
+} from '../../icons/CustomIcons';
 
 export interface DomainVariantProps {
   badge: string;
@@ -38,13 +45,13 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
   result,
 }) => {
   return (
-    <div className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-[#0b1c30] text-white shadow-2xl relative overflow-hidden border border-slate-800/80">
-      {/* Ambient Glows */}
-      <div className="absolute -right-16 -top-16 w-80 h-80 bg-[#006398]/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -left-16 -bottom-16 w-80 h-80 bg-[#5bb8fe]/20 rounded-full blur-3xl pointer-events-none" />
+    <div className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-[#0b1c30] text-white shadow-xl relative overflow-hidden border border-slate-800">
+      {/* Soft Ambient Glows */}
+      <div className="absolute -right-16 -top-16 w-80 h-80 bg-[#006398]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -left-16 -bottom-16 w-80 h-80 bg-[#5bb8fe]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
-        <span className="px-4 py-1 rounded-full bg-white/10 text-cyan-300 text-xs uppercase font-bold tracking-wider border border-white/10 inline-block">
+        <span className="px-3.5 py-1 rounded-full bg-white/10 text-slate-200 text-xs uppercase font-bold tracking-wider border border-white/15 inline-block">
           {badge}
         </span>
 
@@ -107,7 +114,7 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
                 </>
               ) : (
                 <>
-                  <Search className="w-4 h-4" />
+                  <IconSearch className="w-4 h-4" />
                   <span>Kiểm Tra</span>
                 </>
               )}
@@ -136,7 +143,7 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
             >
               <div className="flex items-center gap-2.5">
                 {result.isAvailable ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <IconCheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
                 ) : (
                   <AlertCircle className="w-5 h-5 text-amber-400 shrink-0" />
                 )}
@@ -224,13 +231,13 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
         {/* Security and SLA badges */}
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-6 text-xs text-slate-400 pt-2">
           <span className="flex items-center gap-1.5">
-            <Zap className="w-4 h-4 text-[#006398]" /> Kích hoạt chỉ trong 1 phút
+            <IconClock className="w-4 h-4 text-cyan-400" /> Kích hoạt chỉ trong 1 phút
           </span>
           <span className="flex items-center gap-1.5">
-            <Shield className="w-4 h-4 text-[#006398]" /> Quyền sở hữu chính chủ 100%
+            <IconShieldSecurity className="w-4 h-4 text-cyan-400" /> Quyền sở hữu chính chủ 100%
           </span>
           <span className="flex items-center gap-1.5">
-            <Lock className="w-4 h-4 text-[#006398]" /> Miễn phí bảo vệ danh tính cá nhân
+            <IconSparkle className="w-4 h-4 text-cyan-400" /> Miễn phí bảo vệ danh tính cá nhân
           </span>
         </div>
       </div>
