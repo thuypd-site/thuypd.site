@@ -156,8 +156,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full relative z-10">
         {/* Header Block: Centered, balanced, and elegant */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3.5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-bold border border-[#006398]/15 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#006398]" />
+          <div className="inline-flex items-center px-4 py-1 rounded-full bg-[#dce9ff] text-[#006398] text-xs uppercase font-extrabold tracking-wider border border-[#006398]/15 shadow-xs">
             <span>{badge}</span>
           </div>
 

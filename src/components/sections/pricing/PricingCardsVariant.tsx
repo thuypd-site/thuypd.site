@@ -167,9 +167,8 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
 
                 {/* Feature Deliverables List */}
                 <div className="space-y-3 pt-1 flex-1 flex flex-col">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#0b1c30] flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-[#006398]" />
-                    <span>Đặc quyền gói bao gồm:</span>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#0b1c30]">
+                    Đặc quyền gói bao gồm:
                   </div>
 
                   <ul className="space-y-2.5 text-xs sm:text-[13px] text-[#0b1c30] flex-1">
@@ -204,9 +203,8 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                 </button>
 
                 {/* Subtle Renewal Info below button */}
-                <div className="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5 pt-0.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#006398] shrink-0" />
-                  <span>Duy trì máy chủ từ năm 2:</span>
+                <div className="text-center text-[11px] text-slate-400 pt-0.5">
+                  <span>Duy trì máy chủ từ năm 2: </span>
                   <span className="font-semibold text-slate-600">
                     {plan.renewal1Year || '1.200.000đ'}/năm
                   </span>
