@@ -81,7 +81,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
       {/* Cards Container: Snap Carousel on Mobile/Tablet -> 3-Col Grid on Desktop */}
       <div
         onScroll={handleContainerScroll}
-        className="flex lg:grid overflow-x-auto lg:overflow-x-visible snap-x snap-mandatory scrollbar-none gap-5 lg:gap-8 items-stretch px-1 sm:px-2 pb-6 lg:pb-0 -mx-4 sm:-mx-6 lg:mx-0 px-4 sm:px-6 lg:px-0"
+        className="flex lg:grid overflow-x-auto lg:overflow-visible snap-x snap-mandatory scrollbar-none gap-5 lg:grid-cols-3 lg:gap-6 xl:gap-8 items-stretch pt-5 pb-6 lg:pb-2 -mx-4 sm:-mx-6 px-4 sm:px-6 lg:mx-0 lg:px-0"
       >
         {pricingPlans.map((plan, index) => {
           const currentPlanId = plan.id || plan.planId;
@@ -99,9 +99,9 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: index * 0.08 }}
-              className={`snap-center shrink-0 w-[88vw] max-w-[360px] sm:max-w-[420px] lg:max-w-none lg:w-auto relative p-6 sm:p-8 rounded-3xl bg-white flex flex-col justify-between transition-all duration-300 ${
+              className={`snap-center shrink-0 w-[86vw] max-w-[360px] sm:max-w-[400px] lg:w-full lg:max-w-none relative p-6 sm:p-7 xl:p-8 rounded-3xl bg-white flex flex-col justify-between transition-all duration-300 ${
                 isPopular
-                  ? 'border-2 border-[#006398] shadow-2xl shadow-[#006398]/10 lg:-translate-y-3 ring-4 ring-[#006398]/10 hover:-translate-y-4 hover:shadow-2xl'
+                  ? 'border-2 border-[#006398] shadow-2xl shadow-[#006398]/12 lg:-translate-y-2 ring-4 ring-[#006398]/10 hover:-translate-y-3'
                   : 'border border-[#dce9ff] shadow-md hover:shadow-xl hover:-translate-y-1.5'
               }`}
             >
@@ -110,14 +110,14 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
 
               {/* Top Popular Floating Badge */}
               {isPopular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 sm:px-4 py-1 rounded-full bg-gradient-to-r from-[#006398] to-[#0284c7] text-white text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider shadow-md flex items-center gap-1.5 whitespace-nowrap z-10 max-w-[90%] truncate">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#006398] to-[#0284c7] text-white text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider shadow-md flex items-center gap-1.5 whitespace-nowrap z-10">
                   <Sparkles className="w-3.5 h-3.5 text-cyan-300 shrink-0" />
                   <span>Khuyên Dùng Cho Doanh Nghiệp</span>
                 </div>
               )}
 
               {/* Upper Content Block */}
-              <div className="space-y-4 sm:space-y-5">
+              <div className="space-y-4 sm:space-y-5 flex-1 flex flex-col">
                 {/* Tier Subtitle & Completion Days */}
                 <div className="flex items-center justify-between gap-2">
                   <span
@@ -144,7 +144,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                 </h3>
 
                 {/* Description with responsive height */}
-                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed lg:min-h-[44px]">
+                <p className="text-xs sm:text-sm text-[#45464d] leading-relaxed min-h-[40px] lg:min-h-[48px]">
                   {plan.description}
                 </p>
 
@@ -165,13 +165,13 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                 </div>
 
                 {/* Feature Deliverables List */}
-                <div className="space-y-3 pt-1">
+                <div className="space-y-3 pt-1 flex-1 flex flex-col">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-[#0b1c30] flex items-center gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-[#006398]" />
                     <span>Đặc quyền gói bao gồm:</span>
                   </div>
 
-                  <ul className="space-y-2.5 text-xs sm:text-[13px] text-[#0b1c30]">
+                  <ul className="space-y-2.5 text-xs sm:text-[13px] text-[#0b1c30] flex-1">
                     {plan.features.map((feature: string, fIdx: number) => (
                       <li key={fIdx} className="flex items-start gap-2.5 leading-snug">
                         <Check className="w-4 h-4 text-emerald-600 font-bold shrink-0 mt-0.5" />
@@ -208,7 +208,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                   <span>
                     {currentPlanId === 'plan-advanced'
                       ? 'Liên Hệ Tư Vấn Giải Pháp'
-                      : `Đăng Ký ${plan.name.replace('GÓI ', '')}`}
+                      : `Đăng Ký ${plan.name.replace(/^Gói\s+/i, '')}`}
                   </span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>

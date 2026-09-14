@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, Check, Layers, Table2 } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Sparkles, Check } from 'lucide-react';
 import { usePricing } from '../../hooks/usePricing';
 import { PricingSectionContent } from '../../types/landingConfig.types';
 import { PricingCardsVariant, PricingMatrixVariant } from './pricing';
@@ -19,12 +19,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
 }) => {
   const { data: defaultPlans = [] } = usePricing();
 
-  const isMatrixDefault = displayStyle === 'price-b' || displayStyle === 'matrix';
-  const [viewMode, setViewMode] = useState<'cards' | 'matrix'>(isMatrixDefault ? 'matrix' : 'cards');
-
-  useEffect(() => {
-    setViewMode(displayStyle === 'price-b' || displayStyle === 'matrix' ? 'matrix' : 'cards');
-  }, [displayStyle]);
+  const activeStyle = displayStyle || (content as any)?.displayStyle || (content as any)?.variant || 'price-a';
+  const isMatrix = activeStyle === 'price-b' || activeStyle === 'matrix';
 
   const [showScrollHint, setShowScrollHint] = useState<boolean>(true);
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -169,51 +165,10 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
           <p className="text-xs sm:text-sm md:text-base text-[#45464d] leading-relaxed max-w-2xl mx-auto">
             {subtitle}
           </p>
-
-          {/* Centered Segmented Control: Dạng Thẻ Gói vs So Sánh Chi Tiết */}
-          <div className="pt-2 flex justify-center">
-            <div className="inline-flex items-center bg-white p-1.5 rounded-2xl border border-[#dce9ff] shadow-sm">
-              <button
-                type="button"
-                onClick={() => setViewMode('cards')}
-                className={`min-h-[44px] flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                  viewMode === 'cards'
-                    ? 'bg-[#006398] text-white shadow-md shadow-[#006398]/20'
-                    : 'text-[#45464d] hover:text-[#0b1c30] hover:bg-slate-50'
-                }`}
-              >
-                <Layers className="w-4 h-4 shrink-0" />
-                <span>Dạng Thẻ Gói</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setViewMode('matrix')}
-                className={`min-h-[44px] flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                  viewMode === 'matrix'
-                    ? 'bg-[#006398] text-white shadow-md shadow-[#006398]/20'
-                    : 'text-[#45464d] hover:text-[#0b1c30] hover:bg-slate-50'
-                }`}
-              >
-                <Table2 className="w-4 h-4 shrink-0" />
-                <span>So Sánh Chi Tiết</span>
-              </button>
-            </div>
-          </div>
         </div>
 
-        {/* View 1: Dạng Thẻ Gói */}
-        {viewMode === 'cards' && (
-          <PricingCardsVariant
-            pricingPlans={pricingPlans}
-            highlightPlanId={highlightPlanId}
-            onChoosePlan={handleChoosePlan}
-            getTierSelectValue={getTierSelectValue}
-          />
-        )}
-
-        {/* View 2: Bảng So Sánh Ma Trận */}
-        {viewMode === 'matrix' && (
+        {/* Render trực tiếp theo đúng cấu hình Admin chọn */}
+        {isMatrix ? (
           <PricingMatrixVariant
             matrixFeatures={activeMatrixFeatures}
             pricingPlans={pricingPlans}
@@ -221,6 +176,13 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
             showScrollHint={showScrollHint}
             onTableScroll={handleTableScroll}
             tableContainerRef={tableContainerRef}
+          />
+        ) : (
+          <PricingCardsVariant
+            pricingPlans={pricingPlans}
+            highlightPlanId={highlightPlanId}
+            onChoosePlan={handleChoosePlan}
+            getTierSelectValue={getTierSelectValue}
           />
         )}
 

@@ -78,7 +78,7 @@ export const LandingPageRenderer: React.FC<LandingPageRendererProps> = ({
                 <div key={sec.id} id="section-pricing" data-section-id={sec.id}>
                   <PricingSection
                     content={sec.content}
-                    displayStyle={sec.displayStyle}
+                    displayStyle={sec.displayStyle || (sec as any).variant}
                     onSelectPlan={onSelectPlan}
                   />
                 </div>
