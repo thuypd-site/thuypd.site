@@ -67,6 +67,12 @@ export const defaultLandingConfig: LandingPageConfig = {
       content: {
         title: 'Thương Hiệu & Khách Hàng Tin Tưởng Đồng Hành',
         statsText: '100% Khách hàng hài lòng với chất lượng bàn giao và hỗ trợ sau nghiệm thu',
+        items: [
+          { number: '150+', label: 'Dự án đã bàn giao', suffix: 'đúng tiến độ' },
+          { number: '99.2%', label: 'Khách hàng hài lòng', suffix: 'đồng hành lâu dài' },
+          { number: '< 0.8s', label: 'Tốc độ mở trang', suffix: 'tối ưu tức thì' },
+          { number: '24/7', label: 'Hỗ trợ kỹ thuật', suffix: 'đồng hành 1-1' },
+        ],
       },
     },
     {

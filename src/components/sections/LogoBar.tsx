@@ -11,7 +11,16 @@ export interface LogoBarProps {
 
 export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'standard' }) => {
   const title = content?.title || 'Thương Hiệu & Khách Hàng Tin Tưởng Đồng Hành';
-  const items = content?.items || [];
+  const statsText = content?.statsText;
+
+  const defaultStats = [
+    { number: '150+', label: 'Dự án đã bàn giao', suffix: 'đúng tiến độ' },
+    { number: '99.2%', label: 'Khách hàng hài lòng', suffix: 'đồng hành lâu dài' },
+    { number: '< 0.8s', label: 'Tốc độ mở trang', suffix: 'tối ưu tức thì' },
+    { number: '24/7', label: 'Hỗ trợ kỹ thuật', suffix: 'đồng hành 1-1' },
+  ];
+
+  const items = content?.items && content.items.length > 0 ? content.items : defaultStats;
 
   const defaultBrands = [
     { name: 'VICI', style: 'font-black tracking-widest' },
@@ -28,6 +37,7 @@ export const LogoBar: React.FC<LogoBarProps> = ({ content, displayStyle = 'stand
 
   const variantProps = {
     title,
+    statsText,
     items,
     brands,
   };
