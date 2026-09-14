@@ -18,7 +18,13 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
   onChoosePlan,
   getTierSelectValue,
 }) => {
-  const [activePlanIndex, setActivePlanIndex] = useState<number>(1); // Mặc định gói Chuyên Nghiệp (index 1)
+  const popularIndex = pricingPlans.findIndex(
+    (p, idx) =>
+      p.isPopular ||
+      (highlightPlanId ? (p.id === highlightPlanId || p.planId === highlightPlanId) : idx === 1)
+  );
+  const defaultIndex = popularIndex >= 0 ? popularIndex : 0;
+  const [activePlanIndex, setActivePlanIndex] = useState<number>(defaultIndex);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleSelectTab = (index: number) => {
@@ -152,7 +158,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                       {plan.formattedPrice}
                     </span>
                     <span className="text-sm font-bold text-[#5d606a]">₫</span>
-                    {currentPlanId === 'plan-advanced' && (
+                    {(plan.isCustom || currentPlanId === 'plan-advanced' || plan.name?.toLowerCase().includes('yêu cầu')) && (
                       <span className="text-[#006398] font-black text-xl">+</span>
                     )}
                     <span className="text-xs text-slate-400 font-medium ml-1">/ trọn gói bàn giao</span>
@@ -190,7 +196,7 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                   }`}
                 >
                   <span>
-                    {currentPlanId === 'plan-advanced'
+                    {plan.isCustom || currentPlanId === 'plan-advanced' || plan.name?.toLowerCase().includes('yêu cầu')
                       ? 'Liên Hệ Tư Vấn Giải Pháp'
                       : `Đăng Ký ${plan.name.replace(/^Gói\s+/i, '')}`}
                   </span>

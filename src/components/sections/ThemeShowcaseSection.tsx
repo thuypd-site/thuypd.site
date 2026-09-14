@@ -29,14 +29,21 @@ export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({
 
   const { data: themes = [], isLoading } = useThemes(selectedCategory);
 
-  const categories: { id: ThemeCategory; label: string }[] = [
-    { id: 'all', label: 'Tất cả mẫu' },
-    { id: 'ecommerce', label: 'Bán Hàng' },
-    { id: 'corporate', label: 'Doanh Nghiệp' },
-    { id: 'realestate', label: 'Bất Động Sản' },
-    { id: 'spa', label: 'Thẩm Mỹ & Spa' },
-    { id: 'furniture', label: 'Nội Thất' },
-  ];
+  const rawCategories = (content as any)?.categories;
+  const categories: { id: ThemeCategory; label: string }[] =
+    Array.isArray(rawCategories) && rawCategories.length > 0
+      ? rawCategories.map((c: any) => ({
+          id: (c.id || c.key || c.value) as ThemeCategory,
+          label: c.label || c.name || c.title,
+        }))
+      : [
+          { id: 'all', label: 'Tất cả mẫu' },
+          { id: 'ecommerce', label: 'Bán Hàng' },
+          { id: 'corporate', label: 'Doanh Nghiệp' },
+          { id: 'realestate', label: 'Bất Động Sản' },
+          { id: 'spa', label: 'Thẩm Mỹ & Spa' },
+          { id: 'furniture', label: 'Nội Thất' },
+        ];
 
   const handleSelectTheme = (theme: ThemeItem) => {
     if (onSelectTheme) {

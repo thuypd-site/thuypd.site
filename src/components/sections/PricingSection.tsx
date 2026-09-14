@@ -175,6 +175,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
           <PricingMatrixVariant
             matrixFeatures={activeMatrixFeatures}
             pricingPlans={pricingPlans}
+            highlightPlanId={highlightPlanId}
             onChoosePlan={handleChoosePlan}
             showScrollHint={showScrollHint}
             onTableScroll={handleTableScroll}
