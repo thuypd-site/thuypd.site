@@ -133,7 +133,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
         {/* Email */}
         <div className="space-y-1">
           <label className="text-xs font-semibold text-[#0b1c30]">
-            Địa chỉ Email (Nhận báo giá)
+            Địa chỉ Email
           </label>
           <input
             type="email"
@@ -180,10 +180,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           {...register('budgetTier')}
           className="w-full px-4 py-3 rounded-xl bg-slate-50 text-[#0b1c30] text-sm border border-slate-200/90 focus:bg-white focus:border-[#006398] focus:ring-4 focus:ring-[#006398]/20 transition-all outline-none font-medium"
         >
-          <option value="Gói Khởi Nghiệp (4.990.000đ)">Gói Khởi Nghiệp (4.990.000đ) - Cơ bản cho shop &amp; cá nhân</option>
-          <option value="Gói Chuyên Nghiệp (7.990.000đ)">Gói Chuyên Nghiệp (7.990.000đ) - Khuyên dùng cho công ty</option>
-          <option value="Gói Phát Triển Theo Yêu Cầu (12.990.000đ)">Gói Phát Triển Theo Yêu Cầu (12.990.000đ) - Tính năng nâng cao</option>
-          <option value="Tư vấn giải pháp phù hợp nhất">Chưa xác định - Cần tư vấn giải pháp phù hợp nhất</option>
+          <option value="Gói Khởi Nghiệp (4.990.000đ)">Gói Khởi Nghiệp (4.990.000đ)</option>
+          <option value="Gói Chuyên Nghiệp (7.990.000đ)">Gói Chuyên Nghiệp (7.990.000đ)</option>
+          <option value="Gói Phát Triển Theo Yêu Cầu (12.990.000đ)">Gói Phát Triển Theo Yêu Cầu (12.990.000đ)</option>
+          <option value="Tư vấn giải pháp phù hợp nhất">Tư vấn giải pháp theo yêu cầu riêng</option>
         </select>
       </div>
 

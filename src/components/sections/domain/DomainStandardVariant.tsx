@@ -148,11 +148,6 @@ export const DomainStandardVariant: React.FC<DomainVariantProps> = ({
                     </span>
                   </div>
                   <p className="text-xs text-slate-300 opacity-90">{result.message}</p>
-                  {result.details?.registrar && (
-                    <p className="text-[11px] text-slate-400 mt-0.5">
-                      Đơn vị quản lý: {result.details.registrar}
-                    </p>
-                  )}
                 </div>
               </div>
 

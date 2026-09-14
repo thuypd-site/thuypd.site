@@ -201,14 +201,6 @@ export const PricingCardsVariant: React.FC<PricingCardsVariantProps> = ({
                   </span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
-
-                {/* Subtle Renewal Info below button */}
-                <div className="text-center text-[11px] text-slate-400 pt-0.5">
-                  <span>Duy trì máy chủ từ năm 2: </span>
-                  <span className="font-semibold text-slate-600">
-                    {plan.renewal1Year || '1.200.000đ'}/năm
-                  </span>
-                </div>
               </div>
             </motion.div>
           );

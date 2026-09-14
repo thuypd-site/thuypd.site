@@ -4,7 +4,7 @@ export const mockPricingPlans: PricingPlan[] = [
   {
     id: 'plan-basic',
     planId: 'plan-basic',
-    name: 'Gói Khởi Nghiệp (Basic)',
+    name: 'Gói Khởi Nghiệp',
     tierSubtitle: 'Khởi Đầu Nhanh Gọn',
     price: 4990000,
     formattedPrice: '4.990.000',
@@ -27,7 +27,7 @@ export const mockPricingPlans: PricingPlan[] = [
   {
     id: 'plan-professional',
     planId: 'plan-professional',
-    name: 'Gói Chuyên Nghiệp (Professional)',
+    name: 'Gói Chuyên Nghiệp',
     tierSubtitle: 'Lựa Chọn Phổ Biến Nhất',
     price: 7990000,
     formattedPrice: '7.990.000',
@@ -50,7 +50,7 @@ export const mockPricingPlans: PricingPlan[] = [
   {
     id: 'plan-advanced',
     planId: 'plan-advanced',
-    name: 'Gói Phát Triển Theo Yêu Cầu (Advanced)',
+    name: 'Gói Phát Triển Theo Yêu Cầu',
     tierSubtitle: 'Tùy Biến Chuyên Sâu',
     price: 12990000,
     formattedPrice: '12.990.000',

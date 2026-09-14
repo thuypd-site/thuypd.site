@@ -180,7 +180,7 @@ export const PricingMatrixVariant: React.FC<PricingMatrixVariantProps> = ({
                 onClick={() => setMobileViewAll(true)}
                 className="w-full text-center text-xs text-[#006398] font-semibold hover:underline py-1 flex items-center justify-center cursor-pointer"
               >
-                <span>Xem đối chiếu 3 cột đầy đủ</span>
+                <span>Xem đối chiếu đầy đủ</span>
               </button>
             </div>
           </div>
