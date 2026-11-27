@@ -1,114 +1,91 @@
 'use client';
 
 import React from 'react';
-import { mockAdvantages } from '../../services/api';
 import { AdvantagesSectionContent } from '../../types/landingConfig.types';
-import { AdvantagesGridVariant, AdvantagesRoadmapVariant } from './advantages';
-import {
-  IconConsult,
-  IconPrototype,
-  IconDevelopment,
-  IconHandover,
-  IconSparkle,
-} from '../icons';
 
 export interface AdvantagesSectionProps {
-  content?: AdvantagesSectionContent;
-  displayStyle?: string;
+  content: AdvantagesSectionContent;
 }
 
-export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content, displayStyle = 'commits-b' }) => {
-  const activeStyle = (() => {
-    if (displayStyle === 'commits-a' || displayStyle === 'grid-3' || displayStyle === 'grid-4') {
-      return 'commits-a';
-    }
-    return 'commits-b'; // Default to Wavy Roadmap
-  })();
-
-  const items = content?.items && content.items.length > 0 ? content.items : mockAdvantages;
-  const badge = content?.badge || 'Quy Trình Làm Việc';
-  const title = content?.title || 'Quy Trình Triển Khai 4 Bước Rõ Ràng & Bàn Giao Đúng Hẹn';
-  const subtitle = content?.subtitle || 'Mỗi giai đoạn đều có kết quả cụ thể để bạn nghiệm thu trực tiếp trước khi chuyển sang bước tiếp theo.';
-
-  const defaultRoadmapSteps = [
-    {
-      step: '01',
-      days: 'Ngày 1 - 2',
-      title: 'Lắng Nghe & Lên Khung Web',
-      desc: 'Trao đổi kỹ nhu cầu thực tế, tư vấn cấu trúc trang hợp lý, thống nhất màu sắc và lên bản phác thảo khung mẫu.',
-      output: 'Đầu ra: Bản phác thảo khung trang rõ ràng',
-      icon: <IconConsult size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-    },
-    {
-      step: '02',
-      days: 'Ngày 3 - 5',
-      title: 'Thiết Kế Giao Diện Chi Tiết',
-      desc: 'Lên thiết kế đẹp mắt theo nhận diện thương hiệu của bạn. Bạn được xem và góp ý chỉnh sửa cho đến khi ưng ý.',
-      output: 'Đầu ra: Bản thiết kế được bạn duyệt 100%',
-      icon: <IconPrototype size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-    },
-    {
-      step: '03',
-      days: 'Ngày 6 - 8',
-      title: 'Xây Dựng & Tối Ưu Hệ Thống',
-      desc: 'Hiện thực hóa giao diện, tối ưu chuẩn tìm kiếm Google, đảm bảo tốc độ mở trang tức thì dưới 1 giây và chạy thử nghiệm kỹ lưỡng.',
-      output: 'Đầu ra: Website chạy thử thực tế hoàn chỉnh',
-      icon: <IconDevelopment size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-    },
-    {
-      step: '04',
-      days: 'Ngày 9 - 10',
-      title: 'Bàn Giao & Hướng Dẫn Tận Tình',
-      desc: 'Bàn giao toàn bộ quyền quản trị website và dữ liệu, gửi video hướng dẫn sử dụng 1-1 và kích hoạt chế độ hỗ trợ trọn đời.',
-      output: 'Đầu ra: Toàn quyền sở hữu & Bắt đầu kinh doanh',
-      icon: <IconHandover size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-    },
-  ];
-
-  const stepIcons = [
-    <IconConsult key="step-1" size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-    <IconPrototype key="step-2" size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-    <IconDevelopment key="step-3" size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-    <IconHandover key="step-4" size={24} className="text-slate-700 group-hover:text-[#006398] transition-colors" />,
-  ];
-
-  const roadmapSteps = content?.steps && content.steps.length > 0
-    ? content.steps.map((st, idx) => ({
-        step: st.step || `0${idx + 1}`,
-        days: st.days || `Giai đoạn ${idx + 1}`,
-        title: st.title || `Bước ${idx + 1}`,
-        desc: st.desc || st.description || '',
-        output: st.output || 'Nghiệm thu trực tiếp',
-        icon: stepIcons[idx % stepIcons.length],
-      }))
-    : defaultRoadmapSteps;
+export const AdvantagesSection: React.FC<AdvantagesSectionProps> = ({ content }) => {
+  const steps =
+    content.steps && content.steps.length > 0
+      ? content.steps
+      : [
+          {
+            step: '01',
+            days: 'Ngày 1 - 2',
+            title: 'Tiếp Nhận & Lên Khung',
+            desc: 'Trao đổi mục tiêu kinh doanh, thống nhất cấu trúc nội dung và phương án triển khai.',
+          },
+          {
+            step: '02',
+            days: 'Ngày 3 - 5',
+            title: 'Thiết Kế Giao Diện',
+            desc: 'Hoàn thiện bản thiết kế theo đúng màu sắc thương hiệu để bạn duyệt trước.',
+          },
+          {
+            step: '03',
+            days: 'Ngày 6 - 8',
+            title: 'Lập Trình & Tối Ưu',
+            desc: 'Xây dựng hệ thống chuẩn mobile, tối ưu tốc độ tải trang và cấu hình SEO.',
+          },
+          {
+            step: '04',
+            days: 'Ngày 9 - 10',
+            title: 'Nghiệm Thu & Bảo Hành',
+            desc: 'Bàn giao toàn bộ tài khoản quản trị, hướng dẫn 1-1 và kích hoạt bảo hành.',
+          },
+        ];
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc] border-y border-slate-200/60 relative overflow-hidden" id="loi-ich">
-      {/* Subtle neutral background ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-slate-200/30 blur-3xl pointer-events-none rounded-full -z-10" />
-
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
-        {/* Section Header */}
-        <div className="mb-10 lg:mb-14">
-          <div className="space-y-3 max-w-2xl">
-            <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold border border-slate-200/80 inline-block">
-              {badge}
+    <section
+      id="quy-trinh"
+      className="bg-[#f6f9fc] py-16 sm:py-20 border-b border-[#e3e8ee] scroll-mt-16"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mb-12">
+          {content.badge && (
+            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#533afd] mb-2">
+              {content.badge}
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight">
-              {title}
-            </h2>
-            <p className="text-sm sm:text-base text-[#45464d] leading-relaxed">
-              {subtitle}
+          )}
+          <h2 className="text-2xl sm:text-4xl font-bold text-[#0d253d] tracking-tight">
+            {content.title || '4 Bước Triển Khai Rõ Ràng Từ Ý Tưởng Đến Bàn Giao'}
+          </h2>
+          {content.subtitle && (
+            <p className="text-sm sm:text-base text-[#64748d] mt-3 leading-relaxed">
+              {content.subtitle}
             </p>
-          </div>
+          )}
         </div>
 
-        {/* Style A: 4 Columns Parallel Cards */}
-        {activeStyle === 'commits-a' && <AdvantagesGridVariant items={items} />}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {steps.map((st, idx) => (
+            <div
+              key={st.step || idx}
+              className="bg-white border border-[#e3e8ee] rounded-xl p-6 flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#eef2ff] text-[#4434d4] text-sm font-bold tabular-nums">
+                    {st.step || `0${idx + 1}`}
+                  </span>
+                  {st.days && (
+                    <span className="text-xs font-medium text-[#64748d] tabular-nums">
+                      {st.days}
+                    </span>
+                  )}
+                </div>
 
-        {/* Style B: Wavy Roadmap */}
-        {activeStyle === 'commits-b' && <AdvantagesRoadmapVariant roadmapSteps={roadmapSteps} />}
+                <h3 className="text-base font-semibold text-[#0d253d]">{st.title}</h3>
+                <p className="text-xs sm:text-sm text-[#64748d] mt-2 leading-relaxed">
+                  {st.desc || st.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

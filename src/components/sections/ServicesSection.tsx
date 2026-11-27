@@ -1,53 +1,80 @@
 'use client';
 
 import React from 'react';
-import { useServices } from '../../hooks/useServices';
 import { ServicesSectionContent } from '../../types/landingConfig.types';
-import { ServicesBentoVariant, ServicesGridVariant } from './services';
+import {
+  IconWebDesign,
+  IconEcommerce,
+  IconSEO,
+  IconCloudServer,
+  IconCorporate,
+  IconSpeed,
+  IconBadge,
+} from '../icons/CustomIcons';
 
 export interface ServicesSectionProps {
-  content?: ServicesSectionContent;
-  displayStyle?: string;
+  content: ServicesSectionContent;
 }
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({ content, displayStyle = 'services-b' }) => {
-  const { data: defaultServices = [] } = useServices();
+const ICON_MAP: Record<string, React.ReactNode> = {
+  design_services: <IconWebDesign size={20} />,
+  ads_click: <IconEcommerce size={20} />,
+  rocket_launch: <IconSpeed size={20} />,
+  query_stats: <IconSEO size={20} />,
+  dashboard: <IconCorporate size={20} />,
+  dns: <IconCloudServer size={20} />,
+};
 
-  const activeStyle = (() => {
-    if (displayStyle === 'services-a' || displayStyle === 'grid-3' || displayStyle === 'grid-2' || displayStyle === 'compact') {
-      return 'services-a';
-    }
-    return 'services-b'; // Default to modern Bento Grid (Stripe)
-  })();
-
-  const services = content?.items && content.items.length > 0 ? content.items : defaultServices;
-  const badge = content?.badge || 'Dịch Vụ Trọng Tâm';
-  const title = content?.title || 'Giải Pháp Thiết Kế & Phát Triển Website Toàn Diện';
-  const subtitle = content?.subtitle || 'Lựa chọn kiến trúc website phù hợp nhất với mô hình kinh doanh của bạn, tối ưu chuyển đổi và đồng hành kỹ thuật bền lâu.';
+export const ServicesSection: React.FC<ServicesSectionProps> = ({ content }) => {
+  const items = content.items || [];
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc]" id="dich-vu">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
-        {/* Section Header */}
-        <div className="mb-10 lg:mb-14">
-          <div className="space-y-3 max-w-2xl">
-            <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold border border-slate-200/80 inline-block">
-              {badge}
+    <section id="dich-vu" className="bg-white py-16 sm:py-20 border-b border-[#e3e8ee] scroll-mt-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mb-12">
+          {content.badge && (
+            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#533afd] mb-2">
+              {content.badge}
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight">
-              {title}
-            </h2>
-            <p className="text-sm sm:text-base text-[#45464d] leading-relaxed">
-              {subtitle}
+          )}
+          <h2 className="text-2xl sm:text-4xl font-bold text-[#0d253d] tracking-tight">
+            {content.title || 'Dịch Vụ Thiết Kế & Phát Triển Website'}
+          </h2>
+          {content.subtitle && (
+            <p className="text-sm sm:text-base text-[#64748d] mt-3 leading-relaxed">
+              {content.subtitle}
             </p>
-          </div>
+          )}
         </div>
 
-        {/* Style A: Grid Cards */}
-        {activeStyle === 'services-a' && <ServicesGridVariant services={services} />}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {items.map((item, idx) => (
+            <div
+              key={item.id || idx}
+              className="group bg-white border border-[#e3e8ee] hover:border-[#533afd]/40 rounded-xl p-6 transition-all duration-200 hover:shadow-stripe flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-3 mb-4">
+                  <IconBadge size="md">
+                    {ICON_MAP[item.icon] || <IconWebDesign size={20} />}
+                  </IconBadge>
+                  {item.tag && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#eef2ff] text-[#4434d4] text-[11px] font-medium">
+                      {item.tag}
+                    </span>
+                  )}
+                </div>
 
-        {/* Style B: Bento Grid */}
-        {activeStyle === 'services-b' && <ServicesBentoVariant services={services} />}
+                <h3 className="text-lg font-semibold text-[#0d253d] leading-snug">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#64748d] mt-2 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

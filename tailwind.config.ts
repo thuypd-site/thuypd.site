@@ -4,67 +4,34 @@ const config: Config = {
   darkMode: ["class"],
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#eff8ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#006398',
-          700: '#004f7c',
-          800: '#003e61',
-          900: '#0b1c30',
-          dark: '#0b1320',
-          accent: '#5bb8fe',
+        stripe: {
+          primary: '#533afd',
+          deep: '#4434d4',
+          press: '#2e2b8c',
+          soft: '#eef2ff',
+          ink: '#0d253d',
+          secondary: '#273951',
+          muted: '#64748d',
+          canvas: '#ffffff',
+          surface: '#f6f9fc',
+          hairline: '#e3e8ee',
+          input: '#a8c3de',
+          ruby: '#ea2261',
         },
-        surface: {
-          DEFAULT: '#f8f9ff',
-          dark: '#0b1c30',
-          card: '#ffffff',
-          'card-dark': '#131b2e',
-        }
       },
       fontFamily: {
         sans: ['var(--font-be-vietnam-pro)', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
         display: ['var(--font-be-vietnam-pro)', 'Be Vietnam Pro', 'system-ui', 'sans-serif'],
       },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-9px)' },
-        },
-        'float-gentle': {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-4px)' },
-        },
-        pulseGlow: {
-          '0%, 100%': { opacity: '0.55', transform: 'scale(1)' },
-          '50%': { opacity: '0.85', transform: 'scale(1.06)' },
-        },
-        shimmer: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(200%)' },
-        },
-        'border-beam': {
-          '100%': {
-            offsetDistance: '100%',
-          },
-        },
-      },
-      animation: {
-        float: 'float 4s ease-in-out infinite',
-        'float-gentle': 'float-gentle 5s ease-in-out infinite',
-        'pulse-glow': 'pulseGlow 6s ease-in-out infinite',
-        shimmer: 'shimmer 3s infinite ease-in-out',
-        'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
+      boxShadow: {
+        stripe: '0 1px 2px rgba(13, 37, 61, 0.04), 0 8px 24px -12px rgba(13, 37, 61, 0.08)',
+        'stripe-lg': '0 4px 12px rgba(13, 37, 61, 0.06), 0 20px 44px -16px rgba(13, 37, 61, 0.14)',
       },
     },
   },

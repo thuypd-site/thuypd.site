@@ -16,10 +16,15 @@ const defaultFallbackSettings: SiteSettings = {
 };
 
 export const useSettings = () => {
-  return useQuery<SiteSettings>({
+  const query = useQuery<SiteSettings>({
     queryKey: ['site-settings'],
     queryFn: fetchSettingsApi,
     placeholderData: defaultFallbackSettings,
     staleTime: 5 * 60 * 1000,
   });
+
+  return {
+    ...query,
+    settings: query.data ?? defaultFallbackSettings,
+  };
 };

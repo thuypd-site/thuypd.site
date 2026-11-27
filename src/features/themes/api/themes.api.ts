@@ -6,7 +6,7 @@ function normalizeTheme(t: any): ThemeItem {
   const priceNum = typeof t.price === 'number' ? t.price : 0;
   const formattedPrice =
     t.formattedPrice ||
-    (priceNum > 0 ? `${new Intl.NumberFormat('vi-VN').format(priceNum)}đ` : 'Liên hệ');
+    (priceNum > 0 ? `${new Intl.NumberFormat('vi-VN').format(priceNum)} ₫` : 'Liên hệ');
 
   return {
     ...t,
@@ -28,7 +28,6 @@ function normalizeTheme(t: any): ThemeItem {
 export const fetchThemesApi = async (category: ThemeCategory = 'all'): Promise<ThemeItem[]> => {
   try {
     const query = category !== 'all' ? `?category=${encodeURIComponent(category)}` : '';
-    // Prefer official client endpoint /api/client/themes from docs
     const data = await httpClient<any>(`/api/client/themes${query}`);
     const list = Array.isArray(data?.data) ? data.data : Array.isArray(data?.themes) ? data.themes : [];
 
@@ -36,23 +35,9 @@ export const fetchThemesApi = async (category: ThemeCategory = 'all'): Promise<T
       return list.map(normalizeTheme);
     }
   } catch (err) {
-    console.warn('[Themes API] Không thể lấy từ máy chủ, chuyển sang dữ liệu dự phòng:', err);
+    console.warn('[Themes API] Fallback to mockThemes:', err);
   }
 
   if (category === 'all') return mockThemes;
   return mockThemes.filter((theme) => theme.category === category);
-};
-
-export const fetchThemeByIdApi = async (id: string): Promise<ThemeItem | null> => {
-  try {
-    const data = await httpClient<any>(`/api/client/themes/${id}`);
-    const t = data?.data || data?.theme;
-    if (data?.success && t) {
-      return normalizeTheme(t);
-    }
-  } catch (err) {
-    console.warn(`[Themes API] Không thể tải chi tiết theme ${id}:`, err);
-  }
-
-  return mockThemes.find((m) => m.id === id || m._id === id || m.themeId === id) || null;
 };

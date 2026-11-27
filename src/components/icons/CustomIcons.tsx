@@ -439,14 +439,14 @@ export interface IconBadgeProps {
 
 export const IconBadge: React.FC<IconBadgeProps> = ({ children, className = '', size = 'md' }) => {
   const sizeClass = {
-    sm: 'w-9 h-9 rounded-xl',
-    md: 'w-12 h-12 rounded-2xl',
-    lg: 'w-14 h-14 rounded-2xl',
+    sm: 'w-9 h-9 rounded-lg',
+    md: 'w-11 h-11 rounded-lg',
+    lg: 'w-12 h-12 rounded-xl',
   }[size];
 
   return (
     <div
-      className={`inline-flex items-center justify-center bg-slate-50 border border-slate-200/80 text-slate-700 shadow-2xs transition-all duration-300 group-hover:border-[#006398]/35 group-hover:text-[#006398] group-hover:bg-[#f0f7ff] group-hover:shadow-sm ${sizeClass} ${className}`}
+      className={`inline-flex items-center justify-center bg-[#eef2ff] border border-[#e3e8ee] text-[#533afd] transition-colors duration-200 group-hover:bg-[#533afd] group-hover:text-white group-hover:border-[#533afd] ${sizeClass} ${className}`}
     >
       {children}
     </div>

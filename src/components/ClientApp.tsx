@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import { Header, Footer, FloatingWidget } from '@/src/components/layout';
-import { LandingPageRenderer } from '@/src/components/landing/LandingPageRenderer';
+import { LandingPageRenderer } from '@/src/features/landing/components/LandingPageRenderer';
 import { ThemeItem } from '@/src/types';
-
 import { useLandingConfig } from '@/src/features/landing/context/LandingConfigContext';
 
 export function ClientApp() {
@@ -12,44 +11,40 @@ export function ClientApp() {
   const isHeaderVisible = config?.header?.enabled !== false && config?.header?.isVisible !== false;
   const isFooterVisible = config?.footer?.enabled !== false && config?.footer?.isVisible !== false;
 
-  const [selectedBudgetTier, setSelectedBudgetTier] = useState<string>('Gói Chuyên Nghiệp (7.990.000đ)');
-  const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Website Bán Hàng / Cửa Hàng Trực Tuyến');
+  const [selectedBudgetTier, setSelectedBudgetTier] = useState<string>('');
+  const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Website Doanh Nghiệp');
   const [selectedNotes, setSelectedNotes] = useState<string>('');
 
   const handleSelectPlan = (planName: string, budgetTier: string) => {
     setSelectedBudgetTier(budgetTier);
-    setSelectedNotes(`Khách hàng quan tâm đăng ký ${planName}.`);
+    setSelectedNotes(`Quan tâm đăng ký ${planName}.`);
   };
 
   const handleSelectTheme = (theme: ThemeItem) => {
-    setSelectedWebsiteType(
-      theme.category === 'ecommerce'
-        ? 'Website Bán Hàng / Cửa Hàng Trực Tuyến'
-        : theme.category === 'corporate'
-          ? 'Website Giới Thiệu Doanh Nghiệp'
-          : theme.category === 'realestate'
-            ? 'Website Bất Động Sản'
-            : theme.category === 'spa'
-              ? 'Website Dịch Vụ / Spa / Thẩm Mỹ'
-              : 'Website Thiết Kế Theo Yêu Cầu Riêng'
-    );
-    setSelectedNotes(`Khách hàng quan tâm mẫu thiết kế: ${theme.title} (${theme.formattedPrice}).`);
+    const categoryToType: Record<string, string> = {
+      ecommerce: 'Website Bán Hàng & Thương Mại Điện Tử',
+      corporate: 'Website Giới Thiệu Doanh Nghiệp',
+      realestate: 'Website Bất Động Sản',
+      spa: 'Website Dịch Vụ / Spa / Thẩm Mỹ',
+      furniture: 'Website Nội Thất & Kiến Trúc',
+      portfolio: 'Website Portfolio / Studio',
+    };
+    setSelectedWebsiteType(categoryToType[theme.category] || 'Website Thiết Kế Theo Yêu Cầu Riêng');
+    setSelectedNotes(`Quan tâm mẫu giao diện: ${theme.title} (${theme.formattedPrice}).`);
   };
 
   const handleOpenQuoteModal = () => {
-    const target = document.querySelector('#nhan-bao-gia') || document.querySelector('#contact-lead');
+    const target = document.querySelector('#nhan-bao-gia');
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#fafbfc] text-[#0b1c30] flex flex-col font-sans selection:bg-[#006398]/20 selection:text-[#006398]">
-      {/* Navigation Bar */}
+    <div className="min-h-screen bg-white text-[#0d253d] flex flex-col font-sans">
       {isHeaderVisible && <Header onOpenQuoteModal={handleOpenQuoteModal} />}
 
-      {/* Main Dynamic Landing Sections */}
-      <main className={`w-full ${isHeaderVisible ? 'pt-20' : 'pt-0'} pb-16 sm:pb-0`}>
+      <main className={`w-full ${isHeaderVisible ? 'pt-16' : 'pt-0'} pb-16 sm:pb-0`}>
         <LandingPageRenderer
           onSelectTheme={handleSelectTheme}
           onSelectPlan={handleSelectPlan}
@@ -59,10 +54,7 @@ export function ClientApp() {
         />
       </main>
 
-      {/* Footer */}
       {isFooterVisible && <Footer />}
-
-      {/* Floating Quick Action Contacts */}
       <FloatingWidget />
     </div>
   );

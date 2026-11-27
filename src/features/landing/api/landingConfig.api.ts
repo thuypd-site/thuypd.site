@@ -3,14 +3,25 @@ import { defaultLandingConfig } from '../../../data/defaultLandingConfig';
 
 const API_BASE = '/api/landing-config';
 
-/**
- * Normalizes section keys and field schemas between Backend API (remote or local)
- * and FE Client typed state.
- */
+const VALID_SECTIONS: SectionId[] = [
+  'header',
+  'hero',
+  'logobar',
+  'services',
+  'advantages',
+  'themes',
+  'pricing',
+  'domain',
+  'testimonials',
+  'faq',
+  'cta',
+  'contact',
+  'footer',
+];
+
 export function normalizeServerSection(rawSec: any): SectionConfig | null {
   if (!rawSec) return null;
 
-  // Determine section key
   const rawKey: string = (rawSec.sectionKey || rawSec.id || '').replace(/^sec_/, '');
   let id: SectionId;
 
@@ -18,170 +29,198 @@ export function normalizeServerSection(rawSec: any): SectionConfig | null {
     id = 'logobar';
   } else if (rawKey === 'process') {
     id = 'advantages';
-  } else if (
-    [
-      'header',
-      'hero',
-      'logobar',
-      'services',
-      'advantages',
-      'themes',
-      'pricing',
-      'domain',
-      'testimonials',
-      'faq',
-      'cta',
-      'contact',
-      'footer',
-    ].includes(rawKey)
-  ) {
+  } else if (VALID_SECTIONS.includes(rawKey as SectionId)) {
     id = rawKey as SectionId;
   } else {
     return null;
   }
 
-  const enabled = rawSec.enabled !== undefined 
-    ? Boolean(rawSec.enabled) 
-    : (rawSec.isVisible !== undefined ? Boolean(rawSec.isVisible) : true);
+  const enabled =
+    rawSec.enabled !== undefined
+      ? Boolean(rawSec.enabled)
+      : rawSec.isVisible !== undefined
+        ? Boolean(rawSec.isVisible)
+        : true;
 
-  const displayStyle = rawSec.displayStyle || rawSec.variant || 'standard';
-
-  // Find default fallback section to preserve availableStyles and default pillars/options
   const defaultSec = defaultLandingConfig.sections.find((ds) => ds.id === id);
-
   const baseConfig = {
     id,
     name: rawSec.name || defaultSec?.name || id,
     enabled,
-    displayStyle,
-    availableStyles: rawSec.availableStyles || defaultSec?.availableStyles || [
-      { value: displayStyle, label: 'Mặc định', description: 'Giao diện chuẩn' },
-    ],
+    displayStyle: 'default',
   };
 
   const rawContent = rawSec.content || {};
 
   switch (id) {
     case 'header': {
-      const defContent = defaultSec?.id === 'header' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'header' ? defaultSec.content : null;
+      const navItems =
+        Array.isArray(rawContent.navItems) && rawContent.navItems.length > 0
+          ? rawContent.navItems.map((item: any) => ({
+              ...item,
+              href:
+                item.href === '#hoi-dap'
+                  ? '#faq'
+                  : item.href === '#loi-ich'
+                    ? '#quy-trinh'
+                    : item.href,
+            }))
+          : def?.navItems || [];
+
       return {
         ...baseConfig,
         id: 'header',
         content: {
-          hotlineLabel: rawContent.hotlineLabel || defContent?.hotlineLabel || 'Hotline 24/7',
-          ctaText: rawContent.ctaText || defContent?.ctaText || 'Nhận Báo Giá Ngay',
-          ctaLink: rawContent.ctaLink || defContent?.ctaLink || '#nhan-bao-gia',
-          sticky: rawContent.sticky !== undefined ? Boolean(rawContent.sticky) : (defContent?.sticky ?? true),
-          navItems: rawContent.navItems && rawContent.navItems.length > 0 ? rawContent.navItems : (defContent?.navItems || []),
+          ctaText: rawContent.ctaText || def?.ctaText || 'Nhận Báo Giá',
+          ctaLink: rawContent.ctaLink || def?.ctaLink || '#nhan-bao-gia',
+          navItems,
         },
       };
     }
 
     case 'hero': {
-      const defContent = defaultSec?.id === 'hero' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'hero' ? defaultSec.content : null;
+      const rawPrimaryLink = rawContent.ctaPrimaryLink || def?.ctaPrimaryLink || '#bang-gia';
       return {
         ...baseConfig,
         id: 'hero',
         content: {
-          badgeText: rawContent.badgeText || rawContent.badge || defContent?.badgeText || '',
-          headlineMain: rawContent.headlineMain || rawContent.title || defContent?.headlineMain || '',
-          headlineHighlight: rawContent.headlineHighlight || rawContent.titleHighlight || defContent?.headlineHighlight || '',
-          description: rawContent.description || rawContent.subtitle || defContent?.description || '',
-          ctaPrimaryText: rawContent.ctaPrimaryText || defContent?.ctaPrimaryText || 'Khám Phá Bảng Giá',
-          ctaSecondaryText: rawContent.ctaSecondaryText || defContent?.ctaSecondaryText || 'Tư Vấn Miễn Phí',
-          ctaPrimaryLink: rawContent.ctaPrimaryLink || '#pricing',
-          ctaSecondaryLink: rawContent.ctaSecondaryLink || '#contact-lead',
-          ratingBadgeText: rawContent.ratingBadgeText || '',
-          heroImageUrl: rawContent.heroImageUrl || '',
-          pillars: rawContent.pillars && rawContent.pillars.length > 0 
-            ? rawContent.pillars 
-            : (defContent?.pillars || []),
+          badgeText: rawContent.badgeText || rawContent.badge || def?.badgeText || '',
+          headlineMain: rawContent.headlineMain || rawContent.title || def?.headlineMain || '',
+          headlineHighlight:
+            rawContent.headlineHighlight || rawContent.titleHighlight || def?.headlineHighlight || '',
+          description: rawContent.description || rawContent.subtitle || def?.description || '',
+          ctaPrimaryText: rawContent.ctaPrimaryText || def?.ctaPrimaryText || 'Xem Bảng Giá Trọn Gói',
+          ctaSecondaryText: rawContent.ctaSecondaryText || def?.ctaSecondaryText || 'Khám Phá Kho Mẫu',
+          ctaPrimaryLink: rawPrimaryLink === '#pricing' ? '#bang-gia' : rawPrimaryLink,
+          ctaSecondaryLink: rawContent.ctaSecondaryLink || def?.ctaSecondaryLink || '#kho-giao-dien',
+          pillars:
+            Array.isArray(rawContent.pillars) && rawContent.pillars.length > 0
+              ? rawContent.pillars
+              : def?.pillars || [],
         },
       };
     }
 
     case 'logobar': {
-      const defContent = defaultSec?.id === 'logobar' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'logobar' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'logobar',
         content: {
-          title: rawContent.title || defContent?.title || 'Khách Hàng Tiêu Biểu Tin Tưởng Đồng Hành',
-          statsText: rawContent.statsText || defContent?.statsText || '',
-          items: rawContent.items && rawContent.items.length > 0 ? rawContent.items : (defContent?.items || []),
+          title: rawContent.title || def?.title || '',
+          statsText: rawContent.statsText || def?.statsText || '',
+          items:
+            Array.isArray(rawContent.items) && rawContent.items.length > 0
+              ? rawContent.items
+              : def?.items || [],
         },
       };
     }
 
     case 'services': {
-      const defContent = defaultSec?.id === 'services' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'services' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'services',
         content: {
-          badge: rawContent.badge || defContent?.badge || 'Hệ Sinh Thái Toàn Diện',
-          title: rawContent.title || defContent?.title || 'Giải Pháp Thiết Kế Website',
-          subtitle: rawContent.subtitle || defContent?.subtitle || '',
-          items: rawContent.items && rawContent.items.length > 0 ? rawContent.items : (defContent?.items || []),
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
+          items:
+            Array.isArray(rawContent.items) && rawContent.items.length > 0
+              ? rawContent.items
+              : def?.items || [],
         },
       };
     }
 
     case 'advantages': {
-      const defContent = defaultSec?.id === 'advantages' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'advantages' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'advantages',
         content: {
-          badge: rawContent.badge || defContent?.badge || 'Quy Trình Triển Khai',
-          title: rawContent.title || defContent?.title || 'Quy Trình Minh Bạch & Chuẩn Chỉ',
-          subtitle: rawContent.subtitle || defContent?.subtitle || '',
-          steps: rawContent.steps && rawContent.steps.length > 0 ? rawContent.steps : (defContent?.steps || []),
-          items: rawContent.items && rawContent.items.length > 0 ? rawContent.items : (defContent?.items || []),
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
+          steps:
+            Array.isArray(rawContent.steps) && rawContent.steps.length > 0
+              ? rawContent.steps
+              : def?.steps || [],
+          items:
+            Array.isArray(rawContent.items) && rawContent.items.length > 0
+              ? rawContent.items
+              : def?.items || [],
         },
       };
     }
 
     case 'themes': {
-      const defContent = defaultSec?.id === 'themes' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'themes' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'themes',
         content: {
-          badge: rawContent.badge || defContent?.badge || 'Bộ Sưu Tập Mẫu',
-          title: rawContent.title || defContent?.title || 'Kho Giao Diện Đẳng Cấp Theo Từng Ngành',
-          subtitle: rawContent.subtitle || defContent?.subtitle || '',
-          ctaText: rawContent.ctaText || 'Xem Tất Cả Giao Diện Mẫu',
-          ctaLink: rawContent.ctaLink || '#kho-giao-dien',
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
         },
       };
     }
 
     case 'pricing': {
-      const defContent = defaultSec?.id === 'pricing' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'pricing' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'pricing',
         content: {
-          badge: rawContent.badge || defContent?.badge || 'Bảng Giá Minh Bạch',
-          title: rawContent.title || defContent?.title || 'Đầu Tư Đúng Mực, Thu Về Hiệu Quả Lâu Dài',
-          subtitle: rawContent.subtitle || defContent?.subtitle || '',
-          highlightPlanId: rawContent.highlightPlanId || 'plan-professional',
-          footerNote: rawContent.footerNote || '',
-          plans: rawContent.plans && rawContent.plans.length > 0 ? rawContent.plans : (defContent?.plans || []),
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
+          highlightPlanId: rawContent.highlightPlanId || def?.highlightPlanId || 'plan-professional',
+          plans:
+            Array.isArray(rawContent.plans) && rawContent.plans.length > 0
+              ? rawContent.plans
+              : def?.plans || [],
+        },
+      };
+    }
+
+    case 'domain': {
+      const def = defaultSec?.id === 'domain' ? defaultSec.content : null;
+      return {
+        ...baseConfig,
+        id: 'domain',
+        content: {
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
+          pricing:
+            Array.isArray(rawContent.pricing) && rawContent.pricing.length > 0
+              ? rawContent.pricing
+              : def?.pricing || [],
         },
       };
     }
 
     case 'testimonials': {
-      const defContent = defaultSec?.id === 'testimonials' ? defaultSec.content : null;
-      const rawItems = rawContent.items || defContent?.items || [];
+      const def = defaultSec?.id === 'testimonials' ? defaultSec.content : null;
+      const rawItems =
+        Array.isArray(rawContent.items) && rawContent.items.length > 0
+          ? rawContent.items
+          : def?.items || [];
+
       const normalizedItems = rawItems.map((item: any, idx: number) => ({
         id: item.id || `testimonial-${idx}`,
         author: item.author || item.name || 'Khách hàng',
         role: item.role || 'Đối tác',
         company: item.company || 'Doanh nghiệp',
-        avatarUrl: item.avatarUrl || item.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+        avatarUrl:
+          item.avatarUrl ||
+          item.avatar ||
+          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
         quote: item.quote || item.comment || '',
         rating: typeof item.rating === 'number' ? item.rating : 5,
       }));
@@ -190,84 +229,74 @@ export function normalizeServerSection(rawSec: any): SectionConfig | null {
         ...baseConfig,
         id: 'testimonials',
         content: {
-          badge: rawContent.badge || defContent?.badge || 'Khách Hàng Chia Sẻ',
-          title: rawContent.title || defContent?.title || 'Đánh Giá Thực Tế Từ Đối Tác',
-          subtitle: rawContent.subtitle || defContent?.subtitle || '',
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
           items: normalizedItems,
         },
       };
     }
 
     case 'faq': {
+      const def = defaultSec?.id === 'faq' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'faq',
         content: {
-          badge: rawContent.badge || 'GIẢI ĐÁP THẮC MẮC',
-          title: rawContent.title || 'Câu Hỏi Thường Gặp Khi Thiết Kế Website',
-          subtitle: rawContent.subtitle || 'Những câu hỏi được khách hàng quan tâm nhiều nhất.',
-          items: rawContent.items || [],
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
+          items:
+            Array.isArray(rawContent.items) && rawContent.items.length > 0
+              ? rawContent.items
+              : def?.items || [],
         },
       };
     }
 
     case 'cta': {
+      const def = defaultSec?.id === 'cta' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'cta',
         content: {
-          title: rawContent.title || 'Sẵn Sàng Bứt Phá Doanh Số Cùng Website Đẳng Cấp?',
-          subtitle: rawContent.subtitle || 'Để lại thông tin ngay hôm nay để nhận tư vấn miễn phí.',
-          buttonText: rawContent.buttonText || 'Đăng Ký Tư Vấn & Nhận Báo Giá',
-          buttonLink: rawContent.buttonLink || '#contact-lead',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
+          buttonText: rawContent.buttonText || def?.buttonText || 'Nhận Báo Giá Ngay',
+          buttonLink: rawContent.buttonLink || def?.buttonLink || '#nhan-bao-gia',
           hotlineText: rawContent.hotlineText || '',
         },
       };
     }
 
     case 'contact': {
-      const defContent = defaultSec?.id === 'contact' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'contact' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'contact',
         content: {
-          badge: rawContent.badge || defContent?.badge || 'Liên Hệ Trực Tiếp',
-          title: rawContent.title || defContent?.title || 'Nhận Báo Giá Thiết Kế Web Trong 15 Phút',
-          subtitle: rawContent.subtitle || defContent?.subtitle || '',
-          commitments: rawContent.commitments || defContent?.commitments,
-        },
-      };
-    }
-
-    case 'domain': {
-      const defContent = defaultSec?.id === 'domain' ? defaultSec.content : null;
-      return {
-        ...baseConfig,
-        id: 'domain',
-        content: {
-          badge: rawContent.badge || defContent?.badge || 'Tra Cứu Trực Tuyến',
-          title: rawContent.title || defContent?.title || 'Kiểm Tra Tên Miền Đẹp Cho Doanh Nghiệp',
-          subtitle: rawContent.subtitle || defContent?.subtitle || '',
+          badge: rawContent.badge || def?.badge || '',
+          title: rawContent.title || def?.title || '',
+          subtitle: rawContent.subtitle || def?.subtitle || '',
+          commitments:
+            Array.isArray(rawContent.commitments) && rawContent.commitments.length > 0
+              ? rawContent.commitments
+              : def?.commitments || [],
         },
       };
     }
 
     case 'footer': {
-      const defContent = defaultSec?.id === 'footer' ? defaultSec.content : null;
+      const def = defaultSec?.id === 'footer' ? defaultSec.content : null;
       return {
         ...baseConfig,
         id: 'footer',
         content: {
-          preFooterBadge: rawContent.preFooterBadge || defContent?.preFooterBadge || 'Tư Vấn Miễn Phí • Báo Giá Trong 15 Phút',
-          preFooterTitle: rawContent.preFooterTitle || defContent?.preFooterTitle || 'Bạn Cần Website Chuẩn Gu, Vận Hành Mượt Mà?',
-          preFooterSubtitle: rawContent.preFooterSubtitle || defContent?.preFooterSubtitle || 'Nhắn ngay qua Zalo để nhận tư vấn kiến trúc giải pháp và demo phác thảo giao diện phù hợp nhất với ngành nghề của bạn.',
-          preFooterCtaZaloText: rawContent.preFooterCtaZaloText || defContent?.preFooterCtaZaloText || 'Nhắn Zalo Tư Vấn Ngay',
-          brandDescription: rawContent.brandDescription || defContent?.brandDescription || 'Chuyên gia thiết kế và phát triển website doanh nghiệp, bán hàng, landing page theo yêu cầu. Chuẩn SEO Google, tốc độ tải trang vượt trội và cam kết bàn giao 100% mã nguồn.',
-          systemStatusText: rawContent.systemStatusText || defContent?.systemStatusText || 'Hạ tầng máy chủ: Hoạt động ổn định 99.9%',
-          servicesTitle: rawContent.servicesTitle || defContent?.servicesTitle || 'Dịch Vụ Nổi Bật',
-          quickLinksTitle: rawContent.quickLinksTitle || defContent?.quickLinksTitle || 'Liên Kết Nhanh',
-          contactTitle: rawContent.contactTitle || defContent?.contactTitle || 'Thông Tin Liên Hệ',
-          copyrightText: rawContent.copyrightText || defContent?.copyrightText || '© 2026 THUYPD.SITE. Tất cả quyền được bảo lưu. Thiết kế & phát triển với tiêu chuẩn chất lượng cao nhất.',
+          brandDescription: rawContent.brandDescription || def?.brandDescription || '',
+          servicesTitle: rawContent.servicesTitle || def?.servicesTitle || 'Dịch Vụ',
+          quickLinksTitle: rawContent.quickLinksTitle || def?.quickLinksTitle || 'Điều Hướng',
+          contactTitle: rawContent.contactTitle || def?.contactTitle || 'Liên Hệ',
+          copyrightText: rawContent.copyrightText || def?.copyrightText || '',
         },
       };
     }
@@ -277,9 +306,6 @@ export function normalizeServerSection(rawSec: any): SectionConfig | null {
   }
 }
 
-/**
- * Normalizes full LandingPageConfig payload from backend API
- */
 export function normalizeLandingPageConfig(rawConfig: any): LandingPageConfig {
   if (!rawConfig) return defaultLandingConfig;
 
@@ -296,66 +322,33 @@ export function normalizeLandingPageConfig(rawConfig: any): LandingPageConfig {
     }
   }
 
-  // Ensure 'header' section is retained if not explicitly present
   if (!normalizedSections.some((s) => s.id === 'header')) {
     const defaultHeader = defaultLandingConfig.sections.find((s) => s.id === 'header');
-    if (defaultHeader) {
-      normalizedSections.unshift(defaultHeader);
-    }
+    if (defaultHeader) normalizedSections.unshift(defaultHeader);
   }
 
-  // Ensure 'domain' section is retained if not explicitly present
-  if (!normalizedSections.some((s) => s.id === 'domain')) {
-    const defaultDomain = defaultLandingConfig.sections.find((s) => s.id === 'domain');
-    if (defaultDomain) {
-      const pricingIndex = normalizedSections.findIndex((s) => s.id === 'pricing');
-      if (pricingIndex !== -1) {
-        normalizedSections.splice(pricingIndex + 1, 0, defaultDomain);
-      } else {
-        normalizedSections.push(defaultDomain);
-      }
-    }
-  }
-
-  // Ensure 'footer' section is retained if not explicitly present
   if (!normalizedSections.some((s) => s.id === 'footer')) {
     const defaultFooter = defaultLandingConfig.sections.find((s) => s.id === 'footer');
-    if (defaultFooter) {
-      normalizedSections.push(defaultFooter);
-    }
+    if (defaultFooter) normalizedSections.push(defaultFooter);
   }
 
   const headerSec = normalizedSections.find((s) => s.id === 'header');
   const footerSec = normalizedSections.find((s) => s.id === 'footer');
 
-  const header = headerSec
-    ? {
-        ...headerSec.content,
-        enabled: headerSec.enabled,
-        isVisible: headerSec.enabled,
-        displayStyle: headerSec.displayStyle,
-      }
-    : (rawConfig.header || defaultLandingConfig.header);
-
-  const footer = footerSec
-    ? {
-        ...footerSec.content,
-        enabled: footerSec.enabled,
-        isVisible: footerSec.enabled,
-        displayStyle: footerSec.displayStyle,
-      }
-    : (rawConfig.footer || defaultLandingConfig.footer);
-
   return {
     version: rawConfig.version || defaultLandingConfig.version,
     lastUpdated: rawConfig.lastUpdated || new Date().toISOString(),
-    pageTitle: rawConfig.pageTitle,
-    metaDescription: rawConfig.metaDescription,
-    ogImage: rawConfig.ogImage,
-    theme: rawConfig.theme,
+    pageTitle: rawConfig.pageTitle || defaultLandingConfig.pageTitle,
+    metaDescription: rawConfig.metaDescription || defaultLandingConfig.metaDescription,
+    ogImage: rawConfig.ogImage || defaultLandingConfig.ogImage,
+    theme: rawConfig.theme || defaultLandingConfig.theme,
     sections: normalizedSections,
-    header,
-    footer,
+    header: headerSec
+      ? { ...headerSec.content, enabled: headerSec.enabled, isVisible: headerSec.enabled }
+      : undefined,
+    footer: footerSec
+      ? { ...footerSec.content, enabled: footerSec.enabled, isVisible: footerSec.enabled }
+      : undefined,
   };
 }
 
@@ -374,21 +367,15 @@ export async function fetchLandingConfigApi(): Promise<{
     });
 
     if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
+      throw new Error(`HTTP ${res.status}`);
     }
     const data = await res.json();
-
-    // Check both envelope formats: data.config or data.data or root
     const rawConfig = data.config || data.data || data;
-    const finalConfig = normalizeLandingPageConfig(rawConfig);
-
     return {
       success: true,
-      config: finalConfig,
+      config: normalizeLandingPageConfig(rawConfig),
     };
   } catch (error) {
-    console.warn('[LandingConfig API] Fetch failed, using client fallback:', error);
     return { success: false, message: (error as Error).message };
   }
 }
-

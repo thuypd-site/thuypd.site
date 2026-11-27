@@ -1,105 +1,72 @@
 'use client';
 
 import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-
-import { ChevronDown, HelpCircle, Sparkles } from 'lucide-react';
 import { FaqSectionContent } from '../../types/landingConfig.types';
 
-interface FaqSectionProps {
-  content?: FaqSectionContent;
-  displayStyle?: string;
+export interface FaqSectionProps {
+  content: FaqSectionContent;
 }
 
 export const FaqSection: React.FC<FaqSectionProps> = ({ content }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const items = content.items || [];
 
-  const badge = content?.badge || 'Giải Đáp Thắc Mắc';
-  const title = content?.title || 'Những Câu Hỏi Thường Gặp Khi Làm Website';
-  const subtitle = content?.subtitle || 'Các giải đáp rõ ràng cho những băn khoăn phổ biến nhất trước khi bạn quyết định làm web.';
-  const items = content?.items || [
-    {
-      question: 'Thời gian hoàn thiện một website là bao lâu?',
-      answer: 'Tùy theo nhu cầu: Gói cơ bản từ 2 - 3 ngày, gói chuyên nghiệp từ 5 - 7 ngày, và gói thiết kế & phát triển theo yêu cầu từ 2 - 3 tuần. Chúng tôi luôn cam kết bàn giao đúng tiến độ cam kết.',
-    },
-    {
-      question: 'Chi phí trên đã bao gồm tên miền và máy chủ (hosting) chưa?',
-      answer: 'Tất cả các gói tại THUYPD.SITE đều đã bao gồm trọn gói năm đầu tiên cho tên miền quốc tế (.com / .net) và máy chủ lưu trữ (hosting) tốc độ cao. Bạn không cần chi thêm khoản nào khác để vận hành web.',
-    },
-    {
-      question: 'Tôi không rành về máy tính thì có tự quản lý website được không?',
-      answer: 'Hoàn toàn được! Giao diện quản trị được làm bằng tiếng Việt rất trực quan, kèm video hướng dẫn từng bước. Bạn có thể tự thay đổi hình ảnh, giá bán, bài viết ngay trên điện thoại dễ như dùng mạng xã hội.',
-    },
-    {
-      question: 'Sau khi bàn giao, website gặp sự cố thì ai hỗ trợ?',
-      answer: 'Chúng tôi bảo hành kỹ thuật và đồng hành trọn đời cùng bạn. Bất cứ khi nào cần trợ giúp, bạn chỉ cần nhắn Zalo hoặc gọi hotline là kỹ thuật sẽ kiểm tra xử lý ngay.',
-    },
-  ];
-
-  const toggleAccordion = (idx: number) => {
-    setOpenIndex(openIndex === idx ? null : idx);
-  };
+  if (items.length === 0) return null;
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc]" id="faq">
-      <div className="max-w-[1000px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        {/* Header */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold border border-slate-200/80 shadow-2xs inline-flex items-center gap-1.5">
-            <HelpCircle className="w-3.5 h-3.5 text-[#006398]" />
-            <span>{badge}</span>
-          </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight">
-            {title}
+    <section
+      id="faq"
+      className="bg-white py-16 sm:py-20 border-b border-[#e3e8ee] scroll-mt-16"
+    >
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          {content.badge && (
+            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#533afd] mb-2">
+              {content.badge}
+            </span>
+          )}
+          <h2 className="text-2xl sm:text-4xl font-bold text-[#0d253d] tracking-tight">
+            {content.title || 'Giải Đáp Nhanh Trước Khi Bắt Đầu'}
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            {subtitle}
-          </p>
+          {content.subtitle && (
+            <p className="text-sm sm:text-base text-[#64748d] mt-3 leading-relaxed">
+              {content.subtitle}
+            </p>
+          )}
         </div>
 
-        {/* Accordion List */}
-        <div className="space-y-3">
-          {items.map((item, index) => {
-            const isOpen = openIndex === index;
+        <div className="divide-y divide-[#e3e8ee] border border-[#e3e8ee] rounded-2xl bg-white overflow-hidden">
+          {items.map((item, idx) => {
+            const isOpen = openIndex === idx;
             return (
-              <div
-                key={index}
-                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
-                    ? 'bg-slate-50 border-[#006398]/30 shadow-2xs'
-                    : 'bg-white border-slate-200/80 hover:border-[#006398]/30 hover:bg-slate-50/40'
-                }`}
-              >
+              <div key={idx}>
                 <button
                   type="button"
-                  onClick={() => toggleAccordion(index)}
-                  className="w-full py-4 sm:py-5 px-5 sm:px-6 flex items-center justify-between text-left gap-4 cursor-pointer select-none"
+                  onClick={() => setOpenIndex(isOpen ? null : idx)}
                   aria-expanded={isOpen}
+                  className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 hover:bg-[#f6f9fc] transition-colors cursor-pointer"
                 >
-                  <span className="text-sm sm:text-base font-bold text-[#0b1c30] flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] text-xs flex items-center justify-center font-bold shrink-0">
-                      {index + 1}
-                    </span>
+                  <span className="text-sm sm:text-base font-semibold text-[#0d253d]">
                     {item.question}
                   </span>
-                  <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 bg-[#006398] text-white' : 'bg-slate-100 text-slate-600'
+                  <ChevronDown
+                    className={`w-4 h-4 text-[#64748d] shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-[#533afd]' : ''
                     }`}
-                  >
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
+                  />
                 </button>
-
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={{ duration: 0.18 }}
+                      className="overflow-hidden"
                     >
-                      <div className="px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60">
+                      <div className="px-6 pb-5 pt-1 text-sm text-[#273951] leading-relaxed">
                         {item.answer}
                       </div>
                     </motion.div>

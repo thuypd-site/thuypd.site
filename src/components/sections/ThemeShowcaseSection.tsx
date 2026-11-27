@@ -1,158 +1,157 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MessageCircleQuestion } from 'lucide-react';
-import { ThemeCategory, ThemeItem } from '../../types';
-import { useThemes } from '../../hooks/useThemes';
-import { ThemePreviewModal } from '../modals/ThemePreviewModal';
+import { Eye, Loader2 } from 'lucide-react';
+import { useThemes } from '../../features/themes/hooks/useThemes';
+import { ThemeCategory, ThemeItem } from '../../types/theme.types';
 import { ThemesSectionContent } from '../../types/landingConfig.types';
-import { ThemeCompactVariant, ThemeStandardVariant } from './themes';
-import { IconArrowRight } from '../icons/CustomIcons';
+import { ThemePreviewModal } from '../modals/ThemePreviewModal';
 
 export interface ThemeShowcaseSectionProps {
-  content?: ThemesSectionContent;
-  displayStyle?: string;
+  content: ThemesSectionContent;
   onSelectTheme?: (theme: ThemeItem) => void;
 }
 
+const CATEGORIES: { id: ThemeCategory; label: string }[] = [
+  { id: 'all', label: 'Tất cả' },
+  { id: 'corporate', label: 'Doanh nghiệp' },
+  { id: 'ecommerce', label: 'Bán hàng' },
+  { id: 'realestate', label: 'Bất động sản' },
+  { id: 'spa', label: 'Thẩm mỹ & Spa' },
+  { id: 'furniture', label: 'Nội thất' },
+];
+
 export const ThemeShowcaseSection: React.FC<ThemeShowcaseSectionProps> = ({
   content,
-  displayStyle = 'standard',
   onSelectTheme,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<ThemeCategory>('all');
-  const [activePreviewTheme, setActivePreviewTheme] = useState<ThemeItem | null>(null);
-
-  const isCompact = displayStyle === 'compact';
-  const badge = content?.badge || 'Kho Giao Diện';
-  const title = content?.title || 'Mẫu Giao Diện Website Đẹp Mắt & Thu Hút Khách Hàng';
-  const subtitle = content?.subtitle || 'Bộ sưu tập mẫu giao diện thực tế đa ngành nghề, dễ dàng tùy biến theo nhận diện thương hiệu của bạn.';
-
+  const [previewTheme, setPreviewTheme] = useState<ThemeItem | null>(null);
   const { data: themes = [], isLoading } = useThemes(selectedCategory);
 
-  const rawCategories = (content as any)?.categories;
-  const categories: { id: ThemeCategory; label: string }[] =
-    Array.isArray(rawCategories) && rawCategories.length > 0
-      ? rawCategories.map((c: any) => ({
-          id: (c.id || c.key || c.value) as ThemeCategory,
-          label: c.label || c.name || c.title,
-        }))
-      : [
-          { id: 'all', label: 'Tất cả mẫu' },
-          { id: 'ecommerce', label: 'Bán Hàng' },
-          { id: 'corporate', label: 'Doanh Nghiệp' },
-          { id: 'realestate', label: 'Bất Động Sản' },
-          { id: 'spa', label: 'Thẩm Mỹ & Spa' },
-          { id: 'furniture', label: 'Nội Thất' },
-        ];
-
-  const handleSelectTheme = (theme: ThemeItem) => {
-    if (onSelectTheme) {
-      onSelectTheme(theme);
-    }
-    const target = document.querySelector('#nhan-bao-gia');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleRequestQuote = (theme: ThemeItem) => {
+    setPreviewTheme(null);
+    onSelectTheme?.(theme);
+    document.querySelector('#nhan-bao-gia')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc]" id="kho-giao-dien">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full space-y-10">
-        {/* Top Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
-          <div className="space-y-2.5 sm:space-y-3 max-w-2xl">
-            <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-bold border border-slate-200/80 shadow-2xs">
-              {badge}
-            </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30]">
-              {title}
+    <section
+      id="kho-giao-dien"
+      className="bg-[#f6f9fc] py-16 sm:py-20 border-b border-[#e3e8ee] scroll-mt-16"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+          <div className="max-w-2xl">
+            {content.badge && (
+              <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#533afd] mb-2">
+                {content.badge}
+              </span>
+            )}
+            <h2 className="text-2xl sm:text-4xl font-bold text-[#0d253d] tracking-tight">
+              {content.title || 'Khám Phá Giao Diện Thực Tế Theo Ngành Nghề'}
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-              {subtitle}
-            </p>
+            {content.subtitle && (
+              <p className="text-sm sm:text-base text-[#64748d] mt-3 leading-relaxed">
+                {content.subtitle}
+              </p>
+            )}
           </div>
 
-          <div className="pt-1 md:pt-0">
-            <a
-              href="#nhan-bao-gia"
-              className="group inline-flex items-center gap-1.5 text-xs sm:text-sm text-[#006398] font-bold hover:underline"
-            >
-              <span>Khám phá các mẫu giao diện</span>
-              <IconArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+            {CATEGORIES.map((cat) => {
+              const isActive = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors cursor-pointer ${
+                    isActive
+                      ? 'bg-[#533afd] text-white'
+                      : 'bg-white text-[#273951] border border-[#e3e8ee] hover:border-[#a8c3de]'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap no-scrollbar">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap min-h-[44px] flex items-center cursor-pointer ${
-                selectedCategory === cat.id
-                  ? 'bg-[#006398] text-white shadow-md shadow-[#006398]/20'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-[#0b1c30]'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Theme Grid */}
         {isLoading ? (
-          <div className={`grid ${isCompact ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8'}`}>
-            {[1, 2, 3, 4, 5, 6].slice(0, isCompact ? 8 : 6).map((n) => (
+          <div className="flex items-center justify-center py-16 text-sm text-[#64748d] gap-2">
+            <Loader2 className="w-4 h-4 animate-spin text-[#533afd]" />
+            <span>Đang tải kho giao diện mẫu...</span>
+          </div>
+        ) : themes.length === 0 ? (
+          <div className="bg-white border border-[#e3e8ee] rounded-xl p-10 text-center text-sm text-[#64748d]">
+            Chưa có mẫu giao diện trong danh mục này.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {themes.map((theme) => (
               <div
-                key={n}
-                className="rounded-2xl bg-slate-50 border border-slate-100 p-4 space-y-4 animate-pulse"
+                key={theme.id || theme._id || theme.title}
+                onClick={() => setPreviewTheme(theme)}
+                className="group bg-white border border-[#e3e8ee] hover:border-[#533afd]/40 rounded-xl overflow-hidden transition-all duration-200 hover:shadow-stripe flex flex-col cursor-pointer"
               >
-                <div className="aspect-[16/10] bg-slate-200 rounded-xl w-full" />
-                <div className="h-4 bg-slate-200 rounded w-3/4" />
-                <div className="h-3 bg-slate-200 rounded w-1/2" />
+                <div className="relative aspect-[16/10] bg-[#f6f9fc] overflow-hidden border-b border-[#e3e8ee]">
+                  {theme.imageUrl ? (
+                    <img
+                      src={theme.imageUrl}
+                      alt={theme.imageAlt || theme.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-xs text-[#64748d]">
+                      Ảnh xem trước
+                    </div>
+                  )}
+                  <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/95 border border-[#e3e8ee] text-[11px] font-medium text-[#0d253d]">
+                    {theme.categoryName}
+                  </span>
+                </div>
+
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                  <div>
+                    <h3 className="text-base font-semibold text-[#0d253d] leading-snug">
+                      {theme.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#64748d] mt-1.5 line-clamp-2 leading-relaxed">
+                      {theme.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#e3e8ee] flex items-center justify-between gap-3">
+                    <span className="text-sm font-bold text-[#0d253d] tabular-nums">
+                      {theme.formattedPrice}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPreviewTheme(theme);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#eef2ff] hover:bg-[#533afd] text-[#4434d4] hover:text-white text-xs font-medium transition-colors cursor-pointer"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Xem chi tiết</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-        ) : isCompact ? (
-          <ThemeCompactVariant
-            themes={themes}
-            onPreviewTheme={setActivePreviewTheme}
-            onSelectTheme={handleSelectTheme}
-          />
-        ) : (
-          <ThemeStandardVariant
-            themes={themes}
-            onPreviewTheme={setActivePreviewTheme}
-            onSelectTheme={handleSelectTheme}
-          />
         )}
-
-        {/* Custom request banner */}
-        <div className="p-5 sm:p-8 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-center md:text-left">
-          <div className="space-y-1">
-            <h4 className="text-base sm:text-lg font-bold text-[#0b1c30]">Bạn vẫn chưa tìm được giao diện vừa ý?</h4>
-            <p className="text-xs sm:text-sm text-slate-600">
-              Hãy chia sẻ mong muốn hoặc gửi mẫu website tham khảo, chúng tôi sẽ chọn lọc hoặc thiết kế riêng bản demo phù hợp nhất.
-            </p>
-          </div>
-          <a
-            href="#nhan-bao-gia"
-            className="relative overflow-hidden group inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#006398] text-white text-xs sm:text-sm font-semibold rounded-xl shadow-xs hover:shadow-md hover:bg-[#004f7c] active:scale-95 transition-all w-full sm:w-auto shrink-0 min-h-[48px]"
-          >
-            <MessageCircleQuestion className="w-4 h-4" />
-            <span>Tư Vấn Thiết Kế Riêng</span>
-          </a>
-        </div>
       </div>
 
-      {/* Theme preview modal */}
       <ThemePreviewModal
-        theme={activePreviewTheme}
-        isOpen={Boolean(activePreviewTheme)}
-        onClose={() => setActivePreviewTheme(null)}
-        onSelectThemeForQuote={handleSelectTheme}
+        theme={previewTheme}
+        onClose={() => setPreviewTheme(null)}
+        onRequestQuote={handleRequestQuote}
       />
     </section>
   );

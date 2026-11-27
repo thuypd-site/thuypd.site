@@ -23,7 +23,7 @@ export const contactFormSchema = z.object({
     .min(1, { message: 'Vui lòng chọn loại hình website bạn cần' }),
   budgetTier: z
     .string()
-    .min(1, { message: 'Vui lòng chọn mức ngân sách dự kiến' }),
+    .min(1, { message: 'Vui lòng chọn gói giải pháp dự kiến' }),
   notes: z
     .string()
     .max(1000, { message: 'Ghi chú không quá 1000 ký tự' })
@@ -37,17 +37,3 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormInput = z.infer<typeof contactFormSchema>;
-
-export const domainSearchSchema = z.object({
-  domain: z
-    .string()
-    .trim()
-    .min(2, { message: 'Tên miền tối thiểu 2 ký tự' })
-    .max(63, { message: 'Tên miền tối đa 63 ký tự' })
-    .regex(/^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$/, {
-      message: 'Tên miền chỉ gồm chữ cái, số và dấu gạch nối (không bắt đầu/kết thúc bằng gạch nối)',
-    }),
-  tld: z.string().default('.com'),
-});
-
-export type DomainSearchInput = z.infer<typeof domainSearchSchema>;

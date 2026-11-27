@@ -1,24 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, ArrowUp, Sparkles } from 'lucide-react';
-
-import { siteConfig } from '../../config/site.config';
-import { useSettings } from '../../hooks/useSettings';
+import { PhoneCall, ArrowUp, MessageCircle } from 'lucide-react';
+import { useSettings } from '../../features/settings/hooks/useSettings';
 
 export const FloatingWidget: React.FC = () => {
-  const { data: settings } = useSettings();
-  const hotline = settings?.hotline || siteConfig.hotline;
-  const hotlineRaw = settings?.hotlineRaw || siteConfig.hotlineRaw;
-  const zaloUrl = settings?.zaloUrl || siteConfig.zaloUrl;
-
-  const [showBackToTop, setShowBackToTop] = useState(false);
+  const { settings } = useSettings();
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 300);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setShowScrollTop(window.scrollY > 480);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -26,82 +18,60 @@ export const FloatingWidget: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const scrollToQuote = () => {
-    const target = document.querySelector('#nhan-bao-gia');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <>
-      {/* Desktop & Tablet Floating Action Buttons (Hotline, Zalo, BackToTop) */}
-      <div className="hidden sm:flex fixed bottom-6 right-6 z-40 flex-col items-center gap-3">
-        {/* Hotline Button */}
-        <a
-          href={`tel:${hotlineRaw}`}
-          title={`Gọi Hotline ${hotline}`}
-          className="w-12 h-12 rounded-full bg-[#ef4444] text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all group relative"
-        >
-          <span className="absolute -inset-1 rounded-full bg-[#ef4444]/40 animate-ping pointer-events-none" />
-          <Phone className="w-5 h-5 relative z-10" />
-        </a>
-
-        {/* Zalo Button */}
-        <a
-          href={zaloUrl}
-          target="_blank"
-          rel="noreferrer"
-          title="Chat Zalo Tư Vấn Trực Tiếp"
-          className="w-12 h-12 rounded-full bg-[#0068ff] text-white flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all group relative"
-        >
-          <MessageCircle className="w-5 h-5" />
-          <span className="absolute right-14 bg-[#0b1c30] text-white text-xs font-semibold py-1.5 px-3 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-md pointer-events-none">
-            Chat Zalo Ngay
-          </span>
-        </a>
-
-        {/* Back to top */}
-        {showBackToTop && (
+      <div className="hidden sm:flex fixed bottom-6 right-6 z-40 flex-col items-end gap-2.5">
+        {showScrollTop && (
           <button
             type="button"
             onClick={scrollToTop}
-            title="Lên đầu trang"
-            className="w-10 h-10 rounded-full bg-white text-[#0b1c30] border border-[#dce9ff] flex items-center justify-center shadow-md hover:bg-[#eff4ff] active:scale-95 transition-all cursor-pointer"
+            aria-label="Lên đầu trang"
+            className="w-10 h-10 rounded-full bg-white border border-[#e3e8ee] shadow-stripe text-[#0d253d] hover:border-[#533afd] hover:text-[#533afd] flex items-center justify-center transition-colors cursor-pointer"
           >
             <ArrowUp className="w-4 h-4" />
           </button>
         )}
+
+        <div className="flex items-center gap-2 p-1.5 rounded-full bg-white border border-[#e3e8ee] shadow-stripe-lg">
+          {settings.zaloUrl && (
+            <a
+              href={settings.zaloUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#eef2ff] hover:bg-[#e0e7ff] text-[#4434d4] text-xs font-semibold transition-colors"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>Chat Zalo</span>
+            </a>
+          )}
+          <a
+            href={`tel:${settings.hotlineRaw || settings.hotline.replace(/\D/g, '')}`}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#533afd] hover:bg-[#4434d4] text-white text-xs font-semibold transition-colors tabular-nums"
+          >
+            <PhoneCall className="w-3.5 h-3.5" />
+            <span>{settings.hotline}</span>
+          </a>
+        </div>
       </div>
 
-      {/* Mobile Sticky Bottom Floating Bar */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#dce9ff] px-4 py-2.5 flex items-center justify-between gap-3 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]">
+      {/* Mobile bottom action bar */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e3e8ee] px-4 py-2.5 grid grid-cols-2 gap-2.5">
         <a
-          href={`tel:${hotlineRaw}`}
-          className="flex-1 py-2.5 px-3 rounded-xl bg-rose-50 text-rose-600 font-bold text-xs flex items-center justify-center gap-1.5 border border-rose-200 active:scale-95 transition-transform"
+          href={`tel:${settings.hotlineRaw || settings.hotline.replace(/\D/g, '')}`}
+          className="flex items-center justify-center gap-1.5 py-2.5 rounded-full border border-[#e3e8ee] bg-white text-[#0d253d] text-xs font-semibold tabular-nums"
         >
-          <Phone className="w-3.5 h-3.5" />
-          <span>Gọi {hotline}</span>
+          <PhoneCall className="w-3.5 h-3.5 text-[#533afd]" />
+          <span>Gọi {settings.hotline}</span>
         </a>
-
         <a
-          href={zaloUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="flex-1 py-2.5 px-3 rounded-xl bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center gap-1.5 border border-blue-200 active:scale-95 transition-transform"
+          href={settings.zaloUrl || '#nhan-bao-gia'}
+          target={settings.zaloUrl ? '_blank' : undefined}
+          rel={settings.zaloUrl ? 'noopener noreferrer' : undefined}
+          className="flex items-center justify-center gap-1.5 py-2.5 rounded-full bg-[#533afd] text-white text-xs font-semibold"
         >
           <MessageCircle className="w-3.5 h-3.5" />
-          <span>Chat Zalo</span>
+          <span>Tư Vấn Zalo</span>
         </a>
-
-        <button
-          type="button"
-          onClick={scrollToQuote}
-          className="flex-1 py-2.5 px-3 rounded-xl bg-[#006398] text-white font-bold text-xs flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-transform cursor-pointer"
-        >
-          <Sparkles className="w-3 h-3 text-cyan-300" />
-          <span>Báo Giá</span>
-        </button>
       </div>
     </>
   );

@@ -4,13 +4,7 @@ import { siteConfig } from '../../../config/site.config';
 
 export const fetchSettingsApi = async (): Promise<SiteSettings> => {
   try {
-    let data: any = null;
-    try {
-      data = await httpClient<any>(`/api/client/settings?_t=${Date.now()}`);
-    } catch {
-      data = await httpClient<any>(`/api/settings?_t=${Date.now()}`);
-    }
-
+    const data = await httpClient<any>(`/api/client/settings?_t=${Date.now()}`);
     const s = data?.data || data?.settings || data;
     if (s && (s.siteName || s.hotline || s.contactEmail || s.officeAddress)) {
       const rawZalo = s.zaloPhone || s.zaloNumber || s.zalo || siteConfig.zaloPhone;
@@ -39,7 +33,7 @@ export const fetchSettingsApi = async (): Promise<SiteSettings> => {
       };
     }
   } catch (err) {
-    console.warn('[Settings API] Sử dụng cấu hình dự phòng từ siteConfig', err);
+    console.warn('[Settings API] Fallback to siteConfig:', err);
   }
 
   return {

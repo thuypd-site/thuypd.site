@@ -6,12 +6,12 @@ export interface PricingPlan {
   tierSubtitle: string;
   price: number;
   formattedPrice: string;
+  originalPrice?: number;
   description: string;
   isPopular?: boolean;
   completionDays: string;
+  period?: string;
   features: string[];
-  renewal1Year: string;
-  renewal3Years: string;
   order?: number;
   isActive?: boolean;
 }

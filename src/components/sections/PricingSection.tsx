@@ -1,247 +1,128 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { Sparkles, Check } from 'lucide-react';
-import { usePricing } from '../../hooks/usePricing';
+import React from 'react';
+import { CheckCircle2, ArrowRight, Clock } from 'lucide-react';
 import { PricingSectionContent } from '../../types/landingConfig.types';
-import { PricingCardsVariant, PricingMatrixVariant } from './pricing';
-import { formatPriceNumber, formatPriceWithVND } from '../../core/utils/formatters';
+import { formatPriceWithVND } from '../../core/utils/formatters';
 
 export interface PricingSectionProps {
-  content?: PricingSectionContent;
-  displayStyle?: string;
-  onSelectPlan?: (planName: string, tierBudget: string) => void;
+  content: PricingSectionContent;
+  onSelectPlan?: (planName: string, budgetTier: string) => void;
 }
 
-export const PricingSection: React.FC<PricingSectionProps> = ({
-  content,
-  displayStyle = 'price-a',
-  onSelectPlan,
-}) => {
-  const { data: defaultPlans = [] } = usePricing();
+export const PricingSection: React.FC<PricingSectionProps> = ({ content, onSelectPlan }) => {
+  const plans = content.plans || [];
+  const highlightId = content.highlightPlanId || 'plan-professional';
 
-  const activeStyle = displayStyle || (content as any)?.displayStyle || (content as any)?.variant || 'price-a';
-  const isMatrix = activeStyle === 'price-b' || activeStyle === 'matrix';
-
-  const [showScrollHint, setShowScrollHint] = useState<boolean>(true);
-  const tableContainerRef = useRef<HTMLDivElement>(null);
-
-  const rawPlans = content?.plans && content.plans.length > 0 ? content.plans : defaultPlans;
-  const pricingPlans = rawPlans.map((plan: any) => {
-    const rawPrice = plan.formattedPrice ?? plan.price;
-    let formattedPrice = formatPriceNumber(rawPrice);
-    if (!formattedPrice) {
-      formattedPrice = '4.990.000';
-    }
-    // Remove trailing '+' if present from formattedPrice since the cards UI renders '+' in a separate span
-    const cleanNumber = formattedPrice.replace(/\+$/, '').trim();
-
-    return {
-      ...plan,
-      id: plan.id || plan.planId,
-      planId: plan.planId || plan.id,
-      description: plan.description || plan.desc || plan.targetAudience || '',
-      formattedPrice: cleanNumber,
-      rawPrice,
-      price: typeof plan.price === 'number' ? plan.price : parseInt(String(rawPrice).replace(/\D/g, ''), 10) || 0,
-    };
-  });
-
-  const badge = content?.badge || 'Chi Phí Rõ Ràng';
-  const title = content?.title || 'Bảng Giá Thiết Kế Website Trọn Gói';
-  const subtitle =
-    content?.subtitle ||
-    'Chi phí rõ ràng từng hạng mục, toàn quyền sở hữu website vĩnh viễn, cam kết không phát sinh chi phí ngầm trong suốt quá trình thực hiện.';
-  const highlightPlanId = content?.highlightPlanId || 'plan-professional';
-
-  const handleTableScroll = () => {
-    if (tableContainerRef.current && tableContainerRef.current.scrollLeft > 20) {
-      setShowScrollHint(false);
-    }
+  const handleChoose = (planName: string, formattedPrice: string) => {
+    const budgetLabel = `${planName} (${formattedPrice})`;
+    onSelectPlan?.(planName, budgetLabel);
+    document.querySelector('#nhan-bao-gia')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
-
-  const handleChoosePlan = (planName: string, budgetTier: string) => {
-    if (onSelectPlan) {
-      onSelectPlan(planName, budgetTier);
-    }
-    const target = document.querySelector('#nhan-bao-gia') || document.querySelector('#contact-lead');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const getTierSelectValue = (planOrId?: any) => {
-    const plan =
-      typeof planOrId === 'object' && planOrId !== null
-        ? planOrId
-        : pricingPlans.find((p: any) => p.id === planOrId || p.planId === planOrId);
-
-    const planId = plan?.id || plan?.planId || planOrId;
-    if (planId === 'plan-business' || planId === 'plan-basic') return 'Gói Khởi Nghiệp (4.990.000đ)';
-    if (planId === 'plan-professional') return 'Gói Chuyên Nghiệp (7.990.000đ)';
-    if (planId === 'plan-advanced' || planId === 'plan-custom') return 'Gói Phát Triển Theo Yêu Cầu (12.990.000đ)';
-    if (plan) {
-      const priceText = formatPriceNumber(plan.formattedPrice || plan.price);
-      return `${plan.name} (${priceText}đ)`;
-    }
-    return 'Gói Chuyên Nghiệp (7.990.000đ)';
-  };
-
-  // Matrix Rows Comparison Data synchronized with current packages
-  const defaultMatrixFeatures = [
-    {
-      category: 'Giao Diện & Trải Nghiệm',
-      name: 'Thiết kế giao diện website',
-      basic: 'Chuẩn ngành nghề, đẹp mắt & tối ưu',
-      professional: 'Thiết kế độc quyền theo nhận diện riêng',
-      advanced: 'Thiết kế độc bản 100%, phong cách cao cấp',
-    },
-    {
-      category: 'Hiệu Năng & Tốc Độ',
-      name: 'Tốc độ tải trang',
-      basic: 'Tải nhanh, mượt mà (< 1.2s)',
-      professional: 'Tải siêu tốc tức thì (< 0.8s)',
-      advanced: 'Mở trang ngay lập tức (< 0.5s)',
-    },
-    {
-      category: 'Hạ Tầng Lưu Trữ',
-      name: 'Dung lượng lưu trữ tốc độ cao',
-      basic: '3 GB lưu trữ tốc độ cao',
-      professional: '8 GB lưu trữ tốc độ cao',
-      advanced: '50 GB lưu trữ dung lượng lớn',
-    },
-    {
-      category: 'Tên Miền & Bảo Mật',
-      name: 'Tặng kèm tên miền quốc tế',
-      basic: '1 năm (.com / .net)',
-      professional: '1 năm (.com / .net / .vn)',
-      advanced: '1 năm (.com + .vn song hành)',
-    },
-    {
-      category: 'SEO & Marketing',
-      name: 'Tối ưu tìm kiếm Google',
-      basic: 'Cấu hình chuẩn tìm kiếm cơ bản',
-      professional: 'Tối ưu chuyên sâu, dễ dàng lên top',
-      advanced: 'Chiến lược tối ưu toàn diện đa ngành',
-    },
-    {
-      category: 'Tương Tác Khách Hàng',
-      name: 'Nút Gọi, Chat Zalo & Form nhận tin',
-      basic: 'Tích hợp đầy đủ',
-      professional: 'Đầy đủ + Tự động gửi thông báo về Zalo',
-      advanced: 'Kết nối tự động Zalo, Telegram & phần mềm bán hàng',
-    },
-    {
-      category: 'Thương Mại Điện Tử',
-      name: 'Cổng thanh toán & Giỏ hàng',
-      basic: 'Chuyển khoản quét mã QR ngân hàng',
-      professional: 'QR tự động + Cổng thanh toán trực tuyến',
-      advanced: 'Hệ thống bán hàng, quản lý đơn hàng & kho',
-    },
-    {
-      category: 'Sở Hữu & Bản Quyền',
-      name: 'Bàn giao website & Toàn quyền sở hữu',
-      basic: '100% Toàn quyền sở hữu trọn đời',
-      professional: '100% Toàn quyền sở hữu trọn đời',
-      advanced: 'Toàn quyền sở hữu + Bản quyền thiết kế riêng',
-    },
-    {
-      category: 'Bảo Hành & Đồng Hành',
-      name: 'Hỗ trợ kỹ thuật & Bảo hành',
-      basic: '12 tháng chu đáo',
-      professional: '24/7 Trọn đời qua Zalo/Hotline',
-      advanced: 'Kỹ sư cao cấp đồng hành 1-1',
-    },
-  ];
-
-  const activeMatrixFeatures =
-    content?.matrixFeatures && content.matrixFeatures.length > 0
-      ? content.matrixFeatures
-      : defaultMatrixFeatures;
 
   return (
-    <section
-      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#fafbfc] via-white to-[#fafbfc] relative overflow-hidden"
-      id="bang-gia"
-    >
-      {/* Subtle ambient lighting for smooth visual transition */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-r from-slate-200/20 via-blue-100/15 to-slate-200/20 blur-3xl rounded-full pointer-events-none -z-10" />
-
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 w-full relative z-10">
-        {/* Header Block: Centered, balanced, and elegant */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3.5">
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs uppercase font-extrabold tracking-wider border border-slate-200/80 shadow-2xs">
-            <span>{badge}</span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0b1c30] tracking-tight leading-tight">
-            {title}
+    <section id="bang-gia" className="bg-white py-16 sm:py-20 border-b border-[#e3e8ee] scroll-mt-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mb-12">
+          {content.badge && (
+            <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#533afd] mb-2">
+              {content.badge}
+            </span>
+          )}
+          <h2 className="text-2xl sm:text-4xl font-bold text-[#0d253d] tracking-tight">
+            {content.title || 'Bảng Giá Thiết Kế Website Trọn Gói'}
           </h2>
-
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            {subtitle}
-          </p>
+          {content.subtitle && (
+            <p className="text-sm sm:text-base text-[#64748d] mt-3 leading-relaxed">
+              {content.subtitle}
+            </p>
+          )}
         </div>
 
-        {/* Render trực tiếp theo đúng cấu hình Admin chọn */}
-        {isMatrix ? (
-          <PricingMatrixVariant
-            matrixFeatures={activeMatrixFeatures}
-            pricingPlans={pricingPlans}
-            highlightPlanId={highlightPlanId}
-            onChoosePlan={handleChoosePlan}
-            showScrollHint={showScrollHint}
-            onTableScroll={handleTableScroll}
-            tableContainerRef={tableContainerRef}
-          />
-        ) : (
-          <PricingCardsVariant
-            pricingPlans={pricingPlans}
-            highlightPlanId={highlightPlanId}
-            onChoosePlan={handleChoosePlan}
-            getTierSelectValue={getTierSelectValue}
-          />
-        )}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          {plans.map((plan, idx) => {
+            const planId = plan.id || plan.planId || `plan-${idx}`;
+            const isPopular = Boolean(plan.isPopular) || planId === highlightId;
+            const formatted = formatPriceWithVND(plan.formattedPrice || plan.price);
+            const originalFormatted = plan.originalPrice
+              ? formatPriceWithVND(plan.originalPrice)
+              : '';
 
-        {/* Sleek Trust & Value Guarantees Strip */}
-        <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200/70">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
-                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-              </span>
-              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
-                100% Không Phụ Phí Ẩn
-              </span>
-            </div>
+            return (
+              <div
+                key={planId}
+                className={`rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-shadow ${
+                  isPopular
+                    ? 'bg-white border-2 border-[#533afd] shadow-stripe-lg relative'
+                    : 'bg-[#f6f9fc] border border-[#e3e8ee]'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-lg font-bold text-[#0d253d]">{plan.name}</h3>
+                    {isPopular && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#eef2ff] text-[#4434d4] text-[11px] font-semibold shrink-0">
+                        {plan.tierSubtitle || 'Phổ biến nhất'}
+                      </span>
+                    )}
+                  </div>
 
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
-                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-              </span>
-              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
-                Tặng Tên Miền &amp; Hosting
-              </span>
-            </div>
+                  {plan.description && (
+                    <p className="text-xs sm:text-sm text-[#64748d] mt-2 leading-relaxed">
+                      {plan.description}
+                    </p>
+                  )}
 
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
-                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-              </span>
-              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
-                Toàn Quyền Sở Hữu 100%
-              </span>
-            </div>
+                  <div className="mt-5 pb-5 border-b border-[#e3e8ee]">
+                    {originalFormatted && (
+                      <div className="text-xs text-[#64748d] line-through tabular-nums">
+                        {originalFormatted}
+                      </div>
+                    )}
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="text-3xl font-bold text-[#0d253d] tabular-nums tracking-tight">
+                        {formatted}
+                      </span>
+                      {plan.period && (
+                        <span className="text-xs text-[#64748d]">/ {plan.period}</span>
+                      )}
+                    </div>
+                    {plan.completionDays && (
+                      <div className="inline-flex items-center gap-1.5 text-xs text-[#273951] mt-2">
+                        <Clock className="w-3.5 h-3.5 text-[#533afd]" />
+                        <span>Hoàn thiện: {plan.completionDays}</span>
+                      </div>
+                    )}
+                  </div>
 
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center gap-2.5 text-center transition-all hover:border-[#006398]/30">
-              <span className="w-6 h-6 rounded-full bg-slate-100 text-[#006398] flex items-center justify-center shrink-0">
-                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-              </span>
-              <span className="text-xs sm:text-[13px] font-bold text-[#0b1c30]">
-                Bảo Hành &amp; Hỗ Trợ 24/7
-              </span>
-            </div>
-          </div>
+                  <ul className="mt-5 space-y-2.5">
+                    {(plan.features || []).map((feat, fIdx) => (
+                      <li
+                        key={fIdx}
+                        className="flex items-start gap-2.5 text-xs sm:text-sm text-[#273951]"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-[#533afd] shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleChoose(plan.name, formatted)}
+                  className={`mt-7 w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${
+                    isPopular
+                      ? 'bg-[#533afd] hover:bg-[#4434d4] text-white'
+                      : 'bg-white hover:bg-[#eef2ff] text-[#0d253d] border border-[#e3e8ee] hover:border-[#533afd]/40'
+                  }`}
+                >
+                  <span>Chọn gói này</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

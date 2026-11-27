@@ -1,187 +1,151 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { X, CheckCircle2, ArrowRight, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { ThemeItem } from '../../types/theme.types';
 
-import { X, ExternalLink, Check, Smartphone, Tablet, Monitor, Sparkles } from 'lucide-react';
-import { ThemeItem } from '../../types';
-
-interface ThemePreviewModalProps {
+export interface ThemePreviewModalProps {
   theme: ThemeItem | null;
-  isOpen: boolean;
   onClose: () => void;
-  onSelectThemeForQuote: (theme: ThemeItem) => void;
+  onRequestQuote: (theme: ThemeItem) => void;
 }
 
 export const ThemePreviewModal: React.FC<ThemePreviewModalProps> = ({
   theme,
-  isOpen,
   onClose,
-  onSelectThemeForQuote,
+  onRequestQuote,
 }) => {
-  const [deviceView, setDeviceView] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+  useEffect(() => {
+    if (!theme) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [theme, onClose]);
 
-  if (!isOpen || !theme) return null;
+  const hasValidDemoUrl = Boolean(
+    theme?.demoUrl && (theme.demoUrl.startsWith('http://') || theme.demoUrl.startsWith('https://'))
+  );
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0b1c30]/75 backdrop-blur-md">
+      {theme && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          transition={{ duration: 0.25 }}
-          className="relative w-full max-w-5xl max-h-[92vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-[#dce9ff]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.16 }}
+          onClick={onClose}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0d253d]/55 backdrop-blur-sm"
         >
-          {/* Top Bar */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-[#eff4ff] border-b border-[#dce9ff]">
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0 pr-2">
-              <span className="px-2.5 sm:px-3 py-1 rounded-full bg-[#006398]/10 text-[#006398] text-[11px] sm:text-xs font-bold shrink-0">
-                {theme.categoryName}
-              </span>
-              <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#0b1c30] truncate">{theme.title}</h3>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0">
-              {/* Device switchers */}
-              <div className="hidden sm:flex items-center gap-1 bg-white p-1 rounded-xl border border-[#dce9ff]">
-                <button
-                  onClick={() => setDeviceView('desktop')}
-                  className={`px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors ${
-                    deviceView === 'desktop' ? 'bg-[#006398] text-white' : 'text-[#45464d] hover:bg-[#eff4ff]'
-                  }`}
-                >
-                  <Monitor className="w-3.5 h-3.5" />
-                  <span className="hidden md:inline">Desktop</span>
-                </button>
-                <button
-                  onClick={() => setDeviceView('tablet')}
-                  className={`px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors ${
-                    deviceView === 'tablet' ? 'bg-[#006398] text-white' : 'text-[#45464d] hover:bg-[#eff4ff]'
-                  }`}
-                >
-                  <Tablet className="w-3.5 h-3.5" />
-                  <span className="hidden md:inline">Tablet</span>
-                </button>
-                <button
-                  onClick={() => setDeviceView('mobile')}
-                  className={`px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors ${
-                    deviceView === 'mobile' ? 'bg-[#006398] text-white' : 'text-[#45464d] hover:bg-[#eff4ff]'
-                  }`}
-                >
-                  <Smartphone className="w-3.5 h-3.5" />
-                  <span className="hidden md:inline">Mobile</span>
-                </button>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.97, y: 8 }}
+            transition={{ duration: 0.18 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white border border-[#e3e8ee] rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-stripe-lg flex flex-col"
+          >
+            {/* Header */}
+            <div className="px-6 py-4 border-b border-[#e3e8ee] flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#533afd]">
+                  {theme.categoryName}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-[#0d253d] truncate">
+                  {theme.title}
+                </h3>
               </div>
-
               <button
+                type="button"
                 onClick={onClose}
-                className="p-2 rounded-xl bg-white hover:bg-slate-100 text-[#45464d] transition-colors min-h-[40px] min-w-[40px] flex items-center justify-center"
+                aria-label="Đóng cửa sổ xem trước"
+                className="p-2 rounded-full text-[#64748d] hover:text-[#0d253d] hover:bg-[#f6f9fc] transition-colors cursor-pointer shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-          </div>
 
-          {/* Modal Body */}
-          <div className="overflow-y-auto p-4 sm:p-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
-            {/* Visual Preview Device Container */}
-            <div className="lg:col-span-8 flex flex-col items-center">
-              <div
-                className={`w-full transition-all duration-300 rounded-xl overflow-hidden border-4 border-slate-800 bg-slate-900 shadow-xl ${
-                  deviceView === 'desktop'
-                    ? 'max-w-full'
-                    : deviceView === 'tablet'
-                    ? 'max-w-[540px]'
-                    : 'max-w-[320px]'
-                }`}
-              >
-                {/* Simulated browser bar */}
-                <div className="bg-slate-800 px-3 py-2 flex items-center gap-2 border-b border-slate-700">
-                  <div className="flex gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+            {/* Body */}
+            <div className="overflow-y-auto p-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+              <div className="md:col-span-7">
+                <div className="aspect-[16/10] rounded-xl overflow-hidden border border-[#e3e8ee] bg-[#f6f9fc]">
+                  {theme.imageUrl ? (
+                    <img
+                      src={theme.imageUrl}
+                      alt={theme.imageAlt || theme.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-sm text-[#64748d]">
+                      Không có ảnh xem trước
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="md:col-span-5 flex flex-col justify-between space-y-5">
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-xs text-[#64748d]">Chi phí triển khai trọn gói</div>
+                    <div className="text-2xl font-bold text-[#0d253d] tabular-nums mt-0.5">
+                      {theme.formattedPrice}
+                    </div>
                   </div>
-                  <div className="flex-1 bg-slate-900 px-2 py-0.5 rounded text-[10px] text-slate-400 font-mono truncate">
-                    https://demo.thuypd.site/{theme.id}
-                  </div>
+
+                  {theme.description && (
+                    <p className="text-sm text-[#273951] leading-relaxed">{theme.description}</p>
+                  )}
+
+                  {theme.features && theme.features.length > 0 && (
+                    <div className="space-y-2 pt-2 border-t border-[#e3e8ee]">
+                      <div className="text-xs font-semibold text-[#0d253d]">
+                        Tính năng nổi bật đi kèm
+                      </div>
+                      <ul className="space-y-2">
+                        {theme.features.map((feat, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-2 text-xs text-[#273951]"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#533afd] shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
-                <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
-                  <img
-                    src={theme.imageUrl}
-                    alt={theme.imageAlt}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+                <div className="flex flex-col gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => onRequestQuote(theme)}
+                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#533afd] hover:bg-[#4434d4] text-white text-sm font-medium transition-colors cursor-pointer"
+                  >
+                    <span>Chọn mẫu này để nhận báo giá</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  {hasValidDemoUrl && (
+                    <a
+                      href={theme.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-[#e3e8ee] hover:bg-[#f6f9fc] text-[#0d253d] text-sm font-medium transition-colors"
+                    >
+                      <span>Mở trang demo</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
-
-            {/* Right Information & Package Details */}
-            <div className="lg:col-span-4 space-y-5">
-              <div>
-                <span className="text-xs font-semibold text-[#45464d]">Giá trọn gói khởi tạo</span>
-                <div className="text-3xl font-extrabold text-[#006398]">{theme.formattedPrice}</div>
-                <p className="text-xs text-[#45464d] mt-1">{theme.description}</p>
-              </div>
-
-              {/* Feature bullet points */}
-              <div className="space-y-2.5 bg-[#eff4ff] p-4 rounded-xl">
-                <h4 className="text-xs font-bold text-[#0b1c30] uppercase tracking-wider">
-                  Điểm Nổi Bật Tiêu Chuẩn THUYPD.SITE
-                </h4>
-                <ul className="space-y-2 text-xs text-[#0b1c30]">
-                  {theme.features.map((feat, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-[#006398] shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Perks included */}
-              <div className="text-xs text-[#45464d] space-y-1.5 border-t border-[#dce9ff] pt-4">
-                <div className="flex items-center gap-1.5 text-emerald-700 font-medium">
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Miễn phí tên miền .com 1 năm</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-emerald-700 font-medium">
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Miễn phí máy chủ tốc độ cao 5GB năm đầu</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-emerald-700 font-medium">
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Toàn quyền sở hữu website 100%</span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-2 flex flex-col gap-2.5">
-                <button
-                  onClick={() => {
-                    onSelectThemeForQuote(theme);
-                    onClose();
-                  }}
-                  className="w-full py-3 bg-[#006398] text-white rounded-xl text-sm font-bold shadow-md hover:bg-[#00476e] active:scale-95 transition-all flex items-center justify-center gap-2"
-                >
-                  <Sparkles className="w-4 h-4 text-cyan-300" />
-                  <span>Chọn Mẫu Này & Nhận Báo Giá</span>
-                </button>
-
-                <button
-                  onClick={onClose}
-                  className="w-full py-2.5 bg-slate-100 text-[#45464d] rounded-xl text-xs font-semibold hover:bg-slate-200 transition-colors"
-                >
-                  Đóng Xem Trước
-                </button>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </motion.div>
-      </div>
+      )}
     </AnimatePresence>
   );
 };

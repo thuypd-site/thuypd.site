@@ -1,15 +1,15 @@
-import { ServiceItem, AdvantageItem, PricingPlan, TestimonialItem, ThemeItem } from './index';
+import { ServiceItem, AdvantageItem, PricingPlan, TestimonialItem } from './index';
 
-export type SectionId = 
+export type SectionId =
   | 'header'
-  | 'hero' 
-  | 'logobar' 
-  | 'services' 
-  | 'advantages' 
-  | 'themes' 
-  | 'pricing' 
-  | 'domain' 
-  | 'testimonials' 
+  | 'hero'
+  | 'logobar'
+  | 'services'
+  | 'advantages'
+  | 'themes'
+  | 'pricing'
+  | 'domain'
+  | 'testimonials'
   | 'faq'
   | 'cta'
   | 'contact'
@@ -19,43 +19,27 @@ export interface HeaderNavItem {
   id?: string;
   name: string;
   href: string;
-  target?: string;
-  badge?: string;
 }
 
 export interface HeaderSectionContent {
-  hotlineLabel?: string;
   ctaText?: string;
   ctaLink?: string;
-  sticky?: boolean;
   navItems?: HeaderNavItem[];
 }
 
 export interface FooterSectionContent {
-  preFooterBadge?: string;
-  preFooterTitle?: string;
-  preFooterSubtitle?: string;
-  preFooterCtaZaloText?: string;
   brandDescription?: string;
-  systemStatusText?: string;
   servicesTitle?: string;
   quickLinksTitle?: string;
   contactTitle?: string;
   copyrightText?: string;
 }
 
-export interface SectionStyleOption {
-  value: string;
-  label: string;
-  description: string;
-}
-
 export interface BaseSectionConfig {
   id: SectionId;
   name: string;
   enabled: boolean;
-  displayStyle: string;
-  availableStyles: SectionStyleOption[];
+  displayStyle?: string;
   badge?: string;
   title?: string;
   subtitle?: string;
@@ -77,8 +61,6 @@ export interface HeroSectionContent {
   ctaSecondaryText?: string;
   ctaPrimaryLink?: string;
   ctaSecondaryLink?: string;
-  ratingBadgeText?: string;
-  heroImageUrl?: string;
   pillars?: HeroPillar[];
 }
 
@@ -107,7 +89,6 @@ export interface ProcessStep {
   description?: string;
   desc?: string;
   days?: string;
-  output?: string;
 }
 
 export interface AdvantagesSectionContent {
@@ -122,8 +103,6 @@ export interface ThemesSectionContent {
   badge: string;
   title: string;
   subtitle: string;
-  ctaText?: string;
-  ctaLink?: string;
 }
 
 export interface PricingSectionContent {
@@ -131,9 +110,7 @@ export interface PricingSectionContent {
   title: string;
   subtitle: string;
   highlightPlanId?: string;
-  footerNote?: string;
   plans: PricingPlan[];
-  matrixFeatures?: any[];
 }
 
 export interface DomainTldPricing {
@@ -149,7 +126,6 @@ export interface DomainSectionContent {
   subtitle: string;
   pricing?: DomainTldPricing[];
 }
-
 
 export interface TestimonialsSectionContent {
   badge: string;
@@ -185,7 +161,7 @@ export interface CtaSectionContent {
   hotlineText?: string;
 }
 
-export type SectionConfig = 
+export type SectionConfig =
   | (BaseSectionConfig & { id: 'header'; content: HeaderSectionContent })
   | (BaseSectionConfig & { id: 'hero'; content: HeroSectionContent })
   | (BaseSectionConfig & { id: 'logobar'; content: LogoBarContent })
@@ -212,12 +188,6 @@ export interface LandingPageConfig {
     fontFamily?: string;
   };
   sections: SectionConfig[];
-  header?: HeaderSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string; variant?: string };
-  footer?: FooterSectionContent & { enabled?: boolean; isVisible?: boolean; displayStyle?: string; variant?: string };
-}
-
-declare global {
-  interface Window {
-    __INITIAL_LANDING_CONFIG__?: LandingPageConfig;
-  }
+  header?: HeaderSectionContent & { enabled?: boolean; isVisible?: boolean };
+  footer?: FooterSectionContent & { enabled?: boolean; isVisible?: boolean };
 }

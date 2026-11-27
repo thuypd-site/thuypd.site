@@ -2,41 +2,26 @@ import React, { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Be_Vietnam_Pro } from 'next/font/google';
 import './globals.css';
-import { BACKEND_URL } from '@/src/lib/backend-proxy';
 import { siteConfig } from '@/src/config/site.config';
+import { getServerLandingConfig, getServerSettings } from '@/src/lib/server-data';
 
 const beVietnamPro = Be_Vietnam_Pro({
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   subsets: ['latin', 'vietnamese'],
   display: 'swap',
   variable: '--font-be-vietnam-pro',
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  let title = 'THUYPD.SITE — Thiết Kế & Phát Triển Website Chuyên Nghiệp, Chuẩn SEO';
-  let description = 'Dịch vụ thiết kế và phát triển website chuyên nghiệp theo yêu cầu THUYPD.SITE, chuẩn tìm kiếm Google, tốc độ mở trang tức thì dưới 1 giây, bàn giao trọn gói toàn quyền sở hữu.';
-  let ogImage = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';
-
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3000);
-    const res = await fetch(`${BACKEND_URL}/api/landing-config`, {
-      signal: controller.signal,
-      headers: { Accept: 'application/json' },
-      next: { revalidate: 60 },
-    });
-    clearTimeout(timeoutId);
-
-    if (res.ok) {
-      const data = await res.json();
-      const cfg = data.data || data.config || data;
-      if (cfg.pageTitle) title = cfg.pageTitle;
-      if (cfg.metaDescription) description = cfg.metaDescription;
-      if (cfg.ogImage) ogImage = cfg.ogImage;
-    }
-  } catch (err) {
-    // fallback to default metadata
-  }
+  const cfg = await getServerLandingConfig();
+  const title =
+    cfg.pageTitle || 'THUYPD.SITE — Thiết Kế & Phát Triển Website Chuyên Nghiệp, Chuẩn SEO';
+  const description =
+    cfg.metaDescription ||
+    'Dịch vụ thiết kế và phát triển website chuyên nghiệp theo yêu cầu THUYPD.SITE, chuẩn tìm kiếm Google, tốc độ tải trang dưới 1 giây, bàn giao trọn gói toàn quyền sở hữu.';
+  const ogImage =
+    cfg.ogImage ||
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80';
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -52,14 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: siteUrl,
       siteName: siteConfig.name || 'THUYPD.SITE',
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
       locale: 'vi_VN',
       type: 'website',
     },
@@ -93,27 +71,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const settings = await getServerSettings();
 
-  let telephone = siteConfig.hotline || '';
-  let orgName = siteConfig.name || 'THUYPD.SITE';
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000);
-    const res = await fetch(`${BACKEND_URL}/api/client/settings`, {
-      signal: controller.signal,
-      headers: { Accept: 'application/json' },
-      cache: 'no-store',
-    });
-    clearTimeout(timeoutId);
-    if (res.ok) {
-      const data = await res.json();
-      const s = data?.data || data?.settings || data;
-      if (s?.hotline) telephone = s.hotline;
-      if (s?.siteName) orgName = s.siteName;
-    }
-  } catch {
-    // fallback to siteConfig
-  }
+  const telephone = settings?.hotline || siteConfig.hotline || '';
+  const orgName = settings?.siteName || siteConfig.name || 'THUYPD.SITE';
 
   const jsonLdData = [
     {
@@ -121,7 +82,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       '@type': 'WebSite',
       name: orgName,
       url: siteUrl,
-      description: 'Dịch vụ thiết kế website chuyên nghiệp theo yêu cầu, chuẩn SEO Google, tối ưu chuyển đổi số.',
+      description:
+        'Dịch vụ thiết kế website chuyên nghiệp theo yêu cầu, chuẩn SEO Google, tối ưu chuyển đổi số.',
     },
     {
       '@context': 'https://schema.org',
@@ -130,7 +92,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       url: siteUrl,
       contactPoint: {
         '@type': 'ContactPoint',
-        telephone: telephone,
+        telephone,
         contactType: 'customer service',
         areaServed: 'VN',
         availableLanguage: ['Vietnamese', 'English'],
@@ -146,7 +108,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
       </head>
-      <body className={`${beVietnamPro.className} min-h-screen bg-[#f8fafd] text-[#0b1c30] antialiased selection:bg-[#006398]/20 selection:text-[#006398]`}>
+      <body
+        className={`${beVietnamPro.className} min-h-screen bg-white text-[#0d253d] antialiased selection:bg-[#533afd]/15 selection:text-[#4434d4]`}
+      >
         {children}
       </body>
     </html>

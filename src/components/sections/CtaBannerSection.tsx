@@ -1,48 +1,44 @@
 'use client';
 
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 import { CtaSectionContent } from '../../types/landingConfig.types';
-import { siteConfig } from '../../config/site.config';
-import { useSettings } from '../../hooks/useSettings';
-import { CtaBoxedVariant, CtaMinimalVariant } from './cta';
 
 export interface CtaBannerSectionProps {
-  content?: CtaSectionContent;
-  displayStyle?: string;
+  content: CtaSectionContent;
 }
 
-export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({
-  content,
-  displayStyle = 'banner_boxed',
-}) => {
-  const { data: settings } = useSettings();
-  const hotline = settings?.hotline || siteConfig.hotline;
-  const hotlineRaw = settings?.hotlineRaw || siteConfig.hotlineRaw;
+export const CtaBannerSection: React.FC<CtaBannerSectionProps> = ({ content }) => {
+  const buttonLink = content.buttonLink || '#nhan-bao-gia';
 
-  const isMinimal = displayStyle === 'minimal';
-  const title = content?.title || 'Sẵn Sàng Xây Dựng Website Đẹp Mắt & Bứt Phá Doanh Thu?';
-  const subtitle = content?.subtitle || 'Liên hệ ngay hôm nay để nhận tư vấn giải pháp tối ưu cho ngành nghề của bạn và nhận báo giá trọn gói minh bạch.';
-  const buttonText = content?.buttonText || 'Nhận Báo Giá & Tư Vấn Miễn Phí';
-  const buttonLink = content?.buttonLink || '#nhan-bao-gia';
-  const hotlineText = content?.hotlineText || `Hoặc gọi Hotline trực tiếp: ${hotline}`;
-
-  const variantProps = {
-    title,
-    subtitle,
-    buttonText,
-    buttonLink,
-    hotlineText,
-    hotlineRaw,
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (buttonLink.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(buttonLink)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
-    <section className="py-12 sm:py-16 bg-[#fafbfc]">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 w-full">
-        {isMinimal ? (
-          <CtaMinimalVariant {...variantProps} />
-        ) : (
-          <CtaBoxedVariant {...variantProps} />
-        )}
+    <section className="bg-white py-12 sm:py-16 border-b border-[#e3e8ee]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="stripe-hero-mesh border border-[#e3e8ee] rounded-2xl p-8 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="max-w-xl">
+            <h2 className="text-xl sm:text-3xl font-bold text-[#0d253d] tracking-tight">
+              {content.title || 'Sẵn Sàng Nâng Cấp Website Cho Doanh Nghiệp?'}
+            </h2>
+            {content.subtitle && (
+              <p className="text-sm text-[#273951] mt-2 leading-relaxed">{content.subtitle}</p>
+            )}
+          </div>
+          <a
+            href={buttonLink}
+            onClick={handleClick}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#533afd] hover:bg-[#4434d4] text-white text-sm font-medium transition-colors shrink-0"
+          >
+            <span>{content.buttonText || 'Nhận Báo Giá Ngay'}</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
       </div>
     </section>
   );

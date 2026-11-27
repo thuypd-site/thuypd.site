@@ -1,39 +1,33 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Providers } from '../providers';
 import { Header, Footer } from '@/src/components/layout';
-import { LandingPageRenderer } from '@/src/components/landing/LandingPageRenderer';
+import { LandingPageRenderer } from '@/src/features/landing/components/LandingPageRenderer';
 import { ThemeItem } from '@/src/types';
-import { Sparkles, Eye } from 'lucide-react';
+import { Eye } from 'lucide-react';
 
 function LivePreviewApp() {
-  const [selectedBudgetTier, setSelectedBudgetTier] = useState<string>('Gói Professional (7.990.000đ)');
-  const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Website Bán Hàng / Shop TMĐT');
+  const [selectedBudgetTier, setSelectedBudgetTier] = useState<string>('');
+  const [selectedWebsiteType, setSelectedWebsiteType] = useState<string>('Website Doanh Nghiệp');
   const [selectedNotes, setSelectedNotes] = useState<string>('');
-  const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   const handleSelectPlan = (planName: string, budgetTier: string) => {
     setSelectedBudgetTier(budgetTier);
-    setSelectedNotes(`Khách hàng quan tâm đăng ký ${planName}.`);
+    setSelectedNotes(`Quan tâm đăng ký ${planName}.`);
   };
 
   const handleSelectTheme = (theme: ThemeItem) => {
     setSelectedWebsiteType(
       theme.category === 'ecommerce'
-        ? 'Website Bán Hàng / Shop TMĐT'
+        ? 'Website Bán Hàng & Thương Mại Điện Tử'
         : theme.category === 'corporate'
-        ? 'Website Giới Thiệu Doanh Nghiệp'
-        : theme.category === 'realestate'
-        ? 'Website Bất Động Sản'
-        : theme.category === 'spa'
-        ? 'Website Dịch Vụ / Spa / Thẩm Mỹ'
-        : 'Website Thiết Kế Theo Yêu Cầu Riêng'
+          ? 'Website Giới Thiệu Doanh Nghiệp'
+          : 'Website Thiết Kế Theo Yêu Cầu Riêng'
     );
-    setSelectedNotes(`Khách hàng quan tâm mẫu thiết kế: ${theme.title} (${theme.formattedPrice}).`);
+    setSelectedNotes(`Quan tâm mẫu thiết kế: ${theme.title} (${theme.formattedPrice}).`);
   };
 
-  // Section click detection for Admin Bidirectional selection
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement | null;
     const sectionEl = target?.closest('[data-section-id]') as HTMLElement | null;
@@ -48,21 +42,16 @@ function LivePreviewApp() {
   return (
     <div
       onClick={handleContainerClick}
-      className="min-h-screen bg-[#f8f9ff] text-[#0b1c30] flex flex-col font-sans selection:bg-[#006398]/20 selection:text-[#006398] relative"
+      className="min-h-screen bg-white text-[#0d253d] flex flex-col font-sans relative"
     >
-      {/* Subtle preview indicator banner */}
-      <div className="sticky top-0 z-50 bg-[#006398] text-white py-1 px-3 text-[11px] font-semibold flex items-center justify-between shadow-xs">
-        <div className="flex items-center gap-1.5 mx-auto">
-          <Eye className="w-3.5 h-3.5 animate-pulse text-sky-200" />
-          <span>Live Preview Mode — Nhấp vào bất kỳ khối nào để chỉnh sửa trực tiếp trên Admin</span>
-        </div>
+      <div className="sticky top-0 z-50 bg-[#0d253d] text-white py-1.5 px-3 text-xs font-medium flex items-center justify-center gap-2 border-b border-white/10">
+        <Eye className="w-3.5 h-3.5 text-indigo-300" />
+        <span>Chế độ Xem Trước — Nhấp vào bất kỳ khối nào để chọn chỉnh sửa trên Admin</span>
       </div>
 
-      {/* Main Real Landing Header */}
       <Header />
 
-      {/* Main Dynamic Landing Sections */}
-      <main className="w-full pt-16 pb-12">
+      <main className="w-full pt-16 pb-10">
         <LandingPageRenderer
           onSelectTheme={handleSelectTheme}
           onSelectPlan={handleSelectPlan}
@@ -72,7 +61,6 @@ function LivePreviewApp() {
         />
       </main>
 
-      {/* Main Real Footer */}
       <Footer />
     </div>
   );
