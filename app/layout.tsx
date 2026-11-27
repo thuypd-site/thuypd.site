@@ -5,6 +5,8 @@ import './globals.css';
 import { siteConfig } from '@/src/config/site.config';
 import { getServerLandingConfig, getServerSettings } from '@/src/lib/server-data';
 
+export const dynamic = 'force-dynamic';
+
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ['300', '400', '500', '600', '700', '800'],
   subsets: ['latin', 'vietnamese'],

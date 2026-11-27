@@ -26,6 +26,9 @@ export const getServerLandingConfig = cache(async (): Promise<LandingPageConfig>
       }
     }
   } catch (err) {
+    if ((err as { digest?: string })?.digest === 'DYNAMIC_SERVER_USAGE') {
+      throw err;
+    }
     console.warn('[SSR] Failed to fetch landing config, using default:', err);
   }
 
@@ -75,6 +78,9 @@ export const getServerSettings = cache(async (): Promise<SiteSettings | null> =>
       }
     }
   } catch (err) {
+    if ((err as { digest?: string })?.digest === 'DYNAMIC_SERVER_USAGE') {
+      throw err;
+    }
     console.warn('[SSR] Failed to fetch settings, using fallback:', err);
   }
 
